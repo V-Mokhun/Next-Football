@@ -1,8 +1,19 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import "@/app/index.scss";
+import type { AppProps } from "next/app";
+import AppProvider from "../app";
+import { withHydrate } from "effector-next";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+const enhance = withHydrate();
+
+function MainApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
+  return (
+    <AppProvider session={session}>
+      <Component {...pageProps} />
+    </AppProvider>
+  );
 }
 
-export default MyApp
+export default enhance(MainApp);
