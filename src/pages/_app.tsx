@@ -5,12 +5,9 @@ import { withHydrate } from "effector-next";
 
 const enhance = withHydrate();
 
-function MainApp({
-  Component,
-  pageProps: { session, ...pageProps },
-}: AppProps) {
+function MainApp({ Component, pageProps }: AppProps) {
   return (
-    <AppProvider session={session}>
+    <AppProvider>
       <Component {...pageProps} />
     </AppProvider>
   );
