@@ -1,7 +1,17 @@
-import { MenuButton, MenuDropdown } from "@/entities/menu";
+import { MenuButton } from "@/entities/menu";
 import { Search } from "@/entities/search";
 import { Settings } from "@/entities/settings";
-import { Box, Container, Flex, Menu } from "@chakra-ui/react";
+import { ThemeToggler } from "@/features/theme-toggle";
+import { MoonIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Container,
+  Flex,
+  FormLabel,
+  Menu,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
 
@@ -9,7 +19,7 @@ interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = ({}) => {
   return (
-    <header>
+    <header style={{ backgroundColor: "#001e28" }}>
       <Container maxW="container.lg">
         <Flex py={5} justifyContent="space-between" alignItems="center" gap={2}>
           <Box>
@@ -21,7 +31,21 @@ export const Header: React.FC<HeaderProps> = ({}) => {
               {({ isOpen }) => (
                 <>
                   <MenuButton isActive={isOpen} />
-                  <MenuDropdown SettingsMenuItem={<Settings />} />
+                  <MenuList>
+                    <Settings />
+                    <MenuItem display="flex" alignItems="center" gap={2}>
+                      <MoonIcon />
+                      <FormLabel
+                        flex="1 1 auto"
+                        cursor="pointer"
+                        htmlFor="color-mode"
+                        mb={0}
+                        mr={0}>
+                        Dark mode
+                      </FormLabel>
+                      <ThemeToggler />
+                    </MenuItem>
+                  </MenuList>
                 </>
               )}
             </Menu>

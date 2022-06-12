@@ -1,1 +1,2 @@
-export * from "./footbal"
+export * from "./football"
+export * from "./settings"
