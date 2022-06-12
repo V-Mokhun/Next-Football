@@ -1,7 +1,10 @@
+import {
+  SettingsItem,
+  SettingsModal,
+  settingsModel,
+} from "@/entities/settings";
 import React, { useRef, useState } from "react";
-import { settingsModel } from "..";
-import { SettingsItem } from "./SettingsItem";
-import { SettingsModal } from "./SettingsModal";
+import { ChangeTimezone } from "./change-timezone";
 
 interface SettingsProps {}
 
@@ -21,7 +24,11 @@ export const Settings: React.FC<SettingsProps> = ({}) => {
   return (
     <>
       <SettingsItem onClick={onOpen} />
-      <SettingsModal onClose={onClose} isOpen={isModalActive} />
+      <SettingsModal
+        onClose={onClose}
+        isOpen={isModalActive}
+        selectTimezones={<ChangeTimezone />}
+      />
     </>
   );
 };

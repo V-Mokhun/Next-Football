@@ -1,6 +1,6 @@
 import { MenuButton } from "@/entities/menu";
 import { Search } from "@/entities/search";
-import { Settings } from "@/entities/settings";
+import { Settings } from "@/features/settings";
 import { ThemeToggler } from "@/features/theme-toggle";
 import { MoonIcon } from "@chakra-ui/icons";
 import {

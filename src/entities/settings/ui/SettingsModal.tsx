@@ -22,11 +22,13 @@ import { settingsModel } from "..";
 interface SettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
+  selectTimezones: React.ReactNode;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
   isOpen,
   onClose,
+  selectTimezones,
 }) => {
   const store = useStore(settingsModel.$settings);
   const loading = useStore(settingsModel.$timezonesFetching);
@@ -46,24 +48,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           <Heading mb={3} as="h3" size="md">
             Timezone
           </Heading>
-          <Skeleton isLoaded={!loading}>
-            <Select
-              icon={<TriangleDownIcon />}
-              variant="outline"
-              size="md"
-              placeholder="Your timezone.."
-              value={store.activeTimezone}
-              onChange={(e) => {
-                settingsModel.changeTimezone(e.target.value);
-              }}>
-              {store.timezones.length > 0 &&
-                store.timezones.map((timezone) => (
-                  <option key={timezone} value={timezone}>
-                    {timezone}
-                  </option>
-                ))}
-            </Select>
-          </Skeleton>
+          <Skeleton isLoaded={!loading}>{selectTimezones}</Skeleton>
           {store.timezoneError && (
             <Alert mt={2} status="error">
               <AlertIcon />

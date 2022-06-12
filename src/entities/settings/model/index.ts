@@ -7,7 +7,6 @@ interface SettingsStore {
   timezoneError: string;
 }
 
-export const changeTimezone = createEvent<string>();
 export const fetchTimezonesFx = createEffect<void, GetTimezonesResponse, Error>(
   async () => {
     const response = await rapidApi.settingsApi.getTimezones();
@@ -20,10 +19,7 @@ export const $settings = createStore<SettingsStore>({
   timezones: [],
   timezoneError: "",
 })
-  .on(changeTimezone, (store, activeTimezone) => ({
-    ...store,
-    activeTimezone,
-  }))
+ 
   .on(fetchTimezonesFx.doneData, (store, response) => ({
     ...store,
     timezones: response.response,
