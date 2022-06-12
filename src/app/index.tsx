@@ -1,4 +1,4 @@
-import { theme } from "@/shared/lib/theme";
+import { theme } from "@/shared/lib";
 import { ChakraProvider } from "@chakra-ui/react";
 import React from "react";
 
