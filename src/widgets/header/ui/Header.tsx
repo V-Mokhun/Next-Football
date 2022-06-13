@@ -1,7 +1,8 @@
 import { MenuButton } from "@/entities/menu";
-import { Search } from "@/features/search";
-import { Settings } from "@/features/settings";
+import { SearchButton } from "@/entities/search";
+import { SettingsItem } from "@/entities/settings";
 import { ThemeToggler } from "@/features/theme-toggle";
+import { HOME_ROUTE } from "@/shared/lib";
 import { MoonIcon } from "@chakra-ui/icons";
 import {
   Box,
@@ -13,6 +14,7 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 interface HeaderProps {}
@@ -22,17 +24,19 @@ export const Header: React.FC<HeaderProps> = ({}) => {
     <header style={{ backgroundColor: "#001e28" }}>
       <Container maxW="container.lg">
         <Flex py={5} justifyContent="space-between" alignItems="center" gap={2}>
-          <Box>
-            <Image src="/images/logo.png" alt="Logo" width={64} height={64} />
-          </Box>
+          <Link href={HOME_ROUTE} passHref>
+            <a>
+              <Image src="/images/logo.png" alt="Logo" width={64} height={64} />
+            </a>
+          </Link>
           <Flex alignItems="center" gap={2}>
-            <Search />
+            <SearchButton />
             <Menu closeOnSelect={false}>
               {({ isOpen }) => (
                 <>
                   <MenuButton isActive={isOpen} />
                   <MenuList>
-                    <Settings />
+                    <SettingsItem />
                     <MenuItem display="flex" alignItems="center" gap={2}>
                       <MoonIcon />
                       <FormLabel

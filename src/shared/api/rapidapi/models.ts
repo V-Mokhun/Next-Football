@@ -80,7 +80,7 @@ export type GetLeaguesResponse = ApiResponse & {
     league: League;
     country: Country;
     seasons: Season[];
-  };
+  }[];
 };
 
 export type GetTeamsResponse = ApiResponse & {

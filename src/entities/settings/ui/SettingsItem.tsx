@@ -1,15 +1,14 @@
 import { ArrowRightIcon, SettingsIcon } from "@chakra-ui/icons";
 import { MenuItem, Text } from "@chakra-ui/react";
 import React from "react";
+import { settingsModel } from "..";
 
-interface SettingsItemProps {
-  onClick: () => void;
-}
+interface SettingsItemProps {}
 
-export const SettingsItem: React.FC<SettingsItemProps> = ({ onClick }) => {
+export const SettingsItem: React.FC<SettingsItemProps> = ({}) => {
   return (
     <MenuItem
-      onClick={onClick}
+      onClick={() => settingsModel.openModal()}
       closeOnSelect
       display="flex"
       alignItems="center"

@@ -1,12 +1,11 @@
 import { Search2Icon } from "@chakra-ui/icons";
 import { IconButton, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
+import { searchModalModel } from "..";
 
-interface SearchButtonProps {
-  onClick: () => void;
-}
+interface SearchButtonProps {}
 
-export const SearchButton: React.FC<SearchButtonProps> = ({ onClick }) => {
+export const SearchButton: React.FC<SearchButtonProps> = ({}) => {
   const bg = useColorModeValue("whiteAlpha.200", "whiteAlpha.200");
   const color = useColorModeValue("whiteAlpha.900", "whiteAlpha.900");
 
@@ -14,7 +13,7 @@ export const SearchButton: React.FC<SearchButtonProps> = ({ onClick }) => {
     <IconButton
       color={color}
       bg={bg}
-      onClick={onClick}
+      onClick={() => searchModalModel.openModal()}
       aria-label="Search"
       icon={<Search2Icon />}
       _hover={{

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { apiInstance } from "./config";
+import { catchError } from "./lib";
 import { GetTimezonesResponse } from "./models";
 
 const TIMEZONES_URL = "timezone";
@@ -10,13 +11,10 @@ class SettingsApi {
       const { data } = await apiInstance.get<GetTimezonesResponse>(
         TIMEZONES_URL
       );
+
       return data;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        throw new Error(error.message);
-      }
-
-      throw new Error("An unexpected error happened..");
+      throw catchError(error);
     }
   }
 }

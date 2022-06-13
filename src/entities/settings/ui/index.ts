@@ -1,2 +1,2 @@
 export { SettingsItem } from "./SettingsItem";
-export { SettingsModal } from "./SettingsModal";
+export { SettingsAlert } from "./SettingsAlert";

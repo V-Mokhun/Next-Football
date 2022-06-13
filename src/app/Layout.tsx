@@ -2,6 +2,7 @@ import { Header } from "@/widgets/header";
 import { Container } from "@chakra-ui/react";
 import Head from "next/head";
 import React from "react";
+import { Modals } from "./Modals";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <main className="main">
         <Container maxW="container.lg">{children}</Container>
       </main>
+      <Modals />
     </div>
   );
 };
