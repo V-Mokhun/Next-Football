@@ -1,1 +1,2 @@
-export { Search } from "./Search";
+export { SearchButton } from "./SearchButton";
+export { SearchModal } from "./SearchModal";

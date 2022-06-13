@@ -1,6 +1,6 @@
+import { SearchButton, SearchModal } from "@/entities/search";
 import React, { useState } from "react";
-import { SearchButton } from "./SearchButton";
-import { SearchModal } from "./SearchModal";
+import { SearchItem } from "./SearchItem";
 
 interface SearchProps {}
 
@@ -13,7 +13,9 @@ export const Search: React.FC<SearchProps> = ({}) => {
   return (
     <>
       <SearchButton onClick={onOpen} />
-      <SearchModal onClose={onClose} isOpen={isModalActive} />
+      <SearchModal onClose={onClose} isOpen={isModalActive}>
+        <SearchItem />
+      </SearchModal>
     </>
   );
 };

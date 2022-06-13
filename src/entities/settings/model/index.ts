@@ -19,7 +19,6 @@ export const $settings = createStore<SettingsStore>({
   timezones: [],
   timezoneError: "",
 })
- 
   .on(fetchTimezonesFx.doneData, (store, response) => ({
     ...store,
     timezones: response.response,
