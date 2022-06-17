@@ -1,6 +1,7 @@
 import { MenuButton } from "@/entities/menu";
 import { SearchButton } from "@/entities/search";
 import { SettingsItem } from "@/entities/settings";
+import { ViewerButton } from "@/entities/viewer";
 import { ThemeToggler } from "@/features/theme-toggle";
 import { HOME_ROUTE } from "@/shared/lib";
 import { MoonIcon } from "@chakra-ui/icons";
@@ -31,6 +32,7 @@ export const Header: React.FC<HeaderProps> = ({}) => {
           </Link>
           <Flex alignItems="center" gap={2}>
             <SearchButton />
+            <ViewerButton />
             <Menu closeOnSelect={false}>
               {({ isOpen }) => (
                 <>

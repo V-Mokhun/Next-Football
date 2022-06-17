@@ -1,3 +1,5 @@
+import { User } from "@/shared/api";
+import { IRON_SESSION_PASS } from "@/shared/config";
 import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
 import {
   GetServerSidePropsContext,
@@ -6,7 +8,7 @@ import {
 } from "next";
 
 const sessionOptions = {
-  password: process.env.IRON_SESSION_PASS!,
+  password: IRON_SESSION_PASS,
   cookieName: "next-football",
   cookieOptions: {
     secure: process.env.NODE_ENV === "production",
@@ -26,4 +28,10 @@ export function withSessionSsr<
   ) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>
 ) {
   return withIronSessionSsr(handler, sessionOptions);
+}
+
+declare module 'iron-session' {
+  interface IronSessionData {
+    user?: User
+  }
 }

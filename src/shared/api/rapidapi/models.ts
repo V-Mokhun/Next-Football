@@ -1,8 +1,3 @@
-export interface User {
-  email: string;
-  password: string;
-}
-
 interface Team {
   id: number;
   name: string;

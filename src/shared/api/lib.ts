@@ -5,5 +5,7 @@ export const catchError = (error: unknown) => {
     throw new Error(error.message);
   }
 
-  throw new Error("An unexpected error happened..");
+  throw new Error(
+    typeof error === "string" ? error : "An unexpected error happened.."
+  );
 };

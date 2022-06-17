@@ -1,5 +1,5 @@
 import { apiInstance } from "./config";
-import { catchError } from "./lib";
+import { catchError } from "../lib";
 import { GetLeaguesResponse, GetTeamsResponse } from "./models";
 
 const SEARCH_LEAGUES_API = "leagues";

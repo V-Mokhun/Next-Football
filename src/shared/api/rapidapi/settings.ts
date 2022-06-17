@@ -1,6 +1,5 @@
-import axios from "axios";
 import { apiInstance } from "./config";
-import { catchError } from "./lib";
+import { catchError } from "../lib";
 import { GetTimezonesResponse } from "./models";
 
 const TIMEZONES_URL = "timezone";

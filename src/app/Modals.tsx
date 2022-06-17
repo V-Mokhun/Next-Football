@@ -1,3 +1,4 @@
+import { AuthModal } from "@/widgets/modals/auth-modal";
 import { SearchModal } from "@/widgets/modals/search-modal";
 import { SettingsModal } from "@/widgets/modals/settings-modal";
 import React from "react";
@@ -9,6 +10,7 @@ export const Modals: React.FC<ModalsProps> = ({}) => {
     <>
       <SearchModal />
       <SettingsModal />
+      <AuthModal />
     </>
   );
 };
