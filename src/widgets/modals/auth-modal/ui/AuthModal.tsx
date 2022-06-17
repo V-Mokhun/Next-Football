@@ -1,4 +1,6 @@
 import { viewerModel } from "@/entities/viewer";
+import { LoginForm } from "@/features/auth/login";
+import { RegisterForm } from "@/features/auth/register";
 import {
   Divider,
   Heading,
@@ -25,8 +27,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({}) => {
   const isOpen = useStore(viewerModel.viewerModalsSubmodel.$authModalOpen);
 
   const handleTabsChange = (index: number) => {
-    setTabIndex(index)
-  }
+    setTabIndex(index);
+  };
 
   return (
     <Modal
@@ -43,7 +45,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({}) => {
         <ModalCloseButton />
         <Divider />
         <ModalBody py={4}>
-          <Tabs onChange={handleTabsChange}>
+          <Tabs index={tabIndex} onChange={handleTabsChange}>
             <TabList justifyContent="center">
               <Tab onClick={() => authModalModel.setLoginMode()}>Log in</Tab>
               <Tab onClick={() => authModalModel.setRegisterMode()}>
@@ -51,8 +53,22 @@ export const AuthModal: React.FC<AuthModalProps> = ({}) => {
               </Tab>
             </TabList>
             <TabPanels>
-              <TabPanel>1</TabPanel>
-              <TabPanel>2</TabPanel>
+              <TabPanel>
+                <LoginForm
+                  changeAuthMode={() => {
+                    authModalModel.setRegisterMode();
+                    setTabIndex(1);
+                  }}
+                />
+              </TabPanel>
+              <TabPanel>
+                <RegisterForm
+                  changeAuthMode={() => {
+                    authModalModel.setLoginMode();
+                    setTabIndex(0);
+                  }}
+                />
+              </TabPanel>
             </TabPanels>
           </Tabs>
         </ModalBody>
