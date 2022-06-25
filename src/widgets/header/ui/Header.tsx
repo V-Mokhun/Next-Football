@@ -6,13 +6,12 @@ import { ThemeToggler } from "@/features/theme-toggle";
 import { HOME_ROUTE } from "@/shared/lib";
 import { MoonIcon } from "@chakra-ui/icons";
 import {
-  Box,
   Container,
   Flex,
   FormLabel,
   Menu,
   MenuItem,
-  MenuList,
+  MenuList
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";

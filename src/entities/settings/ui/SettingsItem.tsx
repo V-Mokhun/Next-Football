@@ -8,7 +8,7 @@ interface SettingsItemProps {}
 export const SettingsItem: React.FC<SettingsItemProps> = ({}) => {
   return (
     <MenuItem
-      onClick={() => settingsModel.openModal()}
+      onClick={() => settingsModel.settingsButtonClicked()}
       closeOnSelect
       display="flex"
       alignItems="center"

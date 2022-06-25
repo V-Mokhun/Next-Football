@@ -13,7 +13,7 @@ export const SearchButton: React.FC<SearchButtonProps> = ({}) => {
     <IconButton
       color={color}
       bg={bg}
-      onClick={() => searchModalModel.openModal()}
+      onClick={() => searchModalModel.searchButtonClicked()}
       aria-label="Search"
       icon={<Search2Icon />}
       _hover={{

@@ -47,8 +47,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({}) => {
         <ModalBody py={4}>
           <Tabs index={tabIndex} onChange={handleTabsChange}>
             <TabList justifyContent="center">
-              <Tab onClick={() => authModalModel.setLoginMode()}>Log in</Tab>
-              <Tab onClick={() => authModalModel.setRegisterMode()}>
+              <Tab onClick={() => authModalModel.loginTabClicked()}>Log in</Tab>
+              <Tab onClick={() => authModalModel.registerTabClicked()}>
                 Register
               </Tab>
             </TabList>
@@ -56,7 +56,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({}) => {
               <TabPanel>
                 <LoginForm
                   changeAuthMode={() => {
-                    authModalModel.setRegisterMode();
+                    authModalModel.registerTabClicked();
                     setTabIndex(1);
                   }}
                 />
@@ -64,7 +64,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({}) => {
               <TabPanel>
                 <RegisterForm
                   changeAuthMode={() => {
-                    authModalModel.setLoginMode();
+                    authModalModel.loginTabClicked();
                     setTabIndex(0);
                   }}
                 />

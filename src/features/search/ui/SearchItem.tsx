@@ -22,7 +22,7 @@ export const SearchItem: React.FC<SearchItemProps> = ({
   return (
     <Flex
       onClick={() => {
-        searchModalModel.closeModal();
+        searchModalModel.searchItemClicked();
         router.push(redirectTo);
       }}
       width="100%"

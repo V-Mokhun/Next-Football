@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import { useStore } from "effector-react";
 import { searchModel } from "..";
-import { useDebounce } from "@/shared/lib";
 
 interface SearchFormProps {
   debouncedSearchValue: string;
@@ -46,13 +45,13 @@ export const SearchForm: React.FC<SearchFormProps> = ({
         <Flex alignItems="center" gap={2}>
           <Button
             isDisabled={loading}
-            onClick={() => searchModel.changeSearchMode("leagues")}
+            onClick={() => searchModel.leaguesButtonClicked("leagues")}
             variant={searchMode === "leagues" ? "solid" : "outline"}>
             Leagues
           </Button>
           <Button
             isDisabled={loading}
-            onClick={() => searchModel.changeSearchMode("teams")}
+            onClick={() => searchModel.teamsButtonClicked("teams")}
             variant={searchMode === "teams" ? "solid" : "outline"}>
             Teams
           </Button>

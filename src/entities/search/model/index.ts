@@ -1,8 +1,20 @@
-import { createEvent, createStore } from "effector-next";
+import { createEvent, createStore, forward } from "effector-next";
 
 export const openModal = createEvent();
 export const closeModal = createEvent();
+export const searchButtonClicked = createEvent();
+export const searchItemClicked = createEvent();
 
 export const $modalOpen = createStore(false)
   .on(openModal, () => true)
   .on(closeModal, () => false);
+
+forward({
+  from: searchButtonClicked,
+  to: openModal,
+});
+
+forward({
+  from: searchItemClicked,
+  to: closeModal,
+});

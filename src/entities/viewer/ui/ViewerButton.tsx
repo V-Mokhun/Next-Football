@@ -27,7 +27,9 @@ export const ViewerButton: React.FC<ViewerButtonProps> = ({}) => {
       bg={bg}
       px={2}
       onClick={() =>
-        isAuth ? onToggle() : viewerModel.viewerModalsSubmodel.openAuthModal()
+        isAuth
+          ? onToggle()
+          : viewerModel.viewerModalsSubmodel.authButtonClicked()
       }
       _hover={{
         backgroundColor: "whiteAlpha.400",

@@ -1,5 +1,11 @@
 import { GetTimezonesResponse, rapidApi } from "@/shared/api";
-import { createEffect, createEvent, createStore, guard } from "effector-next";
+import {
+  createEffect,
+  createEvent,
+  createStore,
+  guard,
+  forward,
+} from "effector-next";
 
 interface SettingsStore {
   timezones: GetTimezonesResponse["response"];
@@ -16,6 +22,7 @@ export const fetchTimezonesFx = createEffect<void, GetTimezonesResponse, Error>(
 
 export const openModal = createEvent();
 export const closeModal = createEvent();
+export const settingsButtonClicked = createEvent();
 
 export const $settings = createStore<SettingsStore>({
   activeTimezone: "",
@@ -36,6 +43,11 @@ export const $timezonesFetching = fetchTimezonesFx.pending;
 export const $modalOpen = createStore(false)
   .on(openModal, () => true)
   .on(closeModal, () => false);
+
+forward({
+  from: settingsButtonClicked,
+  to: openModal,
+});
 
 const $modalOpenedCount = createStore(0).on(openModal, (count) => count + 1);
 

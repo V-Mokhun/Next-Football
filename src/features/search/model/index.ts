@@ -3,6 +3,7 @@ import {
   createEffect,
   createEvent,
   createStore,
+  forward,
   restore,
 } from "effector-next";
 import { GetLeaguesResponse, GetTeamsResponse, rapidApi } from "@/shared/api";
@@ -10,8 +11,20 @@ import { GetLeaguesResponse, GetTeamsResponse, rapidApi } from "@/shared/api";
 type SearchModeStore = "leagues" | "teams";
 
 export const changeSearch = createEvent<string>();
-export const changeSearchMode = createEvent<SearchModeStore>();
+const changeSearchMode = createEvent<SearchModeStore>();
 export const resetItems = createEvent();
+export const leaguesButtonClicked = createEvent<"leagues">("leagues");
+export const teamsButtonClicked = createEvent<"teams">("teams");
+
+forward({
+  from: leaguesButtonClicked,
+  to: changeSearchMode,
+});
+
+forward({
+  from: teamsButtonClicked,
+  to: changeSearchMode,
+});
 
 export const fetchLeaguesFx = createEffect<string, GetLeaguesResponse, Error>(
   async (query) => {
@@ -44,6 +57,7 @@ export const $teams = createStore<GetTeamsResponse["response"]>([])
 
 const $leaguesLoading = fetchLeaguesFx.pending;
 const $teamsLoading = fetchTeamsFx.pending;
+
 export const $searchLoading = combine(
   [$leaguesLoading, $teamsLoading],
   ([$leaguesLoading, $teamsLoading]) => $leaguesLoading || $teamsLoading
