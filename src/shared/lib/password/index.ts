@@ -5,7 +5,7 @@ export const hashPassword = (password: string) => {
   return hashedPassword;
 };
 
-export const comparePasswords = (hashedPassword: string, password: string) => {
+export const comparePasswords = (password: string, hashedPassword: string) => {
   const isEqual = compareSync(password, hashedPassword);
   return isEqual;
 };

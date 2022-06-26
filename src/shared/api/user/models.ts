@@ -18,3 +18,5 @@ export type RegisterResponse =
       success: false;
       data: string;
     };
+
+export type LoginResponse = RegisterResponse;

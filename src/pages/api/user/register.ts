@@ -1,4 +1,4 @@
-import { IClientUser, IUser, User } from "@/shared/api";
+import { IClientUser, User } from "@/shared/api";
 import {
   connectDb,
   hashPassword,
@@ -52,7 +52,6 @@ async function registerRoute(req: NextApiRequest, res: NextApiResponse) {
 
     return res.status(201).json({ success: true, data: userData });
   } catch (error) {
-    console.log(error);
     return res
       .status(500)
       .json({ data: "Something went wrong..", success: false });

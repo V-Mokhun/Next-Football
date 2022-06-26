@@ -1,6 +1,11 @@
 import axios from "axios";
 import { catchError } from "../lib";
-import { IUser, RegisterResponse, UserRequestBody } from "./models";
+import {
+  IUser,
+  LoginResponse,
+  RegisterResponse,
+  UserRequestBody,
+} from "./models";
 
 const USER_API = "/api/user";
 const LOGIN_URL = `${USER_API}/login`;
@@ -22,7 +27,7 @@ class UserApi {
   }
 
   async login(body: UserRequestBody) {
-    const response = await this.makeRequest(body, LOGIN_URL);
+    const response = await this.makeRequest<LoginResponse>(body, LOGIN_URL);
 
     return response;
   }

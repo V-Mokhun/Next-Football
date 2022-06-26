@@ -25,14 +25,8 @@ export const $password = restore(setPassword, "").reset(registerUserFx);
 export const $registerLoading = registerUserFx.pending;
 export const $registerError = createStore("").on(
   registerUserFx.failData,
-  (_, payload) => {
-    console.log(payload);
-
-    return payload.message;
-  }
+  (_, payload) => payload.message
 );
-
-$registerError.watch((state) => console.log(state));
 
 const $register = combine($email, $password, (email, password) => ({
   email,

@@ -1,23 +1,29 @@
 import { isEmail } from "@/shared/lib";
-import { EmailItem, PasswordItem } from "@/shared/ui";
+import { AlertMessage, EmailItem, PasswordItem } from "@/shared/ui";
 import { Button, Flex } from "@chakra-ui/react";
+import { useStore } from "effector-react";
 import React, { useState } from "react";
+import { loginModel } from "..";
 
 interface LoginFormProps {
   changeAuthMode: () => void;
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ changeAuthMode }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const email = useStore(loginModel.$email);
+  const password = useStore(loginModel.$password);
   const [showPassword, setShowPassword] = useState(false);
 
   const isEmailError = !isEmail(email);
   const isPasswordError = password.trim().length < 6;
   const isInvalid = isEmailError || isPasswordError;
 
+  const isLoading = useStore(loginModel.$loginLoading);
+  const errorMessage = useStore(loginModel.$loginError);
+
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    loginModel.formSubmitted();
   };
 
   return (
@@ -25,7 +31,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ changeAuthMode }) => {
       <EmailItem
         id="login-email"
         isError={isEmailError}
-        setValue={(e) => setEmail(e.target.value)}
+        setValue={(e) => loginModel.setEmail(e.target.value)}
         value={email}
       />
       <PasswordItem
@@ -34,16 +40,17 @@ export const LoginForm: React.FC<LoginFormProps> = ({ changeAuthMode }) => {
         setShow={() => setShowPassword((prev) => !prev)}
         show={showPassword}
         value={password}
-        setValue={(e) => setPassword(e.target.value)}
+        setValue={(e) => loginModel.setPassword(e.target.value)}
       />
       <Button
         mb={2}
-        disabled={isInvalid}
+        disabled={isInvalid || isLoading}
         colorScheme="blue"
         variant="outline"
         type="submit">
         Log in
       </Button>
+      {errorMessage && <AlertMessage error={errorMessage} />}
       <Button
         onClick={changeAuthMode}
         variant="link"
