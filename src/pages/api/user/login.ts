@@ -30,7 +30,7 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
         .json({ data: "Provide valid data", success: false });
     }
 
-    const existingUser = await User.findOne({ email: body.email });
+    const existingUser = await User.findOne({ email: body.email }).exec();
     if (!existingUser) {
       return res.status(400).json({ success: false, data: "No user found" });
     }

@@ -29,7 +29,7 @@ async function registerRoute(req: NextApiRequest, res: NextApiResponse) {
         .json({ data: "Provide valid data", success: false });
     }
 
-    const existingUser = await User.findOne({ email: body.email });
+    const existingUser = await User.findOne({ email: body.email }).exec();
     if (existingUser) {
       return res
         .status(400)
@@ -42,7 +42,7 @@ async function registerRoute(req: NextApiRequest, res: NextApiResponse) {
       timezone: "",
     };
 
-    const user = await User.create({
+    await User.create({
       ...userData,
       password: hashedPassword,
     });
