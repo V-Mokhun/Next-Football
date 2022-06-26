@@ -6,11 +6,11 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-interface SettingsAlertProps {
+interface AlertMessageProps {
   error: string;
 }
 
-export const SettingsAlert: React.FC<SettingsAlertProps> = ({ error }) => {
+export const AlertMessage: React.FC<AlertMessageProps> = ({ error }) => {
   return (
     <Alert mt={2} status="error">
       <AlertIcon />

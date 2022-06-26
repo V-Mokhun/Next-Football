@@ -23,11 +23,13 @@ export const LoginForm: React.FC<LoginFormProps> = ({ changeAuthMode }) => {
   return (
     <Flex onSubmit={onFormSubmit} as="form" flexDir="column" gap={4}>
       <EmailItem
+        id="login-email"
         isError={isEmailError}
         setValue={(e) => setEmail(e.target.value)}
         value={email}
       />
       <PasswordItem
+        id="login-password"
         isError={isPasswordError}
         setShow={() => setShowPassword((prev) => !prev)}
         show={showPassword}

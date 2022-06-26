@@ -1,21 +1,18 @@
 import axios from "axios";
 import { catchError } from "../lib";
-import { User } from "./models";
+import { IUser, RegisterResponse, UserRequestBody } from "./models";
 
 const USER_API = "/api/user";
 const LOGIN_URL = `${USER_API}/login`;
 const REGISTER_URL = `${USER_API}/register`;
 const LOGOUT_URL = `${USER_API}/logout`;
 
-type UserReqBody = Pick<User, "email" | "password">;
-
 class UserApi {
-  private async makeRequest(body: UserReqBody, url: string) {
+  private async makeRequest<T>(body: UserRequestBody, url: string) {
     try {
-      const { data } = await axios.post(url, {
+      const { data } = await axios.post<T>(url, {
         method: "POST",
-        body: JSON.stringify(body),
-        headers: { "Content-Type": "application/json" },
+        body,
       });
 
       return data;
@@ -24,14 +21,17 @@ class UserApi {
     }
   }
 
-  async login(body: UserReqBody) {
+  async login(body: UserRequestBody) {
     const response = await this.makeRequest(body, LOGIN_URL);
 
     return response;
   }
 
-  async register(body: UserReqBody) {
-    const response = await this.makeRequest(body, REGISTER_URL);
+  async register(body: UserRequestBody) {
+    const response = await this.makeRequest<RegisterResponse>(
+      body,
+      REGISTER_URL
+    );
 
     return response;
   }

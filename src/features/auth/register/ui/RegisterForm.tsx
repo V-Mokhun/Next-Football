@@ -1,7 +1,9 @@
 import { isEmail } from "@/shared/lib";
-import { EmailItem, PasswordItem } from "@/shared/ui";
+import { AlertMessage, EmailItem, PasswordItem } from "@/shared/ui";
 import { Button, Flex, Text } from "@chakra-ui/react";
+import { useStore } from "effector-react";
 import React, { useState } from "react";
+import { registerModel } from "..";
 
 interface RegisterFormProps {
   changeAuthMode: () => void;
@@ -10,40 +12,47 @@ interface RegisterFormProps {
 export const RegisterForm: React.FC<RegisterFormProps> = ({
   changeAuthMode,
 }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const email = useStore(registerModel.$email);
+  const password = useStore(registerModel.$password);
   const [showPassword, setShowPassword] = useState(false);
 
   const isEmailError = !isEmail(email);
   const isPasswordError = password.trim().length < 6;
   const isInvalid = isEmailError || isPasswordError;
 
+  const isLoading = useStore(registerModel.$registerLoading);
+  const errorMessage = useStore(registerModel.$registerError);
+
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    registerModel.formSubmitted();
   };
 
   return (
     <Flex onSubmit={onFormSubmit} as="form" flexDir="column" gap={4}>
       <EmailItem
+        id="register-email"
         isError={isEmailError}
-        setValue={(e) => setEmail(e.target.value)}
+        setValue={(e) => registerModel.setEmail(e.target.value)}
         value={email}
       />
       <PasswordItem
+        id="register-password"
         isError={isPasswordError}
         setShow={() => setShowPassword((prev) => !prev)}
         show={showPassword}
         value={password}
-        setValue={(e) => setPassword(e.target.value)}
+        setValue={(e) => registerModel.setPassword(e.target.value)}
       />
       <Button
         mb={2}
-        disabled={isInvalid}
+        disabled={isInvalid || isLoading}
         colorScheme="blue"
         variant="outline"
         type="submit">
         Register
       </Button>
+      {errorMessage && <AlertMessage error={errorMessage} />}
       <Text textAlign="center">
         Have an account?
         <Button

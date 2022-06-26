@@ -1,10 +1,10 @@
-import { User } from "@/shared/api";
+import { IClientUser } from "@/shared/api";
 import { IRON_SESSION_PASS } from "@/shared/config";
 import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
 import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
-  NextApiHandler,
+  NextApiHandler
 } from "next";
 
 const sessionOptions = {
@@ -19,7 +19,6 @@ export function withSessionRoute(handler: NextApiHandler) {
   return withIronSessionApiRoute(handler, sessionOptions);
 }
 
-// Theses types are compatible with InferGetStaticPropsType https://nextjs.org/docs/basic-features/data-fetching#typescript-use-getstaticprops
 export function withSessionSsr<
   P extends { [key: string]: unknown } = { [key: string]: unknown }
 >(
@@ -32,6 +31,6 @@ export function withSessionSsr<
 
 declare module 'iron-session' {
   interface IronSessionData {
-    user?: User
+    user?: IClientUser
   }
 }

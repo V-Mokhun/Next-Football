@@ -1,5 +1,6 @@
-import { SettingsAlert, settingsModel } from "@/entities/settings";
+import { settingsModel } from "@/entities/settings";
 import { ChangeTimezone } from "@/features/settings/change-timezone";
+import { AlertMessage } from "@/shared/ui";
 import {
   Divider,
   Heading,
@@ -9,7 +10,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  Skeleton
+  Skeleton,
 } from "@chakra-ui/react";
 import { useStore } from "effector-react";
 import React from "react";
@@ -39,7 +40,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({}) => {
           <Skeleton isLoaded={!loading}>
             <ChangeTimezone />
           </Skeleton>
-          {store.timezoneError && <SettingsAlert error={store.timezoneError} />}
+          {store.timezoneError && <AlertMessage error={store.timezoneError} />}
         </ModalBody>
       </ModalContent>
     </Modal>

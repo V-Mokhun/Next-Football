@@ -5,6 +5,15 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "noImplicitAny": true, 
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,              
+    // "noUnusedLocals": true, 
+    "noUnusedParameters": true,                 
+    "noImplicitReturns": true,                  
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -21,9 +30,9 @@
       "@/widgets/*": ["widgets/*"],
       "@/features/*": ["features/*"],
       "@/entities/*": ["entities/*"],
-      "@/shared/*": ["shared/*"],
+      "@/shared/*": ["shared/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "custom.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

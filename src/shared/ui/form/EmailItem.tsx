@@ -10,17 +10,19 @@ interface EmailItemProps {
   isError: boolean;
   value: string;
   setValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  id: string;
 }
 
 export const EmailItem: React.FC<EmailItemProps> = ({
   isError,
   setValue,
   value,
+  id,
 }) => {
   return (
     <FormControl isInvalid={isError}>
-      <FormLabel htmlFor="email">Email</FormLabel>
-      <Input id="email" type="email" value={value} onChange={setValue} />
+      <FormLabel htmlFor={id}>Email</FormLabel>
+      <Input id={id} type="email" value={value} onChange={setValue} />
       {isError && <FormErrorMessage>Email is required</FormErrorMessage>}
     </FormControl>
   );

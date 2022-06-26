@@ -16,6 +16,7 @@ interface PasswordItemProps {
   setValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   show: boolean;
   setShow: () => void;
+  id: string;
 }
 
 export const PasswordItem: React.FC<PasswordItemProps> = ({
@@ -24,13 +25,14 @@ export const PasswordItem: React.FC<PasswordItemProps> = ({
   value,
   show,
   setShow,
+  id,
 }) => {
   return (
     <FormControl isInvalid={isError}>
-      <FormLabel htmlFor="password">Password</FormLabel>
+      <FormLabel htmlFor={id}>Password</FormLabel>
       <InputGroup>
         <Input
-          id="password"
+          id={id}
           type={show ? "text" : "password"}
           value={value}
           onChange={setValue}

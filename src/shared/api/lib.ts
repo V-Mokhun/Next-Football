@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const catchError = (error: unknown) => {
   if (axios.isAxiosError(error)) {
-    throw new Error(error.message);
+    throw new Error((error.response?.data as any)?.data || error.message);
   }
 
   throw new Error(

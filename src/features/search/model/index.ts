@@ -47,12 +47,14 @@ export const $leagues = createStore<GetLeaguesResponse["response"]>([])
   .on(fetchLeaguesFx.doneData, (_, { response }) => response.slice(0, 20))
   .on(resetItems, (leagues) => {
     if (leagues.length > 0) return [];
+    return leagues
   });
 
 export const $teams = createStore<GetTeamsResponse["response"]>([])
   .on(fetchTeamsFx.doneData, (_, { response }) => response.slice(0, 20))
   .on(resetItems, (teams) => {
     if (teams.length > 0) return [];
+    return teams
   });
 
 const $leaguesLoading = fetchLeaguesFx.pending;
