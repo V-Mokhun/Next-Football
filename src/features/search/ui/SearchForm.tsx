@@ -45,13 +45,13 @@ export const SearchForm: React.FC<SearchFormProps> = ({
         <Flex alignItems="center" gap={2}>
           <Button
             isDisabled={loading}
-            onClick={() => searchModel.leaguesButtonClicked("leagues")}
+            onClick={() => searchModel.leaguesButtonClicked()}
             variant={searchMode === "leagues" ? "solid" : "outline"}>
             Leagues
           </Button>
           <Button
             isDisabled={loading}
-            onClick={() => searchModel.teamsButtonClicked("teams")}
+            onClick={() => searchModel.teamsButtonClicked()}
             variant={searchMode === "teams" ? "solid" : "outline"}>
             Teams
           </Button>

@@ -7,7 +7,7 @@ import {
   NextApiHandler
 } from "next";
 
-const sessionOptions = {
+export const sessionOptions = {
   password: IRON_SESSION_PASS,
   cookieName: "next-football",
   cookieOptions: {

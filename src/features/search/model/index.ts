@@ -13,16 +13,16 @@ type SearchModeStore = "leagues" | "teams";
 export const changeSearch = createEvent<string>();
 const changeSearchMode = createEvent<SearchModeStore>();
 export const resetItems = createEvent();
-export const leaguesButtonClicked = createEvent<"leagues">("leagues");
-export const teamsButtonClicked = createEvent<"teams">("teams");
+export const leaguesButtonClicked = createEvent("leagues");
+export const teamsButtonClicked = createEvent("teams");
 
 forward({
-  from: leaguesButtonClicked,
+  from: leaguesButtonClicked.map(() => "leagues" as SearchModeStore),
   to: changeSearchMode,
 });
 
 forward({
-  from: teamsButtonClicked,
+  from: teamsButtonClicked.map(() => "teams" as SearchModeStore),
   to: changeSearchMode,
 });
 
@@ -47,14 +47,14 @@ export const $leagues = createStore<GetLeaguesResponse["response"]>([])
   .on(fetchLeaguesFx.doneData, (_, { response }) => response.slice(0, 20))
   .on(resetItems, (leagues) => {
     if (leagues.length > 0) return [];
-    return leagues
+    return leagues;
   });
 
 export const $teams = createStore<GetTeamsResponse["response"]>([])
   .on(fetchTeamsFx.doneData, (_, { response }) => response.slice(0, 20))
   .on(resetItems, (teams) => {
     if (teams.length > 0) return [];
-    return teams
+    return teams;
   });
 
 const $leaguesLoading = fetchLeaguesFx.pending;

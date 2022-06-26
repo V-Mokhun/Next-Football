@@ -27,6 +27,7 @@
     "paths": {
       "@/app/*": ["app/*"],
       "@/pages/*": ["pages/*"],
+      "@/pages-models/*": ["pages-models/*"],
       "@/widgets/*": ["widgets/*"],
       "@/features/*": ["features/*"],
       "@/entities/*": ["entities/*"],

@@ -2,7 +2,6 @@ import { IClientUser, User } from "@/shared/api";
 import {
   comparePasswords,
   connectDb,
-  hashPassword,
   isEmail,
   withSessionRoute,
 } from "@/shared/lib";

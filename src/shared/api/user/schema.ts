@@ -5,6 +5,7 @@ import { IUser } from "./models";
 const UserSchema: Schema = new Schema<IUser>({
   email: {
     type: String,
+    unique: true,
     trim: true,
     validate: {
       validator: function (v: string) {
