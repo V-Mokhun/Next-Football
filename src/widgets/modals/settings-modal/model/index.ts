@@ -1,11 +1,11 @@
 import { settingsModel } from "@/entities/settings";
-import { viewerModel } from "@/entities/viewer";
+import { changeTimezoneModel } from "@/features/settings/change-timezone";
 import { combine } from "effector-next";
 
 export const $loading = combine(
   [
     settingsModel.$timezonesFetching,
-    viewerModel.viewerSubmodel.$viewerTimezonesFetching,
+    changeTimezoneModel.$viewerTimezonesFetching,
   ],
   ([$timezonesFetching, $viewerTimezonesFetching]) =>
     $timezonesFetching || $viewerTimezonesFetching
