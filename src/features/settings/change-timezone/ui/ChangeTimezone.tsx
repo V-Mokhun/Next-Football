@@ -1,14 +1,16 @@
 import { settingsModel } from "@/entities/settings";
+import { viewerModel } from "@/entities/viewer";
 import { TriangleDownIcon } from "@chakra-ui/icons";
 import { Select } from "@chakra-ui/react";
-import { useStore } from "effector-react";
+import { useEvent, useStore } from "effector-react";
 import React from "react";
 import { changeTimezoneModel } from "..";
 
 interface ChangeTimezoneProps {}
 
 export const ChangeTimezone: React.FC<ChangeTimezoneProps> = ({}) => {
-  const activeTimezone = useStore(changeTimezoneModel.$timezone);
+  const activeTimezone = useStore(viewerModel.viewerSubmodel.$viewerTimezone);
+  const changeTimezone = useEvent(changeTimezoneModel.changeTimezone);
   const { timezones } = useStore(settingsModel.$settings);
 
   return (
@@ -19,7 +21,7 @@ export const ChangeTimezone: React.FC<ChangeTimezoneProps> = ({}) => {
       placeholder="Your timezone.."
       value={activeTimezone}
       onChange={(e) => {
-        changeTimezoneModel.changeTimezone(e.target.value);
+        changeTimezone(e.target.value);
       }}>
       {timezones.length > 0 &&
         timezones.map((timezone) => (

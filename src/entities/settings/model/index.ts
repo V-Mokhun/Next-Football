@@ -9,7 +9,6 @@ import {
 
 interface SettingsStore {
   timezones: GetTimezonesResponse["response"];
-  activeTimezone: string;
   timezoneError: string;
 }
 
@@ -25,7 +24,6 @@ export const closeModal = createEvent();
 export const settingsButtonClicked = createEvent();
 
 export const $settings = createStore<SettingsStore>({
-  activeTimezone: "",
   timezones: [],
   timezoneError: "",
 })

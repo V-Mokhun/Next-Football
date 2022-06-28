@@ -14,13 +14,14 @@ import {
 } from "@chakra-ui/react";
 import { useStore } from "effector-react";
 import React from "react";
+import { settingsModalModel } from "..";
 
 interface SettingsModalProps {}
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({}) => {
   const store = useStore(settingsModel.$settings);
   const isOpen = useStore(settingsModel.$modalOpen);
-  const loading = useStore(settingsModel.$timezonesFetching);
+  const loading = useStore(settingsModalModel.$loading);
 
   return (
     <Modal size="xl" isOpen={isOpen} onClose={settingsModel.closeModal}>

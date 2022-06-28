@@ -1,17 +1,10 @@
+import { viewerModel } from "@/entities/viewer";
 import { PageGate } from "@/pages-models/index";
 import { IClientUser } from "@/shared/api";
 import { withSessionSsr } from "@/shared/lib";
 import { useGate } from "effector-react";
 import { NextPage } from "next";
 import React from "react";
-
-// interface LeaguePageProps {}
-
-// const LeaguePage: NextPage<LeaguePageProps> = ({}) => {
-//   return <div>1</div>;
-// };
-
-// export default LeaguePage;
 
 interface LeagueProps {
   user: IClientUser | null;

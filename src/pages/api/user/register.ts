@@ -10,9 +10,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 export default withSessionRoute(registerRoute);
 
 async function registerRoute(req: NextApiRequest, res: NextApiResponse) {
-  const {
-    body: { method, body },
-  } = req;
+  const { body, method } = req;
 
   if (method !== "POST") {
     return res

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { catchError } from "../lib";
 import {
+  ChangeTimezoneResponse,
   IUser,
   LoginResponse,
   RegisterResponse,
@@ -11,14 +12,12 @@ const USER_API = "/api/user";
 const LOGIN_URL = `${USER_API}/login`;
 const REGISTER_URL = `${USER_API}/register`;
 const LOGOUT_URL = `${USER_API}/logout`;
+const CHANGE_TIMEZONE_URL = `${USER_API}/change-timezone`;
 
 class UserApi {
   private async makeRequest<T>(body: UserRequestBody, url: string) {
     try {
-      const { data } = await axios.post<T>(url, {
-        method: "POST",
-        body,
-      });
+      const { data } = await axios.post<T>(url, body);
 
       return data;
     } catch (error) {
@@ -39,6 +38,21 @@ class UserApi {
     );
 
     return response;
+  }
+
+  async changeTimezone(timezone: string) {
+    try {
+      const { data } = await axios.patch<ChangeTimezoneResponse>(
+        CHANGE_TIMEZONE_URL,
+        {
+          timezone,
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw catchError(error);
+    }
   }
 
   async logout() {

@@ -1,7 +1,7 @@
 import { MenuButton } from "@/entities/menu";
 import { SearchButton } from "@/entities/search";
 import { SettingsItem } from "@/entities/settings";
-import { ViewerButton } from "@/entities/viewer";
+import { ViewerButton, viewerModel } from "@/entities/viewer";
 import { ThemeToggler } from "@/features/theme-toggle";
 import { HOME_ROUTE } from "@/shared/lib";
 import { MoonIcon } from "@chakra-ui/icons";
@@ -11,8 +11,9 @@ import {
   FormLabel,
   Menu,
   MenuItem,
-  MenuList
+  MenuList,
 } from "@chakra-ui/react";
+import { useStore } from "effector-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -20,6 +21,8 @@ import React from "react";
 interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = ({}) => {
+  const isAuth = useStore(viewerModel.viewerSubmodel.$isAuth);
+
   return (
     <header style={{ backgroundColor: "#001e28" }}>
       <Container maxW="container.lg">
@@ -32,12 +35,13 @@ export const Header: React.FC<HeaderProps> = ({}) => {
           <Flex alignItems="center" gap={2}>
             <SearchButton />
             <ViewerButton />
+
             <Menu closeOnSelect={false}>
               {({ isOpen }) => (
                 <>
                   <MenuButton isActive={isOpen} />
                   <MenuList>
-                    <SettingsItem />
+                    {isAuth && <SettingsItem />}
                     <MenuItem display="flex" alignItems="center" gap={2}>
                       <MoonIcon />
                       <FormLabel

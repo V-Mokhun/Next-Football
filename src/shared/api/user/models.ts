@@ -20,3 +20,5 @@ export type RegisterResponse =
     };
 
 export type LoginResponse = RegisterResponse;
+
+export type ChangeTimezoneResponse = { success: boolean; data: string };
