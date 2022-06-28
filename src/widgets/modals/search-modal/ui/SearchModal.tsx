@@ -11,7 +11,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import { useStore } from "effector-react";
+import { useEvent, useStore } from "effector-react";
 import React from "react";
 
 interface SearchModalProps {}
@@ -20,9 +20,10 @@ export const SearchModal: React.FC<SearchModalProps> = ({}) => {
   const isOpen = useStore(searchModalModel.$modalOpen);
   const searchValue = useStore(searchModel.$search);
   const debouncedSearchValue = useDebounce(searchValue, 500);
+  const closeModal = useEvent(searchModalModel.closeModal);
 
   return (
-    <Modal size="xl" isOpen={isOpen} onClose={searchModalModel.closeModal}>
+    <Modal size="xl" isOpen={isOpen} onClose={closeModal}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>

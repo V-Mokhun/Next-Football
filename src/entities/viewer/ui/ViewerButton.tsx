@@ -5,7 +5,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useStore } from "effector-react";
+import { useEvent, useStore } from "effector-react";
 import React from "react";
 import { viewerModel } from "..";
 
@@ -17,6 +17,9 @@ export const ViewerButton: React.FC<ViewerButtonProps> = ({}) => {
   const { onToggle } = useDisclosure();
   const isAuth = useStore(viewerModel.viewerSubmodel.$isAuth);
   const viewer = useStore(viewerModel.viewerSubmodel.$viewer);
+  const authButtonClicked = useEvent(
+    viewerModel.viewerModalsSubmodel.authButtonClicked
+  );
 
   return (
     <Button
@@ -26,11 +29,7 @@ export const ViewerButton: React.FC<ViewerButtonProps> = ({}) => {
       color={color}
       bg={bg}
       px={2}
-      onClick={() =>
-        isAuth
-          ? onToggle()
-          : viewerModel.viewerModalsSubmodel.authButtonClicked()
-      }
+      onClick={() => (isAuth ? onToggle() : authButtonClicked())}
       _hover={{
         backgroundColor: "whiteAlpha.400",
       }}

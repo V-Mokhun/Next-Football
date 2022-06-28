@@ -1,7 +1,7 @@
 import { isEmail } from "@/shared/lib";
 import { AlertMessage, EmailItem, PasswordItem } from "@/shared/ui";
 import { Button, Flex } from "@chakra-ui/react";
-import { useStore } from "effector-react";
+import { useEvent, useStore } from "effector-react";
 import React, { useState } from "react";
 import { loginModel } from "..";
 
@@ -20,6 +20,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ changeAuthMode }) => {
 
   const isLoading = useStore(loginModel.$loginLoading);
   const errorMessage = useStore(loginModel.$loginError);
+  const setEmail = useEvent(loginModel.setEmail);
+  const setPassword = useEvent(loginModel.setPassword);
 
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +33,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ changeAuthMode }) => {
       <EmailItem
         id="login-email"
         isError={isEmailError}
-        setValue={(e) => loginModel.setEmail(e.target.value)}
+        setValue={(e) => setEmail(e.target.value)}
         value={email}
       />
       <PasswordItem
@@ -40,7 +42,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ changeAuthMode }) => {
         setShow={() => setShowPassword((prev) => !prev)}
         show={showPassword}
         value={password}
-        setValue={(e) => loginModel.setPassword(e.target.value)}
+        setValue={(e) => setPassword(e.target.value)}
       />
       <Button
         mb={2}

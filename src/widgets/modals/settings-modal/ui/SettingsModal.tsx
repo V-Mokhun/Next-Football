@@ -12,7 +12,7 @@ import {
   ModalOverlay,
   Skeleton,
 } from "@chakra-ui/react";
-import { useStore } from "effector-react";
+import { useEvent, useStore } from "effector-react";
 import React from "react";
 import { settingsModalModel } from "..";
 
@@ -22,9 +22,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({}) => {
   const store = useStore(settingsModel.$settings);
   const isOpen = useStore(settingsModel.$modalOpen);
   const loading = useStore(settingsModalModel.$loading);
+  const closeModal = useEvent(settingsModel.closeModal);
 
   return (
-    <Modal size="xl" isOpen={isOpen} onClose={settingsModel.closeModal}>
+    <Modal size="xl" isOpen={isOpen} onClose={closeModal}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>

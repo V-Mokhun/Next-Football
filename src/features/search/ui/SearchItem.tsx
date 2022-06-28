@@ -1,5 +1,6 @@
 import { searchModalModel } from "@/entities/search";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { useEvent } from "effector-react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
@@ -18,11 +19,12 @@ export const SearchItem: React.FC<SearchItemProps> = ({
   redirectTo,
 }) => {
   const router = useRouter();
+  const searchItemClicked = useEvent(searchModalModel.searchItemClicked);
 
   return (
     <Flex
       onClick={() => {
-        searchModalModel.searchItemClicked();
+        searchItemClicked();
         router.push(redirectTo);
       }}
       width="100%"

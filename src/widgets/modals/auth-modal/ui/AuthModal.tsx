@@ -16,7 +16,7 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import { useStore } from "effector-react";
+import { useEvent, useStore } from "effector-react";
 import React, { useState } from "react";
 import { authModalModel } from "..";
 
@@ -25,16 +25,18 @@ interface AuthModalProps {}
 export const AuthModal: React.FC<AuthModalProps> = ({}) => {
   const [tabIndex, setTabIndex] = useState(0);
   const isOpen = useStore(viewerModel.viewerModalsSubmodel.$authModalOpen);
+  const closeAuthModal = useEvent(
+    viewerModel.viewerModalsSubmodel.closeAuthModal
+  );
+  const loginTabClicked = useEvent(authModalModel.loginTabClicked);
+  const registerTabClicked = useEvent(authModalModel.registerTabClicked);
 
   const handleTabsChange = (index: number) => {
     setTabIndex(index);
   };
 
   return (
-    <Modal
-      size="xl"
-      isOpen={isOpen}
-      onClose={viewerModel.viewerModalsSubmodel.closeAuthModal}>
+    <Modal size="xl" isOpen={isOpen} onClose={closeAuthModal}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
@@ -47,16 +49,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({}) => {
         <ModalBody py={4}>
           <Tabs index={tabIndex} onChange={handleTabsChange}>
             <TabList justifyContent="center">
-              <Tab onClick={() => authModalModel.loginTabClicked()}>Log in</Tab>
-              <Tab onClick={() => authModalModel.registerTabClicked()}>
-                Register
-              </Tab>
+              <Tab onClick={() => loginTabClicked()}>Log in</Tab>
+              <Tab onClick={() => registerTabClicked()}>Register</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
                 <LoginForm
                   changeAuthMode={() => {
-                    authModalModel.registerTabClicked();
+                    registerTabClicked();
                     setTabIndex(1);
                   }}
                 />
@@ -64,7 +64,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({}) => {
               <TabPanel>
                 <RegisterForm
                   changeAuthMode={() => {
-                    authModalModel.loginTabClicked();
+                    loginTabClicked();
                     setTabIndex(0);
                   }}
                 />

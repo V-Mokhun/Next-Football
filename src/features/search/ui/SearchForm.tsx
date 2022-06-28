@@ -8,7 +8,7 @@ import {
   Heading,
   Input,
 } from "@chakra-ui/react";
-import { useStore } from "effector-react";
+import { useEvent, useStore } from "effector-react";
 import { searchModel } from "..";
 
 interface SearchFormProps {
@@ -22,10 +22,14 @@ export const SearchForm: React.FC<SearchFormProps> = ({
 }) => {
   const searchMode = useStore(searchModel.$searchMode);
   const loading = useStore(searchModel.$searchLoading);
+  const resetItems = useEvent(searchModel.resetItems);
+  const changeSearch = useEvent(searchModel.changeSearch);
+  const leaguesButtonClicked = useEvent(searchModel.leaguesButtonClicked);
+  const teamsButtonClicked = useEvent(searchModel.teamsButtonClicked);
 
   useEffect(() => {
     if (!debouncedSearchValue || debouncedSearchValue.trim().length < 3) {
-      searchModel.resetItems();
+      resetItems();
       return;
     }
 
@@ -45,13 +49,13 @@ export const SearchForm: React.FC<SearchFormProps> = ({
         <Flex alignItems="center" gap={2}>
           <Button
             isDisabled={loading}
-            onClick={() => searchModel.leaguesButtonClicked()}
+            onClick={() => leaguesButtonClicked()}
             variant={searchMode === "leagues" ? "solid" : "outline"}>
             Leagues
           </Button>
           <Button
             isDisabled={loading}
-            onClick={() => searchModel.teamsButtonClicked()}
+            onClick={() => teamsButtonClicked()}
             variant={searchMode === "teams" ? "solid" : "outline"}>
             Teams
           </Button>
@@ -63,7 +67,7 @@ export const SearchForm: React.FC<SearchFormProps> = ({
           size="md"
           placeholder="Search..."
           value={searchValue}
-          onChange={(e) => searchModel.changeSearch(e.target.value)}
+          onChange={(e) => changeSearch(e.target.value)}
         />
         {debouncedSearchValue.trim().length < 3 && (
           <FormHelperText>

@@ -35,7 +35,6 @@ export const Header: React.FC<HeaderProps> = ({}) => {
           <Flex alignItems="center" gap={2}>
             <SearchButton />
             <ViewerButton />
-
             <Menu closeOnSelect={false}>
               {({ isOpen }) => (
                 <>

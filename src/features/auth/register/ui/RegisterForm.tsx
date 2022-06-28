@@ -1,7 +1,7 @@
 import { isEmail } from "@/shared/lib";
 import { AlertMessage, EmailItem, PasswordItem } from "@/shared/ui";
 import { Button, Flex, Text } from "@chakra-ui/react";
-import { useStore } from "effector-react";
+import { useEvent, useStore } from "effector-react";
 import React, { useState } from "react";
 import { registerModel } from "..";
 
@@ -22,6 +22,8 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
 
   const isLoading = useStore(registerModel.$registerLoading);
   const errorMessage = useStore(registerModel.$registerError);
+  const setEmail = useEvent(registerModel.setEmail);
+  const setPassword = useEvent(registerModel.setPassword);
 
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +35,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
       <EmailItem
         id="register-email"
         isError={isEmailError}
-        setValue={(e) => registerModel.setEmail(e.target.value)}
+        setValue={(e) => setEmail(e.target.value)}
         value={email}
       />
       <PasswordItem
@@ -42,7 +44,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         setShow={() => setShowPassword((prev) => !prev)}
         show={showPassword}
         value={password}
-        setValue={(e) => registerModel.setPassword(e.target.value)}
+        setValue={(e) => setPassword(e.target.value)}
       />
       <Button
         mb={2}
