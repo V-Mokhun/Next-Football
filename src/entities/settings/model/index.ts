@@ -21,7 +21,7 @@ export const fetchTimezonesFx = createEffect<void, GetTimezonesResponse, Error>(
 
 export const openModal = createEvent();
 export const closeModal = createEvent();
-export const settingsButtonClicked = createEvent();
+export const buttonClicked = createEvent();
 
 export const $settings = createStore<SettingsStore>({
   timezones: [],
@@ -43,7 +43,7 @@ export const $modalOpen = createStore(false)
   .on(closeModal, () => false);
 
 forward({
-  from: settingsButtonClicked,
+  from: buttonClicked,
   to: openModal,
 });
 

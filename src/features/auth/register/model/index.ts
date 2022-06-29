@@ -12,13 +12,13 @@ export const setEmail = createEvent<string>();
 export const setPassword = createEvent<string>();
 export const formSubmitted = createEvent();
 
-export const $email = restore(setEmail, "").reset(viewerModel.registerViewerFx);
+export const $email = restore(setEmail, "").reset(viewerModel.registerFx);
 export const $password = restore(setPassword, "").reset(
-  viewerModel.registerViewerFx
+  viewerModel.registerFx
 );
-export const $registerLoading = viewerModel.registerViewerFx.pending;
-export const $registerError = createStore("").on(
-  viewerModel.registerViewerFx.failData,
+export const $loading = viewerModel.registerFx.pending;
+export const $error = createStore("").on(
+  viewerModel.registerFx.failData,
   (_, { message }) => message
 );
 
@@ -30,18 +30,18 @@ const $register = combine($email, $password, (email, password) => ({
 sample({
   clock: formSubmitted,
   source: $register,
-  target: viewerModel.registerViewerFx,
+  target: viewerModel.registerFx,
 });
 
 sample({
-  clock: viewerModel.registerViewerFx.doneData,
+  clock: viewerModel.registerFx.doneData,
   filter: ({ success }) => success,
   fn: ({ data }) => data as IClientViewer,
   target: viewerModel.setViewer,
 });
 
 sample({
-  clock: viewerModel.registerViewerFx.doneData,
+  clock: viewerModel.registerFx.doneData,
   filter: ({ success }) => success,
   target: viewerModel.closeAuthModal,
 });

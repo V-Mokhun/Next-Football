@@ -18,8 +18,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ changeAuthMode }) => {
   const isPasswordError = password.trim().length < 6;
   const isInvalid = isEmailError || isPasswordError;
 
-  const isLoading = useStore(loginModel.$loginLoading);
-  const errorMessage = useStore(loginModel.$loginError);
+  const isLoading = useStore(loginModel.$loading);
+  const errorMessage = useStore(loginModel.$error);
   const setEmail = useEvent(loginModel.setEmail);
   const setPassword = useEvent(loginModel.setPassword);
 

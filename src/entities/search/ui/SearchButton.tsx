@@ -9,13 +9,13 @@ interface SearchButtonProps {}
 export const SearchButton: React.FC<SearchButtonProps> = ({}) => {
   const bg = useColorModeValue("whiteAlpha.200", "whiteAlpha.200");
   const color = useColorModeValue("whiteAlpha.900", "whiteAlpha.900");
-  const searchButtonClicked = useEvent(searchModalModel.searchButtonClicked);
+  const buttonClicked = useEvent(searchModalModel.buttonClicked);
 
   return (
     <IconButton
       color={color}
       bg={bg}
-      onClick={() => searchButtonClicked()}
+      onClick={() => buttonClicked()}
       aria-label="Search"
       icon={<Search2Icon />}
       _hover={{

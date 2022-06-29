@@ -1,4 +1,6 @@
 import {
+  ChangePasswordRequest,
+  ChangePasswordResponse,
   ChangeTimezoneResponse,
   IClientViewer,
   LoginResponse,
@@ -16,10 +18,46 @@ import {
 } from "effector-next";
 
 export const setViewer = createEvent<IClientViewer | null>();
-export const setViewerTimezone = createEvent<string>();
+export const changeViewerTimezone = createEvent<string>();
 export const logoutViewer = createEvent();
 
-export const setViewerTimezoneFx = createEffect<
+export const registerFx = createEffect<
+  ViewerRequestBody,
+  RegisterResponse,
+  Error
+>(async (viewer) => {
+  const response = await viewerApi.register(viewer);
+  return response;
+});
+
+export const loginFx = createEffect<
+  ViewerRequestBody,
+  LoginResponse,
+  Error
+>(async (viewer) => {
+  const response = await viewerApi.login(viewer);
+  return response;
+});
+
+export const logoutFx = createEffect<void, LogoutResponse, Error>(
+  async () => {
+    const response = await viewerApi.logout();
+
+    return response;
+  }
+);
+
+export const changePasswordFx = createEffect<
+  ChangePasswordRequest,
+  ChangePasswordResponse,
+  Error
+>(async (body) => {
+  const response = await viewerApi.changePassword(body);
+
+  return response;
+});
+
+export const changeTimezoneFx = createEffect<
   string,
   ChangeTimezoneResponse,
   Error
@@ -29,34 +67,8 @@ export const setViewerTimezoneFx = createEffect<
   return response;
 });
 
-export const registerViewerFx = createEffect<
-  ViewerRequestBody,
-  RegisterResponse,
-  Error
->(async (viewer) => {
-  const response = await viewerApi.register(viewer);
-  return response;
-});
-
-export const loginViewerFx = createEffect<
-  ViewerRequestBody,
-  LoginResponse,
-  Error
->(async (viewer) => {
-  const response = await viewerApi.login(viewer);
-  return response;
-});
-
-export const logoutViewerFx = createEffect<void, LogoutResponse, Error>(
-  async () => {
-    const response = await viewerApi.logout();
-
-    return response;
-  }
-);
-
 export const $viewer = restore(setViewer, null)
-  .on(setViewerTimezone, (state, timezone) => state && { ...state, timezone })
+  .on(changeViewerTimezone, (state, timezone) => state && { ...state, timezone })
   .reset(logoutViewer);
 
 export const $viewerTimezone = $viewer.map((state) =>
@@ -67,13 +79,13 @@ export const $isAuth = $viewer.map((viewer) => !!viewer);
 // Modal
 export const openAuthModal = createEvent();
 export const closeAuthModal = createEvent();
-export const authButtonClicked = createEvent();
+export const buttonClicked  = createEvent();
 
 export const $authModalOpen = createStore(false)
   .on(openAuthModal, () => true)
   .on(closeAuthModal, () => false);
 
 forward({
-  from: authButtonClicked,
+  from: buttonClicked ,
   to: openAuthModal,
 });

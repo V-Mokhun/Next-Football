@@ -11,16 +11,14 @@ interface ChangePasswordButtonProps {
 export const ChangePasswordButton: React.FC<ChangePasswordButtonProps> = ({
   onButtonClick,
 }) => {
-  const changePasswordButtonClicked = useEvent(
-    changePasswordModel.changePasswordButtonClicked
-  );
+  const buttonClicked = useEvent(changePasswordModel.buttonClicked);
 
   return (
     <Button
       variant="ghost"
       w="100%"
       onClick={() => {
-        changePasswordButtonClicked();
+        buttonClicked();
         onButtonClick();
       }}
       display="flex"

@@ -26,3 +26,9 @@ export type LogoutResponse =
   | { success: false; data: string };
 
 export type ChangeTimezoneResponse = { success: boolean; data: string };
+
+export type ChangePasswordRequest = {
+  oldPassword: string;
+  newPassword: string;
+};
+export type ChangePasswordResponse = LogoutResponse;

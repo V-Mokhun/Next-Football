@@ -11,14 +11,14 @@ interface LogoutButtonProps {
 export const LogoutButton: React.FC<LogoutButtonProps> = ({
   onButtonClick,
 }) => {
-  const logoutButtonClicked = useEvent(logoutModel.logoutButtonClicked);
+  const buttonClicked = useEvent(logoutModel.buttonClicked);
 
   return (
     <Button
       variant="ghost"
       w="100%"
       onClick={() => {
-        logoutButtonClicked();
+        buttonClicked();
         onButtonClick();
       }}
       display="flex"

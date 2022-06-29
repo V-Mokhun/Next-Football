@@ -17,6 +17,8 @@ interface PasswordItemProps {
   show: boolean;
   setShow: () => void;
   id: string;
+  label?: string;
+  errorMessage?: string;
 }
 
 export const PasswordItem: React.FC<PasswordItemProps> = ({
@@ -26,10 +28,12 @@ export const PasswordItem: React.FC<PasswordItemProps> = ({
   show,
   setShow,
   id,
+  label,
+  errorMessage,
 }) => {
   return (
     <FormControl isInvalid={isError}>
-      <FormLabel htmlFor={id}>Password</FormLabel>
+      <FormLabel htmlFor={id}>{label || "Password"}</FormLabel>
       <InputGroup>
         <Input
           id={id}
@@ -46,7 +50,11 @@ export const PasswordItem: React.FC<PasswordItemProps> = ({
           />
         </InputRightElement>
       </InputGroup>
-      {isError && <FormErrorMessage>Password is required</FormErrorMessage>}
+      {isError && (
+        <FormErrorMessage>
+          {errorMessage || "Password is required"}
+        </FormErrorMessage>
+      )}
     </FormControl>
   );
 };

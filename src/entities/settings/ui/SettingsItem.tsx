@@ -7,11 +7,11 @@ import { settingsModel } from "..";
 interface SettingsItemProps {}
 
 export const SettingsItem: React.FC<SettingsItemProps> = ({}) => {
-  const settingsButtonClicked = useEvent(settingsModel.settingsButtonClicked);
+  const buttonClicked = useEvent(settingsModel.buttonClicked);
 
   return (
     <MenuItem
-      onClick={() => settingsButtonClicked()}
+      onClick={() => buttonClicked()}
       closeOnSelect
       display="flex"
       alignItems="center"

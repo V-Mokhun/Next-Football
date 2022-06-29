@@ -20,8 +20,8 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   const isPasswordError = password.trim().length < 6;
   const isInvalid = isEmailError || isPasswordError;
 
-  const isLoading = useStore(registerModel.$registerLoading);
-  const errorMessage = useStore(registerModel.$registerError);
+  const isLoading = useStore(registerModel.$loading);
+  const errorMessage = useStore(registerModel.$error);
   const setEmail = useEvent(registerModel.setEmail);
   const setPassword = useEvent(registerModel.setPassword);
 

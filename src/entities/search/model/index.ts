@@ -2,7 +2,7 @@ import { createEvent, createStore, forward } from "effector-next";
 
 export const openModal = createEvent();
 export const closeModal = createEvent();
-export const searchButtonClicked = createEvent();
+export const buttonClicked = createEvent();
 export const searchItemClicked = createEvent();
 
 export const $modalOpen = createStore(false)
@@ -10,7 +10,7 @@ export const $modalOpen = createStore(false)
   .on(closeModal, () => false);
 
 forward({
-  from: searchButtonClicked,
+  from: buttonClicked,
   to: openModal,
 });
 

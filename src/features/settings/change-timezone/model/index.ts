@@ -11,22 +11,22 @@ import {
 export const changeTimezone = createEvent<string>();
 
 export const $timezoneError = createStore<string>("").reset(changeTimezone);
-export const $viewerTimezonesFetching = viewerModel.setViewerTimezoneFx.pending;
+export const $viewerTimezonesFetching = viewerModel.changeTimezoneFx.pending;
 
 forward({
   from: changeTimezone,
-  to: viewerModel.setViewerTimezoneFx,
+  to: viewerModel.changeTimezoneFx,
 });
 
 sample({
-  clock: viewerModel.setViewerTimezoneFx.doneData,
+  clock: viewerModel.changeTimezoneFx.doneData,
   filter: ({ success }) => success,
   fn: ({ data }) => data,
-  target: viewerModel.setViewerTimezone,
+  target: viewerModel.changeViewerTimezone,
 });
 
 sample({
-  clock: viewerModel.setViewerTimezoneFx.failData,
+  clock: viewerModel.changeTimezoneFx.failData,
   fn: ({ message }) => message,
   target: $timezoneError,
 });
