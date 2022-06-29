@@ -1,1 +1,1 @@
-export { ViewerButton } from "./ViewerButton";
+export { ViewerPopover } from "./ViewerPopover";

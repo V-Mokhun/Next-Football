@@ -41,13 +41,12 @@ sample({
 
 sample({
   clock: loginUserFx.doneData,
-  fn: (sourceData) =>
-    typeof sourceData.data === "string" ? null : sourceData.data,
+  fn: ({ data, success }) => (success ? data : null),
   target: viewerModel.viewerSubmodel.setViewer,
 });
 
 sample({
   clock: loginUserFx.doneData,
-  filter: (sourceData) => sourceData.success,
+  filter: ({ success }) => success,
   target: viewerModel.viewerModalsSubmodel.closeAuthModal,
 });

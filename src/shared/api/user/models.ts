@@ -21,4 +21,8 @@ export type RegisterResponse =
 
 export type LoginResponse = RegisterResponse;
 
+export type LogoutResponse =
+  | { success: true; data: null }
+  | { success: false; data: string };
+
 export type ChangeTimezoneResponse = { success: boolean; data: string };

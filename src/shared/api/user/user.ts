@@ -2,8 +2,8 @@ import axios from "axios";
 import { catchError } from "../lib";
 import {
   ChangeTimezoneResponse,
-  IUser,
   LoginResponse,
+  LogoutResponse,
   RegisterResponse,
   UserRequestBody,
 } from "./models";
@@ -57,7 +57,7 @@ class UserApi {
 
   async logout() {
     try {
-      const { data } = await axios.get(LOGOUT_URL);
+      const { data } = await axios.post<LogoutResponse>(LOGOUT_URL);
 
       return data;
     } catch (error) {

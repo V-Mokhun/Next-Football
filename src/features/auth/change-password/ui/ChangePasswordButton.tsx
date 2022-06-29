@@ -1,8 +1,8 @@
 import { ArrowRightIcon, LockIcon } from "@chakra-ui/icons";
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 import { useEvent } from "effector-react";
 import React from "react";
-import { viewerModel } from "..";
+import { changePasswordModel } from "..";
 
 interface ChangePasswordButtonProps {
   onButtonClick: () => void;
@@ -12,7 +12,7 @@ export const ChangePasswordButton: React.FC<ChangePasswordButtonProps> = ({
   onButtonClick,
 }) => {
   const changePasswordButtonClicked = useEvent(
-    viewerModel.viewerSubmodel.changePasswordButtonClicked
+    changePasswordModel.changePasswordButtonClicked
   );
 
   return (

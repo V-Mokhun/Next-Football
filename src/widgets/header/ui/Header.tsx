@@ -1,9 +1,11 @@
-import { MenuButton } from "@/entities/menu";
 import { SearchButton } from "@/entities/search";
 import { SettingsItem } from "@/entities/settings";
-import { ViewerButton, viewerModel } from "@/entities/viewer";
+import { viewerModel, ViewerPopover } from "@/entities/viewer";
+import { ChangePasswordButton } from "@/features/auth/change-password";
+import { LogoutButton } from "@/features/auth/logout";
 import { ThemeToggler } from "@/features/theme-toggle";
 import { HOME_ROUTE } from "@/shared/lib";
+import { MenuButton } from "@/shared/ui";
 import { MoonIcon } from "@chakra-ui/icons";
 import {
   Container,
@@ -34,7 +36,14 @@ export const Header: React.FC<HeaderProps> = ({}) => {
           </Link>
           <Flex alignItems="center" gap={2}>
             <SearchButton />
-            <ViewerButton />
+            <ViewerPopover
+              renderContent={({ onClose }) => (
+                <>
+                  <ChangePasswordButton onButtonClick={onClose} />
+                  <LogoutButton onButtonClick={onClose} />
+                </>
+              )}
+            />
             <Menu closeOnSelect={false}>
               {({ isOpen }) => (
                 <>

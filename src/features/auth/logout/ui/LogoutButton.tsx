@@ -2,7 +2,7 @@ import { ArrowLeftIcon } from "@chakra-ui/icons";
 import { Button, Flex, Text } from "@chakra-ui/react";
 import { useEvent } from "effector-react";
 import React from "react";
-import { viewerModel } from "..";
+import { logoutModel } from "..";
 
 interface LogoutButtonProps {
   onButtonClick: () => void;
@@ -11,9 +11,7 @@ interface LogoutButtonProps {
 export const LogoutButton: React.FC<LogoutButtonProps> = ({
   onButtonClick,
 }) => {
-  const logoutButtonClicked = useEvent(
-    viewerModel.viewerSubmodel.logoutButtonClicked
-  );
+  const logoutButtonClicked = useEvent(logoutModel.logoutButtonClicked);
 
   return (
     <Button
