@@ -1,16 +1,7 @@
 import { searchModalModel } from "@/entities/search";
 import { SearchForm, SearchList, searchModel } from "@/features/search";
 import { useDebounce } from "@/shared/lib";
-import {
-  Divider,
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-} from "@chakra-ui/react";
+import { Modal } from "@/shared/ui";
 import { useEvent, useStore } from "effector-react";
 import React from "react";
 
@@ -23,24 +14,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({}) => {
   const closeModal = useEvent(searchModalModel.closeModal);
 
   return (
-    <Modal size="xl" isOpen={isOpen} onClose={closeModal}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>
-          <Heading as="h2" size="lg">
-            Search
-          </Heading>
-        </ModalHeader>
-        <ModalCloseButton />
-        <Divider />
-        <ModalBody py={4}>
-          <SearchForm
-            debouncedSearchValue={debouncedSearchValue}
-            searchValue={searchValue}
-          />
-          <SearchList debouncedSearchValue={debouncedSearchValue} />
-        </ModalBody>
-      </ModalContent>
+    <Modal title="Search" isOpen={isOpen} onClose={closeModal}>
+      <SearchForm
+        debouncedSearchValue={debouncedSearchValue}
+        searchValue={searchValue}
+      />
+      <SearchList debouncedSearchValue={debouncedSearchValue} />
     </Modal>
   );
 };
