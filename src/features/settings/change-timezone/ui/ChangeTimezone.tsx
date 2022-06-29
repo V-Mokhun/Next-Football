@@ -9,7 +9,7 @@ import { changeTimezoneModel } from "..";
 interface ChangeTimezoneProps {}
 
 export const ChangeTimezone: React.FC<ChangeTimezoneProps> = ({}) => {
-  const activeTimezone = useStore(viewerModel.viewerSubmodel.$viewerTimezone);
+  const activeTimezone = useStore(viewerModel.$viewerTimezone);
   const changeTimezone = useEvent(changeTimezoneModel.changeTimezone);
   const { timezones } = useStore(settingsModel.$settings);
 

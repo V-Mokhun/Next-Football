@@ -1,22 +1,15 @@
 import { viewerModel } from "@/entities/viewer";
-import { LogoutResponse, userApi } from "@/shared/api";
-import { createEffect, createEvent, forward, sample } from "effector-next";
+import { createEvent, forward, sample } from "effector-next";
 
 export const logoutButtonClicked = createEvent();
 
-const logoutUserFx = createEffect<void, LogoutResponse, Error>(async () => {
-  const response = await userApi.logout();
-
-  return response;
-});
-
 forward({
   from: logoutButtonClicked,
-  to: logoutUserFx,
+  to: viewerModel.logoutViewerFx,
 });
 
 sample({
-  clock: logoutUserFx.doneData,
-  fn: () => null,
-  target: viewerModel.viewerSubmodel.setViewer,
+  clock: viewerModel.logoutViewerFx.doneData,
+  filter: ({ success }) => success,
+  target: viewerModel.logoutViewer,
 });

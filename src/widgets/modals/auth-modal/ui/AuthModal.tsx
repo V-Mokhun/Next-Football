@@ -24,9 +24,9 @@ interface AuthModalProps {}
 
 export const AuthModal: React.FC<AuthModalProps> = ({}) => {
   const [tabIndex, setTabIndex] = useState(0);
-  const isOpen = useStore(viewerModel.viewerModalsSubmodel.$authModalOpen);
+  const isOpen = useStore(viewerModel.$authModalOpen);
   const closeAuthModal = useEvent(
-    viewerModel.viewerModalsSubmodel.closeAuthModal
+    viewerModel.closeAuthModal
   );
   const loginTabClicked = useEvent(authModalModel.loginTabClicked);
   const registerTabClicked = useEvent(authModalModel.registerTabClicked);

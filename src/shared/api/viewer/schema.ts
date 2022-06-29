@@ -1,8 +1,8 @@
 import { isEmail } from "@/shared/lib";
 import mongoose, { model, Model, Schema } from "mongoose";
-import { IUser } from "./models";
+import { IViewer } from "./models";
 
-const UserSchema: Schema = new Schema<IUser>({
+const ViewerSchema: Schema = new Schema<IViewer>({
   email: {
     type: String,
     unique: true,
@@ -26,5 +26,5 @@ const UserSchema: Schema = new Schema<IUser>({
   },
 });
 
-export const User: Model<IUser> =
-  mongoose?.models?.User || model("User", UserSchema);
+export const Viewer: Model<IViewer> =
+  mongoose?.models?.Viewer || model("Viewer", ViewerSchema);

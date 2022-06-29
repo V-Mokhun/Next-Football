@@ -1,30 +1,25 @@
 import { viewerModel } from "@/entities/viewer";
-import { LoginResponse, userApi, UserRequestBody } from "@/shared/api";
 import {
-  combine,
-  createEffect,
-  createEvent,
+  IClientViewer
+} from "@/shared/api";
+import {
+  combine, createEvent,
   createStore,
   restore,
-  sample,
+  sample
 } from "effector-next";
 
 export const setEmail = createEvent<string>();
 export const setPassword = createEvent<string>();
 export const formSubmitted = createEvent();
 
-const loginUserFx = createEffect<UserRequestBody, LoginResponse, Error>(
-  async (user) => {
-    const response = await userApi.login(user);
-    return response;
-  }
+export const $email = restore(setEmail, "").reset(viewerModel.loginViewerFx);
+export const $password = restore(setPassword, "").reset(
+  viewerModel.loginViewerFx
 );
-
-export const $email = restore(setEmail, "").reset(loginUserFx);
-export const $password = restore(setPassword, "").reset(loginUserFx);
-export const $loginLoading = loginUserFx.pending;
+export const $loginLoading = viewerModel.loginViewerFx.pending;
 export const $loginError = createStore("").on(
-  loginUserFx.failData,
+  viewerModel.loginViewerFx.failData,
   (_, payload) => payload.message
 );
 
@@ -36,17 +31,18 @@ const $login = combine($email, $password, (email, password) => ({
 sample({
   clock: formSubmitted,
   source: $login,
-  target: loginUserFx,
+  target: viewerModel.loginViewerFx,
 });
 
 sample({
-  clock: loginUserFx.doneData,
-  fn: ({ data, success }) => (success ? data : null),
-  target: viewerModel.viewerSubmodel.setViewer,
-});
-
-sample({
-  clock: loginUserFx.doneData,
+  clock: viewerModel.loginViewerFx.doneData,
   filter: ({ success }) => success,
-  target: viewerModel.viewerModalsSubmodel.closeAuthModal,
+  fn: ({ data }) => data as IClientViewer,
+  target: viewerModel.setViewer,
+});
+
+sample({
+  clock: viewerModel.loginViewerFx.doneData,
+  filter: ({ success }) => success,
+  target: viewerModel.closeAuthModal,
 });

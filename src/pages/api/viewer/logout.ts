@@ -12,7 +12,7 @@ async function logoutRoute(req: NextApiRequest, res: NextApiResponse) {
       .json({ success: false, data: "Method is not allowed" });
   }
 
-  if (!req.session.user) {
+  if (!req.session.viewer) {
     return res.status(401).json({
       success: false,
       data: "Not authenticated",

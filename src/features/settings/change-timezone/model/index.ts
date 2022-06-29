@@ -1,27 +1,32 @@
 import { viewerModel } from "@/entities/viewer";
-import { ChangeTimezoneResponse, userApi } from "@/shared/api";
-import { createEffect, createEvent, forward, sample } from "effector-next";
+import { ChangeTimezoneResponse, viewerApi } from "@/shared/api";
+import {
+  createEffect,
+  createEvent,
+  createStore,
+  forward,
+  sample,
+} from "effector-next";
 
 export const changeTimezone = createEvent<string>();
 
-const setViewerTimezoneFx = createEffect<string, ChangeTimezoneResponse, Error>(
-  async (timezone) => {
-    const response = await userApi.changeTimezone(timezone);
-
-    return response;
-  }
-);
-
-export const $viewerTimezonesFetching = setViewerTimezoneFx.pending;
+export const $timezoneError = createStore<string>("").reset(changeTimezone);
+export const $viewerTimezonesFetching = viewerModel.setViewerTimezoneFx.pending;
 
 forward({
   from: changeTimezone,
-  to: setViewerTimezoneFx,
+  to: viewerModel.setViewerTimezoneFx,
 });
 
 sample({
-  clock: setViewerTimezoneFx.doneData,
+  clock: viewerModel.setViewerTimezoneFx.doneData,
   filter: ({ success }) => success,
   fn: ({ data }) => data,
-  target: viewerModel.viewerSubmodel.setViewerTimezone,
+  target: viewerModel.setViewerTimezone,
+});
+
+sample({
+  clock: viewerModel.setViewerTimezoneFx.failData,
+  fn: ({ message }) => message,
+  target: $timezoneError,
 });

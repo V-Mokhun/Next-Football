@@ -5,17 +5,17 @@ import {
   LoginResponse,
   LogoutResponse,
   RegisterResponse,
-  UserRequestBody,
+  ViewerRequestBody,
 } from "./models";
 
-const USER_API = "/api/user";
-const LOGIN_URL = `${USER_API}/login`;
-const REGISTER_URL = `${USER_API}/register`;
-const LOGOUT_URL = `${USER_API}/logout`;
-const CHANGE_TIMEZONE_URL = `${USER_API}/change-timezone`;
+const VIEWER_API = "/api/viewer";
+const LOGIN_URL = `${VIEWER_API}/login`;
+const REGISTER_URL = `${VIEWER_API}/register`;
+const LOGOUT_URL = `${VIEWER_API}/logout`;
+const CHANGE_TIMEZONE_URL = `${VIEWER_API}/change-timezone`;
 
-class UserApi {
-  private async makeRequest<T>(body: UserRequestBody, url: string) {
+class ViewerApi {
+  private async makeRequest<T>(body: ViewerRequestBody, url: string) {
     try {
       const { data } = await axios.post<T>(url, body);
 
@@ -25,13 +25,13 @@ class UserApi {
     }
   }
 
-  async login(body: UserRequestBody) {
+  async login(body: ViewerRequestBody) {
     const response = await this.makeRequest<LoginResponse>(body, LOGIN_URL);
 
     return response;
   }
 
-  async register(body: UserRequestBody) {
+  async register(body: ViewerRequestBody) {
     const response = await this.makeRequest<RegisterResponse>(
       body,
       REGISTER_URL
@@ -66,4 +66,4 @@ class UserApi {
   }
 }
 
-export const userApi = new UserApi();
+export const viewerApi = new ViewerApi();

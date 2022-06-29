@@ -23,7 +23,7 @@ import React from "react";
 interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = ({}) => {
-  const isAuth = useStore(viewerModel.viewerSubmodel.$isAuth);
+  const isAuth = useStore(viewerModel.$isAuth);
 
   return (
     <header style={{ backgroundColor: "#001e28" }}>

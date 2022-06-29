@@ -1,5 +1,8 @@
 import { settingsModel } from "@/entities/settings";
-import { ChangeTimezone } from "@/features/settings/change-timezone";
+import {
+  ChangeTimezone,
+  changeTimezoneModel,
+} from "@/features/settings/change-timezone";
 import { AlertMessage } from "@/shared/ui";
 import {
   Divider,
@@ -20,6 +23,7 @@ interface SettingsModalProps {}
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({}) => {
   const store = useStore(settingsModel.$settings);
+  const changeTimezoneError = useStore(changeTimezoneModel.$timezoneError);
   const isOpen = useStore(settingsModel.$modalOpen);
   const loading = useStore(settingsModalModel.$loading);
   const closeModal = useEvent(settingsModel.closeModal);
@@ -42,6 +46,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({}) => {
           <Skeleton isLoaded={!loading}>
             <ChangeTimezone />
           </Skeleton>
+          {changeTimezoneError && <AlertMessage error={changeTimezoneError} />}
           {store.timezoneError && <AlertMessage error={store.timezoneError} />}
         </ModalBody>
       </ModalContent>

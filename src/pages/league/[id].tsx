@@ -1,17 +1,16 @@
-import { viewerModel } from "@/entities/viewer";
 import { PageGate } from "@/pages-models/index";
-import { IClientUser } from "@/shared/api";
+import { IClientViewer } from "@/shared/api";
 import { withSessionSsr } from "@/shared/lib";
 import { useGate } from "effector-react";
 import { NextPage } from "next";
 import React from "react";
 
 interface LeagueProps {
-  user: IClientUser | null;
+  viewer: IClientViewer | null;
 }
 
-const League: NextPage<LeagueProps> = ({ user }) => {
-  useGate(PageGate, user);
+const League: NextPage<LeagueProps> = ({ viewer }) => {
+  useGate(PageGate, viewer);
 
   return <div>League</div>;
 };
@@ -20,7 +19,7 @@ export const getServerSideProps = withSessionSsr(
   async function getServerSideProps({ req }) {
     return {
       props: {
-        user: req.session.user,
+        viewer: req.session.viewer,
       },
     };
   }

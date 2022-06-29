@@ -1,8 +1,8 @@
-import "@/app/index.scss";
+import "@/app/index.css";
+import { AppProvider } from "@/app/AppProvider";
 import { Layout } from "@/app/Layout";
 import { withHydrate } from "effector-next";
 import type { AppProps } from "next/app";
-import AppProvider from "../app";
 
 const enhance = withHydrate();
 

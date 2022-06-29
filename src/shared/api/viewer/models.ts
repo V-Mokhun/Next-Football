@@ -1,18 +1,18 @@
-export interface IClientUser {
+export interface IClientViewer {
   email: string;
   timezone: string;
 }
 
-export interface IUser extends IClientUser {
+export interface IViewer extends IClientViewer {
   password: string;
 }
 
-export type UserRequestBody = Pick<IUser, "email" | "password">;
+export type ViewerRequestBody = Pick<IViewer, "email" | "password">;
 
 export type RegisterResponse =
   | {
       success: true;
-      data: IClientUser;
+      data: IClientViewer;
     }
   | {
       success: false;

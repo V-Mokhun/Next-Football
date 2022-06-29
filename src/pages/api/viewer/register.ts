@@ -1,4 +1,4 @@
-import { IClientUser, User } from "@/shared/api";
+import { IClientViewer, Viewer } from "@/shared/api";
 import {
   connectDb,
   hashPassword,
@@ -27,28 +27,28 @@ async function registerRoute(req: NextApiRequest, res: NextApiResponse) {
         .json({ data: "Provide valid data", success: false });
     }
 
-    const existingUser = await User.findOne({ email: body.email }).exec();
-    if (existingUser) {
+    const existingViewer = await Viewer.findOne({ email: body.email }).exec();
+    if (existingViewer) {
       return res
         .status(400)
-        .json({ success: false, data: "User already exists" });
+        .json({ success: false, data: "Viewer already exists" });
     }
 
     const hashedPassword = hashPassword(body.password);
-    const userData: IClientUser = {
+    const viewerData: IClientViewer = {
       email: body.email,
       timezone: "",
     };
 
-    await User.create({
-      ...userData,
+    await Viewer.create({
+      ...viewerData,
       password: hashedPassword,
     });
 
-    req.session.user = userData;
+    req.session.viewer = viewerData;
     await req.session.save();
 
-    return res.status(201).json({ success: true, data: userData });
+    return res.status(201).json({ success: true, data: viewerData });
   } catch (error) {
     return res
       .status(500)

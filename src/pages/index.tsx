@@ -1,15 +1,15 @@
-import { IClientUser } from "@/shared/api";
+import { IClientViewer } from "@/shared/api";
 import { withSessionSsr } from "@/shared/lib";
 import { useGate } from "effector-react";
 import { PageGate } from "@/pages-models/index";
 import type { NextPage } from "next";
 
 interface HomeProps {
-  user: IClientUser | null;
+  viewer: IClientViewer | null;
 }
 
-const Home: NextPage<HomeProps> = ({ user }) => {
-  useGate(PageGate, user);
+const Home: NextPage<HomeProps> = ({ viewer }) => {
+  useGate(PageGate, viewer);
 
   return <div>Home</div>;
 };
@@ -18,7 +18,7 @@ export const getServerSideProps = withSessionSsr(
   async function getServerSideProps({ req }) {
     return {
       props: {
-        user: req.session.user ? req.session.user : null,
+        viewer: req.session.viewer ? req.session.viewer : null,
       },
     };
   }

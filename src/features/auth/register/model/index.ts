@@ -1,8 +1,7 @@
 import { viewerModel } from "@/entities/viewer";
-import { RegisterResponse, userApi, UserRequestBody } from "@/shared/api";
+import { IClientViewer } from "@/shared/api";
 import {
   combine,
-  createEffect,
   createEvent,
   createStore,
   restore,
@@ -13,19 +12,14 @@ export const setEmail = createEvent<string>();
 export const setPassword = createEvent<string>();
 export const formSubmitted = createEvent();
 
-const registerUserFx = createEffect<UserRequestBody, RegisterResponse, Error>(
-  async (user) => {
-    const response = await userApi.register(user);
-    return response;
-  }
+export const $email = restore(setEmail, "").reset(viewerModel.registerViewerFx);
+export const $password = restore(setPassword, "").reset(
+  viewerModel.registerViewerFx
 );
-
-export const $email = restore(setEmail, "").reset(registerUserFx);
-export const $password = restore(setPassword, "").reset(registerUserFx);
-export const $registerLoading = registerUserFx.pending;
+export const $registerLoading = viewerModel.registerViewerFx.pending;
 export const $registerError = createStore("").on(
-  registerUserFx.failData,
-  (_, payload) => payload.message
+  viewerModel.registerViewerFx.failData,
+  (_, { message }) => message
 );
 
 const $register = combine($email, $password, (email, password) => ({
@@ -36,18 +30,18 @@ const $register = combine($email, $password, (email, password) => ({
 sample({
   clock: formSubmitted,
   source: $register,
-  target: registerUserFx,
+  target: viewerModel.registerViewerFx,
 });
 
 sample({
-  clock: registerUserFx.doneData,
-  fn: (sourceData) =>
-    typeof sourceData.data === "string" ? null : sourceData.data,
-  target: viewerModel.viewerSubmodel.setViewer,
+  clock: viewerModel.registerViewerFx.doneData,
+  filter: ({ success }) => success,
+  fn: ({ data }) => data as IClientViewer,
+  target: viewerModel.setViewer,
 });
 
 sample({
-  clock: registerUserFx.doneData,
-  filter: (sourceData) => sourceData.success,
-  target: viewerModel.viewerModalsSubmodel.closeAuthModal,
+  clock: viewerModel.registerViewerFx.doneData,
+  filter: ({ success }) => success,
+  target: viewerModel.closeAuthModal,
 });

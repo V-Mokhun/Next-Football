@@ -1,4 +1,4 @@
-import { User } from "@/shared/api";
+import { Viewer } from "@/shared/api";
 import { connectDb, withSessionRoute } from "@/shared/lib";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -13,7 +13,7 @@ async function changeTimezoneRoute(req: NextApiRequest, res: NextApiResponse) {
       .json({ success: false, data: "Method is not allowed" });
   }
 
-  if (!req.session.user) {
+  if (!req.session.viewer) {
     return res.status(401).json({
       success: false,
       data: "Not authenticated",
@@ -30,22 +30,22 @@ async function changeTimezoneRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectDb();
 
-    const user = await User.findOneAndUpdate(
-      { email: req.session.user.email },
+    const viewer = await Viewer.findOneAndUpdate(
+      { email: req.session.viewer.email },
       { $set: { timezone: body.timezone } },
       { new: true }
     );
 
-    if (!user) {
+    if (!viewer) {
       throw new Error();
     }
 
-    const userData = {
-      email: user.email,
-      timezone: user.timezone,
+    const viewerData = {
+      email: viewer.email,
+      timezone: viewer.timezone,
     };
 
-    req.session.user = userData;
+    req.session.viewer = viewerData;
     await req.session.save();
 
     return res.status(201).json({ success: true, data: body.timezone });
