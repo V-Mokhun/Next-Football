@@ -37,17 +37,17 @@ async function changePasswordRoute(req: NextApiRequest, res: NextApiResponse) {
     });
   }
 
-  if(body.oldPassword === body.newPassword) {
+  if (body.oldPassword === body.newPassword) {
     return res.status(400).json({
       success: false,
-      data: "Provided same passwords"
-    })
+      data: "Provided same passwords",
+    });
   }
 
   try {
     await connectDb();
 
-    const viewer = await Viewer.findOne({ email: req.session.viewer.email });
+    const viewer = await Viewer.findOne({ email: req.session.viewer.email }).exec();
     if (!viewer) {
       throw new Error();
     }

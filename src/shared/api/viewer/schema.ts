@@ -24,6 +24,63 @@ const ViewerSchema: Schema = new Schema<IViewer>({
   timezone: {
     type: String,
   },
+  favoriteLeagues: {
+    type: [
+      {
+        id: {
+          type: Number,
+          unique: true,
+          required: true,
+        },
+        logo: {
+          type: String,
+          required: true,
+        },
+        name: {
+          type: String,
+          required: true,
+        },
+        type: {
+          type: String,
+        },
+      },
+    ],
+    default: [],
+  },
+  favoriteTeams: {
+    type: [
+      {
+        id: {
+          type: Number,
+          unique: true,
+          required: true,
+        },
+        logo: {
+          type: String,
+          required: true,
+        },
+        name: {
+          type: String,
+          required: true,
+        },
+        code: {
+          type: String,
+          required: true,
+        },
+        country: {
+          type: String,
+          required: true,
+        },
+        founded: {
+          type: Number,
+        },
+        national: {
+          type: Boolean,
+        },
+      },
+    ],
+    default: [],
+  },
 });
 
 export const Viewer: Model<IViewer> =

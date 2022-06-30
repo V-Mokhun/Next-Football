@@ -1,7 +1,7 @@
 import { IClientViewer } from "@/shared/api";
 import { withSessionSsr } from "@/shared/lib";
 import { useGate } from "effector-react";
-import { PageGate } from "@/pages-models/index";
+import { pageModel } from "@/pages-models/index";
 import type { NextPage } from "next";
 
 interface HomeProps {
@@ -9,7 +9,7 @@ interface HomeProps {
 }
 
 const Home: NextPage<HomeProps> = ({ viewer }) => {
-  useGate(PageGate, viewer);
+  useGate(pageModel.PageGate, viewer);
 
   return <div>Home</div>;
 };

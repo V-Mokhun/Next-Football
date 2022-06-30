@@ -45,6 +45,8 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
     const viewerData: IClientViewer = {
       email: existingViewer.email,
       timezone: existingViewer.timezone,
+      favoriteLeagues: existingViewer.favoriteLeagues,
+      favoriteTeams: existingViewer.favoriteTeams,
     };
 
     req.session.viewer = viewerData;

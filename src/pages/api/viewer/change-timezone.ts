@@ -1,4 +1,4 @@
-import { Viewer } from "@/shared/api";
+import { IClientViewer, Viewer } from "@/shared/api";
 import { connectDb, withSessionRoute } from "@/shared/lib";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -34,15 +34,17 @@ async function changeTimezoneRoute(req: NextApiRequest, res: NextApiResponse) {
       { email: req.session.viewer.email },
       { $set: { timezone: body.timezone } },
       { new: true }
-    );
+    ).exec();
 
     if (!viewer) {
       throw new Error();
     }
 
-    const viewerData = {
+    const viewerData: IClientViewer = {
       email: viewer.email,
       timezone: viewer.timezone,
+      favoriteLeagues: viewer.favoriteLeagues,
+      favoriteTeams: viewer.favoriteTeams,
     };
 
     req.session.viewer = viewerData;

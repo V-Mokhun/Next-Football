@@ -1,6 +1,10 @@
+import { League, Team } from "../models";
+
 export interface IClientViewer {
   email: string;
   timezone: string;
+  favoriteLeagues: League[];
+  favoriteTeams: Team[];
 }
 
 export interface IViewer extends IClientViewer {
@@ -32,3 +36,31 @@ export type ChangePasswordRequest = {
   newPassword: string;
 };
 export type ChangePasswordResponse = LogoutResponse;
+
+export type GetLeaguesResponse =
+  | {
+      success: true;
+      data: League[];
+    }
+  | { success: false; data: string };
+export type AddLeagueResponse =
+  | {
+      success: true;
+      data: null;
+    }
+  | { success: false; data: string };
+export type RemoveLeagueResponse = AddLeagueResponse;
+
+export type GetTeamsResponse =
+  | {
+      success: true;
+      data: Team[];
+    }
+  | { success: false; data: string };
+export type AddTeamResponse =
+  | {
+      success: true;
+      data: null;
+    }
+  | { success: false; data: string };
+export type RemoveTeamResponse = AddTeamResponse;

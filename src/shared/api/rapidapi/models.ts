@@ -1,4 +1,4 @@
-interface Team {
+export interface Team {
   id: number;
   name: string;
   code: string;
@@ -42,14 +42,16 @@ interface Season {
   coverage: Coverage;
 }
 
-interface League {
+export type LeagueType = "league" | "cup"
+
+export interface League {
   id: number;
   name: string;
-  type: string;
+  type: LeagueType;
   logo: string;
 }
 
-interface Country {
+export interface Country {
   name: string;
   code: string;
   flag: string;
@@ -80,4 +82,8 @@ export type GetLeaguesResponse = ApiResponse & {
 
 export type GetTeamsResponse = ApiResponse & {
   response: { team: Team; venue: Venue }[];
+};
+
+export type GetCountriesResponse = ApiResponse & {
+  response: Country[];
 };

@@ -31,13 +31,15 @@ async function registerRoute(req: NextApiRequest, res: NextApiResponse) {
     if (existingViewer) {
       return res
         .status(400)
-        .json({ success: false, data: "Viewer already exists" });
+        .json({ success: false, data: "User already exists" });
     }
 
     const hashedPassword = hashPassword(body.password);
     const viewerData: IClientViewer = {
       email: body.email,
       timezone: "",
+      favoriteLeagues: [],
+      favoriteTeams: [],
     };
 
     await Viewer.create({

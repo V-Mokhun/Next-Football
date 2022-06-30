@@ -1,4 +1,4 @@
-import { PageGate } from "@/pages-models/index";
+import { pageModel } from "@/pages-models/index";
 import { IClientViewer } from "@/shared/api";
 import { withSessionSsr } from "@/shared/lib";
 import { useGate } from "effector-react";
@@ -10,7 +10,7 @@ interface LeagueProps {
 }
 
 const League: NextPage<LeagueProps> = ({ viewer }) => {
-  useGate(PageGate, viewer);
+  useGate(pageModel.PageGate, viewer);
 
   return <div>League</div>;
 };

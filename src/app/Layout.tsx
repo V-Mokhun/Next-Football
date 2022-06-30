@@ -1,5 +1,6 @@
 import { Header } from "@/widgets/header";
-import { Container } from "@chakra-ui/react";
+import { Sidebar } from "@/widgets/sidebar";
+import { Box, Container, Flex } from "@chakra-ui/react";
 import Head from "next/head";
 import React from "react";
 import { Modals } from "./Modals";
@@ -18,7 +19,14 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       </Head>
       <Header />
       <main className="main">
-        <Container maxW="container.lg">{children}</Container>
+        <Container pt={4} as={Flex} gap={2} maxW="container.lg">
+          <Flex flexDir="column" flex="0 0 230px">
+            <Sidebar />
+          </Flex>
+          <Flex flexDir="column" flex="1 1 auto">
+            {children}
+          </Flex>
+        </Container>
       </main>
       <Modals />
     </div>
