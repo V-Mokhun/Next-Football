@@ -30,18 +30,30 @@ async function removeLeagueRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectDb();
 
-    const viewer = await Viewer.findOne({ email: req.session.viewer.email });
+    const viewer = await Viewer.findOne({
+      email: req.session.viewer.email,
+    }).exec();
     if (!viewer) {
       throw new Error();
     }
 
-    await viewer.updateOne({
-      $set: {
-        favoriteLeagues: viewer.favoriteLeagues.filter(
-          (league) => league.id !== id
-        ),
-      },
-    });
+    const filteredLeagues = viewer.favoriteLeagues.filter(
+      (league) => league.id !== id
+    );
+
+    await viewer
+      .updateOne({
+        $set: {
+          favoriteLeagues: filteredLeagues,
+        },
+      })
+      .exec();
+
+    req.session.viewer = {
+      ...req.session.viewer,
+      favoriteLeagues: filteredLeagues,
+    };
+    await req.session.save();
 
     res.status(201).json({
       success: true,

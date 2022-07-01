@@ -40,14 +40,7 @@ async function changeTimezoneRoute(req: NextApiRequest, res: NextApiResponse) {
       throw new Error();
     }
 
-    const viewerData: IClientViewer = {
-      email: viewer.email,
-      timezone: viewer.timezone,
-      favoriteLeagues: viewer.favoriteLeagues,
-      favoriteTeams: viewer.favoriteTeams,
-    };
-
-    req.session.viewer = viewerData;
+    req.session.viewer = { ...req.session.viewer, timezone: viewer.timezone };
     await req.session.save();
 
     return res.status(201).json({ success: true, data: body.timezone });

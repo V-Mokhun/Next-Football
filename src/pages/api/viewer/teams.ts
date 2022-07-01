@@ -23,7 +23,10 @@ async function teamsRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectDb();
 
-    const viewer = await Viewer.findOne({ email: req.session.viewer.email }).exec();
+    const viewer = await Viewer.findOne({
+      email: req.session.viewer.email,
+    }).exec();
+
     if (!viewer) {
       throw new Error();
     }

@@ -85,3 +85,18 @@ const ViewerSchema: Schema = new Schema<IViewer>({
 
 export const Viewer: Model<IViewer> =
   mongoose?.models?.Viewer || model("Viewer", ViewerSchema);
+
+// Viewer?.aggregate([
+//   {
+//     $unwind: {
+//       path: "$favoriteTeams",
+//       preserveNullAndEmptyArrays: true,
+//     },
+//   },
+//   {
+//     $unwind: {
+//       path: "$favoriteLeagues",
+//       preserveNullAndEmptyArrays: true,
+//     },
+//   },
+// ]).exec();

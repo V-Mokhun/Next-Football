@@ -1,11 +1,19 @@
 import {
+  AddFavoriteLeagueResponse,
+  AddFavoriteTeamResponse,
   ChangePasswordRequest,
   ChangePasswordResponse,
   ChangeTimezoneResponse,
+  GetFavoriteLeaguesResponse,
+  GetFavoriteTeamsResponse,
   IClientViewer,
+  League,
   LoginResponse,
   LogoutResponse,
   RegisterResponse,
+  RemoveFavoriteLeagueResponse,
+  RemoveFavoriteTeamResponse,
+  Team,
   viewerApi,
   ViewerRequestBody,
 } from "@/shared/api";
@@ -30,22 +38,18 @@ export const registerFx = createEffect<
   return response;
 });
 
-export const loginFx = createEffect<
-  ViewerRequestBody,
-  LoginResponse,
-  Error
->(async (viewer) => {
-  const response = await viewerApi.login(viewer);
-  return response;
-});
-
-export const logoutFx = createEffect<void, LogoutResponse, Error>(
-  async () => {
-    const response = await viewerApi.logout();
-
+export const loginFx = createEffect<ViewerRequestBody, LoginResponse, Error>(
+  async (viewer) => {
+    const response = await viewerApi.login(viewer);
     return response;
   }
 );
+
+export const logoutFx = createEffect<void, LogoutResponse, Error>(async () => {
+  const response = await viewerApi.logout();
+
+  return response;
+});
 
 export const changePasswordFx = createEffect<
   ChangePasswordRequest,
@@ -67,8 +71,71 @@ export const changeTimezoneFx = createEffect<
   return response;
 });
 
+export const getFavoriteLeaguesFx = createEffect<
+  void,
+  GetFavoriteLeaguesResponse,
+  Error
+>(async () => {
+  const response = await viewerApi.getFavoriteLeagues();
+
+  return response;
+});
+
+export const addFavoriteLeagueFx = createEffect<
+  League,
+  AddFavoriteLeagueResponse,
+  Error
+>(async (league) => {
+  const response = await viewerApi.addFavoriteLeague(league);
+
+  return response;
+});
+
+export const removeFavoriteLeagueFx = createEffect<
+  number,
+  RemoveFavoriteLeagueResponse,
+  Error
+>(async (id) => {
+  const response = await viewerApi.removeFavoriteLeague(id);
+
+  return response;
+});
+
+export const getFavoriteTeamsFx = createEffect<
+  void,
+  GetFavoriteTeamsResponse,
+  Error
+>(async () => {
+  const response = await viewerApi.getFavoriteTeams();
+
+  return response;
+});
+
+export const addFavoriteTeamFx = createEffect<
+  Team,
+  AddFavoriteTeamResponse,
+  Error
+>(async (team) => {
+  const response = await viewerApi.addFavoriteTeam(team);
+
+  return response;
+});
+
+export const removeFavoriteTeamFx = createEffect<
+  number,
+  RemoveFavoriteTeamResponse,
+  Error
+>(async (id) => {
+  const response = await viewerApi.removeFavoriteTeam(id);
+
+  return response;
+});
+
 export const $viewer = restore(setViewer, null)
-  .on(changeViewerTimezone, (state, timezone) => state && { ...state, timezone })
+  .on(
+    changeViewerTimezone,
+    (state, timezone) => state && { ...state, timezone }
+  )
   .reset(logoutViewer);
 
 export const $viewerTimezone = $viewer.map((state) =>
@@ -79,13 +146,13 @@ export const $isAuth = $viewer.map((viewer) => !!viewer);
 // Modal
 export const openAuthModal = createEvent();
 export const closeAuthModal = createEvent();
-export const buttonClicked  = createEvent();
+export const buttonClicked = createEvent();
 
 export const $authModalOpen = createStore(false)
   .on(openAuthModal, () => true)
   .on(closeAuthModal, () => false);
 
 forward({
-  from: buttonClicked ,
+  from: buttonClicked,
   to: openAuthModal,
 });

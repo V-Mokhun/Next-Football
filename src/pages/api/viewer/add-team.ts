@@ -30,10 +30,22 @@ async function addTeamRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectDb();
 
-    await Viewer.findOneAndUpdate(
+    const viewer = await Viewer.findOneAndUpdate(
       { email: req.session.viewer.email },
-      { $push: { favoriteTeams: team } }
+      { $push: { favoriteTeams: team } },
+      {
+        new: true,
+      }
     ).exec();
+    if (!viewer) {
+      throw new Error();
+    }
+
+    req.session.viewer = {
+      ...req.session.viewer,
+      favoriteTeams: viewer.favoriteTeams,
+    };
+    await req.session.save();
 
     res.status(201).json({
       success: true,

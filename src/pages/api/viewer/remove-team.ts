@@ -35,11 +35,19 @@ async function removeTeamRoute(req: NextApiRequest, res: NextApiResponse) {
       throw new Error();
     }
 
+    const filteredTeams = viewer.favoriteTeams.filter((team) => team.id !== id);
+
     await viewer.updateOne({
       $set: {
-        favoriteTeams: viewer.favoriteTeams.filter((team) => team.id !== id),
+        favoriteTeams: filteredTeams,
       },
     });
+
+    req.session.viewer = {
+      ...req.session.viewer,
+      favoriteTeams: filteredTeams,
+    };
+    await req.session.save();
 
     res.status(201).json({
       success: true,

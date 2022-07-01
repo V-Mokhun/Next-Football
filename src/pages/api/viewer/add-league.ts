@@ -30,10 +30,23 @@ async function addLeagueRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectDb();
 
-    await Viewer.findOneAndUpdate(
+    const viewer = await Viewer.findOneAndUpdate(
       { email: req.session.viewer.email },
-      { $push: { favoriteLeagues: league } }
+      { $push: { favoriteLeagues: league } },
+      {
+        new: true,
+      }
     ).exec();
+
+    if (!viewer) {
+      throw new Error();
+    }
+
+    req.session.viewer = {
+      ...req.session.viewer,
+      favoriteLeagues: viewer.favoriteLeagues,
+    };
+    await req.session.save();
 
     res.status(201).json({
       success: true,

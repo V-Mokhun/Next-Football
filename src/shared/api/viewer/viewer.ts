@@ -2,18 +2,18 @@ import axios from "axios";
 import { catchError } from "../lib";
 import { League, Team } from "../models";
 import {
-  AddLeagueResponse,
-  AddTeamResponse,
+  AddFavoriteLeagueResponse,
+  AddFavoriteTeamResponse,
   ChangePasswordRequest,
   ChangePasswordResponse,
   ChangeTimezoneResponse,
-  GetLeaguesResponse,
-  GetTeamsResponse,
+  GetFavoriteLeaguesResponse,
+  GetFavoriteTeamsResponse,
   LoginResponse,
   LogoutResponse,
   RegisterResponse,
-  RemoveLeagueResponse,
-  RemoveTeamResponse,
+  RemoveFavoriteLeagueResponse,
+  RemoveFavoriteTeamResponse,
   ViewerRequestBody,
 } from "./models";
 
@@ -115,13 +115,13 @@ class ViewerApi {
   }
 
   async getFavoriteLeagues() {
-    const response = await this.getRequest<GetLeaguesResponse>(GET_LEAGUES);
+    const response = await this.getRequest<GetFavoriteLeaguesResponse>(GET_LEAGUES);
 
     return response;
   }
 
   async addFavoriteLeague(league: League) {
-    const response = await this.updateRequest<AddLeagueResponse, League>(
+    const response = await this.updateRequest<AddFavoriteLeagueResponse, League>(
       league,
       ADD_LEAGUE
     );
@@ -130,7 +130,7 @@ class ViewerApi {
   }
 
   async removeFavoriteLeague(id: number) {
-    const response = await this.updateRequest<RemoveLeagueResponse, number>(
+    const response = await this.updateRequest<RemoveFavoriteLeagueResponse, number>(
       id,
       REMOVE_LEAGUE
     );
@@ -139,13 +139,13 @@ class ViewerApi {
   }
 
   async getFavoriteTeams() {
-    const response = await this.getRequest<GetTeamsResponse>(GET_TEAMS);
+    const response = await this.getRequest<GetFavoriteTeamsResponse>(GET_TEAMS);
 
     return response;
   }
 
   async addFavoriteTeam(team: Team) {
-    const response = await this.updateRequest<AddTeamResponse, Team>(
+    const response = await this.updateRequest<AddFavoriteTeamResponse, Team>(
       team,
       ADD_TEAM
     );
@@ -154,7 +154,7 @@ class ViewerApi {
   }
 
   async removeFavoriteTeam(id: number) {
-    const response = await this.updateRequest<RemoveTeamResponse, number>(
+    const response = await this.updateRequest<RemoveFavoriteTeamResponse, number>(
       id,
       REMOVE_TEAM
     );

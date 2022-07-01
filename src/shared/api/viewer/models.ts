@@ -37,30 +37,30 @@ export type ChangePasswordRequest = {
 };
 export type ChangePasswordResponse = LogoutResponse;
 
-export type GetLeaguesResponse =
+export type GetFavoriteLeaguesResponse =
   | {
       success: true;
       data: League[];
     }
   | { success: false; data: string };
-export type AddLeagueResponse =
+export type AddFavoriteLeagueResponse =
   | {
       success: true;
       data: null;
     }
   | { success: false; data: string };
-export type RemoveLeagueResponse = AddLeagueResponse;
+export type RemoveFavoriteLeagueResponse = AddFavoriteLeagueResponse;
 
-export type GetTeamsResponse =
+export type GetFavoriteTeamsResponse =
   | {
       success: true;
       data: Team[];
     }
   | { success: false; data: string };
-export type AddTeamResponse =
+export type AddFavoriteTeamResponse =
   | {
       success: true;
       data: null;
     }
   | { success: false; data: string };
-export type RemoveTeamResponse = AddTeamResponse;
+export type RemoveFavoriteTeamResponse = AddFavoriteTeamResponse;
