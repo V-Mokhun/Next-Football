@@ -3,7 +3,6 @@ import { IClientViewer } from "@/shared/api";
 import { withSessionSsr } from "@/shared/lib";
 import { useGate } from "effector-react";
 import { NextPage } from "next";
-import React from "react";
 
 interface TeamProps {
   viewer: IClientViewer | null;
@@ -19,7 +18,7 @@ export const getServerSideProps = withSessionSsr(
   async function getServerSideProps({ req }) {
     return {
       props: {
-        viewer: req.session.viewer,
+        viewer: req.session.viewer || null,
       },
     };
   }

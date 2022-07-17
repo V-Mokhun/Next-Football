@@ -1,5 +1,5 @@
-import "@/app/index.css";
 import { AppProvider } from "@/app/AppProvider";
+import "@/app/index.css";
 import { Layout } from "@/app/Layout";
 import { withHydrate } from "effector-next";
 import type { AppProps } from "next/app";

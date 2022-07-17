@@ -1,7 +1,7 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
-import { withFork } from "effector-next";
-import { ColorModeScript } from "@chakra-ui/react";
 import { theme } from "@/shared/lib";
+import { ColorModeScript } from "@chakra-ui/react";
+import { withFork } from "effector-next";
+import Document, { Head, Html, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
   render(): JSX.Element {
