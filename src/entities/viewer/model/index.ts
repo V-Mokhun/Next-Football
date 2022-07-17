@@ -15,14 +15,14 @@ import {
   RemoveFavoriteTeamResponse,
   Team,
   viewerApi,
-  ViewerRequestBody,
+  ViewerRequestBody
 } from "@/shared/api";
 import {
   createEffect,
   createEvent,
   createStore,
   forward,
-  restore,
+  restore
 } from "effector-next";
 
 export const setViewer = createEvent<IClientViewer | null>();
@@ -141,7 +141,7 @@ export const $viewer = restore(setViewer, null)
 export const $viewerTimezone = $viewer.map((state) =>
   state ? state.timezone : ""
 );
-export const $isAuth = $viewer.map((viewer) => !!viewer);
+export const $isAuthenticated = $viewer.map((viewer) => !!viewer);
 
 // Modal
 export const openAuthModal = createEvent();

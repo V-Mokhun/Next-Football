@@ -1,6 +1,6 @@
 import { viewerModel } from "@/entities/viewer";
 import { IClientViewer } from "@/shared/api";
-import { createStore, forward, sample } from "effector-next";
+import { createStore, forward } from "effector-next";
 import { createGate } from "effector-react";
 
 export const PageGate = createGate<IClientViewer | null>();
@@ -18,8 +18,8 @@ forward({
 
 // sample({
 //   clock: $viewerSet,
-//   source: viewerModel.$isAuth,
-//   filter: (isAuth) => isAuth,
+//   source: viewerModel.$isAuthenticated,
+//   filter: (isAuthenticated) => isAuthenticated,
 //   target: [viewerModel.getFavoriteLeaguesFx, viewerModel.getFavoriteTeamsFx],
 // });
 

@@ -13,7 +13,7 @@ import {
   FormLabel,
   Menu,
   MenuItem,
-  MenuList,
+  MenuList
 } from "@chakra-ui/react";
 import { useStore } from "effector-react";
 import Image from "next/image";
@@ -23,7 +23,7 @@ import React from "react";
 interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = ({}) => {
-  const isAuth = useStore(viewerModel.$isAuth);
+  const isAuthenticated = useStore(viewerModel.$isAuthenticated);
 
   return (
     <header style={{ backgroundColor: "#001e28" }}>
@@ -49,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({}) => {
                 <>
                   <MenuButton isActive={isOpen} />
                   <MenuList>
-                    {isAuth && <SettingsItem />}
+                    {isAuthenticated && <SettingsItem />}
                     <MenuItem display="flex" alignItems="center" gap={2}>
                       <MoonIcon />
                       <FormLabel

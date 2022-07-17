@@ -11,7 +11,7 @@ export const ViewerButton: React.FC<ViewerButtonProps> = React.forwardRef(
   ({ onToggle }, ref) => {
     const bg = useColorModeValue("whiteAlpha.200", "whiteAlpha.200");
     const color = useColorModeValue("whiteAlpha.900", "whiteAlpha.900");
-    const isAuth = useStore(viewerModel.$isAuth);
+    const isAuthenticated = useStore(viewerModel.$isAuthenticated);
     const viewer = useStore(viewerModel.$viewer);
     const buttonClicked = useEvent(viewerModel.buttonClicked);
 
@@ -24,7 +24,7 @@ export const ViewerButton: React.FC<ViewerButtonProps> = React.forwardRef(
         bg={bg}
         px={2}
         ref={ref}
-        onClick={() => (isAuth ? onToggle() : buttonClicked())}
+        onClick={() => (isAuthenticated ? onToggle() : buttonClicked())}
         _hover={{
           backgroundColor: "whiteAlpha.400",
         }}
@@ -32,7 +32,7 @@ export const ViewerButton: React.FC<ViewerButtonProps> = React.forwardRef(
           backgroundColor: "whiteAlpha.400",
         }}>
         <Avatar size="xs" name={viewer?.email} />
-        <Text>{isAuth ? viewer?.email : "Log in"}</Text>
+        <Text>{isAuthenticated ? viewer?.email : "Log in"}</Text>
       </Button>
     );
   }

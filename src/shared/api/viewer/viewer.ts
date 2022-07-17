@@ -14,21 +14,26 @@ import {
   RegisterResponse,
   RemoveFavoriteLeagueResponse,
   RemoveFavoriteTeamResponse,
-  ViewerRequestBody,
+  ViewerRequestBody
 } from "./models";
 
 const VIEWER_API = "/api/viewer";
+const FAVORITE_LEAGUE_API = "/api/league"
+const FAVORITE_TEAM_API = "/api/team"
+
 const LOGIN_URL = `${VIEWER_API}/login`;
 const REGISTER_URL = `${VIEWER_API}/register`;
 const LOGOUT_URL = `${VIEWER_API}/logout`;
 const CHANGE_TIMEZONE_URL = `${VIEWER_API}/change-timezone`;
 const CHANGE_PASSWORD_URL = `${VIEWER_API}/change-password`;
-const GET_LEAGUES = `${VIEWER_API}/leagues`;
-const ADD_LEAGUE = `${VIEWER_API}/add-league`;
-const REMOVE_LEAGUE = `${VIEWER_API}/remove-league`;
-const GET_TEAMS = `${VIEWER_API}/teams`;
-const ADD_TEAM = `${VIEWER_API}/add-team`;
-const REMOVE_TEAM = `${VIEWER_API}/remove-team`;
+
+const GET_LEAGUES = `${FAVORITE_LEAGUE_API}/leagues`;
+const ADD_LEAGUE = `${FAVORITE_LEAGUE_API}/add-league`;
+const REMOVE_LEAGUE = `${FAVORITE_LEAGUE_API}/remove-league`;
+
+const GET_TEAMS = `${FAVORITE_TEAM_API}/teams`;
+const ADD_TEAM = `${FAVORITE_TEAM_API}/add-team`;
+const REMOVE_TEAM = `${FAVORITE_TEAM_API}/remove-team`;
 
 class ViewerApi {
   private async postRequest<T>(body: ViewerRequestBody, url: string) {
