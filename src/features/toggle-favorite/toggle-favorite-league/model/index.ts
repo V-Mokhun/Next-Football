@@ -4,16 +4,13 @@ import { createEvent, createStore, forward, sample } from "effector-next";
 
 export const buttonClicked = createEvent<League>();
 
-export const $viewerFavoriteLeagues = viewerModel.$viewer.map(
-  (viewer) => viewer && viewer.favoriteLeagues
-);
 export const $loading = createStore<{ id: number; loading: boolean } | null>(
   null
 );
 
 const isInFavorites = sample({
   clock: buttonClicked,
-  source: $viewerFavoriteLeagues,
+  source: viewerModel.$viewerFavoriteLeagues,
   fn: (source, clock) => {
     if (!source) return false;
     const favoriteLeague = source.find((league) => league.id === clock.id);

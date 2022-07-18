@@ -151,6 +151,13 @@ export const $viewer = restore(setViewer, null)
 export const $viewerTimezone = $viewer.map((state) =>
   state ? state.timezone : ""
 );
+export const $viewerFavoriteTeams = $viewer.map((state) =>
+  state ? state.favoriteTeams : []
+);
+export const $viewerFavoriteLeagues = $viewer.map((state) =>
+  state ? state.favoriteLeagues : []
+);
+$viewerFavoriteLeagues.watch((state) => console.log(state));
 export const $isAuthenticated = $viewer.map((viewer) => !!viewer);
 
 // Modal

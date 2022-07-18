@@ -1,3 +1,4 @@
+import { viewerModel } from "@/entities/viewer";
 import { League } from "@/shared/api";
 import { StarIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/react";
@@ -16,7 +17,7 @@ export const FavoriteLeagueButton: React.FC<FavoriteLeagueButtonProps> = ({
 }) => {
   const buttonClicked = useEvent(toggleFavoriteLeagueModel.buttonClicked);
   const favoriteLeagues = useStore(
-    toggleFavoriteLeagueModel.$viewerFavoriteLeagues
+    viewerModel.$viewerFavoriteLeagues
   );
   const loadingState = useStore(toggleFavoriteLeagueModel.$loading);
 
