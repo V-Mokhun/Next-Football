@@ -49,7 +49,7 @@ async function addTeamRoute(req: NextApiRequest, res: NextApiResponse) {
 
     res.status(201).json({
       success: true,
-      data: null,
+      data: viewer.favoriteTeams,
     });
   } catch (error) {
     return res

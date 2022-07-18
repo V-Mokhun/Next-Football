@@ -10,6 +10,7 @@ interface SearchItemProps {
   logo: string;
   name: string;
   country: string;
+  favoriteComponent: React.ReactElement;
 }
 
 export const SearchItem: React.FC<SearchItemProps> = ({
@@ -17,37 +18,44 @@ export const SearchItem: React.FC<SearchItemProps> = ({
   name,
   country,
   redirectTo,
+  favoriteComponent,
 }) => {
   const router = useRouter();
   const searchItemClicked = useEvent(searchModalModel.searchItemClicked);
 
   return (
     <Flex
-      onClick={() => {
-        searchItemClicked();
-        router.push(redirectTo);
-      }}
       width="100%"
-      cursor="pointer"
       alignItems="center"
+      justifyContent="space-between"
       gap={3}
       p={2}
       borderRadius={10}>
-      <Box>
-        <Image
-          src={logo}
-          alt={name}
-          width={50}
-          height={50}
-          style={{ borderRadius: 10 }}
-        />
-      </Box>
-      <Box>
-        <Heading mb={1} as="p" size="sm">
-          {name}
-        </Heading>
-        <Text>Football, {country}</Text>
-      </Box>
+      <Flex
+        cursor="pointer"
+        alignItems="center"
+        gap={2}
+        onClick={() => {
+          searchItemClicked();
+          router.push(redirectTo);
+        }}>
+        <Box>
+          <Image
+            src={logo}
+            alt={name}
+            width={50}
+            height={50}
+            style={{ borderRadius: 10 }}
+          />
+        </Box>
+        <Box>
+          <Heading mb={1} as="p" size="sm">
+            {name}
+          </Heading>
+          <Text>Football, {country}</Text>
+        </Box>
+      </Flex>
+      {favoriteComponent}
     </Flex>
   );
 };

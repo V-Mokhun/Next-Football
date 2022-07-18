@@ -1,35 +1,62 @@
 import { viewerModel } from "@/entities/viewer";
 import { League } from "@/shared/api";
-import { createEvent, sample } from "effector-next";
+import { createEvent, createStore, forward, sample } from "effector-next";
 
 export const buttonClicked = createEvent<League>();
 
-const $viewerFavoriteLeagues = viewerModel.$viewer.map(
+export const $viewerFavoriteLeagues = viewerModel.$viewer.map(
   (viewer) => viewer && viewer.favoriteLeagues
+);
+export const $loading = createStore<{ id: number; loading: boolean } | null>(
+  null
 );
 
 const isInFavorites = sample({
   clock: buttonClicked,
   source: $viewerFavoriteLeagues,
   fn: (source, clock) => {
-    const favoriteLeague = source?.find((league) => league.id === clock.id);
+    if (!source) return false;
+    const favoriteLeague = source.find((league) => league.id === clock.id);
 
     if (favoriteLeague) return true;
     return false;
   },
 });
 
+forward({
+  from: buttonClicked.map((league) => ({ id: league.id, loading: true })),
+  to: $loading,
+});
+
 sample({
   clock: buttonClicked,
-	filter: isInFavorites.map(isFavorite => isFavorite),
-  fn: (league) => {
-    return league.id;
-  },
+  filter: isInFavorites.map((isFavorite) => isFavorite),
+  fn: (league) => league.id,
   target: viewerModel.removeFavoriteLeagueFx,
 });
 
 sample({
   clock: buttonClicked,
-	filter: isInFavorites.map(isFavorite => !isFavorite),
+  filter: isInFavorites.map((isFavorite) => !isFavorite),
   target: viewerModel.addFavoriteLeagueFx,
+});
+
+sample({
+  clock: [
+    viewerModel.addFavoriteLeagueFx.doneData,
+    viewerModel.removeFavoriteLeagueFx.doneData,
+  ],
+  filter: ({ success }) => success,
+  fn: ({ data }) => data as League[],
+  target: viewerModel.updateLeagues,
+});
+
+sample({
+  clock: [
+    viewerModel.addFavoriteLeagueFx.doneData,
+    viewerModel.removeFavoriteLeagueFx.doneData,
+  ],
+  source: buttonClicked,
+  fn: (source) => ({ id: source.id, loading: false }),
+  target: $loading,
 });

@@ -1,3 +1,4 @@
+import { League, Team } from "@/shared/api";
 import { LEAGUE_ROUTE, TEAM_ROUTE } from "@/shared/lib";
 import { Flex, Spinner, StackDivider, Text, VStack } from "@chakra-ui/react";
 import { useStore } from "effector-react";
@@ -7,51 +8,75 @@ import { SearchItem } from "./SearchItem";
 
 interface SearchListProps {
   debouncedSearchValue: string;
+  FavoriteLeagueComponent: React.FC<{ data: League }>;
+  FavoriteTeamComponent: React.FC<{ data: Team }>;
 }
 
 export const SearchList: React.FC<SearchListProps> = ({
   debouncedSearchValue,
+  FavoriteLeagueComponent,
+  FavoriteTeamComponent,
 }) => {
   const teams = useStore(searchModel.$teams);
   const leagues = useStore(searchModel.$leagues);
   const loading = useStore(searchModel.$searchLoading);
+  const searchMode = useStore(searchModel.$searchMode);
 
-  return loading ? (
-    <Flex justifyContent="center" mt={2}>
-      <Spinner size="xl" />
-    </Flex>
-  ) : (
-    <>
+  let body = null;
+
+  if (loading) {
+    body = (
+      <Flex justifyContent="center" mt={2}>
+        <Spinner size="xl" />
+      </Flex>
+    );
+  }
+
+  if (
+    teams.length <= 0 &&
+    leagues.length <= 0 &&
+    debouncedSearchValue.trim().length >= 3
+  ) {
+    body = (
+      <Text mt={2} textAlign="left">
+        No results found.
+      </Text>
+    );
+  }
+
+  if (searchMode === "leagues") {
+    body = (
       <VStack mt={3} align="start" divider={<StackDivider />} spacing={2}>
-        {teams.length > 0 &&
-          teams.map(({ team }) => (
-            <SearchItem
-              key={team.id}
-              logo={team.logo}
-              name={team.name}
-              redirectTo={`${TEAM_ROUTE}/${team.id}`}
-              country={team.country}
-            />
-          ))}
-
-        {leagues.length > 0 &&
-          leagues.map(({ country, league }) => (
-            <SearchItem
-              key={league.id}
-              logo={league.logo}
-              name={league.name}
-              redirectTo={`${LEAGUE_ROUTE}/${league.id}`}
-              country={country.name}
-            />
-          ))}
+        {leagues?.map(({ country, league }) => (
+          <SearchItem
+            favoriteComponent={<FavoriteLeagueComponent data={league} />}
+            key={league.id}
+            logo={league.logo}
+            name={league.name}
+            redirectTo={`${LEAGUE_ROUTE}/${league.id}`}
+            country={country.name}
+          />
+        ))}
       </VStack>
-      {teams.length <= 0 &&
-        leagues.length <= 0 &&
-        debouncedSearchValue.trim().length >= 3 && (
-          <Text mt={2} textAlign="left">
-            No results found.
-          </Text>
-        )}
-    </>
-  );
+    );
+  }
+
+  if (searchMode === "teams") {
+    body = (
+      <VStack mt={3} align="start" divider={<StackDivider />} spacing={2}>
+        {teams?.map(({ team }) => (
+          <SearchItem
+            favoriteComponent={<FavoriteTeamComponent data={team} />}
+            key={team.id}
+            logo={team.logo}
+            name={team.name}
+            redirectTo={`${TEAM_ROUTE}/${team.id}`}
+            country={team.country}
+          />
+        ))}
+      </VStack>
+    );
+  }
+
+  return body;
 };

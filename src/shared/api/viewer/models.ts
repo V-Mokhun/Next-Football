@@ -43,13 +43,8 @@ export type GetFavoriteLeaguesResponse =
       data: League[];
     }
   | { success: false; data: string };
-export type AddFavoriteLeagueResponse =
-  | {
-      success: true;
-      data: null;
-    }
-  | { success: false; data: string };
-export type RemoveFavoriteLeagueResponse = AddFavoriteLeagueResponse;
+export type AddFavoriteLeagueResponse = GetFavoriteLeaguesResponse;
+export type RemoveFavoriteLeagueResponse = GetFavoriteLeaguesResponse;
 
 export type GetFavoriteTeamsResponse =
   | {
@@ -57,10 +52,5 @@ export type GetFavoriteTeamsResponse =
       data: Team[];
     }
   | { success: false; data: string };
-export type AddFavoriteTeamResponse =
-  | {
-      success: true;
-      data: null;
-    }
-  | { success: false; data: string };
-export type RemoveFavoriteTeamResponse = AddFavoriteTeamResponse;
+export type AddFavoriteTeamResponse = GetFavoriteTeamsResponse;
+export type RemoveFavoriteTeamResponse = GetFavoriteTeamsResponse;

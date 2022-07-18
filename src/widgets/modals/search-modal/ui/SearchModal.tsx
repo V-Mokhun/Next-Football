@@ -1,5 +1,7 @@
 import { searchModalModel } from "@/entities/search";
 import { SearchForm, SearchList, searchModel } from "@/features/search";
+import { FavoriteLeagueButton } from "@/features/toggle-favorite/toggle-favorite-league";
+import { FavoriteTeamButton } from "@/features/toggle-favorite/toggle-favorite-team";
 import { useDebounce } from "@/shared/lib";
 import { Modal } from "@/shared/ui";
 import { useEvent, useStore } from "effector-react";
@@ -19,7 +21,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({}) => {
         debouncedSearchValue={debouncedSearchValue}
         searchValue={searchValue}
       />
-      <SearchList debouncedSearchValue={debouncedSearchValue} />
+      <SearchList
+        FavoriteLeagueComponent={FavoriteLeagueButton}
+        FavoriteTeamComponent={FavoriteTeamButton}
+        debouncedSearchValue={debouncedSearchValue}
+      />
     </Modal>
   );
 };

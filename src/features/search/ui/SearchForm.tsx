@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
 import {
-  Box,
   Button,
   Flex,
   FormControl,
   FormHelperText,
   Heading,
-  Input,
+  Input
 } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
+import React, { useEffect } from "react";
 import { searchModel } from "..";
 
 interface SearchFormProps {
@@ -38,7 +37,7 @@ export const SearchForm: React.FC<SearchFormProps> = ({
     } else {
       searchModel.fetchTeamsFx(debouncedSearchValue);
     }
-  }, [debouncedSearchValue]);
+  }, [debouncedSearchValue, resetItems, searchMode]);
 
   return (
     <>

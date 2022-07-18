@@ -1,12 +1,12 @@
+import { GetLeaguesResponse, GetTeamsResponse, rapidApi } from "@/shared/api";
 import {
   combine,
   createEffect,
   createEvent,
   createStore,
   forward,
-  restore,
+  restore
 } from "effector-next";
-import { GetLeaguesResponse, GetTeamsResponse, rapidApi } from "@/shared/api";
 
 type SearchModeStore = "leagues" | "teams";
 
@@ -40,7 +40,7 @@ export const fetchTeamsFx = createEffect<string, GetTeamsResponse, Error>(
   }
 );
 
-export const $search = restore(changeSearch, "").reset(changeSearchMode);
+export const $search = restore(changeSearch, "")
 export const $searchMode = restore(changeSearchMode, "leagues");
 
 export const $leagues = createStore<GetLeaguesResponse["response"]>([])

@@ -18,8 +18,8 @@ import {
 } from "./models";
 
 const VIEWER_API = "/api/viewer";
-const FAVORITE_LEAGUE_API = "/api/league"
-const FAVORITE_TEAM_API = "/api/team"
+const FAVORITE_LEAGUE_API = "/api/leagues";
+const FAVORITE_TEAM_API = "/api/teams";
 
 const LOGIN_URL = `${VIEWER_API}/login`;
 const REGISTER_URL = `${VIEWER_API}/register`;
@@ -27,13 +27,13 @@ const LOGOUT_URL = `${VIEWER_API}/logout`;
 const CHANGE_TIMEZONE_URL = `${VIEWER_API}/change-timezone`;
 const CHANGE_PASSWORD_URL = `${VIEWER_API}/change-password`;
 
-const GET_LEAGUES = `${FAVORITE_LEAGUE_API}/leagues`;
-const ADD_LEAGUE = `${FAVORITE_LEAGUE_API}/add-league`;
-const REMOVE_LEAGUE = `${FAVORITE_LEAGUE_API}/remove-league`;
+const GET_LEAGUES = `${FAVORITE_LEAGUE_API}`;
+const ADD_LEAGUE = `${FAVORITE_LEAGUE_API}/add`;
+const REMOVE_LEAGUE = `${FAVORITE_LEAGUE_API}/remove`;
 
-const GET_TEAMS = `${FAVORITE_TEAM_API}/teams`;
-const ADD_TEAM = `${FAVORITE_TEAM_API}/add-team`;
-const REMOVE_TEAM = `${FAVORITE_TEAM_API}/remove-team`;
+const GET_TEAMS = `${FAVORITE_TEAM_API}`;
+const ADD_TEAM = `${FAVORITE_TEAM_API}/add`;
+const REMOVE_TEAM = `${FAVORITE_TEAM_API}/remove`;
 
 class ViewerApi {
   private async postRequest<T>(body: ViewerRequestBody, url: string) {
@@ -120,25 +120,27 @@ class ViewerApi {
   }
 
   async getFavoriteLeagues() {
-    const response = await this.getRequest<GetFavoriteLeaguesResponse>(GET_LEAGUES);
+    const response = await this.getRequest<GetFavoriteLeaguesResponse>(
+      GET_LEAGUES
+    );
 
     return response;
   }
 
   async addFavoriteLeague(league: League) {
-    const response = await this.updateRequest<AddFavoriteLeagueResponse, League>(
-      league,
-      ADD_LEAGUE
-    );
+    const response = await this.updateRequest<
+      AddFavoriteLeagueResponse,
+      League
+    >(league, ADD_LEAGUE);
 
     return response;
   }
 
   async removeFavoriteLeague(id: number) {
-    const response = await this.updateRequest<RemoveFavoriteLeagueResponse, number>(
-      id,
-      REMOVE_LEAGUE
-    );
+    const response = await this.updateRequest<
+      RemoveFavoriteLeagueResponse,
+      { id: number }
+    >({ id }, REMOVE_LEAGUE);
 
     return response;
   }
@@ -159,10 +161,10 @@ class ViewerApi {
   }
 
   async removeFavoriteTeam(id: number) {
-    const response = await this.updateRequest<RemoveFavoriteTeamResponse, number>(
-      id,
-      REMOVE_TEAM
-    );
+    const response = await this.updateRequest<
+      RemoveFavoriteTeamResponse,
+      {id: number}
+    >({id}, REMOVE_TEAM);
 
     return response;
   }

@@ -27,6 +27,8 @@ import {
 
 export const setViewer = createEvent<IClientViewer | null>();
 export const changeViewerTimezone = createEvent<string>();
+export const updateLeagues = createEvent<League[]>();
+export const updateTeams = createEvent<Team[]>();
 export const logoutViewer = createEvent();
 
 export const registerFx = createEffect<
@@ -135,6 +137,14 @@ export const $viewer = restore(setViewer, null)
   .on(
     changeViewerTimezone,
     (state, timezone) => state && { ...state, timezone }
+  )
+  .on(
+    updateLeagues,
+    (state, leagues) => state && { ...state, favoriteLeagues: leagues }
+  )
+  .on(
+    updateTeams,
+    (state, teams) => state && { ...state, favoriteTeams: teams }
   )
   .reset(logoutViewer);
 

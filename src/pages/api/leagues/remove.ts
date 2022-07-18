@@ -5,7 +5,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 export default withSessionRoute(removeLeagueRoute);
 
 async function removeLeagueRoute(req: NextApiRequest, res: NextApiResponse) {
-  const { body: id, method } = req;
+  const {
+    body: { id },
+    method,
+  } = req;
 
   if (method !== "PATCH") {
     return res
@@ -57,7 +60,7 @@ async function removeLeagueRoute(req: NextApiRequest, res: NextApiResponse) {
 
     res.status(201).json({
       success: true,
-      data: null,
+      data: filteredLeagues,
     });
   } catch (error) {
     return res
