@@ -1,4 +1,5 @@
 import { viewerModel } from "@/entities/viewer";
+import { countriesModel } from "@/features/countries";
 import {
   Box,
   Button,
@@ -8,7 +9,7 @@ import {
   VStack
 } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { SidebarCountries } from "./SidebarCountries";
 import { SidebarLeagues } from "./SidebarLeagues";
 import { SidebarTeams } from "./SidebarTeams";
@@ -19,6 +20,9 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
   const { colorMode } = useColorMode();
   const isAuthenticated = useStore(viewerModel.$isAuthenticated);
   const onLogin = useEvent(viewerModel.openAuthModal);
+  const sidebarLoaded = useEvent(countriesModel.sidebarLoaded);
+
+  useEffect(sidebarLoaded, []);
 
   return (
     <aside>

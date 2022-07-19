@@ -26,6 +26,10 @@ export const FavoriteTeamButton: React.FC<FavoriteTeamButtonProps> = ({
 
   return (
     <Button
+      position="absolute"
+      right="0"
+      top="50%"
+      transform="translateY(-50%)"
       p={1}
       size={size === "normal" ? "md" : "xs"}
       onClick={() => buttonClicked(data)}

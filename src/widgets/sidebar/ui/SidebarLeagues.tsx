@@ -2,12 +2,12 @@ import { searchModalModel } from "@/entities/search";
 import { viewerModel } from "@/entities/viewer";
 import { FavoriteLeagueButton } from "@/features/toggle-favorite/toggle-favorite-league";
 import { LEAGUE_ROUTE } from "@/shared/lib";
+import { SidebarItem } from "@/shared/ui";
 import { StarIcon } from "@chakra-ui/icons";
 import { Box, Button, Heading, VStack } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
 import { useRouter } from "next/router";
 import React from "react";
-import { SidebarItem } from "./SidebarItem";
 
 interface SidebarLeaguesProps {}
 

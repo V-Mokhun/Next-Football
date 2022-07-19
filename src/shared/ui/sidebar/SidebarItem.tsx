@@ -6,7 +6,7 @@ interface SidebarItemProps {
   id: number;
   logo: string;
   name: string;
-  favoriteComponent: React.ReactElement;
+  favoriteComponent: React.ReactElement | null;
   noImage?: boolean;
 }
 
@@ -26,7 +26,10 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
       justifyContent="space-between"
       gap={2}
       p={1}
-      borderRadius={10}>
+      borderRadius={10}
+     position="relative" 
+     pr={8}
+      >
       <>
         <Flex
           cursor="pointer"
@@ -42,7 +45,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
               <Image src={logo} alt={name} width={18} height={18} />
             </Box>
           )}
-          <Heading as="p" size="xs">
+          <Heading overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap" as="p" size="xs">
             {name}
           </Heading>
         </Flex>

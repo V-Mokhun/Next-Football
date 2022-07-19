@@ -16,9 +16,7 @@ export const FavoriteLeagueButton: React.FC<FavoriteLeagueButtonProps> = ({
   size = "normal",
 }) => {
   const buttonClicked = useEvent(toggleFavoriteLeagueModel.buttonClicked);
-  const favoriteLeagues = useStore(
-    viewerModel.$viewerFavoriteLeagues
-  );
+  const favoriteLeagues = useStore(viewerModel.$viewerFavoriteLeagues);
   const loadingState = useStore(toggleFavoriteLeagueModel.$loading);
 
   const isLoading = loadingState?.id === data.id && loadingState.loading;
@@ -26,6 +24,10 @@ export const FavoriteLeagueButton: React.FC<FavoriteLeagueButtonProps> = ({
 
   return (
     <Button
+      position="absolute"
+      right="0"
+      top="50%"
+      transform="translateY(-50%)"
       p={1}
       size={size === "normal" ? "md" : "xs"}
       onClick={() => buttonClicked(data)}

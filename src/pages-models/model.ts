@@ -10,16 +10,3 @@ forward({
   from: PageGate.state,
   to: viewerModel.setViewer,
 });
-
-// forward({
-//   from: viewerModel.setViewer.map(() => true),
-//   to: $viewerSet,
-// });
-
-// sample({
-//   clock: $viewerSet,
-//   source: viewerModel.$isAuthenticated,
-//   filter: (isAuthenticated) => isAuthenticated,
-//   target: [viewerModel.getFavoriteLeaguesFx, viewerModel.getFavoriteTeamsFx],
-// });
-

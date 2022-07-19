@@ -1,20 +1,21 @@
 import {
-	Country,
-	GetCountriesResponse,
-	GetLeaguesResponse,
-	League,
-	LeaguesQueryParams,
-	rapidApi
+  Country,
+  GetCountriesResponse,
+  GetLeaguesResponse,
+  League,
+  LeaguesQueryParams,
+  rapidApi
 } from "@/shared/api";
 import {
-	createEffect,
-	createEvent,
-	createStore,
-	forward,
-	sample
+  createEffect,
+  createEvent,
+  createStore,
+  forward,
+  sample
 } from "effector-next";
 
 export const countryButtonClicked = createEvent<string>();
+export const sidebarLoaded = createEvent()
 
 export const fetchCountriesFx = createEffect<
   void,
@@ -42,7 +43,7 @@ export const $countryLeaguesFetching = createStore<{
   loading: boolean;
 } | null>(null);
 
-const $countryLeagues = createStore<{ code: string; leagues: League[] }[]>([]);
+export const $countryLeagues = createStore<{ code: string; leagues: League[] }[]>([]);
 
 export const $countries = createStore<{ country: Country; loaded: boolean }[]>(
   []
@@ -50,9 +51,27 @@ export const $countries = createStore<{ country: Country; loaded: boolean }[]>(
   return countries.map((country) => ({ country, loaded: false }));
 });
 
+$countryLeaguesFetching.watch(state => console.log(state)
+)
+
 forward({
-  from: countryButtonClicked.map((code) => ({ code, loading: true })),
-  to: $countryLeaguesFetching,
+  from: sidebarLoaded,
+  to: fetchCountriesFx
+})
+
+sample({
+  clock: countryButtonClicked,
+  source: $countries,
+  filter: (countries, code) => {
+    const country = countries.find((item) => item.country.code === code);
+    if (!country || country.loaded === true) return false;
+
+    return true;
+  },
+  fn: (_, code) => {
+    return {code, loading: true}
+  },
+  target: $countryLeaguesFetching,
 });
 
 sample({
