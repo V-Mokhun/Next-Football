@@ -79,6 +79,14 @@ export type GetLeaguesResponse = ApiResponse & {
     seasons: Season[];
   }[];
 };
+export type LeaguesQueryParams = {
+  id?: string;
+  name?: string;
+  country?: string;
+  code?: string;
+  season?: string;
+  team?: string;
+};
 
 export type GetTeamsResponse = ApiResponse & {
   response: { team: Team; venue: Venue }[];

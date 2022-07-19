@@ -8,8 +8,8 @@ import { SearchItem } from "./SearchItem";
 
 interface SearchListProps {
   debouncedSearchValue: string;
-  FavoriteLeagueComponent: React.FC<{ data: League, size: "normal"|"small"}>;
-  FavoriteTeamComponent: React.FC<{ data: Team,size: "normal"|"small" }>;
+  FavoriteLeagueComponent: React.FC<{ data: League; size: "normal" | "small" }>;
+  FavoriteTeamComponent: React.FC<{ data: Team; size: "normal" | "small" }>;
 }
 
 export const SearchList: React.FC<SearchListProps> = ({
@@ -32,24 +32,14 @@ export const SearchList: React.FC<SearchListProps> = ({
     );
   }
 
-  if (
-    teams.length <= 0 &&
-    leagues.length <= 0 &&
-    debouncedSearchValue.trim().length >= 3
-  ) {
-    body = (
-      <Text mt={2} textAlign="left">
-        No results found.
-      </Text>
-    );
-  }
-
-  if (searchMode === "leagues") {
+  if (searchMode === "leagues" && leagues?.length > 0) {
     body = (
       <VStack mt={3} align="start" divider={<StackDivider />} spacing={2}>
         {leagues?.map(({ country, league }) => (
           <SearchItem
-            favoriteComponent={<FavoriteLeagueComponent data={league} size="normal"/>}
+            favoriteComponent={
+              <FavoriteLeagueComponent data={league} size="normal" />
+            }
             key={league.id}
             logo={league.logo}
             name={league.name}
@@ -61,12 +51,14 @@ export const SearchList: React.FC<SearchListProps> = ({
     );
   }
 
-  if (searchMode === "teams") {
+  if (searchMode === "teams" && teams?.length > 0) {
     body = (
       <VStack mt={3} align="start" divider={<StackDivider />} spacing={2}>
         {teams?.map(({ team }) => (
           <SearchItem
-            favoriteComponent={<FavoriteTeamComponent data={team} size="normal" />}
+            favoriteComponent={
+              <FavoriteTeamComponent data={team} size="normal" />
+            }
             key={team.id}
             logo={team.logo}
             name={team.name}
@@ -75,6 +67,18 @@ export const SearchList: React.FC<SearchListProps> = ({
           />
         ))}
       </VStack>
+    );
+  }
+
+  if (
+    teams.length <= 0 &&
+    leagues.length <= 0 &&
+    debouncedSearchValue.trim().length >= 3
+  ) {
+    body = (
+      <Text mt={2} textAlign="left">
+        No results found.
+      </Text>
     );
   }
 

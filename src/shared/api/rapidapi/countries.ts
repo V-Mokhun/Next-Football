@@ -1,5 +1,5 @@
-import { apiInstance } from "./config";
 import { catchError } from "../lib";
+import { apiInstance } from "./config";
 import { GetCountriesResponse } from "./models";
 
 const COUNTRIES_URL = "countries";

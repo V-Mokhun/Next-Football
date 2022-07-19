@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BaseApi } from "../base";
 import { catchError } from "../lib";
 import { League, Team } from "../models";
 import {
@@ -14,7 +15,7 @@ import {
   RegisterResponse,
   RemoveFavoriteLeagueResponse,
   RemoveFavoriteTeamResponse,
-  ViewerRequestBody
+  ViewerRequestBody,
 } from "./models";
 
 const VIEWER_API = "/api/viewer";
@@ -35,37 +36,7 @@ const GET_TEAMS = `${FAVORITE_TEAM_API}`;
 const ADD_TEAM = `${FAVORITE_TEAM_API}/add`;
 const REMOVE_TEAM = `${FAVORITE_TEAM_API}/remove`;
 
-class ViewerApi {
-  private async postRequest<T>(body: ViewerRequestBody, url: string) {
-    try {
-      const { data } = await axios.post<T>(url, body);
-
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
-  }
-
-  private async updateRequest<T, F>(body: F, url: string) {
-    try {
-      const { data } = await axios.patch<T>(url, body);
-
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
-  }
-
-  private async getRequest<T>(url: string) {
-    try {
-      const { data } = await axios.get<T>(url);
-
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
-  }
-
+class ViewerApi extends BaseApi {
   async login(body: ViewerRequestBody) {
     const response = await this.postRequest<LoginResponse>(body, LOGIN_URL);
 
@@ -163,8 +134,8 @@ class ViewerApi {
   async removeFavoriteTeam(id: number) {
     const response = await this.updateRequest<
       RemoveFavoriteTeamResponse,
-      {id: number}
-    >({id}, REMOVE_TEAM);
+      { id: number }
+    >({ id }, REMOVE_TEAM);
 
     return response;
   }

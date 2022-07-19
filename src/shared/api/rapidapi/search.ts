@@ -1,20 +1,12 @@
-import { apiInstance } from "./config";
+import { BaseApi } from "../base";
 import { catchError } from "../lib";
+import { apiInstance } from "./config";
 import { GetLeaguesResponse, GetTeamsResponse } from "./models";
 
 const SEARCH_LEAGUES_API = "leagues";
 const SEARCH_TEAMS_API = "teams";
 
-class SearchApi {
-  private makeUrl(apiUrl: string, paramsObj: { [key: string]: string }) {
-    let url = `${apiUrl}?`;
-    const queries = new URLSearchParams(paramsObj);
-
-    url += queries.toString();
-
-    return url;
-  }
-
+class SearchApi extends BaseApi {
   async searchLeagues(searchQuery: string) {
     if (searchQuery.trim().length < 3)
       throw catchError("Provide valid search query");
