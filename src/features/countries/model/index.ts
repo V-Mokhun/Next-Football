@@ -51,9 +51,6 @@ export const $countries = createStore<{ country: Country; loaded: boolean }[]>(
   return countries.map((country) => ({ country, loaded: false }));
 });
 
-$countryLeaguesFetching.watch(state => console.log(state)
-)
-
 forward({
   from: sidebarLoaded,
   to: fetchCountriesFx

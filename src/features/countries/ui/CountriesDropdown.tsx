@@ -29,7 +29,8 @@ export const CountriesDropdown: React.FC<CountriesDropdownProps> = ({
       ))}
 
       {showCountries ? (
-        countries
+        <>
+        {countries
           ?.slice(20)
           ?.map(({ country }) => (
             <CountryDropdownItem
@@ -37,7 +38,11 @@ export const CountriesDropdown: React.FC<CountriesDropdownProps> = ({
               country={country}
               FavoriteComponent={FavoriteComponent}
             />
-          ))
+          ))}
+        <Button mt={2} w="100%" onClick={() => setShowCountries(false)} variant="link">
+          Hide most countries
+        </Button>
+        </>
       ) : (
         <Button mt={2} w="100%" onClick={() => setShowCountries(true)} variant="link">
           Show all countries

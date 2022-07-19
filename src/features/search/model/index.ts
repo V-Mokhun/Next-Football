@@ -11,7 +11,7 @@ import {
 type SearchModeStore = "leagues" | "teams";
 
 export const changeSearch = createEvent<string>();
-const changeSearchMode = createEvent<SearchModeStore>();
+export const changeSearchMode = createEvent<SearchModeStore>();
 export const resetItems = createEvent();
 export const leaguesButtonClicked = createEvent("leagues");
 export const teamsButtonClicked = createEvent("teams");

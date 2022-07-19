@@ -1,5 +1,6 @@
 import { searchModalModel } from "@/entities/search";
 import { viewerModel } from "@/entities/viewer";
+import { searchModel } from "@/features/search";
 import { FavoriteLeagueButton } from "@/features/toggle-favorite/toggle-favorite-league";
 import { LEAGUE_ROUTE } from "@/shared/lib";
 import { SidebarItem } from "@/shared/ui";
@@ -14,6 +15,7 @@ interface SidebarLeaguesProps {}
 export const SidebarLeagues: React.FC<SidebarLeaguesProps> = ({}) => {
   const leagues = useStore(viewerModel.$viewerFavoriteLeagues);
   const onAddLeagues = useEvent(searchModalModel.buttonClicked);
+  const changeSearchMode = useEvent(searchModel.changeSearchMode)
   const router = useRouter();
 
   return (
@@ -28,8 +30,7 @@ export const SidebarLeagues: React.FC<SidebarLeaguesProps> = ({}) => {
         <StarIcon /> <span>My leagues</span>
       </Heading>
       <VStack w="100%" spacing={2}>
-        {leagues?.length > 0 ? (
-          leagues.map((league) => (
+          {leagues?.map((league) => (
             <SidebarItem
               key={league.id}
               favoriteComponent={
@@ -42,12 +43,13 @@ export const SidebarLeagues: React.FC<SidebarLeaguesProps> = ({}) => {
                 router.push(`${LEAGUE_ROUTE}/${league.id}`);
               }}
             />
-          ))
-        ) : (
-          <Button onClick={onAddLeagues} w="100%" variant="outline">
+          ))}
+          <Button onClick={() => {
+            onAddLeagues()
+            changeSearchMode("leagues")
+          }} w="100%" variant="outline">
             Add leagues
           </Button>
-        )}
       </VStack>
     </Box>
   );
