@@ -1,4 +1,3 @@
-import { StarIcon } from "@chakra-ui/icons";
 import {
   Box,
   Heading,
@@ -8,12 +7,12 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { SidebarLeagues } from "./SidebarLeagues";
+import { SidebarTeams } from "./SidebarTeams";
 
 interface SidebarProps {}
 
 export const Sidebar: React.FC<SidebarProps> = ({}) => {
   const { colorMode } = useColorMode();
-  // const openModal
 
   return (
     <aside>
@@ -26,11 +25,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
         spacing={4}
         alignItems="flex-start">
         <SidebarLeagues />
-        <Box w="100%">
-          <Heading display="flex" alignItems="center" gap={2} as="h3" size="sm">
-            <StarIcon /> <span>My teams</span>
-          </Heading>
-        </Box>
+        <SidebarTeams />
         <Box w="100%">
           <Heading as="h3" size="sm">
             Countries

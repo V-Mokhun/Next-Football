@@ -19,6 +19,8 @@ const isInFavorites = sample({
     return false;
   },
 });
+buttonClicked.watch((state) => console.log(state));
+viewerModel.removeFavoriteTeamFx.doneData.watch((state) => console.log(state));
 
 forward({
   from: buttonClicked.map((team) => ({ id: team.id, loading: true })),

@@ -8,8 +8,8 @@ import { SearchItem } from "./SearchItem";
 
 interface SearchListProps {
   debouncedSearchValue: string;
-  FavoriteLeagueComponent: React.FC<{ data: League }>;
-  FavoriteTeamComponent: React.FC<{ data: Team }>;
+  FavoriteLeagueComponent: React.FC<{ data: League, size: "normal"|"small"}>;
+  FavoriteTeamComponent: React.FC<{ data: Team,size: "normal"|"small" }>;
 }
 
 export const SearchList: React.FC<SearchListProps> = ({
@@ -49,7 +49,7 @@ export const SearchList: React.FC<SearchListProps> = ({
       <VStack mt={3} align="start" divider={<StackDivider />} spacing={2}>
         {leagues?.map(({ country, league }) => (
           <SearchItem
-            favoriteComponent={<FavoriteLeagueComponent data={league} />}
+            favoriteComponent={<FavoriteLeagueComponent data={league} size="normal"/>}
             key={league.id}
             logo={league.logo}
             name={league.name}
@@ -66,7 +66,7 @@ export const SearchList: React.FC<SearchListProps> = ({
       <VStack mt={3} align="start" divider={<StackDivider />} spacing={2}>
         {teams?.map(({ team }) => (
           <SearchItem
-            favoriteComponent={<FavoriteTeamComponent data={team} />}
+            favoriteComponent={<FavoriteTeamComponent data={team} size="normal" />}
             key={team.id}
             logo={team.logo}
             name={team.name}

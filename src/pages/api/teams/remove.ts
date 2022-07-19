@@ -5,7 +5,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 export default withSessionRoute(removeTeamRoute);
 
 async function removeTeamRoute(req: NextApiRequest, res: NextApiResponse) {
-  const { body: id, method } = req;
+  const {
+    body: { id },
+    method,
+  } = req;
 
   if (method !== "PATCH") {
     return res
@@ -51,7 +54,7 @@ async function removeTeamRoute(req: NextApiRequest, res: NextApiResponse) {
 
     res.status(201).json({
       success: true,
-      data: null,
+      data: filteredTeams,
     });
   } catch (error) {
     return res

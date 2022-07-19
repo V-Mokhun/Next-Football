@@ -1,19 +1,20 @@
 import { searchModalModel } from "@/entities/search";
 import { viewerModel } from "@/entities/viewer";
-import { FavoriteLeagueButton } from "@/features/toggle-favorite/toggle-favorite-league";
-import { LEAGUE_ROUTE } from "@/shared/lib";
+import { FavoriteTeamButton } from "@/features/toggle-favorite/toggle-favorite-team";
+import { TEAM_ROUTE } from "@/shared/lib";
 import { StarIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Heading, Image, VStack } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
 import { useRouter } from "next/router";
 import React from "react";
 
-interface SidebarLeaguesProps {}
+interface SidebarTeamsProps {}
 
-export const SidebarLeagues: React.FC<SidebarLeaguesProps> = ({}) => {
-  const leagues = useStore(viewerModel.$viewerFavoriteLeagues);
-  const onAddLeagues = useEvent(searchModalModel.buttonClicked);
+export const SidebarTeams: React.FC<SidebarTeamsProps> = ({}) => {
+  const teams = useStore(viewerModel.$viewerFavoriteTeams);
+  const onAddTeams = useEvent(searchModalModel.buttonClicked);
   const router = useRouter();
+
   return (
     <Box w="100%">
       <Heading
@@ -23,13 +24,13 @@ export const SidebarLeagues: React.FC<SidebarLeaguesProps> = ({}) => {
         gap={2}
         as="h3"
         size="sm">
-        <StarIcon /> <span>My leagues</span>
+        <StarIcon /> <span>My teams</span>
       </Heading>
       <VStack w="100%" spacing={2}>
-        {leagues?.length > 0 ? (
-          leagues.map((league) => (
+        {teams?.length > 0 ? (
+          teams.map((team) => (
             <Flex
-              key={league.id}
+              key={team.id}
               width="100%"
               alignItems="center"
               justifyContent="space-between"
@@ -41,26 +42,26 @@ export const SidebarLeagues: React.FC<SidebarLeaguesProps> = ({}) => {
                 alignItems="center"
                 gap={1}
                 onClick={() => {
-                  router.push(`${LEAGUE_ROUTE}/${league.id}`);
+                  router.push(`${TEAM_ROUTE}/${team.id}`);
                 }}>
                 <Box flex="0 0 18px">
                   <Image
-                    src={league.logo}
-                    alt={league.name}
+                    src={team.logo}
+                    alt={team.name}
                     width={18}
                     height={18}
                   />
                 </Box>
                 <Heading as="p" size="xs">
-                  {league.name}
+                  {team.name}
                 </Heading>
               </Flex>
-              <FavoriteLeagueButton data={league} size="small" />
+              <FavoriteTeamButton data={team} size="small" />
             </Flex>
           ))
         ) : (
-          <Button onClick={onAddLeagues} w="100%" variant="outline">
-            Add leagues
+          <Button onClick={onAddTeams} w="100%" variant="outline">
+            Add teams
           </Button>
         )}
       </VStack>
