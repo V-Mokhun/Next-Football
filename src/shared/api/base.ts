@@ -3,9 +3,16 @@ import { catchError } from "./lib";
 import { ViewerRequestBody } from "./models";
 
 export class BaseApi {
-  protected makeUrl(apiUrl: string, paramsObj: { [key: string]: string}) {
+  protected makeUrl(
+    apiUrl: string,
+    paramsObj: { [key: string]: string | number }
+  ) {
     let url = `${apiUrl}?`;
-    const queries = new URLSearchParams(paramsObj);
+    const params: {[key: string]: string} = {};
+    for (const [key, value] of Object.entries(paramsObj)) {
+      params[key] = typeof value === "number" ? `${value}` : value
+    }
+    const queries = new URLSearchParams(params);
 
     url += queries.toString();
 
