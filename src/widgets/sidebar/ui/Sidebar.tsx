@@ -9,8 +9,7 @@ import {
   VStack
 } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
-import React, { useEffect } from "react";
-import { SidebarCountries } from "./SidebarCountries";
+import React from "react";
 import { SidebarLeagues } from "./SidebarLeagues";
 import { SidebarTeams } from "./SidebarTeams";
 
@@ -22,7 +21,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
   const onLogin = useEvent(viewerModel.openAuthModal);
   const sidebarLoaded = useEvent(countriesModel.sidebarLoaded);
 
-  useEffect(sidebarLoaded, []);
+  // useEffect(sidebarLoaded, []);
 
   return (
     <aside>
@@ -54,7 +53,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             </Button>
           </Box>
         )}
-        <SidebarCountries />
+        {/* <SidebarCountries /> */}
       </VStack>
     </aside>
   );

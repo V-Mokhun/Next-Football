@@ -7,15 +7,12 @@ import {
   AddFavoriteTeamResponse,
   ChangePasswordRequest,
   ChangePasswordResponse,
-  ChangeTimezoneResponse,
-  GetFavoriteLeaguesResponse,
-  GetFavoriteTeamsResponse,
-  LoginResponse,
+  ChangeTimezoneResponse, LoginResponse,
   LogoutResponse,
   RegisterResponse,
   RemoveFavoriteLeagueResponse,
   RemoveFavoriteTeamResponse,
-  ViewerRequestBody,
+  ViewerRequestBody
 } from "./models";
 
 const VIEWER_API = "/api/viewer";
@@ -28,11 +25,9 @@ const LOGOUT_URL = `${VIEWER_API}/logout`;
 const CHANGE_TIMEZONE_URL = `${VIEWER_API}/change-timezone`;
 const CHANGE_PASSWORD_URL = `${VIEWER_API}/change-password`;
 
-const GET_LEAGUES = `${FAVORITE_LEAGUE_API}`;
 const ADD_LEAGUE = `${FAVORITE_LEAGUE_API}/add`;
 const REMOVE_LEAGUE = `${FAVORITE_LEAGUE_API}/remove`;
 
-const GET_TEAMS = `${FAVORITE_TEAM_API}`;
 const ADD_TEAM = `${FAVORITE_TEAM_API}/add`;
 const REMOVE_TEAM = `${FAVORITE_TEAM_API}/remove`;
 
@@ -90,14 +85,6 @@ class ViewerApi extends BaseApi {
     }
   }
 
-  async getFavoriteLeagues() {
-    const response = await this.getRequest<GetFavoriteLeaguesResponse>(
-      GET_LEAGUES
-    );
-
-    return response;
-  }
-
   async addFavoriteLeague(league: League) {
     const response = await this.updateRequest<
       AddFavoriteLeagueResponse,
@@ -112,12 +99,6 @@ class ViewerApi extends BaseApi {
       RemoveFavoriteLeagueResponse,
       { id: number }
     >({ id }, REMOVE_LEAGUE);
-
-    return response;
-  }
-
-  async getFavoriteTeams() {
-    const response = await this.getRequest<GetFavoriteTeamsResponse>(GET_TEAMS);
 
     return response;
   }

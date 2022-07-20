@@ -3,10 +3,7 @@ import {
   AddFavoriteTeamResponse,
   ChangePasswordRequest,
   ChangePasswordResponse,
-  ChangeTimezoneResponse,
-  GetFavoriteLeaguesResponse,
-  GetFavoriteTeamsResponse,
-  IClientViewer,
+  ChangeTimezoneResponse, IClientViewer,
   League,
   LoginResponse,
   LogoutResponse,
@@ -73,16 +70,6 @@ export const changeTimezoneFx = createEffect<
   return response;
 });
 
-export const getFavoriteLeaguesFx = createEffect<
-  void,
-  GetFavoriteLeaguesResponse,
-  Error
->(async () => {
-  const response = await viewerApi.getFavoriteLeagues();
-
-  return response;
-});
-
 export const addFavoriteLeagueFx = createEffect<
   League,
   AddFavoriteLeagueResponse,
@@ -99,16 +86,6 @@ export const removeFavoriteLeagueFx = createEffect<
   Error
 >(async (id) => {
   const response = await viewerApi.removeFavoriteLeague(id);
-
-  return response;
-});
-
-export const getFavoriteTeamsFx = createEffect<
-  void,
-  GetFavoriteTeamsResponse,
-  Error
->(async () => {
-  const response = await viewerApi.getFavoriteTeams();
 
   return response;
 });
