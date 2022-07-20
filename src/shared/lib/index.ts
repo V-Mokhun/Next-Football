@@ -1,4 +1,5 @@
 export * from "./connect-db";
+export * from "./create-dates";
 export * from "./format-date";
 export * from "./password";
 export * from "./routes";

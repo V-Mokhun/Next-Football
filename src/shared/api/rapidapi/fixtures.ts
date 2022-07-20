@@ -1,16 +1,16 @@
 import { BaseApi } from "../base";
 import { catchError } from "../lib";
 import { apiInstance } from "./config";
-import { FixturesQueryParams, GetLeaguesResponse, LeaguesQueryParams } from "./models";
+import { FixturesQueryParams, GetFixturesResponse } from "./models";
 
 const FIXTURES_URL = "fixtures";
 
 class FixturesApi extends BaseApi {
-  async getLeagues(params: FixturesQueryParams) {
+  async getFixtures(params: FixturesQueryParams) {
     try {
       const url = this.makeUrl(FIXTURES_URL, params);
 
-      const { data } = await apiInstance.get<GetLeaguesResponse>(url);
+      const { data } = await apiInstance.get<GetFixturesResponse>(url);
 
       return data;
     } catch (error) {
