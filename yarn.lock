@@ -2478,11 +2478,6 @@ next@12.1.6:
     "@next/swc-win32-ia32-msvc" "12.1.6"
     "@next/swc-win32-x64-msvc" "12.1.6"
 
-nextjs-effector@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/nextjs-effector/-/nextjs-effector-0.10.0.tgz#1ef5550b6582f70b0d28287dbe6b4dc822850deb"
-  integrity sha512-uWHXypHZmvUMINaJcZa8fIHUh9/nZy/JuK+jTF5yGqqdqL7xcdhP89FFpjHTl8M3cOYWiAN5HLGjCmJStZVQww==
-
 object-assign@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"

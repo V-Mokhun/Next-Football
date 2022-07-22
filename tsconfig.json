@@ -30,7 +30,8 @@
       "@/widgets/*": ["src/widgets/*"],
       "@/features/*": ["src/features/*"],
       "@/entities/*": ["src/entities/*"],
-      "@/shared/*": ["src/shared/*"]
+      "@/shared/*": ["src/shared/*"],
+      "nextjs-effector": ["./library"]
     }
   },
   "include": ["next-env.d.ts", "custom.d.ts", "**/*.ts", "**/*.tsx"],
