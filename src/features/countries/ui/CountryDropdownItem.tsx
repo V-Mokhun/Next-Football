@@ -19,6 +19,7 @@ interface CountryDropdownItemProps {
   FavoriteComponent: React.ElementType<{
     data: League;
     size: "normal" | "small";
+    isAbsolute?: boolean
   }>;
 }
 
@@ -74,7 +75,7 @@ export const CountryDropdownItem: React.FC<CountryDropdownItemProps> = ({
               }}
               favoriteComponent={
                 isAuthenticated ? (
-                  <FavoriteComponent data={league} size="small" />
+                  <FavoriteComponent isAbsolute={true} data={league} size="small" />
                 ) : null
               }
             />

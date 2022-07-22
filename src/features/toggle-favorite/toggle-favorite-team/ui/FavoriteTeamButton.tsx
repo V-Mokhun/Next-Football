@@ -9,11 +9,13 @@ import { toggleFavoriteTeamModel } from "..";
 interface FavoriteTeamButtonProps {
   data: Team;
   size: "small" | "normal";
+  isAbsolute?: boolean
 }
 
 export const FavoriteTeamButton: React.FC<FavoriteTeamButtonProps> = ({
   data,
   size = "normal",
+  isAbsolute = false
 }) => {
   const buttonClicked = useEvent(toggleFavoriteTeamModel.buttonClicked);
   const favoriteTeams = useStore(
@@ -26,10 +28,10 @@ export const FavoriteTeamButton: React.FC<FavoriteTeamButtonProps> = ({
 
   return (
     <Button
-      position="absolute"
-      right="0"
-      top="50%"
-      transform="translateY(-50%)"
+      position={isAbsolute ? "absolute" : "initial"}
+      right={isAbsolute ? "0" : "initial"}
+      top={isAbsolute ? "50%" : "initial"}
+      transform={isAbsolute ? "translateY(-50%)" : "initial"}
       p={1}
       size={size === "normal" ? "md" : "xs"}
       onClick={() => buttonClicked(data)}

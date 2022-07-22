@@ -34,7 +34,7 @@ export const SidebarTeams: React.FC<SidebarTeamsProps> = ({}) => {
             <SidebarItem
               key={team.id}
               favoriteComponent={
-                <FavoriteTeamButton data={team} size="small" />
+                <FavoriteTeamButton isAbsolute={true} data={team} size="small" />
               }
               id={team.id}
               logo={team.logo}

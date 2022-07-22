@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const { withEffectorReactAliases } = require("effector-next/tools");
-const enhance = withEffectorReactAliases();
 
 const nextConfig = {
   reactStrictMode: true,
@@ -9,4 +7,4 @@ const nextConfig = {
   },
 };
 
-module.exports = enhance(nextConfig);
+module.exports = nextConfig

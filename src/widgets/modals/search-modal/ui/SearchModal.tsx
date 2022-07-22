@@ -10,13 +10,15 @@ import React from "react";
 interface SearchModalProps {}
 
 export const SearchModal: React.FC<SearchModalProps> = ({}) => {
-  const isOpen = useStore(searchModalModel.$modalOpen);
+  const isModalOpen = useStore(searchModalModel.$modalOpen)
   const searchValue = useStore(searchModel.$search);
-  const debouncedSearchValue = useDebounce(searchValue, 500);
+
   const closeModal = useEvent(searchModalModel.closeModal);
 
+  const debouncedSearchValue = useDebounce(searchValue, 500);
+
   return (
-    <Modal title="Search" isOpen={isOpen} onClose={closeModal}>
+    <Modal title="Search" isOpen={isModalOpen} onClose={closeModal}>
       <SearchForm
         debouncedSearchValue={debouncedSearchValue}
         searchValue={searchValue}

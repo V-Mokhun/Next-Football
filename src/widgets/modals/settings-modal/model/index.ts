@@ -1,6 +1,6 @@
 import { settingsModel } from "@/entities/settings";
 import { changeTimezoneModel } from "@/features/settings/change-timezone";
-import { combine } from "effector-next";
+import { combine } from "effector";
 
 export const $loading = combine(
   [

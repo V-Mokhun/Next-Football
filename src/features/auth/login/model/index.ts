@@ -1,22 +1,13 @@
 import { viewerModel } from "@/entities/viewer";
-import {
-  IClientViewer
-} from "@/shared/api";
-import {
-  combine, createEvent,
-  createStore,
-  restore,
-  sample
-} from "effector-next";
+import { IClientViewer } from "@/shared/api";
+import { combine, createEvent, createStore, restore, sample } from "effector";
 
 export const setEmail = createEvent<string>();
 export const setPassword = createEvent<string>();
 export const formSubmitted = createEvent();
 
 export const $email = restore(setEmail, "").reset(viewerModel.loginFx);
-export const $password = restore(setPassword, "").reset(
-  viewerModel.loginFx
-);
+export const $password = restore(setPassword, "").reset(viewerModel.loginFx);
 export const $loading = viewerModel.loginFx.pending;
 export const $error = createStore("").on(
   viewerModel.loginFx.failData,

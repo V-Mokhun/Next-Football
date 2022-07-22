@@ -5,8 +5,8 @@ import {
   createEvent,
   createStore,
   restore,
-  sample,
-} from "effector-next";
+  sample
+} from "effector";
 
 export const setEmail = createEvent<string>();
 export const setPassword = createEvent<string>();

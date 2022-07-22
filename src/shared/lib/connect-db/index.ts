@@ -20,6 +20,7 @@ export const connectDb = async () => {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
+      useNewUrlParser: true,
     };
 
     cached.promise = mongoose.connect(MONGO_URL, opts).then((mongoose) => {

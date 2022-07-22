@@ -22,10 +22,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ changeAuthMode }) => {
   const errorMessage = useStore(loginModel.$error);
   const setEmail = useEvent(loginModel.setEmail);
   const setPassword = useEvent(loginModel.setPassword);
+  const formSubmitted = useEvent(loginModel.formSubmitted)
 
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    loginModel.formSubmitted();
+    formSubmitted()
   };
 
   return (

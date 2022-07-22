@@ -1,12 +1,10 @@
 import { viewerModel } from "@/entities/viewer";
-import { ChangeTimezoneResponse, viewerApi } from "@/shared/api";
 import {
-  createEffect,
-  createEvent,
-  createStore,
-  forward,
-  sample,
-} from "effector-next";
+    createEvent,
+    createStore,
+    forward,
+    sample
+} from "effector";
 
 export const changeTimezone = createEvent<string>();
 

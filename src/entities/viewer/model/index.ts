@@ -3,10 +3,12 @@ import {
   AddFavoriteTeamResponse,
   ChangePasswordRequest,
   ChangePasswordResponse,
-  ChangeTimezoneResponse, IClientViewer,
+  ChangeTimezoneResponse,
+  IClientViewer,
   League,
   LoginResponse,
   LogoutResponse,
+  MeResponse,
   RegisterResponse,
   RemoveFavoriteLeagueResponse,
   RemoveFavoriteTeamResponse,
@@ -20,13 +22,19 @@ import {
   createStore,
   forward,
   restore
-} from "effector-next";
+} from "effector";
 
 export const setViewer = createEvent<IClientViewer | null>();
 export const changeViewerTimezone = createEvent<string>();
 export const updateLeagues = createEvent<League[]>();
 export const updateTeams = createEvent<Team[]>();
 export const logoutViewer = createEvent();
+
+export const loadViewerFx = createEffect<void, MeResponse, Error>(async () => {
+  const response = await viewerApi.me();
+
+  return response;
+})
 
 export const registerFx = createEffect<
   ViewerRequestBody,

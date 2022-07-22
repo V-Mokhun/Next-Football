@@ -1,5 +1,5 @@
 import { calendarModel } from "@/entities/calendar";
-import { createEvent, forward, sample } from "effector-next";
+import { createEvent, forward, sample } from "effector";
 
 export const nextDayButtonClicked = createEvent();
 export const prevDayButtonClicked = createEvent();

@@ -23,15 +23,14 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
-      "@/app/*": ["app/*"],
-      "@/pages/*": ["pages/*"],
-      "@/pages-models/*": ["pages-models/*"],
-      "@/widgets/*": ["widgets/*"],
-      "@/features/*": ["features/*"],
-      "@/entities/*": ["entities/*"],
-      "@/shared/*": ["shared/*"]
+      "@/app/*": ["src/app/*"],
+      "@/pages/*": ["src/pages/*"],
+      "@/widgets/*": ["src/widgets/*"],
+      "@/features/*": ["src/features/*"],
+      "@/entities/*": ["src/entities/*"],
+      "@/shared/*": ["src/shared/*"]
     }
   },
   "include": ["next-env.d.ts", "custom.d.ts", "**/*.ts", "**/*.tsx"],

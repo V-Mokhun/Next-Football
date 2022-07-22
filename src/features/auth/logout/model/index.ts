@@ -1,5 +1,5 @@
 import { viewerModel } from "@/entities/viewer";
-import { createEvent, forward, sample } from "effector-next";
+import { createEvent, forward, sample } from "effector";
 
 export const buttonClicked = createEvent();
 

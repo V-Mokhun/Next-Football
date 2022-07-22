@@ -24,10 +24,11 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   const errorMessage = useStore(registerModel.$error);
   const setEmail = useEvent(registerModel.setEmail);
   const setPassword = useEvent(registerModel.setPassword);
+  const formSubmitted = useEvent(registerModel.formSubmitted)
 
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    registerModel.formSubmitted();
+    formSubmitted()
   };
 
   return (

@@ -1,12 +1,10 @@
 import { viewerModel } from "@/entities/viewer";
 import {
-  combine,
-  createEvent,
-  createStore,
-  forward,
-  restore,
-  sample,
-} from "effector-next";
+    combine,
+    createEvent,
+    createStore, restore,
+    sample
+} from "effector";
 
 export const buttonClicked = createEvent();
 export const setOldPassword = createEvent<string>();

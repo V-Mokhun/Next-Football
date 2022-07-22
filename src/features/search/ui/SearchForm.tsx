@@ -25,6 +25,8 @@ export const SearchForm: React.FC<SearchFormProps> = ({
   const changeSearch = useEvent(searchModel.changeSearch);
   const leaguesButtonClicked = useEvent(searchModel.leaguesButtonClicked);
   const teamsButtonClicked = useEvent(searchModel.teamsButtonClicked);
+  const onFetchLeagues = useEvent(searchModel.onFetchLeagues);
+  const onFetchTeams = useEvent(searchModel.onFetchTeams);
 
   useEffect(() => {
     if (!debouncedSearchValue || debouncedSearchValue.trim().length < 3) {
@@ -33,11 +35,17 @@ export const SearchForm: React.FC<SearchFormProps> = ({
     }
 
     if (searchMode === "leagues") {
-      searchModel.fetchLeaguesFx(debouncedSearchValue);
+      onFetchLeagues(debouncedSearchValue);
     } else {
-      searchModel.fetchTeamsFx(debouncedSearchValue);
+      onFetchTeams(debouncedSearchValue);
     }
-  }, [debouncedSearchValue, resetItems, searchMode]);
+  }, [
+    debouncedSearchValue,
+    resetItems,
+    searchMode,
+    onFetchLeagues,
+    onFetchTeams,
+  ]);
 
   return (
     <>

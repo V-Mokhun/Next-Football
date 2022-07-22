@@ -9,13 +9,11 @@ import {
 import {
   createEffect,
   createEvent,
-  createStore,
-  forward,
-  sample
-} from "effector-next";
+  createStore, forward, sample
+} from "effector";
 
 export const countryButtonClicked = createEvent<string>();
-export const sidebarLoaded = createEvent()
+export const fetchCountries = createEvent()
 
 export const fetchCountriesFx = createEffect<
   void,
@@ -52,7 +50,7 @@ export const $countries = createStore<{ country: Country; loaded: boolean }[]>(
 });
 
 forward({
-  from: sidebarLoaded,
+  from: fetchCountries,
   to: fetchCountriesFx
 })
 

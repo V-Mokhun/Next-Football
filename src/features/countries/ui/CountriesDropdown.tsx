@@ -9,6 +9,7 @@ interface CountriesDropdownProps {
   FavoriteComponent: React.ElementType<{
     data: League;
     size: "normal" | "small";
+    isAbsolute?: boolean
   }>;
 }
 

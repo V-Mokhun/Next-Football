@@ -1,6 +1,5 @@
 import { theme } from "@/shared/lib";
 import { ColorModeScript } from "@chakra-ui/react";
-import { withFork } from "effector-next";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
@@ -18,5 +17,4 @@ class MyDocument extends Document {
   }
 }
 
-const enhance = withFork({ debug: false });
-export default enhance(MyDocument);
+export default MyDocument;

@@ -1,4 +1,4 @@
-import { createEvent, createStore, forward } from "effector-next";
+import { createEvent, createStore, forward } from "effector";
 
 export type AuthModalMode = "login" | "register";
 

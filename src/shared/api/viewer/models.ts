@@ -13,6 +13,8 @@ export interface IViewer extends IClientViewer {
 
 export type ViewerRequestBody = Pick<IViewer, "email" | "password">;
 
+export type MeResponse = { success: boolean; data: IClientViewer | null };
+
 export type RegisterResponse =
   | {
       success: true;

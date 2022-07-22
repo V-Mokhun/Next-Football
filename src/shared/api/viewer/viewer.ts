@@ -7,8 +7,10 @@ import {
   AddFavoriteTeamResponse,
   ChangePasswordRequest,
   ChangePasswordResponse,
-  ChangeTimezoneResponse, LoginResponse,
+  ChangeTimezoneResponse,
+  LoginResponse,
   LogoutResponse,
+  MeResponse,
   RegisterResponse,
   RemoveFavoriteLeagueResponse,
   RemoveFavoriteTeamResponse,
@@ -19,6 +21,7 @@ const VIEWER_API = "/api/viewer";
 const FAVORITE_LEAGUE_API = "/api/leagues";
 const FAVORITE_TEAM_API = "/api/teams";
 
+const ME_URL = `${VIEWER_API}/me`;
 const LOGIN_URL = `${VIEWER_API}/login`;
 const REGISTER_URL = `${VIEWER_API}/register`;
 const LOGOUT_URL = `${VIEWER_API}/logout`;
@@ -32,6 +35,16 @@ const ADD_TEAM = `${FAVORITE_TEAM_API}/add`;
 const REMOVE_TEAM = `${FAVORITE_TEAM_API}/remove`;
 
 class ViewerApi extends BaseApi {
+  async me() {
+    try {
+      const { data } = await axios.get<MeResponse>(ME_URL);
+
+      return data;
+    } catch (error) {
+      throw catchError(error);
+    }
+  }
+
   async login(body: ViewerRequestBody) {
     const response = await this.postRequest<LoginResponse>(body, LOGIN_URL);
 

@@ -1,6 +1,6 @@
 import { viewerModel } from "@/entities/viewer";
 import { League } from "@/shared/api";
-import { createEvent, createStore, forward, sample } from "effector-next";
+import { createEvent, createStore, forward, sample } from "effector";
 
 export const buttonClicked = createEvent<League>();
 

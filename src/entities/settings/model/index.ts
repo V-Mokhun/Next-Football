@@ -1,11 +1,9 @@
 import { GetTimezonesResponse, rapidApi } from "@/shared/api";
 import {
-  createEffect,
-  createEvent,
-  createStore,
-  guard,
-  forward,
-} from "effector-next";
+    createEffect,
+    createEvent,
+    createStore, forward, guard
+} from "effector";
 
 interface SettingsStore {
   timezones: GetTimezonesResponse["response"];

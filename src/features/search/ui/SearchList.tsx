@@ -73,7 +73,8 @@ export const SearchList: React.FC<SearchListProps> = ({
   if (
     teams.length <= 0 &&
     leagues.length <= 0 &&
-    debouncedSearchValue.trim().length >= 3
+    debouncedSearchValue.trim().length >= 3 &&
+    !loading
   ) {
     body = (
       <Text mt={2} textAlign="left">

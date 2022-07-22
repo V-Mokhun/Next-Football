@@ -1,7 +1,7 @@
 import { settingsModel } from "@/entities/settings";
 import {
   ChangeTimezone,
-  changeTimezoneModel,
+  changeTimezoneModel
 } from "@/features/settings/change-timezone";
 import { AlertMessage, Modal } from "@/shared/ui";
 import { Heading, Skeleton } from "@chakra-ui/react";

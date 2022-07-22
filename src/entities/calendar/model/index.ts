@@ -1,5 +1,5 @@
 import { createDates, formatDate } from "@/shared/lib";
-import { combine, createEvent, createStore, restore } from "effector-next";
+import { combine, createEvent, createStore, restore } from "effector";
 
 export const dateSelected = createEvent<string>();
 
