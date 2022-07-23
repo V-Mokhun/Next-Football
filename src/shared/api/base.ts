@@ -1,16 +1,22 @@
-import axios from "axios";
+import { AxiosInstance } from "axios";
 import { catchError } from "./lib";
 import { ViewerRequestBody } from "./models";
 
 export class BaseApi {
+  apiInstance: AxiosInstance;
+
+  constructor(apiInstance: AxiosInstance) {
+    this.apiInstance = apiInstance;
+  }
+
   protected makeUrl(
     apiUrl: string,
     paramsObj: { [key: string]: string | number }
   ) {
     let url = `${apiUrl}?`;
-    const params: {[key: string]: string} = {};
+    const params: { [key: string]: string } = {};
     for (const [key, value] of Object.entries(paramsObj)) {
-      params[key] = typeof value === "number" ? `${value}` : value
+      params[key] = typeof value === "number" ? `${value}` : value;
     }
     const queries = new URLSearchParams(params);
 
@@ -21,7 +27,7 @@ export class BaseApi {
 
   protected async postRequest<T>(body: ViewerRequestBody, url: string) {
     try {
-      const { data } = await axios.post<T>(url, body);
+      const { data } = await this.apiInstance.post<T>(url, body);
 
       return data;
     } catch (error) {
@@ -31,7 +37,7 @@ export class BaseApi {
 
   protected async updateRequest<T, F>(body: F, url: string) {
     try {
-      const { data } = await axios.patch<T>(url, body);
+      const { data } = await this.apiInstance.patch<T>(url, body);
 
       return data;
     } catch (error) {
@@ -41,7 +47,7 @@ export class BaseApi {
 
   protected async getRequest<T>(url: string) {
     try {
-      const { data } = await axios.get<T>(url);
+      const { data } = await this.apiInstance.get<T>(url);
 
       return data;
     } catch (error) {

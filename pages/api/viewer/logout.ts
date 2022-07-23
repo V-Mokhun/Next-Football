@@ -1,4 +1,4 @@
-import { connectDb, withSessionRoute } from "@/shared/lib";
+import { withSessionRoute } from "@/shared/lib";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default withSessionRoute(logoutRoute);

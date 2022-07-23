@@ -1,7 +1,7 @@
-import axios from "axios";
 import { BaseApi } from "../base";
 import { catchError } from "../lib";
 import { League, Team } from "../models";
+import { apiInstance } from "./config";
 import {
   AddFavoriteLeagueResponse,
   AddFavoriteTeamResponse,
@@ -37,7 +37,7 @@ const REMOVE_TEAM = `${FAVORITE_TEAM_API}/remove`;
 class ViewerApi extends BaseApi {
   async me() {
     try {
-      const { data } = await axios.get<MeResponse>(ME_URL);
+      const { data } = await apiInstance.get<MeResponse>(ME_URL);
 
       return data;
     } catch (error) {
@@ -62,7 +62,7 @@ class ViewerApi extends BaseApi {
 
   async logout() {
     try {
-      const { data } = await axios.post<LogoutResponse>(LOGOUT_URL);
+      const { data } = await apiInstance.post<LogoutResponse>(LOGOUT_URL);
 
       return data;
     } catch (error) {
@@ -72,7 +72,7 @@ class ViewerApi extends BaseApi {
 
   async changeTimezone(timezone: string) {
     try {
-      const { data } = await axios.patch<ChangeTimezoneResponse>(
+      const { data } = await apiInstance.patch<ChangeTimezoneResponse>(
         CHANGE_TIMEZONE_URL,
         {
           timezone,
@@ -87,7 +87,7 @@ class ViewerApi extends BaseApi {
 
   async changePassword(body: ChangePasswordRequest) {
     try {
-      const { data } = await axios.patch<ChangePasswordResponse>(
+      const { data } = await apiInstance.patch<ChangePasswordResponse>(
         CHANGE_PASSWORD_URL,
         body
       );
@@ -135,4 +135,4 @@ class ViewerApi extends BaseApi {
   }
 }
 
-export const viewerApi = new ViewerApi();
+export const viewerApi = new ViewerApi(apiInstance);

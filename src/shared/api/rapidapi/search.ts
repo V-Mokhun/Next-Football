@@ -41,4 +41,4 @@ class SearchApi extends BaseApi {
   }
 }
 
-export const searchApi = new SearchApi();
+export const searchApi = new SearchApi(apiInstance);

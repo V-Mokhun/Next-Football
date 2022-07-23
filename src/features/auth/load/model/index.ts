@@ -9,6 +9,8 @@ forward({
   to: viewerModel.loadViewerFx,
 });
 
+viewerModel.loadViewerFx.watch(state => console.log("LOAD", state))
+
 sample({
   clock: viewerModel.loadViewerFx.doneData,
   filter: ({ success }) => success,

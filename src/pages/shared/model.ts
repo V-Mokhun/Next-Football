@@ -5,5 +5,9 @@ export const appStarted = createEvent();
 
 sample({
   clock: appStarted,
-  target: [loadViewerModel.loadViewer],
+  target: [loadViewerModel.loadViewer, 
+    // countriesModel.fetchCountries
+  ],
 });
+
+appStarted.watch(() => console.log("APP STARTED"))

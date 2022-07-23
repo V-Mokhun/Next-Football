@@ -1,5 +1,6 @@
 import { IClientViewer } from "@/shared/api";
 import { IRON_SESSION_PASS } from "@/shared/config";
+import { IronSessionOptions } from "iron-session";
 import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
 import {
   GetServerSidePropsContext,
@@ -7,7 +8,7 @@ import {
   NextApiHandler
 } from "next";
 
-export const sessionOptions = {
+export const sessionOptions: IronSessionOptions = {
   password: IRON_SESSION_PASS,
   cookieName: "next-football",
   cookieOptions: {

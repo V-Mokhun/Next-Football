@@ -19,4 +19,4 @@ class LeaguesApi extends BaseApi {
   }
 }
 
-export const leaguesApi = new LeaguesApi();
+export const leaguesApi = new LeaguesApi(apiInstance);
