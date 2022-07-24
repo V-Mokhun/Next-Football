@@ -12,6 +12,7 @@ export const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({}) => {
 
   const setOldPassword = useEvent(changePasswordModel.setOldPassword);
   const setNewPassword = useEvent(changePasswordModel.setNewPassword);
+  const formSubmitted = useEvent(changePasswordModel.formSubmitted)
 
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -35,7 +36,7 @@ export const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({}) => {
       return;
     }
 
-    changePasswordModel.formSubmitted();
+    formSubmitted();
   };
 
   return (

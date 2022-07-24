@@ -6,26 +6,19 @@ export const setOldPassword = createEvent<string>();
 export const setNewPassword = createEvent<string>();
 export const formSubmitted = createEvent();
 
-export const $oldPassword = restore(setOldPassword, "")
-export const $newPassword = restore(setNewPassword, "")
+export const $oldPassword = restore(setOldPassword, "").reset(
+  viewerModel.changePasswordFx.doneData
+);
+export const $newPassword = restore(setNewPassword, "").reset(
+  viewerModel.changePasswordFx.doneData
+);
 
 export const $loading = viewerModel.changePasswordFx.pending;
-export const $error = createStore("");
-// $error.watch((err) => console.log("STORE ERROR MESSAGE: ", err));
-
-// $oldPassword.watch(state => console.log("OLD PASSWORD: ", state)
-// )
-// $newPassword.watch(state => console.log("NEW PASSWORD: ", state)
-// )
+export const $error = createStore("").reset(viewerModel.changePasswordFx.doneData);
 
 sample({
   clock: formSubmitted,
   source: { oldPassword: $oldPassword, newPassword: $newPassword },
-  fn: (source) => {
-    // console.log("SOURCE FROM SAMPLE: ", source);
-    
-    return source;
-  },
   target: viewerModel.changePasswordFx,
 });
 
