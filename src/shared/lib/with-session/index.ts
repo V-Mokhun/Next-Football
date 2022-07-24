@@ -1,5 +1,5 @@
 import { IClientViewer } from "@/shared/api";
-import { IRON_SESSION_PASS } from "@/shared/config";
+import { COOKIE_NAME, IRON_SESSION_PASS } from "@/shared/config";
 import { IronSessionOptions } from "iron-session";
 import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
 import {
@@ -10,7 +10,7 @@ import {
 
 export const sessionOptions: IronSessionOptions = {
   password: IRON_SESSION_PASS,
-  cookieName: "next-football",
+  cookieName: COOKIE_NAME, 
   cookieOptions: {
     secure: process.env.NODE_ENV === "production",
   },

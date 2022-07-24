@@ -30,8 +30,8 @@ export const updateLeagues = createEvent<League[]>();
 export const updateTeams = createEvent<Team[]>();
 export const logoutViewer = createEvent();
 
-export const loadViewerFx = createEffect<void, MeResponse, Error>(async () => {
-  const response = await viewerApi.me();
+export const loadViewerFx = createEffect<string | void, MeResponse, Error>(async (cookie) => {
+  const response = await viewerApi.me(cookie || undefined)
 
   return response;
 })

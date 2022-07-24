@@ -1,3 +1,5 @@
+import { COOKIE_NAME } from "@/shared/config";
+import { AxiosRequestConfig } from "axios";
 import { BaseApi } from "../base";
 import { catchError } from "../lib";
 import { League, Team } from "../models";
@@ -35,9 +37,20 @@ const ADD_TEAM = `${FAVORITE_TEAM_API}/add`;
 const REMOVE_TEAM = `${FAVORITE_TEAM_API}/remove`;
 
 class ViewerApi extends BaseApi {
-  async me() {
+  async me(cookieValue?: string) {
     try {
-      const { data } = await apiInstance.get<MeResponse>(ME_URL);
+      const options: AxiosRequestConfig = {
+        headers: {}
+      };
+
+      if (typeof window === "undefined") {
+        options.withCredentials = true;
+        options.headers!.Cookie = cookieValue
+          ? `${COOKIE_NAME}=${cookieValue};`
+          : "";
+      } 
+
+      const { data } = await apiInstance.get<MeResponse>(ME_URL, options);
 
       return data;
     } catch (error) {

@@ -1,13 +1,25 @@
 import { loadViewerModel } from "@/features/auth/load";
-import { createEvent, sample } from "effector";
+import { COOKIE_NAME } from "@/shared/config";
+import { createEvent, Event, sample } from "effector";
+import { PageContext, ServerPageContext } from "nextjs-effector";
+import { ParsedUrlQuery } from "querystring";
 
-export const appStarted = createEvent();
+export const appStarted = createEvent<PageContext>();
+
+export const loadViewerOnPageStarted = (
+  pageStartedOnServer: Event<ServerPageContext<ParsedUrlQuery, ParsedUrlQuery>>
+) =>
+  sample({
+    source: pageStartedOnServer,
+    fn: ({ req }) => {
+      return req.cookies[COOKIE_NAME] || "";
+    },
+    target: loadViewerModel.loadViewer,
+  });
 
 sample({
   clock: appStarted,
-  target: [loadViewerModel.loadViewer, 
-    // countriesModel.fetchCountries
-  ],
+  filter: ({ env }) => env === "client",
+  fn: () => "",
+  target: [loadViewerModel.loadViewer],
 });
-
-appStarted.watch(() => console.log("APP STARTED"))
