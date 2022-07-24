@@ -1,4 +1,4 @@
-import { IClientViewer, Viewer } from "@/shared/api";
+import { Viewer } from "@/shared/api";
 import { connectDb, withSessionRoute } from "@/shared/lib";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -30,18 +30,14 @@ async function changeTimezoneRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectDb();
 
-    const viewer = await Viewer.findOneAndUpdate(
-      { email: req.session.viewer.email },
+    const viewer = await Viewer.findByIdAndUpdate(
+      req.session.viewer._id,
       { $set: { timezone: body.timezone } },
-      { new: true }
     ).exec();
 
     if (!viewer) {
       throw new Error();
     }
-
-    req.session.viewer = { ...req.session.viewer, timezone: viewer.timezone };
-    await req.session.save();
 
     return res.status(201).json({ success: true, data: body.timezone });
   } catch (error) {

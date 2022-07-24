@@ -3,7 +3,7 @@ import {
   connectDb,
   hashPassword,
   isEmail,
-  withSessionRoute,
+  withSessionRoute
 } from "@/shared/lib";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -42,16 +42,18 @@ async function registerRoute(req: NextApiRequest, res: NextApiResponse) {
       favoriteTeams: [],
     };
 
-    await Viewer.create({
+    const viewer = await Viewer.create({
       ...viewerData,
       password: hashedPassword,
     });
 
-    req.session.viewer = viewerData;
+    req.session.viewer = { _id: viewer._id.toString() };
     await req.session.save();
 
     return res.status(201).json({ success: true, data: viewerData });
   } catch (error) {
+    console.log(error);
+    
     return res
       .status(500)
       .json({ data: "Something went wrong..", success: false });

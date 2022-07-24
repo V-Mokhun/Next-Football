@@ -9,18 +9,22 @@ interface ChangePasswordFormProps {}
 export const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({}) => {
   const oldPassword = useStore(changePasswordModel.$oldPassword);
   const newPassword = useStore(changePasswordModel.$newPassword);
+
   const setOldPassword = useEvent(changePasswordModel.setOldPassword);
   const setNewPassword = useEvent(changePasswordModel.setNewPassword);
+
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [isPasswordsSame, setIsPasswordsSame] = useState(false);
-  
+
   const isOldPasswordError = oldPassword.trim().length < 6;
   const isNewPasswordError = newPassword.trim().length < 6;
   const isInvalid = isOldPasswordError || isNewPasswordError;
 
   const isLoading = useStore(changePasswordModel.$loading);
   const errorMessage = useStore(changePasswordModel.$error);
+
+  // console.log("ERROR MESSAGE: ", errorMessage);
 
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();

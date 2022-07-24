@@ -33,9 +33,7 @@ async function removeLeagueRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectDb();
 
-    const viewer = await Viewer.findOne({
-      email: req.session.viewer.email,
-    }).exec();
+    const viewer = await Viewer.findById(req.session.viewer._id).exec();
     if (!viewer) {
       throw new Error();
     }
@@ -51,12 +49,6 @@ async function removeLeagueRoute(req: NextApiRequest, res: NextApiResponse) {
         },
       })
       .exec();
-
-    req.session.viewer = {
-      ...req.session.viewer,
-      favoriteLeagues: filteredLeagues,
-    };
-    await req.session.save();
 
     res.status(201).json({
       success: true,

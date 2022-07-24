@@ -1,4 +1,4 @@
-import { IClientViewer } from "@/shared/api";
+import { SessionViewer } from "@/shared/api";
 import { COOKIE_NAME, IRON_SESSION_PASS } from "@/shared/config";
 import { IronSessionOptions } from "iron-session";
 import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
@@ -32,6 +32,6 @@ export function withSessionSsr<
 
 declare module 'iron-session' {
   interface IronSessionData {
-    viewer?: IClientViewer
+    viewer?: SessionViewer
   }
 }

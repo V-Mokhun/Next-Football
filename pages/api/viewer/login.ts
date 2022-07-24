@@ -49,7 +49,7 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
       favoriteTeams: existingViewer.favoriteTeams,
     };
 
-    req.session.viewer = viewerData;
+    req.session.viewer = { _id: existingViewer._id.toString() };
     await req.session.save();
 
     return res.status(201).json({ success: true, data: viewerData });

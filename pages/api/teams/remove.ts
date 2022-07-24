@@ -33,7 +33,7 @@ async function removeTeamRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectDb();
 
-    const viewer = await Viewer.findOne({ email: req.session.viewer.email });
+    const viewer = await Viewer.findById(req.session.viewer._id);
     if (!viewer) {
       throw new Error();
     }
@@ -45,12 +45,6 @@ async function removeTeamRoute(req: NextApiRequest, res: NextApiResponse) {
         favoriteTeams: filteredTeams,
       },
     });
-
-    req.session.viewer = {
-      ...req.session.viewer,
-      favoriteTeams: filteredTeams,
-    };
-    await req.session.save();
 
     res.status(201).json({
       success: true,

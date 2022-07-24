@@ -3,7 +3,7 @@ import {
   comparePasswords,
   connectDb,
   hashPassword,
-  withSessionRoute,
+  withSessionRoute
 } from "@/shared/lib";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -47,7 +47,7 @@ async function changePasswordRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectDb();
 
-    const viewer = await Viewer.findOne({ email: req.session.viewer.email }).exec();
+    const viewer = await Viewer.findById(req.session.viewer._id).exec();
     if (!viewer) {
       throw new Error();
     }

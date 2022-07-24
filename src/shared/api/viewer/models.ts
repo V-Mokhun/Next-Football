@@ -1,5 +1,9 @@
 import { League, Team } from "../models";
 
+export interface SessionViewer {
+  _id: string
+}
+
 export interface IClientViewer {
   email: string;
   timezone: string;
