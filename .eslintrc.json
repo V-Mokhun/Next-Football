@@ -1,5 +1,6 @@
 {
-  "extends": "next/core-web-vitals",
+  "plugins": ["effector"],
+  "extends": ["next/core-web-vitals", "plugin:effector/recommended", "plugin:effector/react"],
   "rules": {
     "react/display-name": "off"
   }

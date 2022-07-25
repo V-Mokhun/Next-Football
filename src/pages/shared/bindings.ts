@@ -1,10 +1,10 @@
 import { createGIPFactory, createGSPFactory } from "nextjs-effector";
-import { appStarted } from "./model";
+import { appStarted, appStartedStatic } from "./model";
 
 export const createGIP = createGIPFactory({
   sharedEvents: [appStarted],
 });
 
 export const createGSP = createGSPFactory({
-  sharedEvents: [appStarted],
+  sharedEvents: [appStartedStatic],
 });

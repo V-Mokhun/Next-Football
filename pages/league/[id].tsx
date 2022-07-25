@@ -1,6 +1,6 @@
-import { LeaguePage } from "@/pages/league";
-import { appStarted } from "@/pages/shared";
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { LeaguePage, leaguePageModel } from "@/pages/league";
+import { appStarted, createGSP } from "@/pages/shared";
+import { GetStaticPaths, NextPage } from "next";
 import { usePageEvent } from "nextjs-effector";
 
 interface LeagueProps {}
@@ -17,7 +17,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // const paths = response.map(({ league }) => ({
   //   params: { id: String(league.id) },
   // }));
-  const paths: any[] = []
+  const paths: any[] = [];
 
   return {
     paths,
@@ -25,32 +25,34 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<
-  LeagueProps,
-  { id: string }
-> = async ({ params }) => {
-  if (!params) {
+export const getStaticProps = createGSP({
+  pageEvent: leaguePageModel.pageStarted,
+  async customize({ context }) {
+    const params = context.params;
+
+    if (!params || !params.id) {
+      return {
+        notFound: true,
+      };
+    }
+
+    const id = params.id as string;
+    const intId = parseInt(id, 10);
+
+    // const { response } = await rapidApi.leaguesApi.getLeagues({ id: intId });
+    // const [leagueObj] = response;
+
+    // if (!leagueObj) {
+    //   return {
+    //     notFound: true,
+    //   };
+    // }
+
     return {
-      notFound: true,
+      props: {},
+      revalidate: 60,
     };
-  }
-
-  const { id } = params;
-  const intId = parseInt(id, 10);
-
-  // const { response } = await rapidApi.leaguesApi.getLeagues({ id: intId });
-  // const [leagueObj] = response;
-
-  // if (!leagueObj) {
-  //   return {
-  //     notFound: true,
-  //   };
-  // }
-
-  return {
-    props: {},
-    revalidate: 60,
-  };
-};
+  },
+});
 
 export default League;
