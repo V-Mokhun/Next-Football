@@ -1,0 +1,1 @@
+export { FixtureMatch } from "./FixtureMatch";

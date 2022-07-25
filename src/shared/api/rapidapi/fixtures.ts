@@ -19,4 +19,4 @@ class FixturesApi extends BaseApi {
   }
 }
 
-export const fixturesApi = new FixturesApi();
+export const fixturesApi = new FixturesApi(apiInstance);
