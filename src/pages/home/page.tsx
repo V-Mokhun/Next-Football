@@ -1,5 +1,6 @@
 import { Calendar } from '@/entities/calendar';
 import { NextDayButton, PrevDayButton } from '@/features/change-date';
+import { Matches } from '@/widgets/matches';
 import { Box, Flex } from '@chakra-ui/react';
 import React from 'react';
 
@@ -19,6 +20,7 @@ export const HomePage: React.FC<HomeProps> = ({}) => {
             PrevButton={<PrevDayButton />}
           />
         </Flex>
+        <Matches />
       </Box>
 		);
 }

@@ -2,6 +2,7 @@
   "plugins": ["effector"],
   "extends": ["next/core-web-vitals", "plugin:effector/recommended", "plugin:effector/react"],
   "rules": {
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "effector/prefer-useUnit": "off"
   }
 }

@@ -7,7 +7,12 @@ import { createEvent, sample } from "effector";
 export const fetchFixtures = createEvent();
 
 sample({
-  clock: [fetchFixtures, calendarModel.$selectedDate],
+  clock: [
+    fetchFixtures,
+    calendarModel.$selectedDate,
+    // fixtureModel.allFixturesSelected,
+    // fixtureModel.liveFixturesSelected,
+  ],
   source: {
     date: calendarModel.$selectedDate,
     timezone: viewerModel.$viewerTimezone,

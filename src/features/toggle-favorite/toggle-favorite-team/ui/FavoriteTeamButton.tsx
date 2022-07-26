@@ -3,28 +3,27 @@ import { Team } from "@/shared/api";
 import { StarIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
-import React from "react";
 import { toggleFavoriteTeamModel } from "..";
 
-interface FavoriteTeamButtonProps {
-  data: Team;
+interface FavoriteTeamButtonProps<T> {
+  data: T;
   size: "small" | "normal";
-  isAbsolute?: boolean
+  isAbsolute?: boolean;
 }
 
-export const FavoriteTeamButton: React.FC<FavoriteTeamButtonProps> = ({
+export function FavoriteTeamButton<T extends Team>({
   data,
   size = "normal",
-  isAbsolute = false
-}) => {
+  isAbsolute = false,
+}: FavoriteTeamButtonProps<T>) {
   const buttonClicked = useEvent(toggleFavoriteTeamModel.buttonClicked);
-  const favoriteTeams = useStore(
-    viewerModel.$viewerFavoriteTeams
-  );
+  const favoriteTeams = useStore(viewerModel.$viewerFavoriteTeams);
   const loadingState = useStore(toggleFavoriteTeamModel.$loading);
 
   const isLoading = loadingState?.id === data.id && loadingState.loading;
   const isFavorite = favoriteTeams?.find((team) => team.id === data.id);
+
+  const { code, country, logo, founded, id, name, national } = data;
 
   return (
     <Button
@@ -34,7 +33,9 @@ export const FavoriteTeamButton: React.FC<FavoriteTeamButtonProps> = ({
       transform={isAbsolute ? "translateY(-50%)" : "initial"}
       p={1}
       size={size === "normal" ? "md" : "xs"}
-      onClick={() => buttonClicked(data)}
+      onClick={() =>
+        buttonClicked({ code, country, logo, founded, id, name, national })
+      }
       variant="outline"
       isLoading={isLoading}>
       <StarIcon
@@ -44,4 +45,4 @@ export const FavoriteTeamButton: React.FC<FavoriteTeamButtonProps> = ({
       />
     </Button>
   );
-};
+}

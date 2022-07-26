@@ -3,20 +3,19 @@ import { League } from "@/shared/api";
 import { StarIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
-import React from "react";
 import { toggleFavoriteLeagueModel } from "..";
 
-interface FavoriteLeagueButtonProps {
-  data: League;
+interface FavoriteLeagueButtonProps<T> {
+  data: T;
   size: "small" | "normal";
   isAbsolute?: boolean;
 }
 
-export const FavoriteLeagueButton: React.FC<FavoriteLeagueButtonProps> = ({
+export function FavoriteLeagueButton<T extends League>({
   data,
   size = "normal",
   isAbsolute = false,
-}) => {
+}: FavoriteLeagueButtonProps<T>) {
   const buttonClicked = useEvent(toggleFavoriteLeagueModel.buttonClicked);
   const favoriteLeagues = useStore(viewerModel.$viewerFavoriteLeagues);
   const loadingState = useStore(toggleFavoriteLeagueModel.$loading);
@@ -32,7 +31,9 @@ export const FavoriteLeagueButton: React.FC<FavoriteLeagueButtonProps> = ({
       transform={isAbsolute ? "translateY(-50%)" : "initial"}
       p={1}
       size={size === "normal" ? "md" : "xs"}
-      onClick={() => buttonClicked(data)}
+      onClick={() =>
+        buttonClicked({ id: data.id, logo: data.logo, name: data.name })
+      }
       variant="outline"
       isLoading={isLoading}>
       <StarIcon
@@ -42,4 +43,4 @@ export const FavoriteLeagueButton: React.FC<FavoriteLeagueButtonProps> = ({
       />
     </Button>
   );
-};
+}

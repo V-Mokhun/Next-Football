@@ -64,11 +64,9 @@ export interface Team {
   logo: string;
 }
 
-export type LeagueType = "league" | "cup";
 export interface League {
   id: number;
   name: string;
-  type: LeagueType;
   logo: string;
 }
 
@@ -81,7 +79,7 @@ export interface Country {
 export interface Fixture {
   id: number;
   timezone: string;
-  date: Date;
+  date: string;
   timestamp: number;
   periods: {
     first: number | null;
@@ -91,12 +89,12 @@ export interface Fixture {
   status: {
     long: string;
     short: FixtureStatus;
-    elapsed: number;
+    elapsed: number | null;
   };
 }
 
 export type FixtureTeam = Pick<Team, "id" | "name" | "logo"> & {
-  winner: boolean;
+  winner: boolean | null;
 };
 
 type ApiResponse = {
@@ -141,7 +139,7 @@ export type GetCountriesResponse = ApiResponse & {
 export type GetFixturesResponse = ApiResponse & {
   response: {
     fixture: Fixture;
-    league: Omit<League, "type"> & {
+    league: League & {
       country: string;
       flag: string;
       season: number;
@@ -152,8 +150,8 @@ export type GetFixturesResponse = ApiResponse & {
       away: FixtureTeam;
     };
     goals: {
-      home: number;
-      away: number;
+      home: number | null;
+      away: number | null;
     };
     score: {
       halftime: { home: number | null; away: number | null };
@@ -172,6 +170,7 @@ export type FixturesQueryParams = {
   to?: string;
   timezone?: string;
 };
+export type FixtureResponse = GetFixturesResponse["response"][0];
 
 export type HeadToHeadQueryParams = Omit<FixturesQueryParams, "id"> & {
   h2h: string;

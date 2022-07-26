@@ -1,6 +1,7 @@
 export * from "./connect-db";
 export * from "./create-dates";
 export * from "./format-date";
+export * from "./get-hours-from-date";
 export * from "./password";
 export * from "./routes";
 export * from "./theme";
