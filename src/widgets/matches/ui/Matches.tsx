@@ -10,11 +10,10 @@ interface MatchesProps {}
 export const Matches: React.FC<MatchesProps> = ({}) => {
   const isAuthenticated = useStore(viewerModel.$isAuthenticated);
   const viewerFavoriteLeagues = useStore(viewerModel.$viewerFavoriteLeagues);
-  const openedFixturesIndexes: number[] = [];
 
   const list = useList(fixtureModel.$fixtures, {
     keys: [viewerFavoriteLeagues],
-    fn: (fixtureObj, index) => {
+    fn: (fixtureObj) => {
       const fixtures = Object.values(fixtureObj)[0];
 
       if (fixtures.length <= 0) return null;
@@ -22,9 +21,6 @@ export const Matches: React.FC<MatchesProps> = ({}) => {
       const isFavoriteLeague = viewerFavoriteLeagues.find(
         (league) => league.id === fixtures[0].league.id
       );
-      if (isFavoriteLeague) {
-        openedFixturesIndexes.push(index);
-      }
 
       const matches = fixtures.map((fixture) => (
         <FixtureMatch key={fixture.fixture.id} fixtureData={fixture} />
@@ -43,7 +39,7 @@ export const Matches: React.FC<MatchesProps> = ({}) => {
   });
 
   return (
-    <Accordion defaultIndex={openedFixturesIndexes} pb={4} allowMultiple>
+    <Accordion pb={4} allowMultiple>
       {list}
     </Accordion>
   );

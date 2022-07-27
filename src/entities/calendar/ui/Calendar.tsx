@@ -1,6 +1,7 @@
 import { CalendarIcon } from "@chakra-ui/icons";
 import {
   Button,
+  Flex,
   Popover,
   PopoverBody,
   PopoverContent,
@@ -32,20 +33,22 @@ export const Calendar: React.FC<CalendarProps> = ({
 
   return (
     <Popover isOpen={isOpen} onClose={onClose}>
-      {PrevButton}
-      <PopoverTrigger>
-        <Button
-          isDisabled={isDisabled}
-          size="sm"
-          onClick={onToggle}
-          py={0}
-          borderRadius={0}
-          variant="solid"
-        >
-          <CalendarIcon /> <Text ml={2}>{selectedDate.slice(5)}</Text>
-        </Button>
-      </PopoverTrigger>
-      {NextButton}
+      <Flex alignItems="center">
+        {PrevButton}
+        <PopoverTrigger>
+          <Button
+            isDisabled={isDisabled}
+            size="sm"
+            onClick={onToggle}
+            py={0}
+            borderRadius={0}
+            variant="solid"
+          >
+            <CalendarIcon /> <Text ml={2}>{selectedDate.slice(5)}</Text>
+          </Button>
+        </PopoverTrigger>
+        {NextButton}
+      </Flex>
       <PopoverContent maxW={160}>
         <PopoverBody padding={2}>
           <VStack spacing={2}>

@@ -21,7 +21,7 @@ export enum FixtureStatus {
 }
 
 interface Venue {
-  id: number;
+  id: number | null;
   name: string;
   address: string;
   city: string;
@@ -141,7 +141,7 @@ export type GetFixturesResponse = ApiResponse & {
     fixture: Fixture;
     league: League & {
       country: string;
-      flag: string;
+      flag: string | null;
       season: number;
       round: string;
     };

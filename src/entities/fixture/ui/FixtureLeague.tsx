@@ -40,7 +40,13 @@ export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
             {FavoriteComponent && (
               <FavoriteComponent size="small" data={league} />
             )}
-            <Flex alignItems="center" flex="1 1 100%" textAlign="left">
+            <Flex
+              fontWeight={700}
+              alignItems="center"
+              flex="1 1 100%"
+              textAlign="left"
+              fontSize="sm"
+            >
               <Box mr={2}>
                 <Image
                   alt={league.name}
@@ -52,15 +58,12 @@ export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
               <Text
                 color={isFavorite ? "yellow.400" : "initial"}
                 mr={1}
-                fontSize="md"
+                textTransform="uppercase"
               >
                 {league.country}:
               </Text>
               <NextLink href={`${LEAGUE_ROUTE}/${league.id}`} passHref>
-                <Link
-                  color={isFavorite ? "yellow.400" : "initial"}
-                  fontSize="md"
-                >
+                <Link color={isFavorite ? "yellow.400" : "initial"}>
                   {league.name}
                 </Link>
               </NextLink>

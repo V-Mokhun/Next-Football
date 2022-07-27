@@ -14,6 +14,18 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({ fixtureData }) => {
   const router = useRouter();
   const { colorMode } = useColorMode();
 
+  let matchDateText = null;
+
+  if (fixture.status.short === FixtureStatus.FT) {
+    matchDateText = "Finished";
+  } else if (fixture.status.short === FixtureStatus.HT) {
+    matchDateText = "Break";
+  } else if (fixture.status.elapsed == null) {
+    matchDateText = getHoursFromDate(fixture.date);
+  } else {
+    matchDateText = `${fixture.status.elapsed}'`;
+  }
+
   return (
     <Flex
       onClick={() => router.push(`${MATCH_ROUTE}/${fixture.id}`)}
@@ -27,12 +39,17 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({ fixtureData }) => {
       }}
     >
       <Box flex="0 1 70px" textAlign="center">
-        <Text fontSize="sm">
-          {fixture.status.short === FixtureStatus.FT
-            ? "Finished"
-            : fixture.status.elapsed == null
-            ? getHoursFromDate(fixture.date)
-            : `'${fixture.status.elapsed}`}
+        <Text
+          color={
+            (fixture.status.short !== FixtureStatus.FT &&
+              fixture.status.elapsed != null) ||
+            fixture.status.short === FixtureStatus.HT
+              ? "primary.500"
+              : "initial"
+          }
+          fontSize="sm"
+        >
+          {matchDateText}
         </Text>
       </Box>
       <Flex flex={"0 1 70%"} flexDir="column" gap={2}>

@@ -10,8 +10,8 @@ sample({
   clock: [
     fetchFixtures,
     calendarModel.$selectedDate,
-    // fixtureModel.allFixturesSelected,
-    // fixtureModel.liveFixturesSelected,
+    fixtureModel.allFixturesSelected,
+    fixtureModel.liveFixturesSelected,
   ],
   source: {
     date: calendarModel.$selectedDate,
@@ -71,11 +71,11 @@ sample({
 sample({
   clock: fixtureModel.fetchFixturesFx,
   fn: () => true,
-  target: calendarModel.$calendarDisabled,
+  target: [calendarModel.$calendarDisabled, fixtureModel.$buttonsDisabled],
 });
 
 sample({
   clock: fixtureModel.fetchFixturesFx.finally,
   fn: () => false,
-  target: calendarModel.$calendarDisabled,
+  target: [calendarModel.$calendarDisabled, fixtureModel.$buttonsDisabled],
 });
