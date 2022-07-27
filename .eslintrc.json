@@ -1,7 +1,14 @@
 {
-  "plugins": ["effector"],
-  "extends": ["next/core-web-vitals", "prettier", "plugin:effector/recommended", "plugin:effector/react"],
+  "plugins": ["effector", "prettier"],
+  "extends": [
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:effector/recommended",
+    "plugin:effector/react",
+    "plugin:prettier/recommended"
+  ],
   "rules": {
+    "prettier/prettier": "error",
     "react/display-name": "off",
     "effector/prefer-useUnit": "off"
   }

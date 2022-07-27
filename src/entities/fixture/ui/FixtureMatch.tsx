@@ -24,7 +24,8 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({ fixtureData }) => {
       _hover={{
         transition: "background-color .3s linear",
         backgroundColor: colorMode === "dark" ? "#283941" : "#f4f5f5",
-      }}>
+      }}
+    >
       <Box flex="0 1 70px" textAlign="center">
         <Text fontSize="sm">
           {fixture.status.short === FixtureStatus.FT
