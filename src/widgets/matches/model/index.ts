@@ -67,3 +67,15 @@ sample({
   },
   target: fixtureModel.$fixtures,
 });
+
+sample({
+  clock: fixtureModel.fetchFixturesFx,
+  fn: () => true,
+  target: calendarModel.$calendarDisabled
+})
+
+sample({
+  clock: fixtureModel.fetchFixturesFx.finally,
+  fn: () => false,
+  target: calendarModel.$calendarDisabled
+})

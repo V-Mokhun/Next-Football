@@ -1,6 +1,6 @@
 {
   "plugins": ["effector"],
-  "extends": ["next/core-web-vitals", "plugin:effector/recommended", "plugin:effector/react"],
+  "extends": ["next/core-web-vitals", "prettier", "plugin:effector/recommended", "plugin:effector/react"],
   "rules": {
     "react/display-name": "off",
     "effector/prefer-useUnit": "off"

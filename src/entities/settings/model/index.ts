@@ -1,8 +1,8 @@
 import { GetTimezonesResponse, rapidApi } from "@/shared/api";
 import {
-    createEffect,
-    createEvent,
-    createStore, forward, guard
+  createEffect,
+  createEvent,
+  createStore, forward, guard
 } from "effector";
 
 interface SettingsStore {
@@ -48,8 +48,8 @@ forward({
 const $modalOpenedCount = createStore(0).on(openModal, (count) => count + 1);
 
 guard({
-  source: $modalOpenedCount,
   clock: openModal,
+  source: $modalOpenedCount,
   filter: (count) => count <= 1,
   target: fetchTimezonesFx,
 });

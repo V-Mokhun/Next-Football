@@ -13,5 +13,6 @@ export const $allDates = createStore<string[]>([
   formattedDate,
   ...nextSevenDates,
 ]);
+export const $calendarDisabled = createStore<boolean>(false)
 export const $isFirstDate = combine($allDates, $selectedDate, (allDates, selectedDate) => allDates[0] === selectedDate)
 export const $isLastDate = combine($allDates, $selectedDate, (allDates, selectedDate) => allDates[allDates.length - 1] === selectedDate)

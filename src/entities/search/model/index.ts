@@ -1,21 +1,23 @@
-import { createEvent, createStore, forward } from "effector";
+import { createEvent, createStore, forward, sample } from "effector";
 
 export const openModal = createEvent();
 export const closeModal = createEvent();
 export const buttonClicked = createEvent();
 export const searchItemClicked = createEvent();
 
-export const $modalOpen = createStore(false)
+export const $modalOpen = createStore(false);
 
-forward({
-  from: openModal.map(() => true),
-  to: $modalOpen
-})
+sample({
+  clock: openModal,
+  fn: () => true,
+  target: $modalOpen,
+});
 
-forward({
-  from: closeModal.map(() => false),
-  to: $modalOpen
-})
+sample({
+  clock: closeModal,
+  fn: () => false,
+  target: $modalOpen,
+});
 
 forward({
   from: buttonClicked,

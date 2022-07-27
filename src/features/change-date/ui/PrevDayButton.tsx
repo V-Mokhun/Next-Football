@@ -9,12 +9,13 @@ interface PrevDayButtonProps {}
 
 export const PrevDayButton: React.FC<PrevDayButtonProps> = ({}) => {
   const onPrevButtonClick = useEvent(changeDateModel.prevDayButtonClicked);
+  const calendarDisabled = useStore(calendarModel.$calendarDisabled);
   const isFirstDate = useStore(calendarModel.$isFirstDate);
 
   return (
     <IconButton
       onClick={onPrevButtonClick}
-      disabled={isFirstDate}
+      isDisabled={isFirstDate || calendarDisabled}
       size="sm"
       borderRadius="8px 0 0 8px"
       p={1}

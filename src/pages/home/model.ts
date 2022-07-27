@@ -4,7 +4,7 @@ import { PageContext } from "nextjs-effector";
 
 export const pageStarted = createEvent<PageContext>();
 
-// sample({
-//   clock: pageStarted,
-//   target: matchesModel.fetchFixtures,
-// });
+sample({
+  clock: pageStarted,
+  target: matchesModel.fetchFixtures,
+});

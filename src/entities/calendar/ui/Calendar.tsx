@@ -1,14 +1,13 @@
+import { CalendarIcon } from "@chakra-ui/icons";
 import {
-	CalendarIcon
-} from "@chakra-ui/icons";
-import {
-	Button, Popover,
-	PopoverBody,
-	PopoverContent,
-	PopoverTrigger,
-	Text,
-	useDisclosure,
-	VStack
+  Button,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  Text,
+  useDisclosure,
+  VStack
 } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
 import React from "react";
@@ -19,19 +18,24 @@ interface CalendarProps {
   PrevButton: React.ReactElement;
 }
 
-export const Calendar: React.FC<CalendarProps> = ({NextButton, PrevButton}) => {
+export const Calendar: React.FC<CalendarProps> = ({
+  NextButton,
+  PrevButton,
+}) => {
   const onSelectDate = useEvent(calendarModel.dateSelected);
 
   const selectedDate = useStore(calendarModel.$selectedDate);
+  const isDisabled = useStore(calendarModel.$calendarDisabled);
   const allDates = useStore(calendarModel.$allDates);
 
   const { onToggle, isOpen, onClose } = useDisclosure();
 
   return (
     <Popover isOpen={isOpen} onClose={onClose}>
-			{PrevButton}
+      {PrevButton}
       <PopoverTrigger>
         <Button
+          isDisabled={isDisabled}
           size="sm"
           onClick={onToggle}
           py={0}
@@ -40,7 +44,7 @@ export const Calendar: React.FC<CalendarProps> = ({NextButton, PrevButton}) => {
           <CalendarIcon /> <Text ml={2}>{selectedDate.slice(5)}</Text>
         </Button>
       </PopoverTrigger>
-			{NextButton}
+      {NextButton}
       <PopoverContent maxW={160}>
         <PopoverBody padding={2}>
           <VStack spacing={2}>

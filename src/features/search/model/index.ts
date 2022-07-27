@@ -5,7 +5,8 @@ import {
   createEvent,
   createStore,
   forward,
-  restore
+  restore,
+  sample
 } from "effector";
 
 type SearchModeStore = "leagues" | "teams";
@@ -18,14 +19,16 @@ export const teamsButtonClicked = createEvent("teams");
 export const onFetchLeagues = createEvent<string>()
 export const onFetchTeams = createEvent<string>()
 
-forward({
-  from: leaguesButtonClicked.map(() => "leagues" as SearchModeStore),
-  to: changeSearchMode,
+sample({
+  clock: leaguesButtonClicked,
+  fn: () => "leagues" as SearchModeStore,
+  target: changeSearchMode,
 });
 
-forward({
-  from: teamsButtonClicked.map(() => "teams" as SearchModeStore),
-  to: changeSearchMode,
+sample({
+  clock: teamsButtonClicked,
+  fn: () => "teams" as SearchModeStore,
+  target: changeSearchMode,
 });
 
 export const fetchLeaguesFx = createEffect<string, GetLeaguesResponse, Error>(

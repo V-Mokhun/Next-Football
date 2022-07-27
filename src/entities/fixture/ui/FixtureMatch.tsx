@@ -29,7 +29,9 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({ fixtureData }) => {
         <Text fontSize="sm">
           {fixture.status.short === FixtureStatus.FT
             ? "Finished"
-            : fixture.status.elapsed || getHoursFromDate(fixture.date)}
+            : fixture.status.elapsed == null
+            ? getHoursFromDate(fixture.date)
+            : `'${fixture.status.elapsed}`}
         </Text>
       </Box>
       <Flex flex={"0 1 70%"} flexDir="column" gap={2}>

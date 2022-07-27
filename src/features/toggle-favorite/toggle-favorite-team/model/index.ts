@@ -1,6 +1,6 @@
 import { viewerModel } from "@/entities/viewer";
 import { Team } from "@/shared/api";
-import { createEvent, createStore, forward, sample } from "effector";
+import { createEvent, createStore, sample } from "effector";
 
 export const buttonClicked = createEvent<Team>();
 
@@ -20,9 +20,10 @@ const isInFavorites = sample({
   },
 });
 
-forward({
-  from: buttonClicked.map((team) => ({ id: team.id, loading: true })),
-  to: $loading,
+sample({
+  clock: buttonClicked,
+  fn: ({ id }) => ({ id, loading: true }),
+  target: $loading,
 });
 
 sample({
