@@ -27,9 +27,9 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
       gap={2}
       p={1}
       borderRadius={10}
-     position="relative" 
-     pr={8}
-      >
+      position="relative"
+      pr={8}
+    >
       <>
         <Flex
           cursor="pointer"
@@ -39,13 +39,20 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
           w="100%"
           _hover={{
             textDecoration: "underline",
-          }}>
+          }}
+        >
           {noImage ? null : (
             <Box flex="0 0 18px">
               <Image src={logo} alt={name} width={18} height={18} />
             </Box>
           )}
-          <Heading overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap" as="p" size="xs">
+          <Heading
+            overflow="hidden"
+            textOverflow="ellipsis"
+            whiteSpace="nowrap"
+            as="p"
+            size="xs"
+          >
             {name}
           </Heading>
         </Flex>

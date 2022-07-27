@@ -1,7 +1,7 @@
 import { League, Team } from "../models";
 
 export interface SessionViewer {
-  _id: string
+  _id: string;
 }
 
 export interface IClientViewer {

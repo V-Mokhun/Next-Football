@@ -13,7 +13,7 @@ import {
   FormLabel,
   Menu,
   MenuItem,
-  MenuList
+  MenuList,
 } from "@chakra-ui/react";
 import { useStore } from "effector-react";
 import Image from "next/image";
@@ -57,7 +57,8 @@ export const Header: React.FC<HeaderProps> = ({}) => {
                         cursor="pointer"
                         htmlFor="color-mode"
                         mb={0}
-                        mr={0}>
+                        mr={0}
+                      >
                         Dark mode
                       </FormLabel>
                       <ThemeToggler />

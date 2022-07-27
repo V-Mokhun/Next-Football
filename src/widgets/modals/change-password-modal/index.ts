@@ -1,2 +1,2 @@
-export * from "./ui"
-export * as changePasswordModalModel from "./model"
+export * as changePasswordModalModel from "./model";
+export * from "./ui";

@@ -5,9 +5,7 @@ import type { NextPage } from "next";
 interface HomeProps {}
 
 const Home: NextPage<HomeProps> = () => {
-  return (
-    <HomePage />
-  );
+  return <HomePage />;
 };
 
 Home.getInitialProps = createGIP({

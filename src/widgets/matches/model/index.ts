@@ -41,8 +41,8 @@ sample({
   clock: fixtureModel.fetchFixturesFx.doneData,
   source: viewerModel.$viewerFavoriteLeagues,
   fn: (favoriteLeagues, fixtures) => {
-		console.log(fixtures);
-		
+    console.log(fixtures);
+
     const sortedFixtures: { [key: string]: FixtureResponse[] }[] = [];
 
     for (const fixture of fixtures) {
@@ -71,11 +71,11 @@ sample({
 sample({
   clock: fixtureModel.fetchFixturesFx,
   fn: () => true,
-  target: calendarModel.$calendarDisabled
-})
+  target: calendarModel.$calendarDisabled,
+});
 
 sample({
   clock: fixtureModel.fetchFixturesFx.finally,
   fn: () => false,
-  target: calendarModel.$calendarDisabled
-})
+  target: calendarModel.$calendarDisabled,
+});

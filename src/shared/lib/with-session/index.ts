@@ -5,12 +5,12 @@ import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
 import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
-  NextApiHandler
+  NextApiHandler,
 } from "next";
 
 export const sessionOptions: IronSessionOptions = {
   password: IRON_SESSION_PASS,
-  cookieName: COOKIE_NAME, 
+  cookieName: COOKIE_NAME,
   cookieOptions: {
     secure: process.env.NODE_ENV === "production",
   },
@@ -30,8 +30,8 @@ export function withSessionSsr<
   return withIronSessionSsr(handler, sessionOptions);
 }
 
-declare module 'iron-session' {
+declare module "iron-session" {
   interface IronSessionData {
-    viewer?: SessionViewer
+    viewer?: SessionViewer;
   }
 }

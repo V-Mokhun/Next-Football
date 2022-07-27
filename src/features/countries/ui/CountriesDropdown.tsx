@@ -9,7 +9,7 @@ interface CountriesDropdownProps {
   FavoriteComponent: React.ElementType<{
     data: League;
     size: "normal" | "small";
-    isAbsolute?: boolean
+    isAbsolute?: boolean;
   }>;
 }
 
@@ -31,21 +31,29 @@ export const CountriesDropdown: React.FC<CountriesDropdownProps> = ({
 
       {showCountries ? (
         <>
-        {countries
-          ?.slice(20)
-          ?.map(({ country }) => (
+          {countries?.slice(20)?.map(({ country }) => (
             <CountryDropdownItem
               key={country.name}
               country={country}
               FavoriteComponent={FavoriteComponent}
             />
           ))}
-        <Button mt={2} w="100%" onClick={() => setShowCountries(false)} variant="link">
-          Hide most countries
-        </Button>
+          <Button
+            mt={2}
+            w="100%"
+            onClick={() => setShowCountries(false)}
+            variant="link"
+          >
+            Hide most countries
+          </Button>
         </>
       ) : (
-        <Button mt={2} w="100%" onClick={() => setShowCountries(true)} variant="link">
+        <Button
+          mt={2}
+          w="100%"
+          onClick={() => setShowCountries(true)}
+          variant="link"
+        >
           Show all countries
         </Button>
       )}

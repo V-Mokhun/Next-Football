@@ -5,7 +5,7 @@ import {
   isClientPageContext,
   isServerPageContext,
   PageContext,
-  StaticPageContext
+  StaticPageContext,
 } from "nextjs-effector";
 
 export const appStarted = createEvent<PageContext>();

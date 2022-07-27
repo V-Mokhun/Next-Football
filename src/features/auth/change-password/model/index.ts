@@ -14,7 +14,9 @@ export const $newPassword = restore(setNewPassword, "").reset(
 );
 
 export const $loading = viewerModel.changePasswordFx.pending;
-export const $error = createStore("").reset(viewerModel.changePasswordFx.doneData);
+export const $error = createStore("").reset(
+  viewerModel.changePasswordFx.doneData
+);
 
 sample({
   clock: formSubmitted,

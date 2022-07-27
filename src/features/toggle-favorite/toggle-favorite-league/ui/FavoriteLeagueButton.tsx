@@ -35,7 +35,8 @@ export function FavoriteLeagueButton<T extends League>({
         buttonClicked({ id: data.id, logo: data.logo, name: data.name })
       }
       variant="outline"
-      isLoading={isLoading}>
+      isLoading={isLoading}
+    >
       <StarIcon
         h={size === "normal" ? 5 : 3}
         w={size === "normal" ? 5 : 3}

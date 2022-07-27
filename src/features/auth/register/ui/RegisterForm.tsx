@@ -24,11 +24,11 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   const errorMessage = useStore(registerModel.$error);
   const setEmail = useEvent(registerModel.setEmail);
   const setPassword = useEvent(registerModel.setPassword);
-  const formSubmitted = useEvent(registerModel.formSubmitted)
+  const formSubmitted = useEvent(registerModel.formSubmitted);
 
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    formSubmitted()
+    formSubmitted();
   };
 
   return (
@@ -52,7 +52,8 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         disabled={isInvalid || isLoading}
         colorScheme="blue"
         variant="outline"
-        type="submit">
+        type="submit"
+      >
         Register
       </Button>
       {errorMessage && <AlertMessage error={errorMessage} />}
@@ -63,7 +64,8 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
           onClick={changeAuthMode}
           variant="link"
           textDecoration="underline"
-          _hover={{ textDecoration: "none" }}>
+          _hover={{ textDecoration: "none" }}
+        >
           Log in
         </Button>
       </Text>

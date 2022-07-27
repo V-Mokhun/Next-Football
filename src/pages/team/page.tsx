@@ -1,8 +1,7 @@
-import React from 'react';
+import React from "react";
 
-interface TeamPageProps {
-}
+interface TeamPageProps {}
 
 export const TeamPage: React.FC<TeamPageProps> = ({}) => {
-		return (<div>Team page</div>);
-}
+  return <div>Team page</div>;
+};

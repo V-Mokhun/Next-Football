@@ -1,2 +1,1 @@
 export { FavoriteTeamButton } from "./FavoriteTeamButton";
-

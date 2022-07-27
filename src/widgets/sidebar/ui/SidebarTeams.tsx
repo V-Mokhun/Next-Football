@@ -15,7 +15,7 @@ interface SidebarTeamsProps {}
 export const SidebarTeams: React.FC<SidebarTeamsProps> = ({}) => {
   const teams = useStore(viewerModel.$viewerFavoriteTeams);
   const onAddTeams = useEvent(searchModalModel.buttonClicked);
-  const changeSearchMode = useEvent(searchModel.changeSearchMode)
+  const changeSearchMode = useEvent(searchModel.changeSearchMode);
   const router = useRouter();
 
   return (
@@ -26,30 +26,35 @@ export const SidebarTeams: React.FC<SidebarTeamsProps> = ({}) => {
         alignItems="center"
         gap={2}
         as="h3"
-        size="sm">
+        size="sm"
+      >
         <StarIcon /> <span>My teams</span>
       </Heading>
       <VStack w="100%" spacing={2}>
-          {teams?.map((team) => (
-            <SidebarItem
-              key={team.id}
-              favoriteComponent={
-                <FavoriteTeamButton isAbsolute={true} data={team} size="small" />
-              }
-              id={team.id}
-              logo={team.logo}
-              name={team.name}
-              onClick={() => {
-                router.push(`${TEAM_ROUTE}/${team.id}`);
-              }}
-            />
-          ))}
-          <Button onClick={() => {
-            onAddTeams()
-            changeSearchMode("teams")
-          }} w="100%" variant="outline">
-            Add teams
-          </Button>
+        {teams?.map((team) => (
+          <SidebarItem
+            key={team.id}
+            favoriteComponent={
+              <FavoriteTeamButton isAbsolute={true} data={team} size="small" />
+            }
+            id={team.id}
+            logo={team.logo}
+            name={team.name}
+            onClick={() => {
+              router.push(`${TEAM_ROUTE}/${team.id}`);
+            }}
+          />
+        ))}
+        <Button
+          onClick={() => {
+            onAddTeams();
+            changeSearchMode("teams");
+          }}
+          w="100%"
+          variant="outline"
+        >
+          Add teams
+        </Button>
       </VStack>
     </Box>
   );

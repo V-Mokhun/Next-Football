@@ -2,7 +2,7 @@ import {
   FixtureResponse,
   FixturesQueryParams,
   GetFixturesResponse,
-  rapidApi
+  rapidApi,
 } from "@/shared/api";
 import { createEffect, createEvent, createStore, sample } from "effector";
 
@@ -19,7 +19,8 @@ export const fetchFixturesFx = createEffect<
   return response;
 });
 
-export const $isLiveFixtures = createStore<boolean>(false).reset(allFixturesSelected);
+export const $isLiveFixtures =
+  createStore<boolean>(false).reset(allFixturesSelected);
 export const $fixtures = createStore<{ [key: string]: FixtureResponse[] }[]>(
   []
 );

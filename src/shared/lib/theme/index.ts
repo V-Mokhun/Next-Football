@@ -7,16 +7,10 @@ const overrides = {
       body: {
         backgroundColor: props.colorMode === "dark" ? "#010a0f" : "#eee",
       },
-      ':root': {
-        '--chakra-colors-main-400': mode(
-            '#fff2ce',
-            '#001e28',
-        )(props),
-        '--chakra-colors-main-500': mode(
-            '#fff',
-            '#00141e',
-        )(props),
-    },
+      ":root": {
+        "--chakra-colors-main-400": mode("#fff2ce", "#001e28")(props),
+        "--chakra-colors-main-500": mode("#fff", "#00141e")(props),
+      },
     }),
   },
   colors: {
@@ -26,8 +20,8 @@ const overrides = {
     },
     primary: {
       400: "#ff0046",
-      500: "#c80037"
-    }
+      500: "#c80037",
+    },
   },
   config: {
     initialColorMode: "dark",

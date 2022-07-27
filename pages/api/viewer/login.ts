@@ -3,7 +3,7 @@ import {
   comparePasswords,
   connectDb,
   isEmail,
-  withSessionRoute
+  withSessionRoute,
 } from "@/shared/lib";
 import { NextApiRequest, NextApiResponse } from "next";
 

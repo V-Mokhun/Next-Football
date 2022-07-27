@@ -1,2 +1,2 @@
-export * from "./ui";
 export * as settingsModalModel from "./model";
+export * from "./ui";

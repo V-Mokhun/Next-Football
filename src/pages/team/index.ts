@@ -1,3 +1,2 @@
-export * as teamPageModel from "./model"
-export { TeamPage } from "./page"
-
+export * as teamPageModel from "./model";
+export { TeamPage } from "./page";

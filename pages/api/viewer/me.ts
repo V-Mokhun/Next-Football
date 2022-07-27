@@ -41,7 +41,7 @@ async function meRoute(req: NextApiRequest, res: NextApiResponse) {
     });
   } catch (error) {
     console.log(error);
-    
+
     return res
       .status(500)
       .json({ data: "Something went wrong..", success: false });

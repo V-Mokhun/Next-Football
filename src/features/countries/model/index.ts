@@ -4,16 +4,18 @@ import {
   GetLeaguesResponse,
   League,
   LeaguesQueryParams,
-  rapidApi
+  rapidApi,
 } from "@/shared/api";
 import {
   createEffect,
   createEvent,
-  createStore, forward, sample
+  createStore,
+  forward,
+  sample,
 } from "effector";
 
 export const countryButtonClicked = createEvent<string>();
-export const fetchCountries = createEvent()
+export const fetchCountries = createEvent();
 
 export const fetchCountriesFx = createEffect<
   void,
@@ -41,7 +43,9 @@ export const $countryLeaguesFetching = createStore<{
   loading: boolean;
 } | null>(null);
 
-export const $countryLeagues = createStore<{ code: string; leagues: League[] }[]>([]);
+export const $countryLeagues = createStore<
+  { code: string; leagues: League[] }[]
+>([]);
 
 export const $countries = createStore<{ country: Country; loaded: boolean }[]>(
   []
@@ -51,8 +55,8 @@ export const $countries = createStore<{ country: Country; loaded: boolean }[]>(
 
 forward({
   from: fetchCountries,
-  to: fetchCountriesFx
-})
+  to: fetchCountriesFx,
+});
 
 sample({
   clock: countryButtonClicked,
@@ -64,7 +68,7 @@ sample({
     return true;
   },
   fn: (_, code) => {
-    return {code, loading: true}
+    return { code, loading: true };
   },
   target: $countryLeaguesFetching,
 });

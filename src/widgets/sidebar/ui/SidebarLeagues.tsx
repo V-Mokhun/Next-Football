@@ -15,7 +15,7 @@ interface SidebarLeaguesProps {}
 export const SidebarLeagues: React.FC<SidebarLeaguesProps> = ({}) => {
   const leagues = useStore(viewerModel.$viewerFavoriteLeagues);
   const onAddLeagues = useEvent(searchModalModel.buttonClicked);
-  const changeSearchMode = useEvent(searchModel.changeSearchMode)
+  const changeSearchMode = useEvent(searchModel.changeSearchMode);
   const router = useRouter();
 
   return (
@@ -26,30 +26,39 @@ export const SidebarLeagues: React.FC<SidebarLeaguesProps> = ({}) => {
         alignItems="center"
         gap={2}
         as="h3"
-        size="sm">
+        size="sm"
+      >
         <StarIcon /> <span>My leagues</span>
       </Heading>
       <VStack w="100%" spacing={2}>
-          {leagues?.map((league) => (
-            <SidebarItem
-              key={league.id}
-              favoriteComponent={
-                <FavoriteLeagueButton isAbsolute={true} data={league} size="small" />
-              }
-              id={league.id}
-              logo={league.logo}
-              name={league.name}
-              onClick={() => {
-                router.push(`${LEAGUE_ROUTE}/${league.id}`);
-              }}
-            />
-          ))}
-          <Button onClick={() => {
-            onAddLeagues()
-            changeSearchMode("leagues")
-          }} w="100%" variant="outline">
-            Add leagues
-          </Button>
+        {leagues?.map((league) => (
+          <SidebarItem
+            key={league.id}
+            favoriteComponent={
+              <FavoriteLeagueButton
+                isAbsolute={true}
+                data={league}
+                size="small"
+              />
+            }
+            id={league.id}
+            logo={league.logo}
+            name={league.name}
+            onClick={() => {
+              router.push(`${LEAGUE_ROUTE}/${league.id}`);
+            }}
+          />
+        ))}
+        <Button
+          onClick={() => {
+            onAddLeagues();
+            changeSearchMode("leagues");
+          }}
+          w="100%"
+          variant="outline"
+        >
+          Add leagues
+        </Button>
       </VStack>
     </Box>
   );

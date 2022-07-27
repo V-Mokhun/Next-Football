@@ -1,1 +1,1 @@
-export * from "./viewer/schema"
+export * from "./viewer/schema";

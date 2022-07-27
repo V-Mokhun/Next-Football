@@ -14,14 +14,14 @@ import {
   RemoveFavoriteTeamResponse,
   Team,
   viewerApi,
-  ViewerRequestBody
+  ViewerRequestBody,
 } from "@/shared/api";
 import {
   createEffect,
   createEvent,
   createStore,
   forward,
-  restore
+  restore,
 } from "effector";
 
 export const setViewer = createEvent<IClientViewer | null>();
@@ -30,11 +30,13 @@ export const updateLeagues = createEvent<League[]>();
 export const updateTeams = createEvent<Team[]>();
 export const logoutViewer = createEvent();
 
-export const loadViewerFx = createEffect<string | void, MeResponse, Error>(async (cookie) => {
-  const response = await viewerApi.me(cookie || undefined)
+export const loadViewerFx = createEffect<string | void, MeResponse, Error>(
+  async (cookie) => {
+    const response = await viewerApi.me(cookie || undefined);
 
-  return response;
-})
+    return response;
+  }
+);
 
 export const registerFx = createEffect<
   ViewerRequestBody,

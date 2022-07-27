@@ -5,7 +5,7 @@ import {
   Heading,
   StackDivider,
   useColorMode,
-  VStack
+  VStack,
 } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
 import React from "react";
@@ -29,7 +29,8 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
           />
         }
         spacing={4}
-        alignItems="flex-start">
+        alignItems="flex-start"
+      >
         {isAuthenticated ? (
           <>
             <SidebarLeagues />

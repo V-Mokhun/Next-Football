@@ -23,7 +23,7 @@ export const SearchItem: React.FC<SearchItemProps> = ({
 }) => {
   const router = useRouter();
   const searchItemClicked = useEvent(searchModalModel.searchItemClicked);
-  const isAuthenticated = useStore(viewerModel.$isAuthenticated)
+  const isAuthenticated = useStore(viewerModel.$isAuthenticated);
 
   return (
     <Flex
@@ -32,7 +32,8 @@ export const SearchItem: React.FC<SearchItemProps> = ({
       justifyContent="space-between"
       gap={3}
       p={2}
-      borderRadius={10}>
+      borderRadius={10}
+    >
       <Flex
         cursor="pointer"
         alignItems="center"
@@ -41,7 +42,8 @@ export const SearchItem: React.FC<SearchItemProps> = ({
         onClick={() => {
           searchItemClicked();
           router.push(redirectTo);
-        }}>
+        }}
+      >
         <Box>
           <Image
             src={logo}

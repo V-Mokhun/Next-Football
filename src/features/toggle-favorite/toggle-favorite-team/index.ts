@@ -1,2 +1,2 @@
-export * from "./ui"
-export * as toggleFavoriteTeamModel from "./model"
+export * as toggleFavoriteTeamModel from "./model";
+export * from "./ui";

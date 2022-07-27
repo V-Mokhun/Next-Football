@@ -10,7 +10,7 @@ import React from "react";
 interface SearchModalProps {}
 
 export const SearchModal: React.FC<SearchModalProps> = ({}) => {
-  const isModalOpen = useStore(searchModalModel.$modalOpen)
+  const isModalOpen = useStore(searchModalModel.$modalOpen);
   const searchValue = useStore(searchModel.$search);
 
   const closeModal = useEvent(searchModalModel.closeModal);

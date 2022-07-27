@@ -1,4 +1,4 @@
-import { createEvent } from 'effector'
-import { StaticPageContext } from 'nextjs-effector'
+import { createEvent } from "effector";
+import { StaticPageContext } from "nextjs-effector";
 
-export const pageStarted = createEvent<StaticPageContext>()
+export const pageStarted = createEvent<StaticPageContext>();

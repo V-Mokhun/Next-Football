@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionPanel,
   Skeleton,
-  Stack
+  Stack,
 } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
 import { useRouter } from "next/router";
@@ -19,7 +19,7 @@ interface CountryDropdownItemProps {
   FavoriteComponent: React.ElementType<{
     data: League;
     size: "normal" | "small";
-    isAbsolute?: boolean
+    isAbsolute?: boolean;
   }>;
 }
 
@@ -75,7 +75,11 @@ export const CountryDropdownItem: React.FC<CountryDropdownItemProps> = ({
               }}
               favoriteComponent={
                 isAuthenticated ? (
-                  <FavoriteComponent isAbsolute={true} data={league} size="small" />
+                  <FavoriteComponent
+                    isAbsolute={true}
+                    data={league}
+                    size="small"
+                  />
                 ) : null
               }
             />

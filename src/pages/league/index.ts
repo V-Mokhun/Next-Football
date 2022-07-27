@@ -1,3 +1,2 @@
-export * as leaguePageModel from "./model"
-export { LeaguePage } from "./page"
-
+export * as leaguePageModel from "./model";
+export { LeaguePage } from "./page";

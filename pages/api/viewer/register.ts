@@ -3,7 +3,7 @@ import {
   connectDb,
   hashPassword,
   isEmail,
-  withSessionRoute
+  withSessionRoute,
 } from "@/shared/lib";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -53,7 +53,7 @@ async function registerRoute(req: NextApiRequest, res: NextApiResponse) {
     return res.status(201).json({ success: true, data: viewerData });
   } catch (error) {
     console.log(error);
-    
+
     return res
       .status(500)
       .json({ data: "Something went wrong..", success: false });

@@ -7,7 +7,7 @@ import {
   PopoverTrigger,
   Text,
   useDisclosure,
-  VStack
+  VStack,
 } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
 import React from "react";
@@ -40,7 +40,8 @@ export const Calendar: React.FC<CalendarProps> = ({
           onClick={onToggle}
           py={0}
           borderRadius={0}
-          variant="solid">
+          variant="solid"
+        >
           <CalendarIcon /> <Text ml={2}>{selectedDate.slice(5)}</Text>
         </Button>
       </PopoverTrigger>
@@ -63,7 +64,8 @@ export const Calendar: React.FC<CalendarProps> = ({
                 backgroundColor={
                   date === selectedDate ? "primary.400" : "initial"
                 }
-                variant="solid">
+                variant="solid"
+              >
                 {date.slice(5)}
               </Button>
             ))}

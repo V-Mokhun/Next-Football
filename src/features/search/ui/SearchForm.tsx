@@ -4,7 +4,7 @@ import {
   FormControl,
   FormHelperText,
   Heading,
-  Input
+  Input,
 } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
 import React, { useEffect } from "react";
@@ -57,13 +57,15 @@ export const SearchForm: React.FC<SearchFormProps> = ({
           <Button
             isDisabled={loading}
             onClick={() => leaguesButtonClicked()}
-            variant={searchMode === "leagues" ? "solid" : "outline"}>
+            variant={searchMode === "leagues" ? "solid" : "outline"}
+          >
             Leagues
           </Button>
           <Button
             isDisabled={loading}
             onClick={() => teamsButtonClicked()}
-            variant={searchMode === "teams" ? "solid" : "outline"}>
+            variant={searchMode === "teams" ? "solid" : "outline"}
+          >
             Teams
           </Button>
         </Flex>

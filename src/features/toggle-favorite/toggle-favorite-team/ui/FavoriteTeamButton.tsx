@@ -37,7 +37,8 @@ export function FavoriteTeamButton<T extends Team>({
         buttonClicked({ code, country, logo, founded, id, name, national })
       }
       variant="outline"
-      isLoading={isLoading}>
+      isLoading={isLoading}
+    >
       <StarIcon
         h={size === "normal" ? 5 : 3}
         w={size === "normal" ? 5 : 3}

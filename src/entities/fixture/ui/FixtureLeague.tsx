@@ -9,7 +9,7 @@ import {
   Flex,
   Image,
   Link,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import React from "react";
@@ -42,18 +42,25 @@ export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
             )}
             <Flex alignItems="center" flex="1 1 100%" textAlign="left">
               <Box mr={2}>
-                <Image alt={league.name} src={league.flag || league.logo} w="18px" h="12px" />
+                <Image
+                  alt={league.name}
+                  src={league.flag || league.logo}
+                  w="18px"
+                  h="12px"
+                />
               </Box>
               <Text
                 color={isFavorite ? "yellow.400" : "initial"}
                 mr={1}
-                fontSize="md">
+                fontSize="md"
+              >
                 {league.country}:
               </Text>
               <NextLink href={`${LEAGUE_ROUTE}/${league.id}`} passHref>
                 <Link
                   color={isFavorite ? "yellow.400" : "initial"}
-                  fontSize="md">
+                  fontSize="md"
+                >
                   {league.name}
                 </Link>
               </NextLink>
@@ -61,7 +68,8 @@ export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
             <AccordionButton
               justifyContent="flex-end"
               width="auto"
-              flex="0 1 auto">
+              flex="0 1 auto"
+            >
               {!isExpanded && (
                 <Text whiteSpace="nowrap" fontSize="xs">
                   Show matches ({matchesQuantity})

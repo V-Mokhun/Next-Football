@@ -9,7 +9,7 @@ interface NextDayButtonProps {}
 
 export const NextDayButton: React.FC<NextDayButtonProps> = ({}) => {
   const onNextButtonClick = useEvent(changeDateModel.nextDayButtonClicked);
-  const calendarDisabled = useStore(calendarModel.$calendarDisabled)
+  const calendarDisabled = useStore(calendarModel.$calendarDisabled);
   const isLastDate = useStore(calendarModel.$isLastDate);
 
   return (

@@ -16,7 +16,7 @@ import {
   RegisterResponse,
   RemoveFavoriteLeagueResponse,
   RemoveFavoriteTeamResponse,
-  ViewerRequestBody
+  ViewerRequestBody,
 } from "./models";
 
 const VIEWER_API = "/api/viewer";
@@ -40,7 +40,7 @@ class ViewerApi extends BaseApi {
   async me(cookieValue?: string) {
     try {
       const options: AxiosRequestConfig = {
-        headers: {}
+        headers: {},
       };
 
       if (typeof window === "undefined") {
@@ -48,7 +48,7 @@ class ViewerApi extends BaseApi {
         options.headers!.Cookie = cookieValue
           ? `${COOKIE_NAME}=${cookieValue};`
           : "";
-      } 
+      }
 
       const { data } = await apiInstance.get<MeResponse>(ME_URL, options);
 

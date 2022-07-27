@@ -15,14 +15,14 @@ sample({
     selectedDate: calendarModel.$selectedDate,
     allDates: calendarModel.$allDates,
   },
-  filter: calendarModel.$isFirstDate.map(isFirst => !isFirst),
+  filter: calendarModel.$isFirstDate.map((isFirst) => !isFirst),
   fn: ({ selectedDate, allDates }) => {
     const selectedDateIdx = allDates.findIndex((date) => date === selectedDate);
 
-		return allDates[selectedDateIdx - 1]	
+    return allDates[selectedDateIdx - 1];
   },
   target: calendarModel.$selectedDate,
-})
+});
 
 sample({
   clock: nextDayButtonClicked,
@@ -30,11 +30,11 @@ sample({
     selectedDate: calendarModel.$selectedDate,
     allDates: calendarModel.$allDates,
   },
-  filter: calendarModel.$isLastDate.map(isLast => !isLast),
+  filter: calendarModel.$isLastDate.map((isLast) => !isLast),
   fn: ({ selectedDate, allDates }) => {
     const selectedDateIdx = allDates.findIndex((date) => date === selectedDate);
 
-		return allDates[selectedDateIdx + 1]	
+    return allDates[selectedDateIdx + 1];
   },
   target: calendarModel.$selectedDate,
 });

@@ -15,7 +15,8 @@ export const SettingsItem: React.FC<SettingsItemProps> = ({}) => {
       closeOnSelect
       display="flex"
       alignItems="center"
-      gap={2}>
+      gap={2}
+    >
       <SettingsIcon />
       <Text flex="1 1 auto">Settings</Text>
       <ArrowRightIcon />

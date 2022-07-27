@@ -1,8 +1,7 @@
-import React from 'react';
+import React from "react";
 
-interface LeaguePageProps {
-}
+interface LeaguePageProps {}
 
 export const LeaguePage: React.FC<LeaguePageProps> = ({}) => {
-		return (<div>league page</div>);
-}
+  return <div>league page</div>;
+};

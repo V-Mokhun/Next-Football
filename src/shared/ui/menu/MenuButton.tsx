@@ -21,7 +21,7 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ isActive }) => {
       isActive={isActive}
       as={IconButton}
       icon={isActive ? <CloseIcon /> : <HamburgerIcon />}
-      _hover={{ 
+      _hover={{
         backgroundColor: "whiteAlpha.400",
       }}
       _active={{

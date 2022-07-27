@@ -23,7 +23,8 @@ export const ChangePasswordButton: React.FC<ChangePasswordButtonProps> = ({
       }}
       display="flex"
       alignItems="center"
-      gap={4}>
+      gap={4}
+    >
       <LockIcon />
       <Text textAlign="left" flex="1 1 auto">
         Change password

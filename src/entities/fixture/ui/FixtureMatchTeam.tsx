@@ -21,7 +21,9 @@ export const FixtureMatchTeam: React.FC<FixtureMatchTeamProps> = ({
           {team.name}
         </Text>
       </Flex>
-      <Text fontWeight={700} fontSize="xs">{goals ?? "-"}</Text>
+      <Text fontWeight={700} fontSize="xs">
+        {goals ?? "-"}
+      </Text>
     </Flex>
   );
 };

@@ -1,2 +1,2 @@
-export * as countriesModel from "./model"
-export * from "./ui"
+export * as countriesModel from "./model";
+export * from "./ui";

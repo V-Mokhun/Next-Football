@@ -22,11 +22,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ changeAuthMode }) => {
   const errorMessage = useStore(loginModel.$error);
   const setEmail = useEvent(loginModel.setEmail);
   const setPassword = useEvent(loginModel.setPassword);
-  const formSubmitted = useEvent(loginModel.formSubmitted)
+  const formSubmitted = useEvent(loginModel.formSubmitted);
 
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    formSubmitted()
+    formSubmitted();
   };
 
   return (
@@ -50,7 +50,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ changeAuthMode }) => {
         disabled={isInvalid || isLoading}
         colorScheme="blue"
         variant="outline"
-        type="submit">
+        type="submit"
+      >
         Log in
       </Button>
       {errorMessage && <AlertMessage error={errorMessage} />}
@@ -58,7 +59,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ changeAuthMode }) => {
         onClick={changeAuthMode}
         variant="link"
         textDecoration="underline"
-        _hover={{ textDecoration: "none" }}>
+        _hover={{ textDecoration: "none" }}
+      >
         Register now
       </Button>
     </Flex>

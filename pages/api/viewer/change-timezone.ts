@@ -30,10 +30,9 @@ async function changeTimezoneRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectDb();
 
-    const viewer = await Viewer.findByIdAndUpdate(
-      req.session.viewer._id,
-      { $set: { timezone: body.timezone } },
-    ).exec();
+    const viewer = await Viewer.findByIdAndUpdate(req.session.viewer._id, {
+      $set: { timezone: body.timezone },
+    }).exec();
 
     if (!viewer) {
       throw new Error();

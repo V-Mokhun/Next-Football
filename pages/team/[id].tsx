@@ -17,7 +17,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // const paths = response.map(({ team }) => ({
   //   params: { id: String(team.id) },
   // }));
-  const paths: any[] = []
+  const paths: any[] = [];
 
   return {
     paths,

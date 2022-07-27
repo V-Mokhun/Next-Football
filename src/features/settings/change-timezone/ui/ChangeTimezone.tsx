@@ -22,7 +22,8 @@ export const ChangeTimezone: React.FC<ChangeTimezoneProps> = ({}) => {
       value={activeTimezone}
       onChange={(e) => {
         changeTimezone(e.target.value);
-      }}>
+      }}
+    >
       {timezones.length > 0 &&
         timezones.map((timezone) => (
           <option key={timezone} value={timezone}>

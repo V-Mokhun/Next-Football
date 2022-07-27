@@ -30,7 +30,8 @@ export const ViewerButton: React.FC<ViewerButtonProps> = React.forwardRef(
         }}
         _active={{
           backgroundColor: "whiteAlpha.400",
-        }}>
+        }}
+      >
         <Avatar size="xs" name={viewer?.email} />
         <Text>{isAuthenticated ? viewer?.email : "Log in"}</Text>
       </Button>

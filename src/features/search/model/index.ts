@@ -6,7 +6,7 @@ import {
   createStore,
   forward,
   restore,
-  sample
+  sample,
 } from "effector";
 
 type SearchModeStore = "leagues" | "teams";
@@ -16,8 +16,8 @@ export const changeSearchMode = createEvent<SearchModeStore>();
 export const resetItems = createEvent();
 export const leaguesButtonClicked = createEvent("leagues");
 export const teamsButtonClicked = createEvent("teams");
-export const onFetchLeagues = createEvent<string>()
-export const onFetchTeams = createEvent<string>()
+export const onFetchLeagues = createEvent<string>();
+export const onFetchTeams = createEvent<string>();
 
 sample({
   clock: leaguesButtonClicked,
@@ -47,15 +47,15 @@ export const fetchTeamsFx = createEffect<string, GetTeamsResponse, Error>(
 
 forward({
   from: onFetchLeagues,
-  to: fetchLeaguesFx
-})
+  to: fetchLeaguesFx,
+});
 
 forward({
   from: onFetchTeams,
-  to: fetchTeamsFx
-})
+  to: fetchTeamsFx,
+});
 
-export const $search = restore(changeSearch, "")
+export const $search = restore(changeSearch, "");
 export const $searchMode = restore(changeSearchMode, "leagues");
 
 export const $leagues = createStore<GetLeaguesResponse["response"]>([])
