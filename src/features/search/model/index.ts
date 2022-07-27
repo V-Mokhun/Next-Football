@@ -1,4 +1,9 @@
-import { GetLeaguesResponse, GetTeamsResponse, rapidApi } from "@/shared/api";
+import {
+  GetLeaguesResponse,
+  GetTeamsResponse,
+  LeagueResponse,
+  rapidApi,
+} from "@/shared/api";
 import {
   combine,
   createEffect,
@@ -58,7 +63,7 @@ forward({
 export const $search = restore(changeSearch, "");
 export const $searchMode = restore(changeSearchMode, "leagues");
 
-export const $leagues = createStore<GetLeaguesResponse["response"]>([])
+export const $leagues = createStore<LeagueResponse[]>([])
   .on(fetchLeaguesFx.doneData, (_, { response }) => response.slice(0, 20))
   .on(resetItems, (leagues) => {
     if (leagues.length > 0) return [];

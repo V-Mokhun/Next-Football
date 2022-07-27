@@ -11,12 +11,15 @@ export class BaseApi {
 
   protected makeUrl(
     apiUrl: string,
-    paramsObj: { [key: string]: string | number }
+    paramsObj: { [key: string]: string | number | boolean }
   ) {
     let url = `${apiUrl}?`;
     const params: { [key: string]: string } = {};
     for (const [key, value] of Object.entries(paramsObj)) {
-      params[key] = typeof value === "number" ? `${value}` : value;
+      params[key] =
+        typeof value === "number" || typeof value === "boolean"
+          ? `${value}`
+          : value;
     }
     const queries = new URLSearchParams(params);
 

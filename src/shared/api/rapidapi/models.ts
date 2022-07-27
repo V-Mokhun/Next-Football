@@ -31,7 +31,7 @@ interface Venue {
 }
 
 interface Fixtures {
-  event: boolean;
+  events: boolean;
   lineups: boolean;
   statistics_fixtures: boolean;
   statistics_players: boolean;
@@ -41,7 +41,10 @@ interface Coverage {
   standings: boolean;
   players: boolean;
   top_scorers: boolean;
+  top_assists: boolean;
+  top_cards: boolean;
   predictions: boolean;
+  injuries: boolean;
   odds: boolean;
   fixtures: Fixtures;
 }
@@ -64,10 +67,12 @@ export interface Team {
   logo: string;
 }
 
+export type LeagueType = "League" | "Cup";
 export interface League {
   id: number;
   name: string;
   logo: string;
+  type?: LeagueType;
 }
 
 export interface Country {
@@ -119,6 +124,7 @@ export type GetLeaguesResponse = ApiResponse & {
     seasons: Season[];
   }[];
 };
+export type LeagueResponse = GetLeaguesResponse["response"][0];
 export type LeaguesQueryParams = {
   id?: number;
   name?: string;
@@ -126,6 +132,7 @@ export type LeaguesQueryParams = {
   code?: string;
   season?: number;
   team?: number;
+  current?: boolean;
 };
 
 export type GetTeamsResponse = ApiResponse & {

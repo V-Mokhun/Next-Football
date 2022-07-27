@@ -13,8 +13,4 @@ const Home: NextPage<HomeProps> = () => {
 
 Home.getInitialProps = createGIP({});
 
-// export const getServerSideProps = createGSSP({
-//   pageEvent: homePageModel.pageStarted,
-// });
-
 export default Home;

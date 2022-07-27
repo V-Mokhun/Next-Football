@@ -25,6 +25,7 @@ export const $isLiveFixtures =
 export const $buttonsDisabled = createStore<boolean>(false);
 
 export const $fixtures = createStore<{ [key: string]: FixtureResponse[] }[]>([
+  // TODO: Remove
   {
     "UEFA Champions League": [
       {
