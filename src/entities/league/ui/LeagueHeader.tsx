@@ -1,6 +1,16 @@
 import { League } from "@/shared/api";
-import { Box, Flex, Heading, Img, Text } from "@chakra-ui/react";
+import { LEAGUE_MATCHES_ROUTE, LEAGUE_STANDINGS_ROUTE } from "@/shared/lib";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Flex,
+  Heading,
+  Img,
+  Text,
+} from "@chakra-ui/react";
 import { useStore } from "effector-react";
+import { useRouter } from "next/router";
 import React from "react";
 import { leagueModel } from "..";
 
@@ -12,6 +22,7 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
   FavoriteComponent,
 }) => {
   const leagueData = useStore(leagueModel.$league);
+  const router = useRouter();
 
   if (!leagueData) {
     return null;
@@ -29,7 +40,15 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
           {country.name}
         </Text>
       </Flex>
-      <Flex alignItems="center" gap={4}>
+      <Flex
+        borderBottomWidth={1}
+        borderBottomStyle="solid"
+        borderBottomColor="main.400"
+        alignItems="center"
+        pb={4}
+        mb={4}
+        gap={4}
+      >
         <Box>
           <Img
             alt={league.name}
@@ -51,6 +70,41 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
           )}/${season.end.slice(0, 4)}`}</Text>
         </Box>
       </Flex>
+      <ButtonGroup mb={2} gap={4}>
+        <Button
+          isActive={router.asPath.endsWith(String(league.id))}
+          variant="link"
+          _active={{
+            color: "primary.400",
+          }}
+        >
+          General
+        </Button>
+        <Button
+          onClick={() =>
+            router.push(`${router.asPath}/${LEAGUE_MATCHES_ROUTE}`)
+          }
+          isActive={router.asPath.endsWith(LEAGUE_MATCHES_ROUTE)}
+          variant="link"
+          _active={{
+            color: "primary.400",
+          }}
+        >
+          Matches
+        </Button>
+        <Button
+          onClick={() =>
+            router.push(`${router.asPath}/${LEAGUE_STANDINGS_ROUTE}`)
+          }
+          isActive={router.asPath.endsWith(LEAGUE_STANDINGS_ROUTE)}
+          variant="link"
+          _active={{
+            color: "primary.400",
+          }}
+        >
+          Standings
+        </Button>
+      </ButtonGroup>
     </Box>
   );
 };

@@ -1,7 +1,5 @@
-import { leagueModel } from "@/entities/league";
 import { LeaguePage, leaguePageModel } from "@/pages/league";
 import { appStarted, createGSP } from "@/pages/shared";
-import { rapidApi } from "@/shared/api";
 import { GetStaticPaths, NextPage } from "next";
 import { usePageEvent } from "nextjs-effector";
 

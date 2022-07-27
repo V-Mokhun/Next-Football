@@ -40,4 +40,3 @@ export const $league = restore<LeagueResponse | null>(leagueSet, {
     },
   ],
 });
-// $league.watch((s) => console.log(s));
