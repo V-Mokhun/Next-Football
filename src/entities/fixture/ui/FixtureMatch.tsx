@@ -1,5 +1,5 @@
 import { FixtureResponse, FixtureStatus } from "@/shared/api";
-import { getHoursFromDate, MATCH_ROUTE } from "@/shared/lib";
+import { convertToReadableDate, MATCH_ROUTE } from "@/shared/lib";
 import { Box, Flex, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
@@ -7,9 +7,13 @@ import { FixtureMatchTeam } from "./FixtureMatchTeam";
 
 interface FixtureMatchProps {
   fixtureData: FixtureResponse;
+  hoursOnlyDate?: boolean;
 }
 
-export const FixtureMatch: React.FC<FixtureMatchProps> = ({ fixtureData }) => {
+export const FixtureMatch: React.FC<FixtureMatchProps> = ({
+  fixtureData,
+  hoursOnlyDate = true,
+}) => {
   const { teams, fixture, goals } = fixtureData;
   const router = useRouter();
   const { colorMode } = useColorMode();
@@ -21,7 +25,7 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({ fixtureData }) => {
   } else if (fixture.status.short === FixtureStatus.HT) {
     matchDateText = "Break";
   } else if (fixture.status.elapsed == null) {
-    matchDateText = getHoursFromDate(fixture.date);
+    matchDateText = convertToReadableDate(fixture.date, hoursOnlyDate);
   } else {
     matchDateText = `${fixture.status.elapsed}'`;
   }
@@ -47,7 +51,7 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({ fixtureData }) => {
               ? "primary.500"
               : "initial"
           }
-          fontSize="sm"
+          fontSize="xs"
         >
           {matchDateText}
         </Text>

@@ -31,7 +31,7 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
   const [season] = seasons;
 
   return (
-    <Box borderRadius="8px" p="12px" backgroundColor="main.500">
+    <Box mb={4} borderRadius="8px" p="12px" backgroundColor="main.500">
       <Flex mb={4} alignItems="center" gap={2}>
         <Box>
           <Img w={18} h={12} alt={country.name} src={country.flag} />

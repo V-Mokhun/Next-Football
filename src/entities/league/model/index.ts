@@ -1,7 +1,30 @@
-import { LeagueResponse } from "@/shared/api";
-import { createEvent, restore } from "effector";
+import {
+  FixtureResponse,
+  FixturesQueryParams,
+  GetFixturesResponse,
+  LeagueResponse,
+  rapidApi,
+} from "@/shared/api";
+import {
+  createEffect,
+  createEvent,
+  createStore,
+  restore,
+  sample,
+} from "effector";
 
 export const leagueSet = createEvent<LeagueResponse | null>();
+export const leagueNextFixturesUpdated = createEvent<number>();
+
+export const fetchLeagueFixturesFx = createEffect<
+  FixturesQueryParams,
+  GetFixturesResponse["response"],
+  Error
+>(async (params) => {
+  const { response } = await rapidApi.fixturesApi.getFixtures(params);
+
+  return response;
+});
 
 export const $league = restore<LeagueResponse | null>(leagueSet, {
   league: {
@@ -39,4 +62,13 @@ export const $league = restore<LeagueResponse | null>(leagueSet, {
       },
     },
   ],
+});
+export const $leagueNextFixtures = restore(leagueNextFixturesUpdated, 1);
+export const $leagueFixtures = createStore<FixtureResponse[]>([]);
+
+$leagueFixtures.watch((s) => console.log(s));
+
+sample({
+  clock: fetchLeagueFixturesFx.doneData,
+  target: $leagueFixtures,
 });

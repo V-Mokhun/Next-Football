@@ -176,6 +176,10 @@ export type FixturesQueryParams = {
   from?: string;
   to?: string;
   timezone?: string;
+  next?: number;
+  last?: number;
+  season?: number;
+  round?: number;
 };
 export type FixtureResponse = GetFixturesResponse["response"][0];
 

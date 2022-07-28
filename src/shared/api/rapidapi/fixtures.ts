@@ -11,6 +11,7 @@ class FixturesApi extends BaseApi {
       const url = this.makeUrl(FIXTURES_URL, params);
 
       const { data } = await apiInstance.get<GetFixturesResponse>(url);
+      console.log("DATA", data);
 
       return data;
     } catch (error) {
