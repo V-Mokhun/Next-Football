@@ -32,12 +32,10 @@ sample({
   filter: ({ leagueFixture, timezone }) =>
     Boolean(leagueFixture) || Boolean(timezone),
   fn: ({ timezone, leagueFixture, rounds }): FixturesQueryParams => {
-    if (!leagueFixture) return {};
-
     return {
       timezone,
-      league: leagueFixture.league.id,
-      season: leagueFixture.seasons[0].year,
+      league: leagueFixture!.league.id,
+      season: leagueFixture!.seasons[0].year,
       round: rounds[0],
     };
   },

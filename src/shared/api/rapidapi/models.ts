@@ -98,8 +98,43 @@ export interface Fixture {
   };
 }
 
+export interface StandingTeamStatistics {
+  played: number | null;
+  win: number | null;
+  draw: number | null;
+  lose: number | null;
+  goals: {
+    for: number | null;
+    against: number | null;
+  };
+}
+
+export interface Standing {
+  rank: number;
+  team: Pick<Team, "id" | "name" | "logo">;
+  points: number;
+  goalsDiff: number;
+  group: string;
+  form: null | string;
+  status: string;
+  description: string | null;
+  all: StandingTeamStatistics;
+  home: StandingTeamStatistics;
+  away: StandingTeamStatistics;
+  update: string;
+}
+
 export type FixtureTeam = Pick<Team, "id" | "name" | "logo"> & {
   winner: boolean | null;
+};
+
+export type LeagueStanding = {
+  league: Omit<League, "type"> & {
+    country: string;
+    flag: string;
+    season: number;
+    standings: Standing[][];
+  };
 };
 
 type ApiResponse = {
@@ -150,6 +185,15 @@ export type RoundsQueryParams = {
   league: number;
   season: number;
   current?: boolean;
+};
+
+export type GetStandingsResponse = ApiResponse & {
+  response: LeagueStanding[];
+};
+export type StandingsQueryParams = {
+  league?: number;
+  season: number;
+  team?: number;
 };
 
 export type GetFixturesResponse = ApiResponse & {

@@ -4,9 +4,12 @@ import {
   FixtureStatus,
   GetFixturesResponse,
   GetRoundsResponse,
+  GetStandingsResponse,
   LeagueResponse,
   rapidApi,
   RoundsQueryParams,
+  Standing,
+  StandingsQueryParams,
 } from "@/shared/api";
 import {
   createEffect,
@@ -34,6 +37,16 @@ export const fetchLeagueRoundsFx = createEffect<
   Error
 >(async (params) => {
   const { response } = await rapidApi.roundsApi.getRounds(params);
+
+  return response;
+});
+
+export const fetchLeagueStandingsFx = createEffect<
+  StandingsQueryParams,
+  GetStandingsResponse["response"],
+  Error
+>(async (params) => {
+  const { response } = await rapidApi.standingsApi.getStandings(params);
 
   return response;
 });
@@ -748,6 +761,908 @@ export const $leagueFixtures = createStore<FixtureResponse[]>([
     },
   },
 ]);
+export const $leagueStandings = createStore<Standing[]>([
+  {
+    rank: 1,
+    team: {
+      id: 548,
+      name: "Real Sociedad",
+      logo: "https://media.api-sports.io/football/teams/548.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 2,
+    team: {
+      id: 797,
+      name: "Elche",
+      logo: "https://media.api-sports.io/football/teams/797.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 3,
+    team: {
+      id: 538,
+      name: "Celta Vigo",
+      logo: "https://media.api-sports.io/football/teams/538.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 4,
+    team: {
+      id: 724,
+      name: "Cadiz",
+      logo: "https://media.api-sports.io/football/teams/724.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 5,
+    team: {
+      id: 728,
+      name: "Rayo Vallecano",
+      logo: "https://media.api-sports.io/football/teams/728.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 6,
+    team: {
+      id: 541,
+      name: "Real Madrid",
+      logo: "https://media.api-sports.io/football/teams/541.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 7,
+    team: {
+      id: 533,
+      name: "Villarreal",
+      logo: "https://media.api-sports.io/football/teams/533.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 8,
+    team: {
+      id: 529,
+      name: "Barcelona",
+      logo: "https://media.api-sports.io/football/teams/529.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 9,
+    team: {
+      id: 530,
+      name: "Atletico Madrid",
+      logo: "https://media.api-sports.io/football/teams/530.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 10,
+    team: {
+      id: 536,
+      name: "Sevilla",
+      logo: "https://media.api-sports.io/football/teams/536.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 11,
+    team: {
+      id: 798,
+      name: "Mallorca",
+      logo: "https://media.api-sports.io/football/teams/798.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 12,
+    team: {
+      id: 723,
+      name: "Almeria",
+      logo: "https://media.api-sports.io/football/teams/723.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 13,
+    team: {
+      id: 532,
+      name: "Valencia",
+      logo: "https://media.api-sports.io/football/teams/532.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 14,
+    team: {
+      id: 531,
+      name: "Athletic Club",
+      logo: "https://media.api-sports.io/football/teams/531.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 15,
+    team: {
+      id: 540,
+      name: "Espanyol",
+      logo: "https://media.api-sports.io/football/teams/540.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 16,
+    team: {
+      id: 543,
+      name: "Real Betis",
+      logo: "https://media.api-sports.io/football/teams/543.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 17,
+    team: {
+      id: 546,
+      name: "Getafe",
+      logo: "https://media.api-sports.io/football/teams/546.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 18,
+    team: {
+      id: 720,
+      name: "Valladolid",
+      logo: "https://media.api-sports.io/football/teams/720.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 19,
+    team: {
+      id: 727,
+      name: "Osasuna",
+      logo: "https://media.api-sports.io/football/teams/727.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+  {
+    rank: 20,
+    team: {
+      id: 547,
+      name: "Girona",
+      logo: "https://media.api-sports.io/football/teams/547.png",
+    },
+    points: 0,
+    goalsDiff: 0,
+    group: "La Liga",
+    form: null,
+    status: "same",
+    description: null,
+    all: {
+      played: 0,
+      win: 0,
+      draw: 0,
+      lose: 0,
+      goals: {
+        for: 0,
+        against: 0,
+      },
+    },
+    home: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    away: {
+      played: null,
+      win: null,
+      draw: null,
+      lose: null,
+      goals: {
+        for: null,
+        against: null,
+      },
+    },
+    update: "2022-07-14T00:00:00+00:00",
+  },
+]);
 
 sample({
   clock: fetchLeagueFixturesFx.doneData,
@@ -762,4 +1677,13 @@ sample({
 sample({
   clock: fetchLeagueRoundsFx.doneData,
   target: $leagueRounds,
+});
+
+sample({
+  clock: fetchLeagueStandingsFx.doneData,
+  filter: (standings) => Boolean(standings[0].league.standings[0]),
+  fn: (standings): Standing[] => {
+    return standings[0].league.standings[0];
+  },
+  target: $leagueStandings,
 });

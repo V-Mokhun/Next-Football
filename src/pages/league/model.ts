@@ -8,5 +8,6 @@ sample({
   target: [
     // leagueMatchesModel.fetchLeagueFixtures,
     // leagueMatchesModel.fetchLeagueRounds,
+    // leagueStandingsModel.fetchLeagueStandings,
   ],
 });
