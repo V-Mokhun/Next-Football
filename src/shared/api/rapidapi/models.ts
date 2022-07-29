@@ -143,6 +143,15 @@ export type GetCountriesResponse = ApiResponse & {
   response: Country[];
 };
 
+export type GetRoundsResponse = ApiResponse & {
+  response: string[];
+};
+export type RoundsQueryParams = {
+  league: number;
+  season: number;
+  current?: boolean;
+};
+
 export type GetFixturesResponse = ApiResponse & {
   response: {
     fixture: Fixture;
@@ -179,7 +188,7 @@ export type FixturesQueryParams = {
   next?: number;
   last?: number;
   season?: number;
-  round?: number;
+  round?: string;
 };
 export type FixtureResponse = GetFixturesResponse["response"][0];
 
