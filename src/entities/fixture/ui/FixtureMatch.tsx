@@ -1,12 +1,19 @@
 import { FixtureResponse, FixtureStatus } from "@/shared/api";
 import { convertToReadableDate, MATCH_ROUTE } from "@/shared/lib";
-import { Box, Flex, Link, Text, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Link,
+  Skeleton,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import NextLink from "next/link";
 import React from "react";
 import { FixtureMatchTeam } from "./FixtureMatchTeam";
 
 interface FixtureMatchProps {
-  fixtureData: FixtureResponse;
+  fixtureData: FixtureResponse | null;
   hoursOnlyDate?: boolean;
 }
 
@@ -14,8 +21,13 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({
   fixtureData,
   hoursOnlyDate = true,
 }) => {
-  const { teams, fixture, goals } = fixtureData;
   const { colorMode } = useColorMode();
+
+  if (!fixtureData) {
+    return <Skeleton width="100%" />;
+  }
+
+  const { teams, fixture, goals } = fixtureData;
 
   let matchDateText = null;
 

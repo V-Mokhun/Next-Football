@@ -41,8 +41,6 @@ sample({
   clock: fixtureModel.fetchFixturesFx.doneData,
   source: viewerModel.$viewerFavoriteLeagues,
   fn: (favoriteLeagues, fixtures) => {
-    console.log(fixtures);
-
     const sortedFixtures: { [key: string]: FixtureResponse[] }[] = [];
 
     for (const fixture of fixtures) {

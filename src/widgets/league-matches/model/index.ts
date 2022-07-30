@@ -9,12 +9,13 @@ sample({
   clock: fetchLeagueRounds,
   source: {
     leagueFixture: leagueModel.$league,
+    isCurrent: leagueModel.$isCurrentRound,
   },
   filter: ({ leagueFixture }) => Boolean(leagueFixture),
-  fn: ({ leagueFixture }): RoundsQueryParams => ({
+  fn: ({ leagueFixture, isCurrent }): RoundsQueryParams => ({
     league: leagueFixture!.league.id,
     season: leagueFixture!.seasons[0].year,
-    current: true,
+    current: isCurrent,
   }),
   target: leagueModel.fetchLeagueRoundsFx,
 });

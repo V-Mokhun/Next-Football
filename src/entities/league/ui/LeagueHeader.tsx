@@ -1,14 +1,10 @@
 import { League } from "@/shared/api";
-import { LEAGUE_MATCHES_ROUTE, LEAGUE_STANDINGS_ROUTE } from "@/shared/lib";
 import {
-  Box,
-  Button,
-  ButtonGroup,
-  Flex,
-  Heading,
-  Img,
-  Text,
-} from "@chakra-ui/react";
+  LEAGUE_MATCHES_ROUTE,
+  LEAGUE_ROUTE,
+  LEAGUE_STANDINGS_ROUTE,
+} from "@/shared/lib";
+import { Box, Button, Flex, Heading, Img, Text } from "@chakra-ui/react";
 import { useStore } from "effector-react";
 import { useRouter } from "next/router";
 import React from "react";
@@ -70,9 +66,10 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
           )}/${season.end.slice(0, 4)}`}</Text>
         </Box>
       </Flex>
-      <ButtonGroup mb={2} gap={4}>
+      <Flex alignItems="center" mb={2} gap={4}>
         <Button
           isActive={router.asPath.endsWith(String(league.id))}
+          onClick={() => router.push(`${LEAGUE_ROUTE}/${league.id}`)}
           variant="link"
           _active={{
             color: "primary.400",
@@ -82,7 +79,7 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
         </Button>
         <Button
           onClick={() =>
-            router.push(`${router.asPath}/${LEAGUE_MATCHES_ROUTE}`)
+            router.push(`${LEAGUE_ROUTE}/${league.id}/${LEAGUE_MATCHES_ROUTE}`)
           }
           isActive={router.asPath.endsWith(LEAGUE_MATCHES_ROUTE)}
           variant="link"
@@ -94,7 +91,9 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
         </Button>
         <Button
           onClick={() =>
-            router.push(`${router.asPath}/${LEAGUE_STANDINGS_ROUTE}`)
+            router.push(
+              `${LEAGUE_ROUTE}/${league.id}/${LEAGUE_STANDINGS_ROUTE}`
+            )
           }
           isActive={router.asPath.endsWith(LEAGUE_STANDINGS_ROUTE)}
           variant="link"
@@ -104,7 +103,7 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
         >
           Standings
         </Button>
-      </ButtonGroup>
+      </Flex>
     </Box>
   );
 };

@@ -1,15 +1,22 @@
 import { FixtureMatch } from "@/entities/fixture";
 import { leagueModel } from "@/entities/league";
-import { Box, Button, Flex, Heading } from "@chakra-ui/react";
-import { useEvent, useList } from "effector-react";
+import { LEAGUE_MATCHES_ROUTE } from "@/shared/lib";
+import { Box, Flex, Heading, Link } from "@chakra-ui/react";
+import { useList } from "effector-react";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
-interface LeagueMatchesProps {}
+interface LeagueCurrentMatchesProps {}
 
-export const LeagueMatches: React.FC<LeagueMatchesProps> = ({}) => {
-  const moreMatchesClicked = useEvent(leagueModel.moreMatchesClicked);
+export const LeagueCurrentMatches: React.FC<
+  LeagueCurrentMatchesProps
+> = ({}) => {
+  const router = useRouter();
   const list = useList(leagueModel.$leagueFixtures, {
-    fn: (leagueFixture) => {
+    fn: (leagueFixture, index) => {
+      if (index !== 0) return null;
+
       const roundName = Object.keys(leagueFixture)[0];
       const matches = leagueFixture[roundName].map((matchFixture) => (
         <FixtureMatch
@@ -41,14 +48,11 @@ export const LeagueMatches: React.FC<LeagueMatchesProps> = ({}) => {
     <Box mb={4} borderRadius="8px" p="12px" backgroundColor="main.500">
       {list}
       <Flex justifyContent="center" mt={3} mb={1}>
-        <Button
-          onClick={moreMatchesClicked}
-          variant="link"
-          fontWeight={700}
-          fontSize="sm"
-        >
-          See more matches
-        </Button>
+        <NextLink href={`${router.asPath}/${LEAGUE_MATCHES_ROUTE}`} passHref>
+          <Link fontWeight={700} fontSize="sm">
+            See more matches
+          </Link>
+        </NextLink>
       </Flex>
     </Box>
   );

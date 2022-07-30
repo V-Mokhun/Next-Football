@@ -1,5 +1,7 @@
+import { leagueModel } from "@/entities/league";
 import { LeaguePage, leaguePageModel } from "@/pages/league";
 import { appStarted, createGSP } from "@/pages/shared";
+import { setLeague } from "@/shared/lib";
 import { GetStaticPaths, NextPage } from "next";
 import { usePageEvent } from "nextjs-effector";
 
@@ -30,32 +32,11 @@ export const getStaticProps = createGSP({
   async customize({ context }) {
     const params = context.params;
 
-    if (!params || !params.id) {
-      return {
-        notFound: true,
-      };
-    }
-
-    const id = params.id as string;
-    const intId = parseInt(id, 10);
-
-    // const { response } = await rapidApi.leaguesApi.getLeagues({
-    //   id: intId,
-    //   current: true,
-    // });
-    // const [league] = response;
-
-    // if (!league) {
-    //   return {
-    //     notFound: true,
-    //   };
-    // }
-
-    // leagueModel.leagueSet(league);
+    // await setLeague(params, leagueModel.leagueSet);
 
     return {
       props: {},
-      revalidate: 60,
+      revalidate: 300,
     };
   },
 });
