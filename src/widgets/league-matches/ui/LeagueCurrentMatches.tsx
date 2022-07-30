@@ -1,7 +1,7 @@
 import { FixtureMatch } from "@/entities/fixture";
 import { leagueModel } from "@/entities/league";
 import { LEAGUE_MATCHES_ROUTE } from "@/shared/lib";
-import { Box, Flex, Heading, Link } from "@chakra-ui/react";
+import { Box, Flex, Heading, Link, Text } from "@chakra-ui/react";
 import { useList } from "effector-react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -46,14 +46,23 @@ export const LeagueCurrentMatches: React.FC<
 
   return (
     <Box mb={4} borderRadius="8px" p="12px" backgroundColor="main.500">
-      {list}
-      <Flex justifyContent="center" mt={3} mb={1}>
-        <NextLink href={`${router.asPath}/${LEAGUE_MATCHES_ROUTE}`} passHref>
-          <Link fontWeight={700} fontSize="sm">
-            See more matches
-          </Link>
-        </NextLink>
-      </Flex>
+      {Array.isArray(list) && list.length < 1 ? (
+        <Text textAlign="center">No matches found.</Text>
+      ) : (
+        <>
+          {list}
+          <Flex justifyContent="center" mt={3} mb={1}>
+            <NextLink
+              href={`${router.asPath}/${LEAGUE_MATCHES_ROUTE}`}
+              passHref
+            >
+              <Link fontWeight={700} fontSize="sm">
+                See more matches
+              </Link>
+            </NextLink>
+          </Flex>
+        </>
+      )}
     </Box>
   );
 };

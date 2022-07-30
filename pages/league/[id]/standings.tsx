@@ -25,12 +25,7 @@ export const getStaticProps = createGSP({
   async customize({ context }) {
     const params = context.params;
 
-    // await checkLeagueExists(params);
-
-    return {
-      props: {},
-      revalidate: 600,
-    };
+    return await checkLeagueExists(params);
   },
 });
 

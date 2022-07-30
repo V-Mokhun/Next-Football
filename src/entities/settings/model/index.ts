@@ -4,7 +4,7 @@ import {
   createEvent,
   createStore,
   forward,
-  guard,
+  sample,
 } from "effector";
 
 interface SettingsStore {
@@ -12,12 +12,14 @@ interface SettingsStore {
   timezoneError: string;
 }
 
-export const fetchTimezonesFx = createEffect<void, GetTimezonesResponse, Error>(
-  async () => {
-    const response = await rapidApi.settingsApi.getTimezones();
-    return response;
-  }
-);
+export const fetchTimezonesFx = createEffect<
+  void,
+  GetTimezonesResponse["response"],
+  Error
+>(async () => {
+  const { response } = await rapidApi.settingsApi.getTimezones();
+  return response;
+});
 
 export const openModal = createEvent();
 export const closeModal = createEvent();
@@ -28,11 +30,11 @@ export const $settings = createStore<SettingsStore>({
   timezoneError: "",
 })
   .on(fetchTimezonesFx.doneData, (store, response) => ({
-    ...store,
-    timezones: response.response,
+    timezoneError: "",
+    timezones: response,
   }))
   .on(fetchTimezonesFx.failData, (store, error) => ({
-    ...store,
+    timezones: [],
     timezoneError: error.message,
   }));
 
@@ -49,7 +51,7 @@ forward({
 
 const $modalOpenedCount = createStore(0).on(openModal, (count) => count + 1);
 
-guard({
+sample({
   clock: openModal,
   source: $modalOpenedCount,
   filter: (count) => count <= 1,

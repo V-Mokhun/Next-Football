@@ -36,19 +36,23 @@ sample({
   target: changeSearchMode,
 });
 
-export const fetchLeaguesFx = createEffect<string, GetLeaguesResponse, Error>(
-  async (query) => {
-    const response = await rapidApi.searchApi.searchLeagues(query);
-    return response;
-  }
-);
+export const fetchLeaguesFx = createEffect<
+  string,
+  GetLeaguesResponse["response"],
+  Error
+>(async (query) => {
+  const { response } = await rapidApi.searchApi.searchLeagues(query);
+  return response;
+});
 
-export const fetchTeamsFx = createEffect<string, GetTeamsResponse, Error>(
-  async (query) => {
-    const response = await rapidApi.searchApi.searchTeams(query);
-    return response;
-  }
-);
+export const fetchTeamsFx = createEffect<
+  string,
+  GetTeamsResponse["response"],
+  Error
+>(async (query) => {
+  const { response } = await rapidApi.searchApi.searchTeams(query);
+  return response;
+});
 
 forward({
   from: onFetchLeagues,
@@ -62,16 +66,20 @@ forward({
 
 export const $search = restore(changeSearch, "");
 export const $searchMode = restore(changeSearchMode, "leagues");
+export const $searchError = createStore("").reset([
+  fetchLeaguesFx.doneData,
+  fetchTeamsFx.doneData,
+]);
 
 export const $leagues = createStore<LeagueResponse[]>([])
-  .on(fetchLeaguesFx.doneData, (_, { response }) => response.slice(0, 20))
+  .on(fetchLeaguesFx.doneData, (_, response) => response.slice(0, 20))
   .on(resetItems, (leagues) => {
     if (leagues.length > 0) return [];
     return leagues;
   });
 
 export const $teams = createStore<GetTeamsResponse["response"]>([])
-  .on(fetchTeamsFx.doneData, (_, { response }) => response.slice(0, 20))
+  .on(fetchTeamsFx.doneData, (_, response) => response.slice(0, 20))
   .on(resetItems, (teams) => {
     if (teams.length > 0) return [];
     return teams;
@@ -84,3 +92,9 @@ export const $searchLoading = combine(
   [$leaguesLoading, $teamsLoading],
   ([$leaguesLoading, $teamsLoading]) => $leaguesLoading || $teamsLoading
 );
+
+sample({
+  clock: [fetchLeaguesFx.failData, fetchTeamsFx.failData],
+  fn: (error) => error.message,
+  target: $searchError,
+});

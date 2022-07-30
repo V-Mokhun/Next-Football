@@ -1,5 +1,5 @@
 import { BaseApi } from "../base";
-import { catchError } from "../lib";
+import { catchApiError, catchError } from "../lib";
 import { apiInstance } from "./config";
 import { FixturesQueryParams, GetFixturesResponse } from "./models";
 
@@ -11,6 +11,8 @@ class FixturesApi extends BaseApi {
       const url = this.makeUrl(FIXTURES_URL, params);
 
       const { data } = await apiInstance.get<GetFixturesResponse>(url);
+
+      catchApiError(data.errors, "No fixtures found..");
 
       return data;
     } catch (error) {

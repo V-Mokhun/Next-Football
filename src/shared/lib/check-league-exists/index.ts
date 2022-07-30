@@ -1,7 +1,9 @@
 import { rapidApi } from "@/shared/api";
 import { ParsedUrlQuery } from "querystring";
 
-export const checkLeagueExists = async (params: ParsedUrlQuery | undefined) => {
+export const checkLeagueExists = async (
+  params: ParsedUrlQuery | undefined
+): Promise<{ notFound: true } | { props: Object; revalidate: number }> => {
   if (!params || !params.id) {
     return {
       notFound: true,
@@ -23,5 +25,5 @@ export const checkLeagueExists = async (params: ParsedUrlQuery | undefined) => {
     };
   }
 
-  return league;
+  return { props: {}, revalidate: 600 };
 };

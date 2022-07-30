@@ -6,7 +6,7 @@ import { createEvent, sample } from "effector";
 export const fetchLeagueRounds = createEvent();
 
 sample({
-  clock: fetchLeagueRounds,
+  clock: [leagueModel.$isCurrentRound, fetchLeagueRounds],
   source: {
     leagueFixture: leagueModel.$league,
     isCurrent: leagueModel.$isCurrentRound,
@@ -21,24 +21,26 @@ sample({
 });
 
 sample({
-  clock: [
-    // viewerModel.$viewerTimezone,
-    leagueModel.$leagueRounds,
-  ],
+  clock: [viewerModel.$viewerTimezone, leagueModel.$activeRound],
   source: {
     timezone: viewerModel.$viewerTimezone,
     leagueFixture: leagueModel.$league,
-    rounds: leagueModel.$leagueRounds,
+    round: leagueModel.$activeRound,
   },
-  filter: ({ leagueFixture, timezone }) =>
-    Boolean(leagueFixture) || Boolean(timezone),
-  fn: ({ timezone, leagueFixture, rounds }): FixturesQueryParams => {
-    return {
-      timezone,
+  filter: ({ leagueFixture, round }) =>
+    Boolean(leagueFixture) && Boolean(round),
+  fn: ({ timezone, leagueFixture, round }): FixturesQueryParams => {
+    const params: FixturesQueryParams = {
       league: leagueFixture!.league.id,
       season: leagueFixture!.seasons[0].year,
-      round: rounds[0],
+      round: round as string,
     };
+
+    if (timezone) {
+      params.timezone = timezone;
+    }
+
+    return params;
   },
   target: leagueModel.fetchLeagueFixturesFx,
 });

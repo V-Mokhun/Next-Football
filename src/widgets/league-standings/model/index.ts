@@ -7,7 +7,9 @@ export const fetchLeagueStandings = createEvent();
 sample({
   clock: fetchLeagueStandings,
   source: { leagueFixture: leagueModel.$league },
-  filter: ({ leagueFixture }) => Boolean(leagueFixture),
+  filter: ({ leagueFixture }) =>
+    Boolean(leagueFixture) ||
+    Boolean(leagueFixture?.seasons[0].coverage.standings),
   fn: ({ leagueFixture }): StandingsQueryParams => {
     return {
       season: leagueFixture!.seasons[0].year,

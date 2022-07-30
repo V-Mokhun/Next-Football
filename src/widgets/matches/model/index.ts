@@ -73,6 +73,12 @@ sample({
 });
 
 sample({
+  clock: fixtureModel.fetchFixturesFx.failData,
+  fn: (error) => error.message,
+  target: fixtureModel.$fixturesError,
+});
+
+sample({
   clock: fixtureModel.fetchFixturesFx.finally,
   fn: () => false,
   target: [calendarModel.$calendarDisabled, fixtureModel.$buttonsDisabled],

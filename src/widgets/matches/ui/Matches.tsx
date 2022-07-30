@@ -1,7 +1,8 @@
 import { FixtureLeague, FixtureMatch, fixtureModel } from "@/entities/fixture";
 import { viewerModel } from "@/entities/viewer";
 import { FavoriteLeagueButton } from "@/features/toggle-favorite/toggle-favorite-league";
-import { Accordion } from "@chakra-ui/react";
+import { AlertMessage } from "@/shared/ui";
+import { Accordion, Text } from "@chakra-ui/react";
 import { useList, useStore } from "effector-react";
 import React from "react";
 
@@ -10,6 +11,7 @@ interface MatchesProps {}
 export const Matches: React.FC<MatchesProps> = ({}) => {
   const isAuthenticated = useStore(viewerModel.$isAuthenticated);
   const viewerFavoriteLeagues = useStore(viewerModel.$viewerFavoriteLeagues);
+  const fixturesError = useStore(fixtureModel.$fixturesError);
 
   const list = useList(fixtureModel.$fixtures, {
     keys: [viewerFavoriteLeagues],
@@ -38,9 +40,23 @@ export const Matches: React.FC<MatchesProps> = ({}) => {
     },
   });
 
-  return (
-    <Accordion pb={4} allowMultiple>
-      {list}
-    </Accordion>
-  );
+  let body = null;
+
+  if (fixturesError) {
+    body = <AlertMessage mb={2} error={fixturesError} />;
+  } else if (Array.isArray(list) && list.length < 1) {
+    body = (
+      <Text mb={4} textAlign="center">
+        No matches found.
+      </Text>
+    );
+  } else {
+    body = (
+      <Accordion pb={4} allowMultiple>
+        {list}
+      </Accordion>
+    );
+  }
+
+  return body;
 };

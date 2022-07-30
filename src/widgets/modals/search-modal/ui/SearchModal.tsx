@@ -3,7 +3,7 @@ import { SearchForm, SearchList, searchModel } from "@/features/search";
 import { FavoriteLeagueButton } from "@/features/toggle-favorite/toggle-favorite-league";
 import { FavoriteTeamButton } from "@/features/toggle-favorite/toggle-favorite-team";
 import { useDebounce } from "@/shared/lib";
-import { Modal } from "@/shared/ui";
+import { AlertMessage, Modal } from "@/shared/ui";
 import { useEvent, useStore } from "effector-react";
 import React from "react";
 
@@ -12,6 +12,7 @@ interface SearchModalProps {}
 export const SearchModal: React.FC<SearchModalProps> = ({}) => {
   const isModalOpen = useStore(searchModalModel.$modalOpen);
   const searchValue = useStore(searchModel.$search);
+  const searchError = useStore(searchModel.$searchError);
 
   const closeModal = useEvent(searchModalModel.closeModal);
 
@@ -23,11 +24,15 @@ export const SearchModal: React.FC<SearchModalProps> = ({}) => {
         debouncedSearchValue={debouncedSearchValue}
         searchValue={searchValue}
       />
-      <SearchList
-        FavoriteLeagueComponent={FavoriteLeagueButton}
-        FavoriteTeamComponent={FavoriteTeamButton}
-        debouncedSearchValue={debouncedSearchValue}
-      />
+      {searchError ? (
+        <AlertMessage error={searchError} />
+      ) : (
+        <SearchList
+          FavoriteLeagueComponent={FavoriteLeagueButton}
+          FavoriteTeamComponent={FavoriteTeamButton}
+          debouncedSearchValue={debouncedSearchValue}
+        />
+      )}
     </Modal>
   );
 };

@@ -1,5 +1,5 @@
+import { catchApiError, catchError } from "../lib";
 import { apiInstance } from "./config";
-import { catchError } from "../lib";
 import { GetTimezonesResponse } from "./models";
 
 const TIMEZONES_URL = "timezone";
@@ -10,6 +10,8 @@ class SettingsApi {
       const { data } = await apiInstance.get<GetTimezonesResponse>(
         TIMEZONES_URL
       );
+
+      catchApiError(data.errors, "No timezones found");
 
       return data;
     } catch (error) {

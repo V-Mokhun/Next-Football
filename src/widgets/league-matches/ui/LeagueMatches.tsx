@@ -1,13 +1,12 @@
 import { FixtureMatch } from "@/entities/fixture";
-import { leagueModel } from "@/entities/league";
-import { Box, Button, Flex, Heading } from "@chakra-ui/react";
-import { useEvent, useList } from "effector-react";
+import { leagueModel, LeagueRoundsSelect } from "@/entities/league";
+import { Box, Heading, Text } from "@chakra-ui/react";
+import { useList } from "effector-react";
 import React from "react";
 
 interface LeagueMatchesProps {}
 
 export const LeagueMatches: React.FC<LeagueMatchesProps> = ({}) => {
-  const moreMatchesClicked = useEvent(leagueModel.moreMatchesClicked);
   const list = useList(leagueModel.$leagueFixtures, {
     fn: (leagueFixture) => {
       const roundName = Object.keys(leagueFixture)[0];
@@ -20,7 +19,7 @@ export const LeagueMatches: React.FC<LeagueMatchesProps> = ({}) => {
       ));
 
       return (
-        <Box mb={4}>
+        <Box>
           <Heading
             backgroundColor="main.400"
             py={1}
@@ -38,18 +37,15 @@ export const LeagueMatches: React.FC<LeagueMatchesProps> = ({}) => {
   });
 
   return (
-    <Box mb={4} borderRadius="8px" p="12px" backgroundColor="main.500">
-      {list}
-      <Flex justifyContent="center" mt={3} mb={1}>
-        <Button
-          onClick={moreMatchesClicked}
-          variant="link"
-          fontWeight={700}
-          fontSize="sm"
-        >
-          See more matches
-        </Button>
-      </Flex>
+    <Box borderRadius="8px" p="12px" backgroundColor="main.500">
+      {Array.isArray(list) && list.length < 1 ? (
+        <Text textAlign="center">No matches found.</Text>
+      ) : (
+        <>
+          <LeagueRoundsSelect />
+          {list}
+        </>
+      )}
     </Box>
   );
 };

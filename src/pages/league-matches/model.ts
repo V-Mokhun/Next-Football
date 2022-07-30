@@ -1,6 +1,5 @@
 import { leagueModel } from "@/entities/league";
 import { leagueMatchesModel } from "@/widgets/league-matches";
-import { leagueStandingsModel } from "@/widgets/league-standings";
 import { createEvent, sample } from "effector";
 import { StaticPageContext } from "nextjs-effector";
 
@@ -15,14 +14,11 @@ sample({
 
 sample({
   clock: pageStarted,
-  fn: () => true,
+  fn: () => false,
   target: leagueModel.currentRoundChanged,
 });
 
 sample({
   clock: leagueModel.$league,
-  target: [
-    leagueMatchesModel.fetchLeagueRounds,
-    leagueStandingsModel.fetchLeagueStandings,
-  ],
+  target: leagueMatchesModel.fetchLeagueRounds,
 });

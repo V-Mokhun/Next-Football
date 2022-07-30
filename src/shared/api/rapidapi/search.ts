@@ -1,5 +1,5 @@
 import { BaseApi } from "../base";
-import { catchError } from "../lib";
+import { catchApiError, catchError } from "../lib";
 import { apiInstance } from "./config";
 import { GetLeaguesResponse, GetTeamsResponse } from "./models";
 
@@ -17,6 +17,8 @@ class SearchApi extends BaseApi {
       });
 
       const { data } = await apiInstance.get<GetLeaguesResponse>(url);
+
+      catchApiError(data.errors);
 
       return data;
     } catch (error) {

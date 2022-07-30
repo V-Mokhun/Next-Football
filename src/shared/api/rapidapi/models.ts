@@ -137,9 +137,9 @@ export type LeagueStanding = {
   };
 };
 
-type ApiResponse = {
+export type ApiResponse = {
   get: string;
-  errors: { [key: string]: string }[];
+  errors: { [key: string]: string };
   parameters: { [key: string]: string }[];
   paging: {
     current: number;
