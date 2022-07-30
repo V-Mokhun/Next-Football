@@ -3,6 +3,7 @@ import {
   leagueStandingsPageModel,
 } from "@/pages/league-standings";
 import { appStarted, createGSP } from "@/pages/shared";
+import { checkLeagueExists } from "@/shared/lib";
 import type { GetStaticPaths, NextPage } from "next";
 import { usePageEvent } from "nextjs-effector";
 
@@ -24,11 +25,11 @@ export const getStaticProps = createGSP({
   async customize({ context }) {
     const params = context.params;
 
-    // await setLeague(params, leagueModel.leagueSet);
+    // await checkLeagueExists(params);
 
     return {
       props: {},
-      revalidate: 300,
+      revalidate: 600,
     };
   },
 });

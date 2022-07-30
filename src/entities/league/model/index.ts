@@ -15,12 +15,24 @@ import {
   createEffect,
   createEvent,
   createStore,
+  forward,
   restore,
   sample,
 } from "effector";
 
-export const leagueSet = createEvent<LeagueResponse | null>();
+export const leagueSet = createEvent<number>();
 export const moreMatchesClicked = createEvent();
+
+export const fetchLeagueFx = createEffect<number, LeagueResponse | null, Error>(
+  async (id) => {
+    const { response } = await rapidApi.leaguesApi.getLeagues({
+      id,
+      current: true,
+    });
+
+    return response[0] || null;
+  }
+);
 
 export const fetchLeagueFixturesFx = createEffect<
   FixturesQueryParams,
@@ -52,7 +64,7 @@ export const fetchLeagueStandingsFx = createEffect<
   return response;
 });
 
-export const $league = restore<LeagueResponse | null>(leagueSet, {
+export const $league = restore<LeagueResponse | null>(fetchLeagueFx.doneData, {
   league: {
     id: 140,
     name: "La Liga",
@@ -1671,6 +1683,11 @@ export const $leagueStandings = createStore<Standing[]>([
   },
 ]);
 export const $isCurrentRound = createStore<boolean>(true);
+
+forward({
+  from: leagueSet,
+  to: fetchLeagueFx,
+});
 
 sample({
   clock: fetchLeagueFixturesFx.doneData,

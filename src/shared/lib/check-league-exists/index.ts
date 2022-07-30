@@ -1,11 +1,7 @@
-import { LeagueResponse, rapidApi } from "@/shared/api";
-import { Event } from "effector";
+import { rapidApi } from "@/shared/api";
 import { ParsedUrlQuery } from "querystring";
 
-export const setLeague = async (
-  params: ParsedUrlQuery | undefined,
-  leagueSet: Event<LeagueResponse | null>
-) => {
+export const checkLeagueExists = async (params: ParsedUrlQuery | undefined) => {
   if (!params || !params.id) {
     return {
       notFound: true,
@@ -26,8 +22,6 @@ export const setLeague = async (
       notFound: true,
     };
   }
-
-  leagueSet(league);
 
   return league;
 };
