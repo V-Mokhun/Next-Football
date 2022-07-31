@@ -18,7 +18,7 @@ export const LeagueStandingHeader: React.FC<
         >
           #
         </Th>
-        <Th backgroundColor="main.400" borderBottom={0} width="100%" p={2}>
+        <Th backgroundColor="main.400" borderBottom={0} width="80%" p={2}>
           Team
         </Th>
         <Th
@@ -62,13 +62,22 @@ export const LeagueStandingHeader: React.FC<
           S
         </Th>
         <Th
-          borderRadius="0 4px 4px 0"
           backgroundColor="main.400"
           borderBottom={0}
           textAlign="center"
           p={2}
         >
           P
+        </Th>
+        <Th
+          borderRadius="0 4px 4px 0"
+          backgroundColor="main.400"
+          borderBottom={0}
+          textAlign="center"
+          p={2}
+          width="160px"
+        >
+          Form
         </Th>
       </Tr>
     </Thead>

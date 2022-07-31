@@ -51,7 +51,7 @@ export const Matches: React.FC<MatchesProps> = ({}) => {
         <Spinner size="xl" />
       </Flex>
     );
-  } else if (Array.isArray(list) && list.length < 1) {
+  } else if ((Array.isArray(list) && list.length < 1) || !list) {
     body = (
       <Text mb={4} textAlign="center">
         No matches found.

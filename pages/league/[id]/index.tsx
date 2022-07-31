@@ -1,6 +1,5 @@
 import { LeaguePage, leaguePageModel } from "@/pages/league";
 import { appStarted, createGSP } from "@/pages/shared";
-import { checkLeagueExists } from "@/shared/lib";
 import { GetStaticPaths, NextPage } from "next";
 import { usePageEvent } from "nextjs-effector";
 
@@ -31,7 +30,11 @@ export const getStaticProps = createGSP({
   async customize({ context }) {
     const params = context.params;
 
-    return await checkLeagueExists(params);
+    return {
+      props: {},
+      revalidate: 600,
+    };
+    // return await checkLeagueExists(params);
   },
 });
 

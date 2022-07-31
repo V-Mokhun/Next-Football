@@ -1,5 +1,6 @@
 import { leagueModel, LeagueStandingHeader } from "@/entities/league";
 import { LeagueStandingRow } from "@/entities/league/ui/LeagueStandingRow";
+import { AlertMessage } from "@/shared/ui";
 import {
   Box,
   Flex,
@@ -16,6 +17,7 @@ interface LeagueStandingsProps {}
 
 export const LeagueStandings: React.FC<LeagueStandingsProps> = ({}) => {
   const standingsLoading = useStore(leagueModel.$leagueStandingsLoading);
+  const standingsError = useStore(leagueModel.$leagueStandingsError);
   const standings = useList(leagueModel.$leagueStandings, (standing) => (
     <LeagueStandingRow standing={standing} />
   ));
@@ -28,7 +30,9 @@ export const LeagueStandings: React.FC<LeagueStandingsProps> = ({}) => {
         <Spinner size="xl" />
       </Flex>
     );
-  } else if (Array.isArray(standings) && standings.length < 1) {
+  } else if (standingsError) {
+    body = <AlertMessage error={standingsError} />;
+  } else if ((Array.isArray(standings) && standings.length < 1) || !standings) {
     body = <Text textAlign="center">No standings found.</Text>;
   } else {
     body = (

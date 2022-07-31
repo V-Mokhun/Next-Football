@@ -1,6 +1,7 @@
 import { FixtureMatch } from "@/entities/fixture";
 import { leagueModel, LeagueRoundsSelect } from "@/entities/league";
 import { LEAGUE_MATCHES_ROUTE } from "@/shared/lib";
+import { AlertMessage } from "@/shared/ui";
 import { Box, Flex, Heading, Link, Spinner, Text } from "@chakra-ui/react";
 import { useStore, useStoreMap } from "effector-react";
 import NextLink from "next/link";
@@ -15,6 +16,7 @@ export const LeagueMatches: React.FC<LeagueMatchesProps> = ({
   isMatchesPage = false,
 }) => {
   const router = useRouter();
+  const matchesError = useStore(leagueModel.$leagueFixturesError);
   const matchesLoading = useStore(leagueModel.$leagueFixturesLoading);
   const list = useStoreMap({
     store: leagueModel.$leagueFixtures,
@@ -57,7 +59,9 @@ export const LeagueMatches: React.FC<LeagueMatchesProps> = ({
         <Spinner size="xl" />
       </Flex>
     );
-  } else if (Array.isArray(list) && list.length < 1) {
+  } else if (matchesError) {
+    body = <AlertMessage error={matchesError} />;
+  } else if ((Array.isArray(list) && list.length < 1) || !list) {
     body = <Text textAlign="center">No matches found.</Text>;
   } else if (isMatchesPage) {
     body = (

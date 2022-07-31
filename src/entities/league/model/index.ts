@@ -74,6 +74,13 @@ export const $leagueStandings = createStore<Standing[]>([]);
 export const $leagueFixturesLoading = fetchLeagueFixturesFx.pending;
 export const $leagueStandingsLoading = fetchLeagueStandingsFx.pending;
 
+export const $leagueFixturesError = createStore("").reset(
+  fetchLeagueFixturesFx
+);
+export const $leagueStandingsError = createStore("").reset(
+  fetchLeagueStandingsFx
+);
+
 export const $isCurrentRound = restore(currentRoundChanged, true);
 export const $activeRound = restore(activeRoundSet, null);
 
@@ -108,4 +115,16 @@ sample({
     return standings[0].league.standings[0];
   },
   target: $leagueStandings,
+});
+
+sample({
+  clock: fetchLeagueStandingsFx.failData,
+  fn: (error) => error.message,
+  target: $leagueStandingsError,
+});
+
+sample({
+  clock: fetchLeagueFixturesFx.failData,
+  fn: (error) => error.message,
+  target: $leagueFixturesError,
 });
