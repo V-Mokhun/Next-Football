@@ -173,6 +173,17 @@ export type LeaguesQueryParams = {
 export type GetTeamsResponse = ApiResponse & {
   response: { team: Team; venue: Venue }[];
 };
+export type TeamResponse = GetTeamsResponse["response"][0];
+export type TeamsQueryParams = {
+  id?: number;
+  name?: string;
+  league?: number;
+  country?: string;
+  code?: string;
+  season?: number;
+  venue?: string;
+  search?: string;
+};
 
 export type GetCountriesResponse = ApiResponse & {
   response: Country[];

@@ -5,3 +5,4 @@ export * from "./rounds";
 export * from "./search";
 export * from "./settings";
 export * from "./standings";
+export * from "./teams";

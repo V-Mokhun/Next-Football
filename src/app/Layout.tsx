@@ -15,7 +15,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     <AppProvider>
       <div className="wrapper">
         <Head>
-          <title>Football app</title>
+          <title>Next Football</title>
           <meta charSet="UTF-8" />
           <meta
             name="viewport"

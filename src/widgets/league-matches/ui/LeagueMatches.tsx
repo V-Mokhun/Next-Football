@@ -1,6 +1,6 @@
 import { FixtureMatch } from "@/entities/fixture";
 import { leagueModel, LeagueRoundsSelect } from "@/entities/league";
-import { LEAGUE_MATCHES_ROUTE } from "@/shared/lib";
+import { MATCHES_ROUTE } from "@/shared/lib";
 import { AlertMessage } from "@/shared/ui";
 import { Box, Flex, Heading, Link, Spinner, Text } from "@chakra-ui/react";
 import { useStore, useStoreMap } from "effector-react";
@@ -75,7 +75,7 @@ export const LeagueMatches: React.FC<LeagueMatchesProps> = ({
       <>
         {list}
         <Flex justifyContent="center" mt={3} mb={1}>
-          <NextLink href={`${router.asPath}/${LEAGUE_MATCHES_ROUTE}`} passHref>
+          <NextLink href={`${router.asPath}/${MATCHES_ROUTE}`} passHref>
             <Link fontWeight={700} fontSize="sm">
               See more matches
             </Link>

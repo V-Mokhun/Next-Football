@@ -2,9 +2,9 @@ import { TeamHeader } from "@/entities/team";
 import { FavoriteTeamButton } from "@/features/toggle-favorite/toggle-favorite-team";
 import React from "react";
 
-interface TeamPageProps {}
+interface TeamTransfersPageProps {}
 
-export const TeamPage: React.FC<TeamPageProps> = ({}) => {
+export const TeamTransfersPage: React.FC<TeamTransfersPageProps> = ({}) => {
   return (
     <>
       <TeamHeader FavoriteComponent={FavoriteTeamButton} />

@@ -1,9 +1,5 @@
 import { League } from "@/shared/api";
-import {
-  LEAGUE_MATCHES_ROUTE,
-  LEAGUE_ROUTE,
-  LEAGUE_STANDINGS_ROUTE,
-} from "@/shared/lib";
+import { LEAGUE_ROUTE, MATCHES_ROUTE, STANDINGS_ROUTE } from "@/shared/lib";
 import { Box, Button, Flex, Heading, Img, Text } from "@chakra-ui/react";
 import { useStore } from "effector-react";
 import { useRouter } from "next/router";
@@ -13,6 +9,27 @@ import { leagueModel } from "..";
 interface LeagueHeaderProps {
   FavoriteComponent: React.FC<{ data: League; size: "normal" | "small" }>;
 }
+
+const LINKS = (id: number) => [
+  {
+    isActivePath: `${id}`,
+    onClickPath: `${LEAGUE_ROUTE}/${id}`,
+    isStandings: false,
+    text: "General",
+  },
+  {
+    isActivePath: `${MATCHES_ROUTE}`,
+    onClickPath: `${LEAGUE_ROUTE}/${id}/${MATCHES_ROUTE}`,
+    isStandings: false,
+    text: "Matches",
+  },
+  {
+    isActivePath: `${STANDINGS_ROUTE}`,
+    onClickPath: `${LEAGUE_ROUTE}/${id}/${STANDINGS_ROUTE}`,
+    isStandings: true,
+    text: "Standings",
+  },
+];
 
 export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
   FavoriteComponent,
@@ -67,42 +84,25 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
         </Box>
       </Flex>
       <Flex alignItems="center" mb={2} gap={4}>
-        <Button
-          isActive={router.asPath.endsWith(String(league.id))}
-          onClick={() => router.push(`${LEAGUE_ROUTE}/${league.id}`)}
-          variant="link"
-          _active={{
-            color: "primary.400",
-          }}
-        >
-          General
-        </Button>
-        <Button
-          onClick={() =>
-            router.push(`${LEAGUE_ROUTE}/${league.id}/${LEAGUE_MATCHES_ROUTE}`)
+        {LINKS(league.id).map(
+          ({ isActivePath, onClickPath, text, isStandings }) => {
+            if (isStandings && !season.coverage.standings) return null;
+
+            return (
+              <Button
+                key={text}
+                isActive={router.asPath.endsWith(isActivePath)}
+                onClick={() => router.push(onClickPath)}
+                variant="link"
+                _active={{
+                  color: "primary.400",
+                }}
+              >
+                {text}
+              </Button>
+            );
           }
-          isActive={router.asPath.endsWith(LEAGUE_MATCHES_ROUTE)}
-          variant="link"
-          _active={{
-            color: "primary.400",
-          }}
-        >
-          Matches
-        </Button>
-        <Button
-          onClick={() =>
-            router.push(
-              `${LEAGUE_ROUTE}/${league.id}/${LEAGUE_STANDINGS_ROUTE}`
-            )
-          }
-          isActive={router.asPath.endsWith(LEAGUE_STANDINGS_ROUTE)}
-          variant="link"
-          _active={{
-            color: "primary.400",
-          }}
-        >
-          Standings
-        </Button>
+        )}
       </Flex>
     </Box>
   );
