@@ -1,6 +1,6 @@
 import { LeagueHeader } from "@/entities/league";
 import { FavoriteLeagueButton } from "@/features/toggle-favorite/toggle-favorite-league";
-import { LeagueCurrentMatches } from "@/widgets/league-matches";
+import { LeagueMatches } from "@/widgets/league-matches";
 import { LeagueStandings } from "@/widgets/league-standings";
 import React from "react";
 
@@ -10,7 +10,7 @@ export const LeaguePage: React.FC<LeaguePageProps> = ({}) => {
   return (
     <>
       <LeagueHeader FavoriteComponent={FavoriteLeagueButton} />
-      <LeagueCurrentMatches />
+      <LeagueMatches />
       <LeagueStandings />
     </>
   );

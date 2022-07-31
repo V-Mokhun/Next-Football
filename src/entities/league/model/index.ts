@@ -66,14 +66,11 @@ export const fetchLeagueStandingsFx = createEffect<
 
 export const $league = restore(fetchLeagueFx.doneData, null);
 export const $leagueRounds = restore(fetchLeagueRoundsFx.doneData, []);
-export const $leagueFixtures = createStore<
-  {
-    [key: string]: FixtureResponse[];
-  }[]
->([]);
+export const $leagueFixtures = createStore<{
+  [key: string]: FixtureResponse[];
+} | null>(null);
 export const $leagueStandings = createStore<Standing[]>([]);
 
-export const $leagueLoading = fetchLeagueFx.pending;
 export const $leagueFixturesLoading = fetchLeagueFixturesFx.pending;
 export const $leagueStandingsLoading = fetchLeagueStandingsFx.pending;
 
@@ -93,7 +90,7 @@ sample({
       (a, b) => a.fixture.timestamp - b.fixture.timestamp
     );
 
-    return [{ [sortedFixtures[0].league.round]: sortedFixtures }];
+    return { [sortedFixtures[0].league.round]: sortedFixtures };
   },
   target: $leagueFixtures,
 });
@@ -106,7 +103,7 @@ sample({
 
 sample({
   clock: fetchLeagueStandingsFx.doneData,
-  filter: (standings) => Boolean(standings[0].league.standings[0]),
+  filter: (standings) => Boolean(standings[0]?.league?.standings[0]),
   fn: (standings): Standing[] => {
     return standings[0].league.standings[0];
   },

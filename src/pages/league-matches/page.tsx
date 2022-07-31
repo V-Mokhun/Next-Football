@@ -9,7 +9,7 @@ export const LeagueMatchesPage: React.FC<LeagueMatchesPageProps> = ({}) => {
   return (
     <>
       <LeagueHeader FavoriteComponent={FavoriteLeagueButton} />
-      <LeagueMatches />
+      <LeagueMatches isMatchesPage={true} />
     </>
   );
 };

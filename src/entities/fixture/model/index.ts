@@ -710,6 +710,7 @@ export const $fixtures = createStore<{ [key: string]: FixtureResponse[] }[]>([
   },
 ]).reset(fetchFixturesFx.failData);
 export const $fixturesError = createStore("");
+export const $fixutresLoading = fetchFixturesFx.pending;
 
 sample({
   clock: liveFixturesSelected,

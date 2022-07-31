@@ -2,7 +2,7 @@ import { FixtureLeague, FixtureMatch, fixtureModel } from "@/entities/fixture";
 import { viewerModel } from "@/entities/viewer";
 import { FavoriteLeagueButton } from "@/features/toggle-favorite/toggle-favorite-league";
 import { AlertMessage } from "@/shared/ui";
-import { Accordion, Text } from "@chakra-ui/react";
+import { Accordion, Flex, Spinner, Text } from "@chakra-ui/react";
 import { useList, useStore } from "effector-react";
 import React from "react";
 
@@ -12,6 +12,7 @@ export const Matches: React.FC<MatchesProps> = ({}) => {
   const isAuthenticated = useStore(viewerModel.$isAuthenticated);
   const viewerFavoriteLeagues = useStore(viewerModel.$viewerFavoriteLeagues);
   const fixturesError = useStore(fixtureModel.$fixturesError);
+  const fixturesLoading = useStore(fixtureModel.$fixutresLoading);
 
   const list = useList(fixtureModel.$fixtures, {
     keys: [viewerFavoriteLeagues],
@@ -44,6 +45,12 @@ export const Matches: React.FC<MatchesProps> = ({}) => {
 
   if (fixturesError) {
     body = <AlertMessage mb={2} error={fixturesError} />;
+  } else if (fixturesLoading) {
+    body = (
+      <Flex justifyContent="center" mb={2}>
+        <Spinner size="xl" />
+      </Flex>
+    );
   } else if (Array.isArray(list) && list.length < 1) {
     body = (
       <Text mb={4} textAlign="center">

@@ -10,8 +10,7 @@ sample({
   clock: [
     fetchFixtures,
     calendarModel.$selectedDate,
-    fixtureModel.allFixturesSelected,
-    fixtureModel.liveFixturesSelected,
+    fixtureModel.$isLiveFixtures,
   ],
   source: {
     date: calendarModel.$selectedDate,

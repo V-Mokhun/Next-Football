@@ -1,14 +1,27 @@
 import { FixtureMatch } from "@/entities/fixture";
 import { leagueModel, LeagueRoundsSelect } from "@/entities/league";
-import { Box, Heading, Text } from "@chakra-ui/react";
-import { useList } from "effector-react";
+import { LEAGUE_MATCHES_ROUTE } from "@/shared/lib";
+import { Box, Flex, Heading, Link, Spinner, Text } from "@chakra-ui/react";
+import { useStore, useStoreMap } from "effector-react";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
-interface LeagueMatchesProps {}
+interface LeagueMatchesProps {
+  isMatchesPage?: boolean;
+}
 
-export const LeagueMatches: React.FC<LeagueMatchesProps> = ({}) => {
-  const list = useList(leagueModel.$leagueFixtures, {
+export const LeagueMatches: React.FC<LeagueMatchesProps> = ({
+  isMatchesPage = false,
+}) => {
+  const router = useRouter();
+  const matchesLoading = useStore(leagueModel.$leagueFixturesLoading);
+  const list = useStoreMap({
+    store: leagueModel.$leagueFixtures,
+    keys: [],
     fn: (leagueFixture) => {
+      if (!leagueFixture) return null;
+
       const roundName = Object.keys(leagueFixture)[0];
       const matches = leagueFixture[roundName].map((matchFixture) => (
         <FixtureMatch
@@ -19,7 +32,7 @@ export const LeagueMatches: React.FC<LeagueMatchesProps> = ({}) => {
       ));
 
       return (
-        <Box>
+        <Box mb={4}>
           <Heading
             backgroundColor="main.400"
             py={1}
@@ -36,16 +49,41 @@ export const LeagueMatches: React.FC<LeagueMatchesProps> = ({}) => {
     },
   });
 
+  let body = null;
+
+  if (matchesLoading) {
+    body = (
+      <Flex justifyContent="center" mb={2}>
+        <Spinner size="xl" />
+      </Flex>
+    );
+  } else if (Array.isArray(list) && list.length < 1) {
+    body = <Text textAlign="center">No matches found.</Text>;
+  } else if (isMatchesPage) {
+    body = (
+      <>
+        <LeagueRoundsSelect />
+        {list}
+      </>
+    );
+  } else {
+    body = (
+      <>
+        {list}
+        <Flex justifyContent="center" mt={3} mb={1}>
+          <NextLink href={`${router.asPath}/${LEAGUE_MATCHES_ROUTE}`} passHref>
+            <Link fontWeight={700} fontSize="sm">
+              See more matches
+            </Link>
+          </NextLink>
+        </Flex>
+      </>
+    );
+  }
+
   return (
     <Box borderRadius="8px" p="12px" backgroundColor="main.500">
-      {Array.isArray(list) && list.length < 1 ? (
-        <Text textAlign="center">No matches found.</Text>
-      ) : (
-        <>
-          <LeagueRoundsSelect />
-          {list}
-        </>
-      )}
+      {body}
     </Box>
   );
 };

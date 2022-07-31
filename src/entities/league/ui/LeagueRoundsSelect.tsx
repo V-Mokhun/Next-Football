@@ -8,6 +8,7 @@ interface LeagueRoundsSelectProps {}
 export const LeagueRoundsSelect: React.FC<LeagueRoundsSelectProps> = ({}) => {
   const leagueRounds = useStore(leagueModel.$leagueRounds);
   const isLoading = useStore(leagueModel.$leagueFixturesLoading);
+  const activeRound = useStore(leagueModel.$activeRound);
   const activeRoundSet = useEvent(leagueModel.activeRoundSet);
 
   return (
@@ -16,6 +17,7 @@ export const LeagueRoundsSelect: React.FC<LeagueRoundsSelectProps> = ({}) => {
       mb={4}
       isDisabled={isLoading}
       placeholder="Select round"
+      value={activeRound || undefined}
       onChange={(e) => {
         activeRoundSet(e.target.value);
       }}
