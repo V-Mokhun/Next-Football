@@ -185,6 +185,10 @@ export type TeamsQueryParams = {
   search?: string;
 };
 
+export type GetSeasonsResponse = ApiResponse & {
+  response: number[];
+};
+
 export type GetCountriesResponse = ApiResponse & {
   response: Country[];
 };
@@ -237,6 +241,7 @@ export type FixturesQueryParams = {
   live?: "all" | "id-id";
   date?: string;
   league?: number;
+  team?: number;
   from?: string;
   to?: string;
   timezone?: string;

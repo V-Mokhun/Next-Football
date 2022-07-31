@@ -1,7 +1,18 @@
-import { rapidApi, TeamResponse } from "@/shared/api";
-import { createEffect, createEvent, forward, restore } from "effector";
+import { FixtureResponse, rapidApi, TeamResponse } from "@/shared/api";
+import { formatDate, transformFixtures } from "@/shared/lib";
+import {
+  createEffect,
+  createEvent,
+  createStore,
+  forward,
+  restore,
+  sample,
+} from "effector";
+
+export const todayDate = formatDate(new Date());
 
 export const teamSet = createEvent<number>();
+export const fetchTeamSeason = createEvent<number>();
 
 export const fetchTeamFx = createEffect<number, TeamResponse, Error>(
   async (id) => {
@@ -10,6 +21,30 @@ export const fetchTeamFx = createEffect<number, TeamResponse, Error>(
     return response[0];
   }
 );
+
+export const fetchTeamSeasonFx = createEffect<
+  number,
+  { teamId: number; season: number },
+  Error
+>(async (teamId) => {
+  const season = await rapidApi.teamsApi.getCurrentSeason(teamId);
+
+  return { season, teamId };
+});
+
+export const fetchTodayMatchesFx = createEffect<
+  { teamId: number; season: number },
+  FixtureResponse[],
+  Error
+>(async ({ season, teamId }) => {
+  const { response } = await rapidApi.fixturesApi.getFixtures({
+    team: teamId,
+    date: todayDate,
+    season,
+  });
+
+  return response;
+});
 
 export const $team = restore(fetchTeamFx.doneData, {
   team: {
@@ -32,9 +67,27 @@ export const $team = restore(fetchTeamFx.doneData, {
   },
 });
 
-$team.watch((s) => console.log(s));
+export const $teamSeason = restore(fetchTeamSeasonFx.doneData, null);
+
+export const $todayMatches = createStore<{
+  [key: string]: FixtureResponse[];
+} | null>(null).reset(fetchTodayMatchesFx.failData);
+export const $todayMatchesLoading = fetchTodayMatchesFx.pending;
 
 // forward({
 //   from: teamSet,
 //   to: fetchTeamFx,
 // });
+
+forward({
+  from: fetchTeamSeason,
+  to: fetchTeamSeasonFx,
+});
+
+sample({
+  clock: fetchTeamSeasonFx.doneData,
+  fn: ({ season, teamId }) => ({ season: season as number, teamId }),
+  target: fetchTodayMatchesFx,
+});
+
+transformFixtures(fetchTodayMatchesFx.doneData, $todayMatches);

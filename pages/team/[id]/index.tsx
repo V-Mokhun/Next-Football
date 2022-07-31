@@ -27,10 +27,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps = createGSP({
   pageEvent: teamPageModel.pageStarted,
-  customize({ context }) {
-    // console.log(context);
-
-    return { props: {}, revalidate: 60 };
+  async customize() {
+    return { props: {}, revalidate: 600 };
   },
 });
 

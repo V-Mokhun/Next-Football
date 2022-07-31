@@ -6,6 +6,7 @@ export * from "./format-date";
 export * from "./password";
 export * from "./routes";
 export * from "./theme";
+export * from "./transform-fixtures";
 export * from "./use-debounce";
 export * from "./validation";
 export * from "./with-session";

@@ -1,5 +1,6 @@
 import { League } from "@/shared/api";
 import { LEAGUE_ROUTE, MATCHES_ROUTE, STANDINGS_ROUTE } from "@/shared/lib";
+import { CardBlock } from "@/shared/ui";
 import { Box, Button, Flex, Heading, Img, Text } from "@chakra-ui/react";
 import { useStore } from "effector-react";
 import { useRouter } from "next/router";
@@ -44,7 +45,7 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
   const [season] = seasons;
 
   return (
-    <Box mb={4} borderRadius="8px" p="12px" backgroundColor="main.500">
+    <CardBlock mb={4}>
       <Flex mb={4} alignItems="center" gap={2}>
         <Box>
           <Img w={18} h={12} alt={country.name} src={country.flag} />
@@ -104,6 +105,6 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
           }
         )}
       </Flex>
-    </Box>
+    </CardBlock>
   );
 };

@@ -6,6 +6,7 @@ import {
   TEAM_ROUTE,
   TRANSFERS_ROUTE,
 } from "@/shared/lib";
+import { CardBlock } from "@/shared/ui";
 import { Box, Button, Flex, Heading, Img } from "@chakra-ui/react";
 import { useStore } from "effector-react";
 import { useRouter } from "next/router";
@@ -55,7 +56,7 @@ export const TeamHeader: React.FC<TeamHeaderProps> = ({
   const { team } = teamData;
 
   return (
-    <Box mb={4} borderRadius="8px" p="12px" backgroundColor="main.500">
+    <CardBlock mb={4}>
       <Flex
         borderBottomWidth={1}
         borderBottomStyle="solid"
@@ -92,6 +93,6 @@ export const TeamHeader: React.FC<TeamHeaderProps> = ({
           </Button>
         ))}
       </Flex>
-    </Box>
+    </CardBlock>
   );
 };

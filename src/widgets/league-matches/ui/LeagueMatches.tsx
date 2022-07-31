@@ -1,7 +1,7 @@
 import { FixtureMatch } from "@/entities/fixture";
 import { leagueModel, LeagueRoundsSelect } from "@/entities/league";
 import { MATCHES_ROUTE } from "@/shared/lib";
-import { AlertMessage } from "@/shared/ui";
+import { AlertMessage, CardBlock } from "@/shared/ui";
 import { Box, Flex, Heading, Link, Spinner, Text } from "@chakra-ui/react";
 import { useStore, useStoreMap } from "effector-react";
 import NextLink from "next/link";
@@ -85,9 +85,5 @@ export const LeagueMatches: React.FC<LeagueMatchesProps> = ({
     );
   }
 
-  return (
-    <Box borderRadius="8px" p="12px" backgroundColor="main.500">
-      {body}
-    </Box>
-  );
+  return <CardBlock>{body}</CardBlock>;
 };

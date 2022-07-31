@@ -15,13 +15,13 @@ export const appStartedStatic = createEvent<StaticPageContext>();
 
 export const setEntityByParamsId = (
   pageStarted: Event<StaticPageContext<ParsedUrlQuery, PreviewData>>,
-  setEntity: Event<number>
+  setEntity: Event<number>[]
 ) => {
   sample({
     clock: pageStarted,
     filter: ({ params }) => Boolean(params?.id),
     fn: ({ params }) => parseInt(params!.id as string, 10),
-    target: setEntity,
+    target: [...setEntity],
   });
 };
 

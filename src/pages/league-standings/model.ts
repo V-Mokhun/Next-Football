@@ -6,7 +6,7 @@ import { setEntityByParamsId } from "../shared";
 
 export const pageStarted = createEvent<StaticPageContext>();
 
-setEntityByParamsId(pageStarted, leagueModel.leagueSet);
+setEntityByParamsId(pageStarted, [leagueModel.leagueSet]);
 
 sample({
   clock: pageStarted,

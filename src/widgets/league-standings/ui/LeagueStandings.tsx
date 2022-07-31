@@ -1,8 +1,7 @@
 import { leagueModel, LeagueStandingHeader } from "@/entities/league";
 import { LeagueStandingRow } from "@/entities/league/ui/LeagueStandingRow";
-import { AlertMessage } from "@/shared/ui";
+import { AlertMessage, CardBlock } from "@/shared/ui";
 import {
-  Box,
   Flex,
   Spinner,
   Table,
@@ -51,9 +50,5 @@ export const LeagueStandings: React.FC<LeagueStandingsProps> = ({}) => {
     );
   }
 
-  return (
-    <Box mb={4} borderRadius="8px" p="12px" backgroundColor="main.500">
-      {body}
-    </Box>
-  );
+  return <CardBlock mb={4}>{body}</CardBlock>;
 };

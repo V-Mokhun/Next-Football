@@ -1,4 +1,5 @@
 export * from "./alert-message";
+export * from "./card-block";
 export * from "./form";
 export * from "./menu";
 export * from "./modal";

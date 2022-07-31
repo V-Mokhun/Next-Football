@@ -1,7 +1,6 @@
 import {
   FixtureResponse,
   FixturesQueryParams,
-  GetFixturesResponse,
   GetRoundsResponse,
   GetStandingsResponse,
   LeagueResponse,
@@ -10,6 +9,7 @@ import {
   Standing,
   StandingsQueryParams,
 } from "@/shared/api";
+import { transformFixtures } from "@/shared/lib";
 import {
   createEffect,
   createEvent,
@@ -36,7 +36,7 @@ export const fetchLeagueFx = createEffect<number, LeagueResponse | null, Error>(
 
 export const fetchLeagueFixturesFx = createEffect<
   FixturesQueryParams,
-  GetFixturesResponse["response"],
+  FixtureResponse[],
   Error
 >(async (params) => {
   const { response } = await rapidApi.fixturesApi.getFixtures(params);
@@ -89,18 +89,7 @@ forward({
   to: fetchLeagueFx,
 });
 
-sample({
-  clock: fetchLeagueFixturesFx.doneData,
-  filter: (fetchedLeagueFixtures) => Boolean(fetchedLeagueFixtures[0]),
-  fn: (fetchedLeagueFixtures) => {
-    const sortedFixtures = fetchedLeagueFixtures.sort(
-      (a, b) => a.fixture.timestamp - b.fixture.timestamp
-    );
-
-    return { [sortedFixtures[0].league.round]: sortedFixtures };
-  },
-  target: $leagueFixtures,
-});
+transformFixtures(fetchLeagueFixturesFx.doneData, $leagueFixtures, true);
 
 sample({
   clock: fetchLeagueRoundsFx.doneData,
