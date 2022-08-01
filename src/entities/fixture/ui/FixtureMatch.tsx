@@ -43,7 +43,7 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({
 
   return (
     <NextLink href={`${MATCH_ROUTE}/${fixture.id}`} passHref>
-      <Link isExternal _hover={{ textDecor: "initial" }}>
+      <Link width="100%" isExternal _hover={{ textDecor: "initial" }}>
         <Flex
           alignItems="center"
           gap={2}

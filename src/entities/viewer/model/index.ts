@@ -20,8 +20,8 @@ import {
   createEffect,
   createEvent,
   createStore,
-  forward,
   restore,
+  sample,
 } from "effector";
 
 export const setViewer = createEvent<IClientViewer | null>();
@@ -155,7 +155,7 @@ export const $authModalOpen = createStore(false)
   .on(openAuthModal, () => true)
   .on(closeAuthModal, () => false);
 
-forward({
-  from: buttonClicked,
-  to: openAuthModal,
+sample({
+  clock: buttonClicked,
+  target: openAuthModal,
 });

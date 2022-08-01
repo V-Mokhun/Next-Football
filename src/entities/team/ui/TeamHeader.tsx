@@ -1,10 +1,10 @@
 import { Team } from "@/shared/api";
 import {
   MATCHES_ROUTE,
+  RESULTS_ROUTE,
   SQUAD_ROUTE,
   STANDINGS_ROUTE,
   TEAM_ROUTE,
-  TRANSFERS_ROUTE,
 } from "@/shared/lib";
 import { CardBlock } from "@/shared/ui";
 import { Box, Button, Flex, Heading, Img } from "@chakra-ui/react";
@@ -24,6 +24,11 @@ const LINKS = (id: number) => [
     text: "General",
   },
   {
+    isActivePath: `${RESULTS_ROUTE}`,
+    onClickPath: `${TEAM_ROUTE}/${id}/${RESULTS_ROUTE}`,
+    text: "Results",
+  },
+  {
     isActivePath: `${MATCHES_ROUTE}`,
     onClickPath: `${TEAM_ROUTE}/${id}/${MATCHES_ROUTE}`,
     text: "Matches",
@@ -32,11 +37,6 @@ const LINKS = (id: number) => [
     isActivePath: `${STANDINGS_ROUTE}`,
     onClickPath: `${TEAM_ROUTE}/${id}/${STANDINGS_ROUTE}`,
     text: "Standings",
-  },
-  {
-    isActivePath: `${TRANSFERS_ROUTE}`,
-    onClickPath: `${TEAM_ROUTE}/${id}/${TRANSFERS_ROUTE}`,
-    text: "Transfers",
   },
   {
     isActivePath: `${SQUAD_ROUTE}`,

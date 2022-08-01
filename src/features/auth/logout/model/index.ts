@@ -1,11 +1,11 @@
 import { viewerModel } from "@/entities/viewer";
-import { createEvent, forward, sample } from "effector";
+import { createEvent, sample } from "effector";
 
 export const buttonClicked = createEvent();
 
-forward({
-  from: buttonClicked,
-  to: viewerModel.logoutFx,
+sample({
+  clock: buttonClicked,
+  target: viewerModel.logoutFx,
 });
 
 sample({

@@ -1,13 +1,13 @@
 import { viewerModel } from "@/entities/viewer";
-import { createEvent, forward, sample } from "effector";
+import { createEvent, sample } from "effector";
 
 export const changeTimezone = createEvent<string>();
 
 export const $viewerTimezonesFetching = viewerModel.changeTimezoneFx.pending;
 
-forward({
-  from: changeTimezone,
-  to: viewerModel.changeTimezoneFx,
+sample({
+  clock: changeTimezone,
+  target: viewerModel.changeTimezoneFx,
 });
 
 sample({

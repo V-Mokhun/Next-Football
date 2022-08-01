@@ -1,7 +1,8 @@
 import { calendarModel } from "@/entities/calendar";
 import { fixtureModel } from "@/entities/fixture";
 import { viewerModel } from "@/entities/viewer";
-import { FixtureResponse, FixturesQueryParams } from "@/shared/api";
+import { FixturesQueryParams } from "@/shared/api";
+import { transformManyFixtures } from "@/shared/lib";
 import { createEvent, sample } from "effector";
 
 export const fetchFixtures = createEvent();
@@ -36,34 +37,11 @@ sample({
   target: fixtureModel.fetchFixturesFx,
 });
 
-sample({
-  clock: fixtureModel.fetchFixturesFx.doneData,
-  source: viewerModel.$viewerFavoriteLeagues,
-  fn: (favoriteLeagues, fixtures) => {
-    const sortedFixtures: { [key: string]: FixtureResponse[] }[] = [];
-
-    for (const fixture of fixtures) {
-      const leagueName = fixture.league.name;
-      const fixtureItem = sortedFixtures.find((f) => f[leagueName]);
-
-      if (fixtureItem) {
-        fixtureItem[leagueName].push(fixture);
-      } else {
-        const isFavoriteLeague = favoriteLeagues.find(
-          (league) => league.id === fixture.league.id
-        );
-        if (isFavoriteLeague) {
-          sortedFixtures.unshift({ [leagueName]: [fixture] });
-        } else {
-          sortedFixtures.push({ [leagueName]: [fixture] });
-        }
-      }
-    }
-
-    return sortedFixtures;
-  },
-  target: fixtureModel.$fixtures,
-});
+transformManyFixtures(
+  fixtureModel.fetchFixturesFx.doneData,
+  fixtureModel.$fixtures,
+  viewerModel.$viewerFavoriteLeagues
+);
 
 sample({
   clock: fixtureModel.fetchFixturesFx,

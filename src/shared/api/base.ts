@@ -3,7 +3,7 @@ import { catchError } from "./lib";
 import { ViewerRequestBody } from "./models";
 
 export class BaseApi {
-  apiInstance: AxiosInstance;
+  protected apiInstance: AxiosInstance;
 
   constructor(apiInstance: AxiosInstance) {
     this.apiInstance = apiInstance;

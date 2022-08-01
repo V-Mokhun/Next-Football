@@ -1,4 +1,4 @@
-import { createEvent, createStore, forward, sample } from "effector";
+import { createEvent, createStore, sample } from "effector";
 
 export const openModal = createEvent();
 export const closeModal = createEvent();
@@ -19,12 +19,12 @@ sample({
   target: $modalOpen,
 });
 
-forward({
-  from: buttonClicked,
-  to: openModal,
+sample({
+  clock: buttonClicked,
+  target: openModal,
 });
 
-forward({
-  from: searchItemClicked,
-  to: closeModal,
+sample({
+  clock: searchItemClicked,
+  target: closeModal,
 });

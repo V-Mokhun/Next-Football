@@ -1,4 +1,4 @@
-import { createEvent, createStore, forward } from "effector";
+import { createEvent, createStore, sample } from "effector";
 
 export type AuthModalMode = "login" | "register";
 
@@ -11,12 +11,12 @@ export const $authModalMode = createStore<AuthModalMode>("login")
   .on(setLoginMode, () => "login")
   .on(setRegisterMode, () => "register");
 
-forward({
-  from: loginTabClicked,
-  to: setLoginMode,
+sample({
+  clock: loginTabClicked,
+  target: setLoginMode,
 });
 
-forward({
-  from: registerTabClicked,
-  to: setRegisterMode,
+sample({
+  clock: registerTabClicked,
+  target: setRegisterMode,
 });

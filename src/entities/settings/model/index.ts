@@ -1,11 +1,5 @@
 import { GetTimezonesResponse, rapidApi } from "@/shared/api";
-import {
-  createEffect,
-  createEvent,
-  createStore,
-  forward,
-  sample,
-} from "effector";
+import { createEffect, createEvent, createStore, sample } from "effector";
 
 interface SettingsStore {
   timezones: GetTimezonesResponse["response"];
@@ -44,9 +38,9 @@ export const $modalOpen = createStore(false)
   .on(openModal, () => true)
   .on(closeModal, () => false);
 
-forward({
-  from: buttonClicked,
-  to: openModal,
+sample({
+  clock: buttonClicked,
+  target: openModal,
 });
 
 const $modalOpenedCount = createStore(0).on(openModal, (count) => count + 1);

@@ -1,6 +1,10 @@
 import { TeamHeader, teamModel } from "@/entities/team";
 import { FavoriteTeamButton } from "@/features/toggle-favorite/toggle-favorite-team";
-import { TeamTodayMatches } from "@/widgets/team-matches";
+import {
+  TeamLastMatches,
+  TeamNextMatches,
+  TeamTodayMatches,
+} from "@/widgets/team-matches";
 import { useStore } from "effector-react";
 import React from "react";
 
@@ -15,6 +19,8 @@ export const TeamPage: React.FC<TeamPageProps> = ({}) => {
       {todayMatches && Object.values(todayMatches)[0]?.length > 0 && (
         <TeamTodayMatches />
       )}
+      <TeamLastMatches />
+      <TeamNextMatches />
     </>
   );
 };

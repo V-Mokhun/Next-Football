@@ -6,13 +6,7 @@ import {
   LeaguesQueryParams,
   rapidApi,
 } from "@/shared/api";
-import {
-  createEffect,
-  createEvent,
-  createStore,
-  forward,
-  sample,
-} from "effector";
+import { createEffect, createEvent, createStore, sample } from "effector";
 
 export const countryButtonClicked = createEvent<string>();
 export const fetchCountries = createEvent();
@@ -53,9 +47,9 @@ export const $countries = createStore<{ country: Country; loaded: boolean }[]>(
   return countries.map((country) => ({ country, loaded: false }));
 });
 
-forward({
-  from: fetchCountries,
-  to: fetchCountriesFx,
+sample({
+  clock: fetchCountries,
+  target: fetchCountriesFx,
 });
 
 sample({

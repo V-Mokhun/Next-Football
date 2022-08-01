@@ -42,6 +42,7 @@ export const TeamTodayMatches: React.FC<TeamTodayMatchesProps> = ({}) => {
           league={match.league}
           matches={matches}
           matchesQuantity={matches.length}
+          isAccordion={false}
         />
       );
     },
@@ -54,14 +55,7 @@ export const TeamTodayMatches: React.FC<TeamTodayMatchesProps> = ({}) => {
   ) : (
     <CardBlock>
       <Box mb={4}>
-        <Heading
-          backgroundColor="main.400"
-          py={1}
-          px={3}
-          borderRadius="8px"
-          as="h2"
-          fontSize="md"
-        >
+        <Heading as="h2" fontSize="xl" mb={4}>
           Today`s matches
         </Heading>
         {list}

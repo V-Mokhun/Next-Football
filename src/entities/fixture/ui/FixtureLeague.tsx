@@ -23,6 +23,7 @@ interface FixtureLeagueProps {
   matches: React.ReactElement | React.ReactElement[];
   isFavorite: boolean;
   matchesQuantity: number;
+  isAccordion?: boolean;
 }
 
 export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
@@ -31,59 +32,105 @@ export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
   matches,
   isFavorite,
   matchesQuantity,
+  isAccordion = true,
 }) => {
-  return (
-    <AccordionItem>
-      {({ isExpanded }) => (
-        <>
-          <Flex alignItems="center" gap={2}>
-            {FavoriteComponent && (
-              <FavoriteComponent size="small" data={league} />
-            )}
-            <Flex
-              fontWeight={700}
-              alignItems="center"
-              flex="1 1 100%"
-              textAlign="left"
-              fontSize="sm"
-            >
-              <Box mr={2}>
-                <Image
-                  alt={league.name}
-                  src={league.flag || league.logo}
-                  w="18px"
-                  h="12px"
-                />
-              </Box>
-              <Text
-                color={isFavorite ? "yellow.400" : "initial"}
-                mr={1}
-                textTransform="uppercase"
-              >
-                {league.country}:
-              </Text>
-              <NextLink href={`${LEAGUE_ROUTE}/${league.id}`} passHref>
-                <Link color={isFavorite ? "yellow.400" : "initial"}>
-                  {league.name}
-                </Link>
-              </NextLink>
-            </Flex>
-            <AccordionButton
-              justifyContent="flex-end"
-              width="auto"
-              flex="0 1 auto"
-            >
-              {!isExpanded && (
-                <Text whiteSpace="nowrap" fontSize="xs">
-                  Show matches ({matchesQuantity})
-                </Text>
+  let body = null;
+
+  if (isAccordion) {
+    body = (
+      <AccordionItem>
+        {({ isExpanded }) => (
+          <>
+            <Flex alignItems="center" gap={2}>
+              {FavoriteComponent && (
+                <FavoriteComponent size="small" data={league} />
               )}
-              <AccordionIcon />
-            </AccordionButton>
+              <Flex
+                fontWeight={700}
+                alignItems="center"
+                flex="1 1 100%"
+                textAlign="left"
+                fontSize="sm"
+              >
+                <Box mr={2}>
+                  <Image
+                    alt={league.name}
+                    src={league.flag || league.logo}
+                    w="18px"
+                    h="12px"
+                  />
+                </Box>
+                <Text
+                  color={isFavorite ? "yellow.400" : "initial"}
+                  mr={1}
+                  textTransform="uppercase"
+                >
+                  {league.country}:
+                </Text>
+                <NextLink href={`${LEAGUE_ROUTE}/${league.id}`} passHref>
+                  <Link color={isFavorite ? "yellow.400" : "initial"}>
+                    {league.name}
+                  </Link>
+                </NextLink>
+              </Flex>
+              <AccordionButton
+                justifyContent="flex-end"
+                width="auto"
+                flex="0 1 auto"
+              >
+                {!isExpanded && (
+                  <Text whiteSpace="nowrap" fontSize="xs">
+                    Show matches ({matchesQuantity})
+                  </Text>
+                )}
+                <AccordionIcon />
+              </AccordionButton>
+            </Flex>
+            <AccordionPanel p={0}>{matches}</AccordionPanel>
+          </>
+        )}
+      </AccordionItem>
+    );
+  } else {
+    body = (
+      <Box>
+        <Flex alignItems="center" gap={2}>
+          {FavoriteComponent && (
+            <FavoriteComponent size="small" data={league} />
+          )}
+          <Flex
+            fontWeight={700}
+            alignItems="center"
+            flex="1 1 100%"
+            textAlign="left"
+            fontSize="sm"
+          >
+            <Box mr={2}>
+              <Image
+                alt={league.name}
+                src={league.flag || league.logo}
+                w="18px"
+                h="12px"
+              />
+            </Box>
+            <Text
+              color={isFavorite ? "yellow.400" : "initial"}
+              mr={1}
+              textTransform="uppercase"
+            >
+              {league.country}:
+            </Text>
+            <NextLink href={`${LEAGUE_ROUTE}/${league.id}`} passHref>
+              <Link color={isFavorite ? "yellow.400" : "initial"}>
+                {league.name}
+              </Link>
+            </NextLink>
           </Flex>
-          <AccordionPanel p={0}>{matches}</AccordionPanel>
-        </>
-      )}
-    </AccordionItem>
-  );
+        </Flex>
+        <Box>{matches}</Box>
+      </Box>
+    );
+  }
+
+  return body;
 };

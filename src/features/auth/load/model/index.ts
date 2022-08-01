@@ -1,12 +1,12 @@
 import { viewerModel } from "@/entities/viewer";
 import { IClientViewer } from "@/shared/api";
-import { createEvent, forward, sample } from "effector";
+import { createEvent, sample } from "effector";
 
 export const loadViewer = createEvent<string | void>();
 
-forward({
-  from: loadViewer,
-  to: viewerModel.loadViewerFx,
+sample({
+  clock: loadViewer,
+  target: viewerModel.loadViewerFx,
 });
 
 sample({

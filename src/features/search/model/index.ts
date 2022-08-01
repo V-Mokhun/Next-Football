@@ -9,7 +9,6 @@ import {
   createEffect,
   createEvent,
   createStore,
-  forward,
   restore,
   sample,
 } from "effector";
@@ -54,14 +53,14 @@ export const fetchTeamsFx = createEffect<
   return response;
 });
 
-forward({
-  from: onFetchLeagues,
-  to: fetchLeaguesFx,
+sample({
+  clock: onFetchLeagues,
+  target: fetchLeaguesFx,
 });
 
-forward({
-  from: onFetchTeams,
-  to: fetchTeamsFx,
+sample({
+  clock: onFetchTeams,
+  target: fetchTeamsFx,
 });
 
 export const $search = restore(changeSearch, "");

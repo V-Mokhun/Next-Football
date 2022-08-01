@@ -19,7 +19,7 @@ export const Matches: React.FC<MatchesProps> = ({}) => {
     fn: (fixtureObj) => {
       const fixtures = Object.values(fixtureObj)[0];
 
-      if (fixtures.length <= 0) return null;
+      if (fixtures.length < 1) return null;
 
       const isFavoriteLeague = viewerFavoriteLeagues.find(
         (league) => league.id === fixtures[0].league.id

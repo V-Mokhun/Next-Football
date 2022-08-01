@@ -1,4 +1,4 @@
-import { FixtureResponse } from "@/shared/api";
+import { FixtureResponse, League } from "@/shared/api";
 import { Event, sample, Store } from "effector";
 
 export const transformFixtures = (
@@ -22,4 +22,66 @@ export const transformFixtures = (
     },
     target,
   });
+};
+
+export const transformManyFixtures = (
+  clock: Event<FixtureResponse[]>,
+  target: Store<
+    {
+      [key: string]: FixtureResponse[];
+    }[]
+  >,
+  source?: Store<League[]>
+) => {
+  if (source) {
+    sample({
+      clock,
+      source,
+      fn: (favoriteLeagues, fixtures) => {
+        const sortedFixtures: { [key: string]: FixtureResponse[] }[] = [];
+
+        for (const fixture of fixtures) {
+          const leagueName = fixture.league.name;
+          const fixtureItem = sortedFixtures.find((f) => f[leagueName]);
+
+          if (fixtureItem) {
+            fixtureItem[leagueName].push(fixture);
+          } else {
+            const isFavoriteLeague = favoriteLeagues.find(
+              (league) => league.id === fixture.league.id
+            );
+            if (isFavoriteLeague) {
+              sortedFixtures.unshift({ [leagueName]: [fixture] });
+            } else {
+              sortedFixtures.push({ [leagueName]: [fixture] });
+            }
+          }
+        }
+
+        return sortedFixtures;
+      },
+      target,
+    });
+  } else {
+    sample({
+      clock,
+      fn: (fixtures) => {
+        const sortedFixtures: { [key: string]: FixtureResponse[] }[] = [];
+
+        for (const fixture of fixtures) {
+          const leagueName = fixture.league.name;
+          const fixtureItem = sortedFixtures.find((f) => f[leagueName]);
+
+          if (fixtureItem) {
+            fixtureItem[leagueName].push(fixture);
+          } else {
+            sortedFixtures.push({ [leagueName]: [fixture] });
+          }
+        }
+
+        return sortedFixtures;
+      },
+      target,
+    });
+  }
 };

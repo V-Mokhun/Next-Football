@@ -14,7 +14,6 @@ import {
   createEffect,
   createEvent,
   createStore,
-  forward,
   restore,
   sample,
 } from "effector";
@@ -84,9 +83,9 @@ export const $leagueStandingsError = createStore("").reset(
 export const $isCurrentRound = restore(currentRoundChanged, true);
 export const $activeRound = restore(activeRoundSet, null);
 
-forward({
-  from: leagueSet,
-  to: fetchLeagueFx,
+sample({
+  clock: leagueSet,
+  target: fetchLeagueFx,
 });
 
 transformFixtures(fetchLeagueFixturesFx.doneData, $leagueFixtures, true);

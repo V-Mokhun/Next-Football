@@ -2,7 +2,6 @@ import {
   FixtureResponse,
   FixturesQueryParams,
   FixtureStatus,
-  GetFixturesResponse,
   rapidApi,
 } from "@/shared/api";
 import { createEffect, createEvent, createStore, sample } from "effector";
@@ -12,7 +11,7 @@ export const allFixturesSelected = createEvent();
 
 export const fetchFixturesFx = createEffect<
   FixturesQueryParams,
-  GetFixturesResponse["response"],
+  FixtureResponse[],
   Error
 >(async (params) => {
   const { response } = await rapidApi.fixturesApi.getFixtures(params);

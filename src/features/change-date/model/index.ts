@@ -1,12 +1,12 @@
 import { calendarModel } from "@/entities/calendar";
-import { createEvent, forward, sample } from "effector";
+import { createEvent, sample } from "effector";
 
 export const nextDayButtonClicked = createEvent();
 export const prevDayButtonClicked = createEvent();
 
-forward({
-  from: calendarModel.dateSelected,
-  to: calendarModel.$selectedDate,
+sample({
+  clock: calendarModel.dateSelected,
+  target: calendarModel.$selectedDate,
 });
 
 sample({
