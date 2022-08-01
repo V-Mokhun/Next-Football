@@ -13,13 +13,11 @@ import {
 import NextLink from "next/link";
 import React from "react";
 
-interface LeagueStandingRowProps {
+interface StandingRowProps {
   standing: Standing;
 }
 
-export const LeagueStandingRow: React.FC<LeagueStandingRowProps> = ({
-  standing,
-}) => {
+export const StandingRow: React.FC<StandingRowProps> = ({ standing }) => {
   const { colorMode } = useColorMode();
   const standingForm = standing.form && standing.form.split("");
 

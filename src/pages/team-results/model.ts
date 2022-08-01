@@ -7,10 +7,10 @@ export const pageStarted = createEvent<StaticPageContext>();
 
 sample({
   clock: pageStarted,
-  source: teamModel.$nextMatchesCount,
+  source: teamModel.$lastMatchesCount,
   filter: (count) => count !== 40,
   fn: (): TeamMatchesLimit => 40,
-  target: teamModel.nextMatchesCountUpdated,
+  target: teamModel.lastMatchesCountUpdated,
 });
 
 setEntityByParamsId(pageStarted, [

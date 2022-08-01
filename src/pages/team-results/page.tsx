@@ -1,15 +1,15 @@
 import { TeamHeader } from "@/entities/team";
 import { FavoriteTeamButton } from "@/features/toggle-favorite/toggle-favorite-team";
-import { TeamStandings } from "@/widgets/team-standings";
+import { TeamLastMatches } from "@/widgets/team-matches";
 import React from "react";
 
-interface TeamStandingsPageProps {}
+interface TeamResultsPageProps {}
 
-export const TeamStandingsPage: React.FC<TeamStandingsPageProps> = ({}) => {
+export const TeamResultsPage: React.FC<TeamResultsPageProps> = ({}) => {
   return (
     <>
       <TeamHeader FavoriteComponent={FavoriteTeamButton} />
-      <TeamStandings />
+      <TeamLastMatches isMatchesPage={true} />
     </>
   );
 };

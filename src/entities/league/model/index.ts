@@ -21,6 +21,7 @@ import {
 export const leagueSet = createEvent<number>();
 export const currentRoundChanged = createEvent<boolean>();
 export const activeRoundSet = createEvent<string>();
+export const fetchLeagueStandings = createEvent();
 
 export const fetchLeagueFx = createEffect<number, LeagueResponse | null, Error>(
   async (id) => {
@@ -85,10 +86,26 @@ export const $activeRound = restore(activeRoundSet, null);
 
 sample({
   clock: leagueSet,
+  source: $league,
+  filter: (league, id) => league != null && league.league.id != id,
+  fn: (_, id) => id,
   target: fetchLeagueFx,
 });
 
-transformFixtures(fetchLeagueFixturesFx.doneData, $leagueFixtures, true);
+sample({
+  clock: fetchLeagueStandings,
+  source: $league,
+  filter: (leagueFixture) =>
+    Boolean(leagueFixture) ||
+    Boolean(leagueFixture?.seasons[0].coverage.standings),
+  fn: (leagueFixture): StandingsQueryParams => {
+    return {
+      season: leagueFixture!.seasons[0].year,
+      league: leagueFixture!.league.id,
+    };
+  },
+  target: fetchLeagueStandingsFx,
+});
 
 sample({
   clock: fetchLeagueRoundsFx.doneData,
@@ -116,3 +133,5 @@ sample({
   fn: (error) => error.message,
   target: $leagueFixturesError,
 });
+
+transformFixtures(fetchLeagueFixturesFx.doneData, $leagueFixtures, true);

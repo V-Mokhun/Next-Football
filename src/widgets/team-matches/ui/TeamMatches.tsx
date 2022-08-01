@@ -15,6 +15,7 @@ interface TeamMatchesProps {
   store: typeof teamModel.$lastMatches;
   title: string;
   route: string;
+  noRedirect?: boolean;
 }
 
 export const TeamMatches: React.FC<TeamMatchesProps> = ({
@@ -23,6 +24,7 @@ export const TeamMatches: React.FC<TeamMatchesProps> = ({
   error,
   title,
   route,
+  noRedirect = false,
 }) => {
   const isAuthenticated = useStore(viewerModel.$isAuthenticated);
   const viewerFavoriteLeagues = useStore(viewerModel.$viewerFavoriteLeagues);
@@ -93,13 +95,15 @@ export const TeamMatches: React.FC<TeamMatchesProps> = ({
           </Heading>
           {list}
         </Box>
-        <Flex justifyContent="center">
-          <NextLink href={`${router.asPath}/${route}`} passHref>
-            <Link fontWeight={700} fontSize="sm">
-              See more matches
-            </Link>
-          </NextLink>
-        </Flex>
+        {!noRedirect && (
+          <Flex justifyContent="center">
+            <NextLink href={`${router.asPath}/${route}`} passHref>
+              <Link fontWeight={700} fontSize="sm">
+                See more matches
+              </Link>
+            </NextLink>
+          </Flex>
+        )}
       </CardBlock>
     );
   }

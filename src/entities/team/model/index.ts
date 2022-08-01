@@ -1,4 +1,12 @@
-import { FixtureResponse, rapidApi, TeamResponse } from "@/shared/api";
+import {
+  FixtureResponse,
+  GetStandingsResponse,
+  LeagueResponse,
+  rapidApi,
+  Standing,
+  StandingsQueryParams,
+  TeamResponse,
+} from "@/shared/api";
 import {
   formatDate,
   transformFixtures,
@@ -11,13 +19,18 @@ import {
   restore,
   sample,
 } from "effector";
+import { TeamMatchesLimit, TeamSeason } from "../types";
+
+export const NORMAL_MATCHES_LIMIT: TeamMatchesLimit = 10;
+export const EXTENDED_MATCHES_LIMIT: TeamMatchesLimit = 40;
 
 export const todayDate = formatDate(new Date());
 
 export const teamSet = createEvent<number>();
 export const fetchTeamSeason = createEvent<number>();
-export const lastMatchesCountUpdated = createEvent<number>();
-export const nextMatchesCountUpdated = createEvent<number>();
+export const fetchTeamStandings = createEvent<number>();
+export const lastMatchesCountUpdated = createEvent<TeamMatchesLimit>();
+export const nextMatchesCountUpdated = createEvent<TeamMatchesLimit>();
 
 export const fetchTeamFx = createEffect<number, TeamResponse, Error>(
   async (id) => {
@@ -27,15 +40,26 @@ export const fetchTeamFx = createEffect<number, TeamResponse, Error>(
   }
 );
 
-export const fetchTeamSeasonFx = createEffect<
+export const fetchTeamLeagueFx = createEffect<
   number,
-  { teamId: number; season: number },
+  LeagueResponse["league"] | null,
   Error
 >(async (teamId) => {
-  const season = await rapidApi.teamsApi.getCurrentSeason(teamId);
+  const { response } = await rapidApi.leaguesApi.getLeagues({
+    team: teamId,
+    current: true,
+  });
 
-  return { season, teamId };
+  return response[0].league || null;
 });
+
+export const fetchTeamSeasonFx = createEffect<number, TeamSeason, Error>(
+  async (teamId) => {
+    const season = await rapidApi.teamsApi.getCurrentSeason(teamId);
+
+    return { season, teamId };
+  }
+);
 
 export const fetchTodayMatchesFx = createEffect<
   { teamId: number; season: number },
@@ -52,7 +76,7 @@ export const fetchTodayMatchesFx = createEffect<
 });
 
 export const fetchLastMatchesFx = createEffect<
-  { teamId: number; season: number; lastMatches: number },
+  TeamSeason & { lastMatches: number },
   FixtureResponse[],
   Error
 >(async ({ season, teamId, lastMatches }) => {
@@ -66,7 +90,7 @@ export const fetchLastMatchesFx = createEffect<
 });
 
 export const fetchNextMatchesFx = createEffect<
-  { teamId: number; season: number; nextMatches: number },
+  TeamSeason & { nextMatches: number },
   FixtureResponse[],
   Error
 >(async ({ season, teamId, nextMatches }) => {
@@ -75,6 +99,16 @@ export const fetchNextMatchesFx = createEffect<
     season,
     next: nextMatches,
   });
+
+  return response;
+});
+
+export const fetchTeamStandingsFx = createEffect<
+  StandingsQueryParams,
+  GetStandingsResponse["response"],
+  Error
+>(async (params) => {
+  const { response } = await rapidApi.standingsApi.getStandings(params);
 
   return response;
 });
@@ -100,6 +134,8 @@ export const $team = restore(fetchTeamFx.doneData, {
   },
 });
 
+export const $teamLeague = restore(fetchTeamLeagueFx.doneData, null);
+
 export const $teamSeason = restore(fetchTeamSeasonFx.doneData, null);
 
 export const $todayMatches = createStore<{
@@ -107,7 +143,10 @@ export const $todayMatches = createStore<{
 } | null>(null).reset(fetchTodayMatchesFx.failData);
 export const $todayMatchesLoading = fetchTodayMatchesFx.pending;
 
-export const $lastMatchesCount = restore(lastMatchesCountUpdated, 10);
+export const $lastMatchesCount = restore(
+  lastMatchesCountUpdated,
+  NORMAL_MATCHES_LIMIT
+);
 export const $lastMatches = createStore<
   {
     [key: string]: FixtureResponse[];
@@ -116,7 +155,10 @@ export const $lastMatches = createStore<
 export const $lastMatchesLoading = fetchLastMatchesFx.pending;
 export const $lastMatchesError = createStore("").reset(fetchLastMatchesFx);
 
-export const $nextMatchesCount = restore(nextMatchesCountUpdated, 10);
+export const $nextMatchesCount = restore(
+  nextMatchesCountUpdated,
+  NORMAL_MATCHES_LIMIT
+);
 export const $nextMatches = createStore<
   {
     [key: string]: FixtureResponse[];
@@ -125,14 +167,60 @@ export const $nextMatches = createStore<
 export const $nextMatchesLoading = fetchNextMatchesFx.pending;
 export const $nextMatchesError = createStore("").reset(fetchNextMatchesFx);
 
+export const $teamStandings = createStore<Standing[]>([]);
+export const $teamStandingsLoading = fetchTeamStandingsFx.pending;
+export const $teamStandingsError = createStore("").reset(fetchTeamStandingsFx);
+
+sample({
+  clock: teamSet,
+  source: $team,
+  filter: (team, id) => team != null && team.team.id != id,
+  fn: (_, id) => id,
+  target: [fetchTeamFx, fetchTeamLeagueFx],
+});
+
+sample({
+  clock: fetchTeamSeason,
+  source: $teamSeason,
+  filter: (season) => season == null,
+  fn: (_, season) => season,
+  target: fetchTeamSeasonFx,
+});
+
+sample({
+  clock: [fetchTeamStandings, $teamSeason],
+  source: { teamSeason: $teamSeason, teamLeague: $teamLeague },
+  filter: ({ teamSeason, teamLeague }) =>
+    teamSeason != null && teamLeague != null,
+  fn: ({ teamSeason, teamLeague }): StandingsQueryParams => ({
+    season: teamSeason!.season,
+    league: teamLeague!.id,
+  }),
+  target: fetchTeamStandingsFx,
+});
+
 // sample({
-//   clock: teamSet,
-//   target: fetchTeamFx,
+//   clock: [$lastMatchesCount, $teamSeason],
+//   source: { lastMatches: $lastMatchesCount, season: $teamSeason },
+//   filter: ({ season }) => season != null,
+//   fn: ({ lastMatches, season }) => ({
+//     season: season!.season,
+//     teamId: season!.teamId,
+//     lastMatches,
+//   }),
+//   target: fetchLastMatchesFx,
 // });
 
 // sample({
-//   clock: fetchTeamSeason,
-//   target: fetchTeamSeasonFx,
+//   clock: [$nextMatchesCount, $teamSeason],
+//   source: { nextMatches: $nextMatchesCount, season: $teamSeason },
+//   filter: ({ season }) => season != null,
+//   fn: ({ nextMatches, season }) => ({
+//     season: season!.season,
+//     teamId: season!.teamId,
+//     nextMatches,
+//   }),
+//   target: fetchNextMatchesFx,
 // });
 
 sample({
@@ -148,6 +236,12 @@ sample({
 });
 
 sample({
+  clock: fetchTeamStandingsFx.failData,
+  fn: (error) => error.message,
+  target: $teamStandingsError,
+});
+
+sample({
   clock: fetchTeamSeasonFx.doneData,
   filter: ({ season }) => Boolean(season),
   fn: ({ season, teamId }) => ({ season: season as number, teamId }),
@@ -155,27 +249,12 @@ sample({
 });
 
 sample({
-  clock: fetchTeamSeasonFx.doneData,
-  source: $lastMatchesCount,
-  filter: (_, { season }) => Boolean(season),
-  fn: (lastMatches, { season, teamId }) => ({
-    season: season as number,
-    teamId,
-    lastMatches,
-  }),
-  target: fetchLastMatchesFx,
-});
-
-sample({
-  clock: fetchTeamSeasonFx.doneData,
-  source: $nextMatchesCount,
-  filter: (_, { season }) => Boolean(season),
-  fn: (nextMatches, { season, teamId }) => ({
-    season: season as number,
-    teamId,
-    nextMatches,
-  }),
-  target: fetchNextMatchesFx,
+  clock: fetchTeamStandingsFx.doneData,
+  filter: (standings) => Boolean(standings[0]?.league?.standings[0]),
+  fn: (standings): Standing[] => {
+    return standings[0].league.standings[0];
+  },
+  target: $teamStandings,
 });
 
 transformFixtures(fetchTodayMatchesFx.doneData, $todayMatches);

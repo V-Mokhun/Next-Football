@@ -1,11 +1,9 @@
 import { Th, Thead, Tr } from "@chakra-ui/react";
 import React from "react";
 
-interface LeagueStandingHeaderProps {}
+interface StandingHeaderProps {}
 
-export const LeagueStandingHeader: React.FC<
-  LeagueStandingHeaderProps
-> = ({}) => {
+export const StandingHeader: React.FC<StandingHeaderProps> = ({}) => {
   return (
     <Thead>
       <Tr>

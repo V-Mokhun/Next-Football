@@ -1,5 +1,4 @@
 import { leagueModel } from "@/entities/league";
-import { leagueStandingsModel } from "@/widgets/league-standings";
 import { createEvent, sample } from "effector";
 import { StaticPageContext } from "nextjs-effector";
 import { setEntityByParamsId } from "../shared";
@@ -16,5 +15,5 @@ sample({
 
 sample({
   clock: leagueModel.$league,
-  target: leagueStandingsModel.fetchLeagueStandings,
+  target: leagueModel.fetchLeagueStandings,
 });

@@ -25,8 +25,6 @@ export const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({}) => {
   const isLoading = useStore(changePasswordModel.$loading);
   const errorMessage = useStore(changePasswordModel.$error);
 
-  // console.log("ERROR MESSAGE: ", errorMessage);
-
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsPasswordsSame(false);

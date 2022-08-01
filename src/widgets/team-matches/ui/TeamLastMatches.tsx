@@ -4,9 +4,13 @@ import { useStore } from "effector-react";
 import React from "react";
 import { TeamMatches } from "./TeamMatches";
 
-interface TeamLastMatchesProps {}
+interface TeamLastMatchesProps {
+  isMatchesPage?: boolean;
+}
 
-export const TeamLastMatches: React.FC<TeamLastMatchesProps> = ({}) => {
+export const TeamLastMatches: React.FC<TeamLastMatchesProps> = ({
+  isMatchesPage = false,
+}) => {
   const loading = useStore(teamModel.$lastMatchesLoading);
   const error = useStore(teamModel.$lastMatchesError);
 
@@ -17,6 +21,7 @@ export const TeamLastMatches: React.FC<TeamLastMatchesProps> = ({}) => {
       store={teamModel.$lastMatches}
       title="Last results"
       route={RESULTS_ROUTE}
+      noRedirect={isMatchesPage}
     />
   );
 };
