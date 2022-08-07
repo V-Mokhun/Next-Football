@@ -18,16 +18,19 @@ interface StandingsProps {
   loading: boolean;
   error: string;
   store: Store<Standing[]>;
+  selectedTeam?: number;
 }
 
 export const Standings: React.FC<StandingsProps> = ({
   loading,
   error,
   store,
+  selectedTeam,
 }) => {
-  const standings = useList(store, (standing) => (
-    <StandingRow standing={standing} />
-  ));
+  const standings = useList(store, (standing) => {
+    const isSelected = standing.team.id === selectedTeam;
+    return <StandingRow standing={standing} isTeamSelected={isSelected} />;
+  });
 
   let body = null;
 

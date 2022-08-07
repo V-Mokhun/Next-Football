@@ -20,6 +20,12 @@ export enum FixtureStatus {
   LIVE = "LIVE",
 }
 
+export type PlayerPosition =
+  | "Goalkeeper"
+  | "Defender"
+  | "Midfielder"
+  | "Attacker";
+
 interface Venue {
   id: number | null;
   name: string;
@@ -57,14 +63,17 @@ interface Season {
   coverage: Coverage;
 }
 
-export interface Team {
+interface BasicTeam {
   id: number;
   name: string;
+  logo: string;
+}
+
+export interface Team extends BasicTeam {
   code: string;
   country: string;
   founded: number;
   national: boolean;
-  logo: string;
 }
 
 export type LeagueType = "League" | "Cup";
@@ -79,6 +88,15 @@ export interface Country {
   name: string;
   code: string;
   flag: string;
+}
+
+export interface Player {
+  id: number;
+  name: string;
+  age: number;
+  number: number | null;
+  position: PlayerPosition;
+  photo: string;
 }
 
 export interface Fixture {
@@ -124,7 +142,7 @@ export interface Standing {
   update: string;
 }
 
-export type FixtureTeam = Pick<Team, "id" | "name" | "logo"> & {
+export type FixtureTeam = BasicTeam & {
   winner: boolean | null;
 };
 
@@ -168,6 +186,7 @@ export type LeaguesQueryParams = {
   season?: number;
   team?: number;
   current?: boolean;
+  type?: Lowercase<LeagueType>;
 };
 
 export type GetTeamsResponse = ApiResponse & {
@@ -254,4 +273,16 @@ export type FixtureResponse = GetFixturesResponse["response"][0];
 
 export type HeadToHeadQueryParams = Omit<FixturesQueryParams, "id"> & {
   h2h: string;
+};
+
+export type GetSquadsResponse = ApiResponse & {
+  response: {
+    team: BasicTeam;
+    players: Player[];
+  }[];
+};
+export type SquadResponse = GetSquadsResponse["response"][0];
+export type SquadsQueryParams = {
+  team?: number;
+  player?: number;
 };

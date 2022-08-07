@@ -87,7 +87,7 @@ export const $activeRound = restore(activeRoundSet, null);
 sample({
   clock: leagueSet,
   source: $league,
-  filter: (league, id) => league != null && league.league.id != id,
+  filter: (league, id) => league?.league.id != id,
   fn: (_, id) => id,
   target: fetchLeagueFx,
 });

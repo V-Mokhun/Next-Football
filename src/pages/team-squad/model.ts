@@ -5,4 +5,4 @@ import { setEntityByParamsId } from "../shared";
 
 export const pageStarted = createEvent<StaticPageContext>();
 
-setEntityByParamsId(pageStarted, teamModel.teamSet);
+setEntityByParamsId(pageStarted, [teamModel.teamSet, teamModel.fetchTeamSquad]);
