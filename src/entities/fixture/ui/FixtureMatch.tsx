@@ -1,5 +1,5 @@
 import { FixtureResponse, FixtureStatus } from "@/shared/api";
-import { convertToReadableDate, MATCH_ROUTE } from "@/shared/lib";
+import { convertToReadableDate, FIXTURE_ROUTE } from "@/shared/lib";
 import {
   Box,
   Flex,
@@ -42,7 +42,7 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({
   }
 
   return (
-    <NextLink href={`${MATCH_ROUTE}/${fixture.id}`} passHref>
+    <NextLink href={`${FIXTURE_ROUTE}/${fixture.id}`} passHref>
       <Link width="100%" isExternal _hover={{ textDecor: "initial" }}>
         <Flex
           alignItems="center"

@@ -93,7 +93,7 @@ export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
     );
   } else {
     body = (
-      <Box>
+      <Box mb={2}>
         <Flex alignItems="center" gap={2}>
           {FavoriteComponent && (
             <FavoriteComponent size="small" data={league} />

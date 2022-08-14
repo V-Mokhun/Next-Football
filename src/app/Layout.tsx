@@ -8,9 +8,13 @@ import { Modals } from "./Modals";
 
 interface LayoutProps {
   children: React.ReactNode;
+  showSidebar?: boolean;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+export const Layout: React.FC<LayoutProps> = ({
+  children,
+  showSidebar = true,
+}) => {
   return (
     <AppProvider>
       <div className="wrapper">
@@ -25,9 +29,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Header />
         <main className="main">
           <Container pt={4} as={Flex} gap={2} maxW="container.lg">
-            <Flex flexDir="column" flex="0 0 230px" maxW={230}>
-              <Sidebar />
-            </Flex>
+            {showSidebar && (
+              <Flex flexDir="column" flex="0 0 230px" maxW={230}>
+                <Sidebar />
+              </Flex>
+            )}
             <Flex flexDir="column" flex="1 1 auto">
               {children}
             </Flex>

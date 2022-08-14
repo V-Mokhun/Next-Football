@@ -1,3 +1,5 @@
+type Nullable<T> = { [K in keyof T]: T[K] | null };
+
 export enum FixtureStatus {
   TBD = "TBD",
   NS = "NS",
@@ -25,6 +27,8 @@ export type PlayerPosition =
   | "Defender"
   | "Midfielder"
   | "Attacker";
+
+export type EventType = "Goal" | "Card" | "subst" | "Var";
 
 interface Venue {
   id: number | null;
@@ -114,6 +118,56 @@ export interface Fixture {
     short: FixtureStatus;
     elapsed: number | null;
   };
+}
+
+interface Event {
+  time: { elapsed: number | null; extra: number | null };
+  team: BasicTeam;
+  player: Pick<Player, "id" | "name">;
+  assist: Nullable<Pick<Player, "id" | "name">>;
+  type: EventType;
+  detail: string;
+  comments: string | null;
+}
+
+interface LineupTeam extends BasicTeam {
+  colors: {
+    player: {
+      primary: string;
+      number: string;
+      border: string;
+    };
+    goalkeeper: {
+      primary: string;
+      number: string;
+      border: string;
+    };
+  };
+}
+interface LineupStart<TGrid> {
+  player: {
+    id: number;
+    name: string;
+    number: number;
+    pos: "G" | "D" | "M" | "F";
+    grid: TGrid;
+  };
+}
+interface Lineup {
+  team: LineupTeam;
+  formation: string;
+  startXI: LineupStart<string>[];
+  substitutes: LineupStart<null>[];
+  coach: {
+    id: number;
+    name: string;
+    photo: string;
+  };
+}
+
+interface Statistic {
+  type: string;
+  value: number | string | null;
 }
 
 export interface StandingTeamStatistics {
@@ -230,30 +284,31 @@ export type StandingsQueryParams = {
   team?: number;
 };
 
+type GetFixturesBasicResponse = {
+  fixture: Fixture;
+  league: League & {
+    country: string;
+    flag: string | null;
+    season: number;
+    round: string;
+  };
+  teams: {
+    home: FixtureTeam;
+    away: FixtureTeam;
+  };
+  goals: {
+    home: number | null;
+    away: number | null;
+  };
+  score: {
+    halftime: { home: number | null; away: number | null };
+    fulltime: { home: number | null; away: number | null };
+    extratime: { home: number | null; away: number | null };
+    penalty: { home: number | null; away: number | null };
+  };
+};
 export type GetFixturesResponse = ApiResponse & {
-  response: {
-    fixture: Fixture;
-    league: League & {
-      country: string;
-      flag: string | null;
-      season: number;
-      round: string;
-    };
-    teams: {
-      home: FixtureTeam;
-      away: FixtureTeam;
-    };
-    goals: {
-      home: number | null;
-      away: number | null;
-    };
-    score: {
-      halftime: { home: number | null; away: number | null };
-      fulltime: { home: number | null; away: number | null };
-      extratime: { home: number | null; away: number | null };
-      penalty: { home: number | null; away: number | null };
-    };
-  }[];
+  response: GetFixturesBasicResponse[];
 };
 export type FixturesQueryParams = {
   id?: number;
@@ -270,6 +325,26 @@ export type FixturesQueryParams = {
   round?: string;
 };
 export type FixtureResponse = GetFixturesResponse["response"][0];
+
+export type GetSingleFixtureResponse = ApiResponse & {
+  response: [
+    GetFixturesBasicResponse & {
+      events: Event[];
+      lineups: Lineup[];
+      statistics:
+        | [
+            { team: BasicTeam; statistics: Statistic[] },
+            { team: BasicTeam; statistics: Statistic[] }
+          ]
+        | [];
+    }
+  ];
+};
+export type SingleFixtureQueryParams = {
+  id: number;
+  timezone?: string;
+};
+export type SingleFixtureResponse = GetSingleFixtureResponse["response"][0];
 
 export type HeadToHeadQueryParams = Omit<FixturesQueryParams, "id"> & {
   h2h: string;

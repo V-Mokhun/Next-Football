@@ -1,25 +1,25 @@
-import { fork, serialize } from 'effector'
-import { NextComponentType } from 'next'
-import { AppContext, AppProps } from 'next/app'
-import React, { useRef } from 'react'
-import { INITIAL_STATE_KEY } from './constants'
+import { fork, serialize } from "effector";
+import { NextComponentType, NextPage } from "next";
+import { AppContext, AppProps } from "next/app";
+import { ReactElement, ReactNode, useRef } from "react";
+import { INITIAL_STATE_KEY } from "./constants";
 import {
   EffectorReact,
   EffectorReactImports,
   setEffectorReact,
-} from './effector-react'
-import { env } from './env'
-import { state } from './state'
+} from "./effector-react";
+import { env } from "./env";
+import { state } from "./state";
 
 interface Values {
-  [sid: string]: any
+  [sid: string]: any;
 }
 
 export function useScope(values: Values = {}) {
-  const valuesRef = useRef<Values | null>(null)
+  const valuesRef = useRef<Values | null>(null);
 
   if (env.isServer) {
-    return fork({ values })
+    return fork({ values });
   }
 
   /*
@@ -28,10 +28,10 @@ export function useScope(values: Values = {}) {
    * We need it to be accessable inside getInitialProps
    */
   if (!state.clientScope) {
-    const nextScope = fork({ values })
+    const nextScope = fork({ values });
 
-    state.clientScope = nextScope
-    valuesRef.current = values
+    state.clientScope = nextScope;
+    valuesRef.current = values;
   }
 
   /*
@@ -39,36 +39,44 @@ export function useScope(values: Values = {}) {
    * Create the new Scope from the old one and save it as before
    */
   if (values !== valuesRef.current) {
-    const currentValues = serialize(state.clientScope)
-    const nextValues = Object.assign({}, currentValues, values)
-    const nextScope = fork({ values: nextValues })
+    const currentValues = serialize(state.clientScope);
+    const nextValues = Object.assign({}, currentValues, values);
+    const nextScope = fork({ values: nextValues });
 
-    state.clientScope = nextScope
-    valuesRef.current = values
+    state.clientScope = nextScope;
+    valuesRef.current = values;
   }
 
-  return state.clientScope
+  return state.clientScope;
 }
 
 interface Options {
-  effectorReact: EffectorReactImports
+  effectorReact: EffectorReactImports;
 }
+
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
 
 export function withEffector(
   App: NextComponentType<AppContext, any, any>,
   { effectorReact }: Options
 ) {
-  setEffectorReact(effectorReact)
+  setEffectorReact(effectorReact);
 
-  return function EnhancedApp(props: AppProps) {
-    const { [INITIAL_STATE_KEY]: initialState, ...pageProps } = props.pageProps
+  return function EnhancedApp(props: AppPropsWithLayout) {
+    const { [INITIAL_STATE_KEY]: initialState, ...pageProps } = props.pageProps;
 
-    const scope = useScope(initialState)
+    const scope = useScope(initialState);
 
     return (
       <EffectorReact.Provider value={scope}>
         <App {...props} pageProps={pageProps} />
       </EffectorReact.Provider>
-    )
-  }
+    );
+  };
 }

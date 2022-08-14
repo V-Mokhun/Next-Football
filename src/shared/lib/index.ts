@@ -3,6 +3,7 @@ export * from "./connect-db";
 export * from "./convert-to-readable-date";
 export * from "./create-dates";
 export * from "./format-date";
+export * from "./next";
 export * from "./password";
 export * from "./routes";
 export * from "./theme";

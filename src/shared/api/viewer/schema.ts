@@ -40,9 +40,6 @@ const ViewerSchema: Schema = new Schema<IViewer>({
           type: String,
           required: true,
         },
-        type: {
-          type: String,
-        },
       } as any,
     ],
     default: [],

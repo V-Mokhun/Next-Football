@@ -11,10 +11,12 @@ interface MatchesProps {}
 export const Matches: React.FC<MatchesProps> = ({}) => {
   const isAuthenticated = useStore(viewerModel.$isAuthenticated);
   const viewerFavoriteLeagues = useStore(viewerModel.$viewerFavoriteLeagues);
-  const fixturesError = useStore(fixtureModel.$fixturesError);
-  const fixturesLoading = useStore(fixtureModel.$fixutresLoading);
+  const fixturesError = useStore(fixtureModel.fixturesSubmodel.$fixturesError);
+  const fixturesLoading = useStore(
+    fixtureModel.fixturesSubmodel.$fixutresLoading
+  );
 
-  const list = useList(fixtureModel.$fixtures, {
+  const list = useList(fixtureModel.fixturesSubmodel.$fixtures, {
     keys: [viewerFavoriteLeagues],
     fn: (fixtureObj) => {
       const fixtures = Object.values(fixtureObj)[0];

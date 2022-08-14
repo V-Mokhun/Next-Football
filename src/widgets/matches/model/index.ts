@@ -11,12 +11,12 @@ sample({
   clock: [
     fetchFixtures,
     calendarModel.$selectedDate,
-    fixtureModel.$isLiveFixtures,
+    fixtureModel.fixturesSubmodel.$isLiveFixtures,
   ],
   source: {
     date: calendarModel.$selectedDate,
     timezone: viewerModel.$viewerTimezone,
-    isLive: fixtureModel.$isLiveFixtures,
+    isLive: fixtureModel.fixturesSubmodel.$isLiveFixtures,
   },
   fn({ date, timezone, isLive }): FixturesQueryParams {
     const params: FixturesQueryParams = {};
@@ -34,29 +34,29 @@ sample({
 
     return params;
   },
-  target: fixtureModel.fetchFixturesFx,
+  target: fixtureModel.fixturesSubmodel.fetchFixturesFx,
 });
 
 transformManyFixtures(
-  fixtureModel.fetchFixturesFx.doneData,
-  fixtureModel.$fixtures,
+  fixtureModel.fixturesSubmodel.fetchFixturesFx.doneData,
+  fixtureModel.fixturesSubmodel.$fixtures,
   viewerModel.$viewerFavoriteLeagues
 );
 
 sample({
-  clock: fixtureModel.fetchFixturesFx,
+  clock: fixtureModel.fixturesSubmodel.fetchFixturesFx,
   fn: () => true,
-  target: [calendarModel.$calendarDisabled, fixtureModel.$buttonsDisabled],
+  target: [
+    calendarModel.$calendarDisabled,
+    fixtureModel.fixturesSubmodel.$buttonsDisabled,
+  ],
 });
 
 sample({
-  clock: fixtureModel.fetchFixturesFx.failData,
-  fn: (error) => error.message,
-  target: fixtureModel.$fixturesError,
-});
-
-sample({
-  clock: fixtureModel.fetchFixturesFx.finally,
+  clock: fixtureModel.fixturesSubmodel.fetchFixturesFx.finally,
   fn: () => false,
-  target: [calendarModel.$calendarDisabled, fixtureModel.$buttonsDisabled],
+  target: [
+    calendarModel.$calendarDisabled,
+    fixtureModel.fixturesSubmodel.$buttonsDisabled,
+  ],
 });

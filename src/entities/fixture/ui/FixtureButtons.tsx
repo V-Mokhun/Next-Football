@@ -6,10 +6,18 @@ import { fixtureModel } from "..";
 interface FixtureButtonsProps {}
 
 export const FixtureButtons: React.FC<FixtureButtonsProps> = ({}) => {
-  const allFixturesSelected = useEvent(fixtureModel.allFixturesSelected);
-  const liveFixturesSelected = useEvent(fixtureModel.liveFixturesSelected);
-  const isLiveFixturesSelected = useStore(fixtureModel.$isLiveFixtures);
-  const isButtonsDisabled = useStore(fixtureModel.$buttonsDisabled);
+  const allFixturesSelected = useEvent(
+    fixtureModel.fixturesSubmodel.allFixturesSelected
+  );
+  const liveFixturesSelected = useEvent(
+    fixtureModel.fixturesSubmodel.liveFixturesSelected
+  );
+  const isLiveFixturesSelected = useStore(
+    fixtureModel.fixturesSubmodel.$isLiveFixtures
+  );
+  const isButtonsDisabled = useStore(
+    fixtureModel.fixturesSubmodel.$buttonsDisabled
+  );
 
   return (
     <ButtonGroup isDisabled={isButtonsDisabled} gap={2}>

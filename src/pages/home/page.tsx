@@ -9,7 +9,9 @@ import React from "react";
 interface HomeProps {}
 
 export const HomePage: React.FC<HomeProps> = ({}) => {
-  const isLiveFixturesSelected = useStore(fixtureModel.$isLiveFixtures);
+  const isLiveFixturesSelected = useStore(
+    fixtureModel.fixturesSubmodel.$isLiveFixtures
+  );
 
   return (
     <Box
