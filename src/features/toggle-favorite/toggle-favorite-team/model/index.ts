@@ -1,8 +1,8 @@
 import { viewerModel } from "@/entities/viewer";
-import { Team } from "@/shared/api";
+import { BasicTeam, Team } from "@/shared/api";
 import { createEvent, createStore, sample } from "effector";
 
-export const buttonClicked = createEvent<Team>();
+export const buttonClicked = createEvent<BasicTeam>();
 
 export const $loading = createStore<{ id: number; loading: boolean } | null>(
   null

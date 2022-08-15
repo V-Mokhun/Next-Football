@@ -2,7 +2,7 @@ import { COOKIE_NAME } from "@/shared/config";
 import { AxiosRequestConfig } from "axios";
 import { BaseApi } from "../base";
 import { catchError } from "../lib";
-import { League, Team } from "../models";
+import { BasicTeam, League } from "../models";
 import { apiInstance } from "./config";
 import {
   AddFavoriteLeagueResponse,
@@ -129,11 +129,11 @@ class ViewerApi extends BaseApi {
     return response;
   }
 
-  async addFavoriteTeam(team: Team) {
-    const response = await this.updateRequest<AddFavoriteTeamResponse, Team>(
-      team,
-      ADD_TEAM
-    );
+  async addFavoriteTeam(team: BasicTeam) {
+    const response = await this.updateRequest<
+      AddFavoriteTeamResponse,
+      BasicTeam
+    >(team, ADD_TEAM);
 
     return response;
   }

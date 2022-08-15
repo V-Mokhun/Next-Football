@@ -67,7 +67,7 @@ interface Season {
   coverage: Coverage;
 }
 
-interface BasicTeam {
+export interface BasicTeam {
   id: number;
   name: string;
   logo: string;
@@ -107,6 +107,7 @@ export interface Fixture {
   id: number;
   timezone: string;
   date: string;
+  referee: string | null;
   timestamp: number;
   periods: {
     first: number | null;

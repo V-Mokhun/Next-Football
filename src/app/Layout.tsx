@@ -1,6 +1,6 @@
 import { Header } from "@/widgets/header";
 import { Sidebar } from "@/widgets/sidebar";
-import { Container, Flex } from "@chakra-ui/react";
+import { Container, ContainerProps, Flex } from "@chakra-ui/react";
 import Head from "next/head";
 import React from "react";
 import { AppProvider } from "./AppProvider";
@@ -9,11 +9,13 @@ import { Modals } from "./Modals";
 interface LayoutProps {
   children: React.ReactNode;
   showSidebar?: boolean;
+  containerProps?: ContainerProps;
 }
 
 export const Layout: React.FC<LayoutProps> = ({
   children,
   showSidebar = true,
+  containerProps,
 }) => {
   return (
     <AppProvider>
@@ -28,7 +30,13 @@ export const Layout: React.FC<LayoutProps> = ({
         </Head>
         <Header />
         <main className="main">
-          <Container pt={4} as={Flex} gap={2} maxW="container.lg">
+          <Container
+            pt={4}
+            as={Flex}
+            gap={2}
+            maxW="container.lg"
+            {...containerProps}
+          >
             {showSidebar && (
               <Flex flexDir="column" flex="0 0 230px" maxW={230}>
                 <Sidebar />

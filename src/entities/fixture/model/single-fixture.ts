@@ -28,6 +28,7 @@ export const $singleFixture = restore(fetchSingleFixtureFx.doneData, {
   fixture: {
     id: 867958,
     timezone: "Europe/Kiev",
+    referee: "Some referee",
     date: "2022-08-13T19:30:00+03:00",
     timestamp: 1660408200,
     periods: {

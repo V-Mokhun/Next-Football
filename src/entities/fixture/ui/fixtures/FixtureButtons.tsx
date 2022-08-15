@@ -1,7 +1,7 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
 import React from "react";
-import { fixtureModel } from "..";
+import { fixtureModel } from "../..";
 
 interface FixtureButtonsProps {}
 

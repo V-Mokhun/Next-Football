@@ -15,7 +15,9 @@ const Fixture: NextPageWithLayout<FixtureProps> = () => {
 };
 
 Fixture.getLayout = (page: ReactElement) => (
-  <Layout showSidebar={false}>{page}</Layout>
+  <Layout containerProps={{ maxW: "container.md" }} showSidebar={false}>
+    {page}
+  </Layout>
 );
 
 export const getStaticPaths: GetStaticPaths = async () => {

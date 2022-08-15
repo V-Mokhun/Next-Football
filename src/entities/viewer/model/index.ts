@@ -1,6 +1,7 @@
 import {
   AddFavoriteLeagueResponse,
   AddFavoriteTeamResponse,
+  BasicTeam,
   ChangePasswordRequest,
   ChangePasswordResponse,
   ChangeTimezoneResponse,
@@ -101,7 +102,7 @@ export const removeFavoriteLeagueFx = createEffect<
 });
 
 export const addFavoriteTeamFx = createEffect<
-  Team,
+  BasicTeam,
   AddFavoriteTeamResponse,
   Error
 >(async (team) => {

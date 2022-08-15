@@ -29,7 +29,7 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({
 
   const { teams, fixture, goals } = fixtureData;
 
-  let matchDateText = null;
+  let matchDateText: string | null = null;
 
   if (fixture.status.short === FixtureStatus.FT) {
     matchDateText = "Finished";
