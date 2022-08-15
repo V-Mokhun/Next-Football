@@ -7,3 +7,5 @@ export const RESULTS_ROUTE = `results`;
 export const MATCHES_ROUTE = `matches`;
 export const STANDINGS_ROUTE = `standings`;
 export const SQUAD_ROUTE = `squad`;
+export const STATISTICS_ROUTE = `statistics`;
+export const HEAD_TO_HEAD_ROUTE = `h2h`;

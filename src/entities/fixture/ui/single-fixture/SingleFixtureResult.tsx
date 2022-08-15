@@ -15,11 +15,12 @@ export const SingleFixtureResult: React.FC<SingleFixtureResultProps> = ({
   goals,
 }) => {
   let matchStatusText: string | null = null;
+
   if (status.short === FixtureStatus.FT) {
     matchStatusText = "Finished";
   } else if (status.short === FixtureStatus.HT) {
     matchStatusText = "Break";
-  } else {
+  } else if (status.elapsed) {
     matchStatusText = `${status.elapsed}'`;
   }
   return (
@@ -28,7 +29,7 @@ export const SingleFixtureResult: React.FC<SingleFixtureResultProps> = ({
         <Text>{convertToReadableDate(date)}</Text>
       </Box>
       <Box mb={2}>
-        <Text fontSize="4xl" fontWeight="700">
+        <Text fontSize="5xl" fontWeight="700">
           {goals.home} - {goals.away}
         </Text>
       </Box>

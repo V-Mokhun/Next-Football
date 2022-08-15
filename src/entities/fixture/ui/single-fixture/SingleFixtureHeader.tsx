@@ -4,6 +4,7 @@ import { useStore } from "effector-react";
 import React from "react";
 import { fixtureModel } from "../..";
 import { SingleFixtureBreadcrumps } from "./SingleFixtureBreadcrumps";
+import { SingleFixtureLinks } from "./SingleFixtureLinks";
 import { SingleFixtureResult } from "./SingleFixtureResult";
 import { SingleFixtureTeam } from "./SingleFixtureTeam";
 
@@ -48,6 +49,11 @@ export function SingleFixtureHeader({
           isAway={true}
         />
       </Flex>
+      <SingleFixtureLinks
+        isSquadEmpty={singleFixture.lineups.length < 1}
+        isStatisticsEmpty={singleFixture.statistics.length < 1}
+        id={singleFixture.fixture.id}
+      />
     </Box>
   );
 }

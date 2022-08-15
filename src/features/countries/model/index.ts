@@ -49,6 +49,8 @@ export const $countries = createStore<{ country: Country; loaded: boolean }[]>(
 
 sample({
   clock: fetchCountries,
+  source: $countries,
+  filter: (countries) => countries.length < 1,
   target: fetchCountriesFx,
 });
 
