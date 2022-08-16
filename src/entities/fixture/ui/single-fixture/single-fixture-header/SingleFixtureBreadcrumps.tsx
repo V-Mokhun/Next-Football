@@ -6,12 +6,12 @@ import NextLink from "next/link";
 import React from "react";
 
 interface SingleFixtureBreadcrumpsProps {
-  singleFixture: SingleFixtureResponse;
+  league: SingleFixtureResponse["league"];
 }
 
 export const SingleFixtureBreadcrumps: React.FC<
   SingleFixtureBreadcrumpsProps
-> = ({ singleFixture }) => {
+> = ({ league }) => {
   return (
     <Flex
       borderBottomColor="main.400"
@@ -25,15 +25,15 @@ export const SingleFixtureBreadcrumps: React.FC<
         <ChakraImage
           width={18}
           height={12}
-          src={singleFixture.league.flag || singleFixture.league.logo}
-          alt={singleFixture.league.name}
+          src={league.flag || league.logo}
+          alt={league.name}
         />
       </Box>
       <Text>
-        {singleFixture.league.country}:{" "}
-        <NextLink href={`${LEAGUE_ROUTE}/${singleFixture.league.id}`} passHref>
+        {league.country}:{" "}
+        <NextLink href={`${LEAGUE_ROUTE}/${league.id}`} passHref>
           <Link>
-            {singleFixture.league.name} - {singleFixture.league.round}
+            {league.name} - {league.round}
           </Link>
         </NextLink>
       </Text>

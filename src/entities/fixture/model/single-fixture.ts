@@ -1083,6 +1083,8 @@ export const $singleFixture = restore(fetchSingleFixtureFx.doneData, {
 export const $singleFixtureError = createStore("").reset(fetchSingleFixtureFx);
 export const $singleFixtureLoading = fetchSingleFixtureFx.pending;
 
+// $singleFixture.watch((s) => console.log(s));
+
 // sample({
 //   clock: singleFixtureSet,
 //   target: fetchSingleFixtureFx,

@@ -1,24 +1,38 @@
 import { Header } from "@/widgets/header";
 import { Sidebar } from "@/widgets/sidebar";
-import { Container, ContainerProps, Flex } from "@chakra-ui/react";
+import {
+  Container,
+  ContainerProps,
+  Flex,
+  useColorMode,
+} from "@chakra-ui/react";
 import Head from "next/head";
 import React from "react";
-import { AppProvider } from "./AppProvider";
 import { Modals } from "./Modals";
 
 interface LayoutProps {
   children: React.ReactNode;
   showSidebar?: boolean;
   containerProps?: ContainerProps;
+  isWhiteContainer?: boolean;
 }
 
 export const Layout: React.FC<LayoutProps> = ({
   children,
   showSidebar = true,
   containerProps,
+  isWhiteContainer = false,
 }) => {
+  const { colorMode } = useColorMode();
+
+  let bgColor = "initial";
+
+  if (isWhiteContainer) {
+    bgColor = colorMode === "dark" ? "#010a0f" : "#fff";
+  }
+
   return (
-    <AppProvider>
+    <>
       <div className="wrapper">
         <Head>
           <title>Next Football</title>
@@ -35,6 +49,7 @@ export const Layout: React.FC<LayoutProps> = ({
             as={Flex}
             gap={2}
             maxW="container.lg"
+            backgroundColor={bgColor}
             {...containerProps}
           >
             {showSidebar && (
@@ -49,6 +64,6 @@ export const Layout: React.FC<LayoutProps> = ({
         </main>
       </div>
       <Modals />
-    </AppProvider>
+    </>
   );
 };

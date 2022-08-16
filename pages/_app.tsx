@@ -1,3 +1,4 @@
+import { AppProvider } from "@/app/AppProvider";
 import "@/app/index.css";
 import { Layout } from "@/app/Layout";
 import { NextPageWithLayout } from "@/shared/lib";
@@ -17,7 +18,7 @@ function commonLayout(page: ReactElement) {
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? commonLayout;
 
-  return getLayout(<Component {...pageProps} />);
+  return <AppProvider>{getLayout(<Component {...pageProps} />)}</AppProvider>;
 };
 
 export default withEffector(MyApp, { effectorReact });

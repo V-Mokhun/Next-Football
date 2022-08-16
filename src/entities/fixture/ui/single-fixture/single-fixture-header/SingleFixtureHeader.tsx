@@ -1,8 +1,9 @@
+import { fixtureModel } from "@/entities/fixture";
 import { BasicTeam, FixtureTeam } from "@/shared/api";
 import { Box, Flex } from "@chakra-ui/react";
 import { useStore } from "effector-react";
+import Head from "next/head";
 import React from "react";
-import { fixtureModel } from "../..";
 import { SingleFixtureBreadcrumps } from "./SingleFixtureBreadcrumps";
 import { SingleFixtureLinks } from "./SingleFixtureLinks";
 import { SingleFixtureResult } from "./SingleFixtureResult";
@@ -22,8 +23,17 @@ export function SingleFixtureHeader({
   if (!singleFixture) return null;
 
   return (
-    <Box>
-      <SingleFixtureBreadcrumps singleFixture={singleFixture} />
+    <Box mb={4}>
+      <Head>
+        <title>
+          {`${singleFixture.teams.home.name} ${
+            singleFixture.goals.home ?? 0
+          } - ${singleFixture.goals.away ?? 0} ${
+            singleFixture.teams.away.name
+          }`}
+        </title>
+      </Head>
+      <SingleFixtureBreadcrumps league={singleFixture.league} />
       <Flex
         borderBottomColor="main.400"
         borderBottomWidth={1}

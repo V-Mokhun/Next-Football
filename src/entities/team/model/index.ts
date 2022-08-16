@@ -124,38 +124,11 @@ export const fetchTeamSquadFx = createEffect<number, SquadResponse, Error>(
   }
 );
 
-export const $team = restore(fetchTeamFx.doneData, {
-  team: {
-    id: 33,
-    name: "Manchester United",
-    code: "MUN",
-    country: "England",
-    founded: 1878,
-    national: false,
-    logo: "https://media.api-sports.io/football/teams/33.png",
-  },
-  venue: {
-    id: 556,
-    name: "Old Trafford",
-    address: "Sir Matt Busby Way",
-    city: "Manchester",
-    capacity: 76212,
-    surface: "grass",
-    image: "https://media.api-sports.io/football/venues/556.png",
-  },
-});
+export const $team = restore(fetchTeamFx.doneData, null);
 
-export const $teamLeague = restore(fetchTeamLeagueFx.doneData, {
-  id: 39,
-  name: "Premier League",
-  type: "League",
-  logo: "https://media.api-sports.io/football/leagues/39.png",
-});
+export const $teamLeague = restore(fetchTeamLeagueFx.doneData, null);
 
-export const $teamSeason = restore(fetchTeamSeasonFx.doneData, {
-  season: 2022,
-  teamId: 33,
-});
+export const $teamSeason = restore(fetchTeamSeasonFx.doneData, null);
 
 export const $todayMatches = createStore<{
   [key: string]: FixtureResponse[];

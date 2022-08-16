@@ -121,7 +121,7 @@ export interface Fixture {
   };
 }
 
-interface Event {
+export interface Event {
   time: { elapsed: number | null; extra: number | null };
   team: BasicTeam;
   player: Pick<Player, "id" | "name">;

@@ -15,7 +15,16 @@ const Fixture: NextPageWithLayout<FixtureProps> = () => {
 };
 
 Fixture.getLayout = (page: ReactElement) => (
-  <Layout containerProps={{ maxW: "container.md" }} showSidebar={false}>
+  <Layout
+    isWhiteContainer={true}
+    containerProps={{
+      maxW: "container.md",
+      borderBottomRightRadius: "8px",
+      borderBottomLeftRadius: "8px",
+      pb: 2,
+    }}
+    showSidebar={false}
+  >
     {page}
   </Layout>
 );
