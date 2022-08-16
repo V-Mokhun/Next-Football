@@ -9,6 +9,7 @@ import {
 import { CardBlock, ChakraImage } from "@/shared/ui";
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import { useStore } from "effector-react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import { teamModel } from "..";
@@ -57,6 +58,9 @@ export const TeamHeader: React.FC<TeamHeaderProps> = ({
 
   return (
     <CardBlock mb={4}>
+      <Head>
+        <title>{team.name}</title>
+      </Head>
       <Flex
         borderBottomWidth={1}
         borderBottomStyle="solid"
@@ -66,9 +70,9 @@ export const TeamHeader: React.FC<TeamHeaderProps> = ({
         mb={4}
         gap={4}
       >
-        <Box>
-          <ChakraImage alt={team.name} src={team.logo} w={84} h={84} />
-        </Box>
+        <Flex justifyContent="center" alignItems="center">
+          <ChakraImage alt={team.name} src={team.logo} width={84} height={84} />
+        </Flex>
         <Box>
           <Flex alignItems="center" gap={4}>
             <Heading as="h1" fontSize="2xl">

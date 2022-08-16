@@ -44,7 +44,7 @@ export const SearchItem: React.FC<SearchItemProps> = ({
           router.push(redirectTo);
         }}
       >
-        <Box>
+        <Flex justifyContent="center" alignItems="center">
           <ChakraImage
             src={logo}
             alt={name}
@@ -52,7 +52,7 @@ export const SearchItem: React.FC<SearchItemProps> = ({
             height={50}
             style={{ borderRadius: 10 }}
           />
-        </Box>
+        </Flex>
         <Box>
           <Heading mb={1} as="p" size="sm">
             {name}

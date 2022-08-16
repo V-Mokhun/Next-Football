@@ -34,8 +34,8 @@ export const StandingRow: React.FC<StandingRowProps> = ({
               <ChakraImage
                 alt={standing.team.name}
                 src={standing.team.logo}
-                w="20px"
-                h="20px"
+                width={20}
+                height={20}
               />
               <Text>{standing.team.name}</Text>
             </Flex>

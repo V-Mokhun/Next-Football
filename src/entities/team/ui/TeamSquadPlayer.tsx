@@ -1,6 +1,6 @@
 import { Player } from "@/shared/api";
 import { ChakraImage } from "@/shared/ui";
-import { Box, Td, Tr, useColorMode } from "@chakra-ui/react";
+import { Flex, Td, Tr, useColorMode } from "@chakra-ui/react";
 import React from "react";
 
 interface TeamSquadPlayerProps {
@@ -29,16 +29,16 @@ export const TeamSquadPlayer: React.FC<TeamSquadPlayerProps> = ({
         px={2}
         py={3}
       >
-        <Box textAlign="center">
+        <Flex textAlign="center" justifyContent="center" alignItems="center">
           <ChakraImage
             mx="auto"
             src={player.photo}
             alt={player.name}
-            w={50}
-            h={50}
+            width={50}
+            height={50}
             borderRadius="8px"
           />
-        </Box>
+        </Flex>
       </Td>
       <Td backgroundColor={bgColor} textAlign="center" px={2} py={3}>
         {player.number ?? 0}

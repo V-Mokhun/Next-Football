@@ -52,14 +52,14 @@ export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
                 textAlign="left"
                 fontSize="sm"
               >
-                <Box mr={2}>
+                <Flex justifyContent="center" alignItems="center" mr={2}>
                   <ChakraImage
                     alt={league.name}
                     src={league.flag || league.logo}
-                    w="18px"
-                    h="12px"
+                    width={18}
+                    height={12}
                   />
-                </Box>
+                </Flex>
                 <Text
                   color={isFavorite ? "yellow.400" : "initial"}
                   mr={1}
@@ -105,14 +105,14 @@ export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
             textAlign="left"
             fontSize="sm"
           >
-            <Box mr={2}>
+            <Flex justifyContent="center" alignItems="center" mr={2}>
               <ChakraImage
                 alt={league.name}
                 src={league.flag || league.logo}
-                w="18px"
-                h="12px"
+                width={18}
+                height={12}
               />
-            </Box>
+            </Flex>
             <Text
               color={isFavorite ? "yellow.400" : "initial"}
               mr={1}

@@ -1,7 +1,7 @@
 import { SingleFixtureResponse } from "@/shared/api";
 import { LEAGUE_ROUTE } from "@/shared/lib";
 import { ChakraImage } from "@/shared/ui";
-import { Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Flex, Link, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import React from "react";
 
@@ -21,14 +21,14 @@ export const SingleFixtureBreadcrumps: React.FC<
       gap={1}
       p={2}
     >
-      <Box>
+      <Flex justifyContent="center" alignItems="center">
         <ChakraImage
           width={18}
           height={12}
           src={league.flag || league.logo}
           alt={league.name}
         />
-      </Box>
+      </Flex>
       <Text>
         {league.country}:{" "}
         <NextLink href={`${LEAGUE_ROUTE}/${league.id}`} passHref>
