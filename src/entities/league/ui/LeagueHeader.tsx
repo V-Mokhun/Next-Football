@@ -1,7 +1,7 @@
 import { League } from "@/shared/api";
 import { LEAGUE_ROUTE, MATCHES_ROUTE, STANDINGS_ROUTE } from "@/shared/lib";
-import { CardBlock } from "@/shared/ui";
-import { Box, Button, Flex, Heading, Img, Text } from "@chakra-ui/react";
+import { CardBlock, ChakraImage } from "@/shared/ui";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { useStore } from "effector-react";
 import { useRouter } from "next/router";
 import React from "react";
@@ -48,7 +48,7 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
     <CardBlock mb={4}>
       <Flex mb={4} alignItems="center" gap={2}>
         <Box>
-          <Img w={18} h={12} alt={country.name} src={country.flag} />
+          <ChakraImage w={18} h={12} alt={country.name} src={country.flag} />
         </Box>
         <Text textTransform="uppercase" fontSize="sm" fontWeight={700}>
           {country.name}
@@ -64,7 +64,7 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
         gap={4}
       >
         <Box>
-          <Img
+          <ChakraImage
             alt={league.name}
             src={league.logo || country.flag}
             w={84}

@@ -1,5 +1,6 @@
 import { FixtureTeam } from "@/shared/api";
-import { Box, Flex, Img, Text } from "@chakra-ui/react";
+import { ChakraImage } from "@/shared/ui";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 
 interface FixtureMatchTeamProps {
@@ -15,7 +16,7 @@ export const FixtureMatchTeam: React.FC<FixtureMatchTeamProps> = ({
     <Flex alignItems="center" gap={2}>
       <Flex alignItems="center" gap={1} flex="1 1 auto">
         <Box>
-          <Img w={15} h={15} alt={team.name} src={team.logo} />
+          <ChakraImage w={15} h={15} alt={team.name} src={team.logo} />
         </Box>
         <Text fontSize="sm" fontWeight={team.winner ? "700" : "400"}>
           {team.name}

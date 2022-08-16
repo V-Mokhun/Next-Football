@@ -10,7 +10,7 @@ import { SingleFixtureResult } from "./SingleFixtureResult";
 import { SingleFixtureTeam } from "./SingleFixtureTeam";
 
 interface SingleFixtureHeaderProps<T extends BasicTeam> {
-  FavoriteComponent: React.FC<{ data: T; size: "normal" | "small" }>;
+  FavoriteComponent: React.FC<{ data: T; size: "normal" | "small" }> | null;
 }
 
 export function SingleFixtureHeader({

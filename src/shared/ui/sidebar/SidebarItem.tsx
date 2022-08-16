@@ -1,5 +1,6 @@
-import { Box, Flex, Heading, Image } from "@chakra-ui/react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import React from "react";
+import { ChakraImage } from "../chakra-image";
 
 interface SidebarItemProps {
   onClick: () => void;
@@ -43,7 +44,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
         >
           {noImage ? null : (
             <Box flex="0 0 18px">
-              <Image src={logo} alt={name} width={18} height={18} />
+              <ChakraImage src={logo} alt={name} width={18} height={18} />
             </Box>
           )}
           <Heading

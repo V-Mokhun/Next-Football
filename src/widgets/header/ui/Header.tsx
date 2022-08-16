@@ -5,7 +5,7 @@ import { ChangePasswordButton } from "@/features/auth/change-password";
 import { LogoutButton } from "@/features/auth/logout";
 import { ThemeToggler } from "@/features/theme-toggle";
 import { HOME_ROUTE } from "@/shared/lib";
-import { MenuButton } from "@/shared/ui";
+import { ChakraImage, MenuButton } from "@/shared/ui";
 import { MoonIcon } from "@chakra-ui/icons";
 import {
   Container,
@@ -16,7 +16,6 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { useStore } from "effector-react";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -31,7 +30,12 @@ export const Header: React.FC<HeaderProps> = ({}) => {
         <Flex py={5} justifyContent="space-between" alignItems="center" gap={2}>
           <Link href={HOME_ROUTE} passHref>
             <a>
-              <Image src="/images/logo.png" alt="Logo" width={64} height={64} />
+              <ChakraImage
+                src="/images/logo.png"
+                alt="Logo"
+                width={64}
+                height={64}
+              />
             </a>
           </Link>
           <Flex alignItems="center" gap={2}>

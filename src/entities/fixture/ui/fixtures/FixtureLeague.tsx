@@ -1,5 +1,6 @@
 import { FixtureResponse, League } from "@/shared/api";
 import { LEAGUE_ROUTE } from "@/shared/lib";
+import { ChakraImage } from "@/shared/ui";
 import {
   AccordionButton,
   AccordionIcon,
@@ -7,7 +8,6 @@ import {
   AccordionPanel,
   Box,
   Flex,
-  Image,
   Link,
   Text,
 } from "@chakra-ui/react";
@@ -53,7 +53,7 @@ export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
                 fontSize="sm"
               >
                 <Box mr={2}>
-                  <Image
+                  <ChakraImage
                     alt={league.name}
                     src={league.flag || league.logo}
                     w="18px"
@@ -106,7 +106,7 @@ export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
             fontSize="sm"
           >
             <Box mr={2}>
-              <Image
+              <ChakraImage
                 alt={league.name}
                 src={league.flag || league.logo}
                 w="18px"

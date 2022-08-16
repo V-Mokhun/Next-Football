@@ -1,5 +1,6 @@
 import { Player } from "@/shared/api";
-import { Box, Img, Td, Tr, useColorMode } from "@chakra-ui/react";
+import { ChakraImage } from "@/shared/ui";
+import { Box, Td, Tr, useColorMode } from "@chakra-ui/react";
 import React from "react";
 
 interface TeamSquadPlayerProps {
@@ -29,7 +30,7 @@ export const TeamSquadPlayer: React.FC<TeamSquadPlayerProps> = ({
         py={3}
       >
         <Box textAlign="center">
-          <Img
+          <ChakraImage
             mx="auto"
             src={player.photo}
             alt={player.name}

@@ -6,7 +6,7 @@ import NextLink from "next/link";
 import React from "react";
 
 interface SingleFixtureTeamProps<T extends BasicTeam> {
-  FavoriteComponent: React.FC<{ data: T; size: "normal" | "small" }>;
+  FavoriteComponent: React.FC<{ data: T; size: "normal" | "small" }> | null;
   team: FixtureTeam;
   isAway?: boolean;
 }
@@ -22,7 +22,7 @@ export function SingleFixtureTeam({
       alignItems="center"
       flexDirection={isAway ? "row-reverse" : "row"}
     >
-      {<FavoriteComponent size="normal" data={team} />}
+      {FavoriteComponent && <FavoriteComponent size="normal" data={team} />}
       <NextLink href={`${TEAM_ROUTE}/${team.id}`} passHref>
         <Link width="100%">
           <Box textAlign="center" mb={1}>

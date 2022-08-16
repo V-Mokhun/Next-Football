@@ -14,7 +14,7 @@ export const SingleFixtureInfo: React.FC<SingleFixtureInfoProps> = ({}) => {
       fixture
         ? {
             referee: fixture.fixture.referee,
-            venue: fixture.fixture.venue.name,
+            venue: fixture.fixture.venue,
           }
         : {},
   });
@@ -52,7 +52,7 @@ export const SingleFixtureInfo: React.FC<SingleFixtureInfoProps> = ({}) => {
             </Text>
           </Flex>
         )}
-        {referee && (
+        {venue && (
           <Flex
             alignItems="center"
             justifyContent="space-between"
@@ -64,7 +64,7 @@ export const SingleFixtureInfo: React.FC<SingleFixtureInfoProps> = ({}) => {
               fontWeight={700}
               color={colorMode === "dark" ? "white" : "initial"}
             >
-              {venue}
+              {venue.name} ({venue.city})
             </Text>
           </Flex>
         )}

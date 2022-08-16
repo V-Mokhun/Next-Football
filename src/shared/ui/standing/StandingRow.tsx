@@ -1,17 +1,9 @@
 import { Standing } from "@/shared/api";
 import { TEAM_ROUTE } from "@/shared/lib";
-import {
-  Box,
-  Flex,
-  Img,
-  Link,
-  Td,
-  Text,
-  Tr,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Box, Flex, Link, Td, Text, Tr, useColorMode } from "@chakra-ui/react";
 import NextLink from "next/link";
 import React from "react";
+import { ChakraImage } from "../chakra-image";
 
 interface StandingRowProps {
   standing: Standing;
@@ -39,7 +31,7 @@ export const StandingRow: React.FC<StandingRowProps> = ({
         <NextLink href={`${TEAM_ROUTE}/${standing.team.id}`} passHref>
           <Link>
             <Flex alignItems="center" gap={2}>
-              <Img
+              <ChakraImage
                 alt={standing.team.name}
                 src={standing.team.logo}
                 w="20px"

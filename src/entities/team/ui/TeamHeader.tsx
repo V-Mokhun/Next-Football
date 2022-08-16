@@ -6,8 +6,8 @@ import {
   STANDINGS_ROUTE,
   TEAM_ROUTE,
 } from "@/shared/lib";
-import { CardBlock } from "@/shared/ui";
-import { Box, Button, Flex, Heading, Img } from "@chakra-ui/react";
+import { CardBlock, ChakraImage } from "@/shared/ui";
+import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import { useStore } from "effector-react";
 import { useRouter } from "next/router";
 import React from "react";
@@ -67,7 +67,7 @@ export const TeamHeader: React.FC<TeamHeaderProps> = ({
         gap={4}
       >
         <Box>
-          <Img alt={team.name} src={team.logo} w={84} h={84} />
+          <ChakraImage alt={team.name} src={team.logo} w={84} h={84} />
         </Box>
         <Box>
           <Flex alignItems="center" gap={4}>

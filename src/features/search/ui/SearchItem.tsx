@@ -1,8 +1,8 @@
 import { searchModalModel } from "@/entities/search";
 import { viewerModel } from "@/entities/viewer";
+import { ChakraImage } from "@/shared/ui";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -45,7 +45,7 @@ export const SearchItem: React.FC<SearchItemProps> = ({
         }}
       >
         <Box>
-          <Image
+          <ChakraImage
             src={logo}
             alt={name}
             width={50}
