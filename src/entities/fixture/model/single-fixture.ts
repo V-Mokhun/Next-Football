@@ -1,5 +1,7 @@
 import {
+  FixtureResponse,
   FixtureStatus,
+  HeadToHeadQueryParams,
   rapidApi,
   SingleFixtureQueryParams,
   SingleFixtureResponse,
@@ -13,6 +15,7 @@ import {
 } from "effector";
 
 export const singleFixtureSet = createEvent<SingleFixtureQueryParams>();
+export const headToHeadSet = createEvent<HeadToHeadQueryParams>();
 
 export const fetchSingleFixtureFx = createEffect<
   SingleFixtureQueryParams,
@@ -22,6 +25,16 @@ export const fetchSingleFixtureFx = createEffect<
   const { response } = await rapidApi.fixturesApi.getSingleFixture(params);
 
   return response[0];
+});
+
+export const fetchHeadToHeadFx = createEffect<
+  HeadToHeadQueryParams,
+  FixtureResponse[],
+  Error
+>(async (params) => {
+  const { response } = await rapidApi.fixturesApi.getHeadToHead(params);
+
+  return response;
 });
 
 export const $singleFixture = restore(fetchSingleFixtureFx.doneData, {
@@ -1083,15 +1096,304 @@ export const $singleFixture = restore(fetchSingleFixtureFx.doneData, {
 export const $singleFixtureError = createStore("").reset(fetchSingleFixtureFx);
 export const $singleFixtureLoading = fetchSingleFixtureFx.pending;
 
-// $singleFixture.watch((s) => console.log(s));
+export const $headToHead = restore(fetchHeadToHeadFx.doneData, [
+  {
+    fixture: {
+      id: 867958,
+      referee: "Stuart Attwell, England",
+      timezone: "Europe/Kiev",
+      date: "2022-08-13T19:30:00+03:00",
+      timestamp: 1660408200,
+      periods: {
+        first: 1660408200,
+        second: 1660411800,
+      },
+      venue: {
+        id: 10503,
+        name: "Gtech Community Stadium",
+        city: "Brentford, Middlesex",
+      },
+      status: {
+        long: "Match Finished",
+        short: FixtureStatus.FT,
+        elapsed: 90,
+      },
+    },
+    league: {
+      id: 39,
+      name: "Premier League",
+      country: "England",
+      logo: "https://media.api-sports.io/football/leagues/39.png",
+      flag: "https://media.api-sports.io/flags/gb.svg",
+      season: 2022,
+      round: "Regular Season - 2",
+    },
+    teams: {
+      home: {
+        id: 55,
+        name: "Brentford",
+        logo: "https://media.api-sports.io/football/teams/55.png",
+        winner: true,
+      },
+      away: {
+        id: 33,
+        name: "Manchester United",
+        logo: "https://media.api-sports.io/football/teams/33.png",
+        winner: false,
+      },
+    },
+    goals: {
+      home: 4,
+      away: 0,
+    },
+    score: {
+      halftime: {
+        home: 4,
+        away: 0,
+      },
+      fulltime: {
+        home: 4,
+        away: 0,
+      },
+      extratime: {
+        home: null,
+        away: null,
+      },
+      penalty: {
+        home: null,
+        away: null,
+      },
+    },
+  },
+  {
+    fixture: {
+      id: 710899,
+      referee: "C. Kavanagh",
+      timezone: "Europe/Kiev",
+      date: "2022-05-02T22:00:00+03:00",
+      timestamp: 1651518000,
+      periods: {
+        first: 1651518000,
+        second: 1651521600,
+      },
+      venue: {
+        id: 556,
+        name: "Old Trafford",
+        city: "Manchester",
+      },
+      status: {
+        long: "Match Finished",
+        short: FixtureStatus.FT,
+        elapsed: 90,
+      },
+    },
+    league: {
+      id: 39,
+      name: "Premier League",
+      country: "England",
+      logo: "https://media.api-sports.io/football/leagues/39.png",
+      flag: "https://media.api-sports.io/flags/gb.svg",
+      season: 2021,
+      round: "Regular Season - 35",
+    },
+    teams: {
+      home: {
+        id: 33,
+        name: "Manchester United",
+        logo: "https://media.api-sports.io/football/teams/33.png",
+        winner: true,
+      },
+      away: {
+        id: 55,
+        name: "Brentford",
+        logo: "https://media.api-sports.io/football/teams/55.png",
+        winner: false,
+      },
+    },
+    goals: {
+      home: 3,
+      away: 0,
+    },
+    score: {
+      halftime: {
+        home: 1,
+        away: 0,
+      },
+      fulltime: {
+        home: 3,
+        away: 0,
+      },
+      extratime: {
+        home: null,
+        away: null,
+      },
+      penalty: {
+        home: null,
+        away: null,
+      },
+    },
+  },
+  {
+    fixture: {
+      id: 710717,
+      referee: "A. Marriner",
+      timezone: "Europe/Kiev",
+      date: "2022-01-19T22:00:00+02:00",
+      timestamp: 1642622400,
+      periods: {
+        first: 1642622400,
+        second: 1642626000,
+      },
+      venue: {
+        id: 10503,
+        name: "Brentford Community Stadium",
+        city: "Brentford, Middlesex",
+      },
+      status: {
+        long: "Match Finished",
+        short: FixtureStatus.FT,
+        elapsed: 90,
+      },
+    },
+    league: {
+      id: 39,
+      name: "Premier League",
+      country: "England",
+      logo: "https://media.api-sports.io/football/leagues/39.png",
+      flag: "https://media.api-sports.io/flags/gb.svg",
+      season: 2021,
+      round: "Regular Season - 17",
+    },
+    teams: {
+      home: {
+        id: 55,
+        name: "Brentford",
+        logo: "https://media.api-sports.io/football/teams/55.png",
+        winner: false,
+      },
+      away: {
+        id: 33,
+        name: "Manchester United",
+        logo: "https://media.api-sports.io/football/teams/33.png",
+        winner: true,
+      },
+    },
+    goals: {
+      home: 1,
+      away: 3,
+    },
+    score: {
+      halftime: {
+        home: 0,
+        away: 0,
+      },
+      fulltime: {
+        home: 1,
+        away: 3,
+      },
+      extratime: {
+        home: null,
+        away: null,
+      },
+      penalty: {
+        home: null,
+        away: null,
+      },
+    },
+  },
+  {
+    fixture: {
+      id: 736034,
+      referee: "C. Pawson",
+      timezone: "Europe/Kiev",
+      date: "2021-07-28T22:00:00+03:00",
+      timestamp: 1627498800,
+      periods: {
+        first: 1627498800,
+        second: 1627502400,
+      },
+      venue: {
+        id: 556,
+        name: "Old Trafford",
+        city: "Manchester",
+      },
+      status: {
+        long: "Match Finished",
+        short: FixtureStatus.FT,
+        elapsed: 90,
+      },
+    },
+    league: {
+      id: 667,
+      name: "Friendlies Clubs",
+      country: "World",
+      logo: "https://media.api-sports.io/football/leagues/667.png",
+      flag: null,
+      season: 2021,
+      round: "Club Friendlies 1",
+    },
+    teams: {
+      home: {
+        id: 33,
+        name: "Manchester United",
+        logo: "https://media.api-sports.io/football/teams/33.png",
+        winner: null,
+      },
+      away: {
+        id: 55,
+        name: "Brentford",
+        logo: "https://media.api-sports.io/football/teams/55.png",
+        winner: null,
+      },
+    },
+    goals: {
+      home: 2,
+      away: 2,
+    },
+    score: {
+      halftime: {
+        home: 1,
+        away: 1,
+      },
+      fulltime: {
+        home: 2,
+        away: 2,
+      },
+      extratime: {
+        home: null,
+        away: null,
+      },
+      penalty: {
+        home: null,
+        away: null,
+      },
+    },
+  },
+]);
+export const $headtoHeadError = createStore("").reset(fetchHeadToHeadFx);
+export const $headToHeadLoading = fetchHeadToHeadFx.pending;
 
 // sample({
 //   clock: singleFixtureSet,
+//   source: $singleFixture,
+//   filter: (fixture, clock) => fixture?.fixture.id != clock.id,
+//   fn: (_, clock) => clock,
 //   target: fetchSingleFixtureFx,
+// });
+
+// sample({
+//   clock: headToHeadSet,
+//   target: fetchHeadToHeadFx,
 // });
 
 sample({
   clock: fetchSingleFixtureFx.failData,
   fn: ({ message }) => message,
   target: $singleFixtureError,
+});
+
+sample({
+  clock: fetchHeadToHeadFx.failData,
+  fn: ({ message }) => message,
+  target: $headtoHeadError,
 });

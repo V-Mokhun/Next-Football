@@ -137,7 +137,7 @@ export const $viewer = restore(setViewer, null)
   .reset(logoutViewer);
 
 export const $viewerTimezone = $viewer.map((state) =>
-  state ? state.timezone : ""
+  state ? state.timezone : "Europe/London"
 );
 export const $viewerFavoriteTeams = $viewer.map((state) =>
   state ? state.favoriteTeams : []

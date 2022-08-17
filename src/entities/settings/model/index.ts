@@ -23,11 +23,11 @@ export const $settings = createStore<SettingsStore>({
   timezones: [],
   timezoneError: "",
 })
-  .on(fetchTimezonesFx.doneData, (store, response) => ({
+  .on(fetchTimezonesFx.doneData, (_, response) => ({
     timezoneError: "",
     timezones: response,
   }))
-  .on(fetchTimezonesFx.failData, (store, error) => ({
+  .on(fetchTimezonesFx.failData, (_, error) => ({
     timezones: [],
     timezoneError: error.message,
   }));

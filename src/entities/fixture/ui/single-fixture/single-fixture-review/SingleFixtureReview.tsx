@@ -47,6 +47,21 @@ export const SingleFixtureReview: React.FC<SingleFixtureReviewProps> = ({}) => {
       });
     },
   });
+  const extraTimeEvents = useStoreMap({
+    store: fixtureModel.singleFixtureSubmodel.$singleFixture,
+    keys: [],
+    fn: (fixture) => {
+      if (!fixture) return [];
+
+      return fixture.events.filter((event) => {
+        if (!event.time.elapsed) return false;
+
+        if (event.time.elapsed >= 91) return true;
+
+        return false;
+      });
+    },
+  });
 
   let homeScore = 0;
   let awayScore = 0;
@@ -80,6 +95,13 @@ export const SingleFixtureReview: React.FC<SingleFixtureReviewProps> = ({}) => {
         awayTeamId={singleFixtureTeams?.away.id || null}
         homeScore={homeScore}
         awayScore={awayScore}
+      />
+      <SingleFixtureEvents
+        events={extraTimeEvents}
+        title="extra time"
+        awayTeamId={singleFixtureTeams?.away.id || null}
+        homeScore={singleFixtureScore?.extratime.home ?? 0}
+        awayScore={singleFixtureScore?.extratime.away ?? 0}
       />
       <SingleFixtureInfo />
     </>

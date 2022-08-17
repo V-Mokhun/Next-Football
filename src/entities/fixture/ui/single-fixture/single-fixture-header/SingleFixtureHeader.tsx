@@ -26,11 +26,7 @@ export function SingleFixtureHeader({
     <Box mb={4}>
       <Head>
         <title>
-          {`${singleFixture.teams.home.name} ${
-            singleFixture.goals.home ?? 0
-          } - ${singleFixture.goals.away ?? 0} ${
-            singleFixture.teams.away.name
-          }`}
+          {`${singleFixture.teams.home.name} ${singleFixture.goals.home} - ${singleFixture.goals.away} ${singleFixture.teams.away.name}`}
         </title>
       </Head>
       <SingleFixtureBreadcrumps league={singleFixture.league} />

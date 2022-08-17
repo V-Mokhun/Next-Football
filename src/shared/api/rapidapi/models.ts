@@ -285,6 +285,18 @@ export type StandingsQueryParams = {
   team?: number;
 };
 
+export type GetSquadsResponse = ApiResponse & {
+  response: {
+    team: BasicTeam;
+    players: Player[];
+  }[];
+};
+export type SquadResponse = GetSquadsResponse["response"][0];
+export type SquadsQueryParams = {
+  team?: number;
+  player?: number;
+};
+
 type GetFixturesBasicResponse = {
   fixture: Fixture;
   league: League & {
@@ -347,18 +359,6 @@ export type SingleFixtureQueryParams = {
 };
 export type SingleFixtureResponse = GetSingleFixtureResponse["response"][0];
 
-export type HeadToHeadQueryParams = Omit<FixturesQueryParams, "id"> & {
+export type HeadToHeadQueryParams = Omit<FixturesQueryParams, "id" | "live"> & {
   h2h: string;
-};
-
-export type GetSquadsResponse = ApiResponse & {
-  response: {
-    team: BasicTeam;
-    players: Player[];
-  }[];
-};
-export type SquadResponse = GetSquadsResponse["response"][0];
-export type SquadsQueryParams = {
-  team?: number;
-  player?: number;
 };

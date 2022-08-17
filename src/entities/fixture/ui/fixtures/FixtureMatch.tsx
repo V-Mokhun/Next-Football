@@ -1,5 +1,6 @@
 import { FixtureResponse, FixtureStatus } from "@/shared/api";
 import { convertToReadableDate, FIXTURE_ROUTE } from "@/shared/lib";
+import { ChakraImage } from "@/shared/ui";
 import {
   Box,
   Flex,
@@ -14,12 +15,16 @@ import { FixtureMatchTeam } from "./FixtureMatchTeam";
 
 interface FixtureMatchProps {
   fixtureData: FixtureResponse | null;
+  showLeague?: boolean;
   hoursOnlyDate?: boolean;
+  dateText?: string;
 }
 
 export const FixtureMatch: React.FC<FixtureMatchProps> = ({
   fixtureData,
   hoursOnlyDate = true,
+  dateText,
+  showLeague = false,
 }) => {
   const { colorMode } = useColorMode();
 
@@ -27,11 +32,22 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({
     return <Skeleton width="100%" />;
   }
 
-  const { teams, fixture, goals } = fixtureData;
+  const { teams, fixture, goals, league } = fixtureData;
 
   let matchDateText: string | null = null;
+  let leagueName: string = "";
 
-  if (fixture.status.short === FixtureStatus.FT) {
+  if (showLeague) {
+    leagueName = league.name
+      .toUpperCase()
+      .split(" ")
+      .map((word) => word[0])
+      .join("");
+  }
+
+  if (dateText) {
+    matchDateText = dateText;
+  } else if (fixture.status.short === FixtureStatus.FT) {
     matchDateText = "Finished";
   } else if (fixture.status.short === FixtureStatus.HT) {
     matchDateText = "Break";
@@ -71,6 +87,26 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({
               {matchDateText}
             </Text>
           </Box>
+          {showLeague && (
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              flex="0 1 75px"
+              textAlign="center"
+              gap={2}
+            >
+              <Box>
+                <ChakraImage
+                  src={league.flag || league.logo}
+                  alt={league.name}
+                  width={18}
+                  height={12}
+                />
+              </Box>
+              <Text>{leagueName}</Text>
+            </Flex>
+          )}
+
           <Flex flex={"0 1 70%"} flexDir="column" gap={2}>
             <FixtureMatchTeam team={teams.home} goals={goals.home} />
             <FixtureMatchTeam team={teams.away} goals={goals.away} />

@@ -1,6 +1,7 @@
 import { Event } from "@/shared/api";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React from "react";
+import { SingleFixtureTitle } from "../SingleFixtureTitle";
 import { SingleFixtureEvent } from "./SingleFixtureEvent";
 
 interface SingleFixtureEventsProps {
@@ -20,23 +21,13 @@ export const SingleFixtureEvents: React.FC<SingleFixtureEventsProps> = ({
 }) => {
   return events.length > 0 ? (
     <Box mb={2}>
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        gap={2}
-        backgroundColor="main.400"
-        py={1}
-        px={3}
-        borderRadius="8px"
-        fontSize="md"
-        mb={2}
-      >
+      <SingleFixtureTitle>
         <span>{title}</span>
         <span>
           {homeScore} - {""}
           {awayScore}
         </span>
-      </Flex>
+      </SingleFixtureTitle>
       {events.map((event) => (
         <SingleFixtureEvent
           key={`${event.time.elapsed}-${event.type}-${event.player.id}`}
