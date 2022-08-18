@@ -145,7 +145,7 @@ interface LineupTeam extends BasicTeam {
     };
   };
 }
-interface LineupStart<TGrid> {
+export interface LineupStart<TGrid> {
   player: {
     id: number;
     name: string;
@@ -154,7 +154,7 @@ interface LineupStart<TGrid> {
     grid: TGrid;
   };
 }
-interface Lineup {
+export interface Lineup {
   team: LineupTeam;
   formation: string;
   startXI: LineupStart<string>[];
@@ -343,7 +343,7 @@ export type GetSingleFixtureResponse = ApiResponse & {
   response: [
     GetFixturesBasicResponse & {
       events: Event[];
-      lineups: Lineup[];
+      lineups: [Lineup, Lineup] | [];
       statistics:
         | [
             { team: BasicTeam; statistics: Statistic[] },

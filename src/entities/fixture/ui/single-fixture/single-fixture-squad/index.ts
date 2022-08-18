@@ -1,0 +1,1 @@
+export { SingleFixtureSquad } from "./SingleFixtureSquad";
