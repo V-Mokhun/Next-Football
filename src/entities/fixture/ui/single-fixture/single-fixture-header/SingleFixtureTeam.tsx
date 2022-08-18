@@ -24,7 +24,7 @@ export function SingleFixtureTeam({
     >
       {FavoriteComponent && <FavoriteComponent size="normal" data={team} />}
       <NextLink href={`${TEAM_ROUTE}/${team.id}`} passHref>
-        <Link width="100%">
+        <Link isExternal width="100%">
           <Box textAlign="center" mb={1}>
             <ChakraImage
               src={team.logo}

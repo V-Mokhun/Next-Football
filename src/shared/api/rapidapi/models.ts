@@ -166,7 +166,7 @@ interface Lineup {
   };
 }
 
-interface Statistic {
+export interface Statistic {
   type: string;
   value: number | string | null;
 }

@@ -98,7 +98,7 @@ export const SingleFixtureReview: React.FC<SingleFixtureReviewProps> = ({}) => {
       />
       <SingleFixtureEvents
         events={extraTimeEvents}
-        title="extra time"
+        title="Extra time"
         awayTeamId={singleFixtureTeams?.away.id || null}
         homeScore={singleFixtureScore?.extratime.home ?? 0}
         awayScore={singleFixtureScore?.extratime.away ?? 0}

@@ -26,7 +26,7 @@ export const SingleFixtureResult: React.FC<SingleFixtureResultProps> = ({
   return (
     <Box textAlign="center">
       <Box mb={2}>
-        <Text>{convertToReadableDate(date, false, true, false)}</Text>
+        <Text>{convertToReadableDate(date, false, true)}</Text>
       </Box>
       <Box mb={2}>
         <Text fontSize="5xl" fontWeight="700">
