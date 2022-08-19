@@ -28,6 +28,8 @@ export const Standings: React.FC<StandingsProps> = ({
   selectedTeam,
 }) => {
   const standings = useList(store, (standing) => {
+    if (!standing) return null;
+
     const isSelected = standing.team.id === selectedTeam;
     return <StandingRow standing={standing} isTeamSelected={isSelected} />;
   });

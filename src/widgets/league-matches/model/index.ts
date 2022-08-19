@@ -40,6 +40,10 @@ sample({
       params.timezone = timezone;
     }
 
+    if (leagueFixture?.league.type === "Cup") {
+      params.last = 20;
+    }
+
     return params;
   },
   target: leagueModel.fetchLeagueFixturesFx,

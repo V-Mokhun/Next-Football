@@ -158,6 +158,7 @@ export const $nextMatches = createStore<
 >([]).reset(fetchNextMatchesFx.failData);
 export const $nextMatchesLoading = fetchNextMatchesFx.pending;
 export const $nextMatchesError = createStore("").reset(fetchNextMatchesFx);
+$nextMatches.watch((s) => console.log(s));
 
 export const $teamStandings = createStore<Standing[]>([]);
 export const $teamStandingsLoading = fetchTeamStandingsFx.pending;

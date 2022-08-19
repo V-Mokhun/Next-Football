@@ -95,14 +95,16 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({
               textAlign="center"
               gap={2}
             >
-              <Box>
-                <ChakraImage
-                  src={league.flag || league.logo}
-                  alt={league.name}
-                  width={18}
-                  height={12}
-                />
-              </Box>
+              {(league.flag || league.logo) && (
+                <Box>
+                  <ChakraImage
+                    src={league.flag || league.logo}
+                    alt={league.name}
+                    width={18}
+                    height={12}
+                  />
+                </Box>
+              )}
               <Text>{leagueName}</Text>
             </Flex>
           )}

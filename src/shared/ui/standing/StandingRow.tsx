@@ -31,12 +31,14 @@ export const StandingRow: React.FC<StandingRowProps> = ({
         <NextLink href={`${TEAM_ROUTE}/${standing.team.id}`} passHref>
           <Link>
             <Flex alignItems="center" gap={2}>
-              <ChakraImage
-                alt={standing.team.name}
-                src={standing.team.logo}
-                width={20}
-                height={20}
-              />
+              {standing.team.logo && (
+                <ChakraImage
+                  alt={standing.team.name}
+                  src={standing.team.logo}
+                  width={20}
+                  height={20}
+                />
+              )}
               <Text>{standing.team.name}</Text>
             </Flex>
           </Link>

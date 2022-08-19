@@ -50,19 +50,21 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
       <Head>
         <title>{league.name}</title>
       </Head>
-      <Flex mb={4} alignItems="center" gap={2}>
-        <Box>
-          <ChakraImage
-            width={18}
-            height={12}
-            alt={country.name}
-            src={country.flag}
-          />
-        </Box>
-        <Text textTransform="uppercase" fontSize="sm" fontWeight={700}>
-          {country.name}
-        </Text>
-      </Flex>
+      {country.flag && (
+        <Flex mb={4} alignItems="center" gap={2}>
+          <Box>
+            <ChakraImage
+              width={18}
+              height={12}
+              alt={country.name}
+              src={country.flag}
+            />
+          </Box>
+          <Text textTransform="uppercase" fontSize="sm" fontWeight={700}>
+            {country.name}
+          </Text>
+        </Flex>
+      )}
       <Flex
         borderBottomWidth={1}
         borderBottomStyle="solid"
@@ -72,14 +74,16 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
         mb={4}
         gap={4}
       >
-        <Flex justifyContent="center" alignItems="center">
-          <ChakraImage
-            alt={league.name}
-            src={league.logo || country.flag}
-            width={84}
-            height={84}
-          />
-        </Flex>
+        {(league.logo || country.flag) && (
+          <Flex justifyContent="center" alignItems="center">
+            <ChakraImage
+              alt={league.name}
+              src={league.logo || country.flag}
+              width={84}
+              height={84}
+            />
+          </Flex>
+        )}
         <Box>
           <Flex alignItems="center" gap={4} mb={3}>
             <Heading as="h1" fontSize="2xl">

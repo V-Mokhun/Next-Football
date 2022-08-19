@@ -1,6 +1,5 @@
 import {
   FixtureResponse,
-  FixtureStatus,
   HeadToHeadQueryParams,
   rapidApi,
   SingleFixtureQueryParams,
@@ -37,7 +36,15 @@ export const fetchHeadToHeadFx = createEffect<
   return response;
 });
 
-export const $singleFixture = restore(fetchSingleFixtureFx.doneData, {
+export const $singleFixture = restore(
+  fetchSingleFixtureFx.doneData,
+  null
+).reset(fetchSingleFixtureFx.failData);
+export const $singleFixtureError = createStore("").reset(fetchSingleFixtureFx);
+export const $singleFixtureLoading = fetchSingleFixtureFx.pending;
+
+/*
+{
   fixture: {
     id: 867958,
     timezone: "Europe/Kiev",
@@ -1092,11 +1099,16 @@ export const $singleFixture = restore(fetchSingleFixtureFx.doneData, {
       ],
     },
   ],
-}).reset(fetchSingleFixtureFx.failData);
-export const $singleFixtureError = createStore("").reset(fetchSingleFixtureFx);
-export const $singleFixtureLoading = fetchSingleFixtureFx.pending;
+}
 
-export const $headToHead = restore(fetchHeadToHeadFx.doneData, [
+*/
+
+export const $headToHead = restore(fetchHeadToHeadFx.doneData, []);
+export const $headtoHeadError = createStore("").reset(fetchHeadToHeadFx);
+export const $headToHeadLoading = fetchHeadToHeadFx.pending;
+
+/* 
+[
   {
     fixture: {
       id: 867958,
@@ -1369,22 +1381,22 @@ export const $headToHead = restore(fetchHeadToHeadFx.doneData, [
       },
     },
   },
-]);
-export const $headtoHeadError = createStore("").reset(fetchHeadToHeadFx);
-export const $headToHeadLoading = fetchHeadToHeadFx.pending;
+]
 
-// sample({
-//   clock: singleFixtureSet,
-//   source: $singleFixture,
-//   filter: (fixture, clock) => fixture?.fixture.id != clock.id,
-//   fn: (_, clock) => clock,
-//   target: fetchSingleFixtureFx,
-// });
+*/
 
-// sample({
-//   clock: headToHeadSet,
-//   target: fetchHeadToHeadFx,
-// });
+sample({
+  clock: singleFixtureSet,
+  source: $singleFixture,
+  filter: (fixture, clock) => fixture?.fixture.id != clock.id,
+  fn: (_, clock) => clock,
+  target: fetchSingleFixtureFx,
+});
+
+sample({
+  clock: headToHeadSet,
+  target: fetchHeadToHeadFx,
+});
 
 sample({
   clock: fetchSingleFixtureFx.failData,
