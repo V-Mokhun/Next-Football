@@ -131,7 +131,7 @@ export interface Event {
   comments: string | null;
 }
 
-interface LineupTeam extends BasicTeam {
+export interface LineupTeam extends BasicTeam {
   colors: {
     player: {
       primary: string;
@@ -145,12 +145,13 @@ interface LineupTeam extends BasicTeam {
     };
   };
 }
+export type LineupPlayerPosition = "G" | "D" | "M" | "F";
 export interface LineupStart<TGrid> {
   player: {
     id: number;
     name: string;
     number: number;
-    pos: "G" | "D" | "M" | "F";
+    pos: LineupPlayerPosition;
     grid: TGrid;
   };
 }
