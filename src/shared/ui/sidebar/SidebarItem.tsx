@@ -1,8 +1,8 @@
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex, FlexProps, Heading } from "@chakra-ui/react";
 import React from "react";
 import { ChakraImage } from "../chakra-image";
 
-interface SidebarItemProps {
+interface SidebarItemProps extends FlexProps {
   onClick: () => void;
   id: number;
   logo: string;
@@ -18,6 +18,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
   name,
   onClick,
   noImage = false,
+  ...props
 }) => {
   return (
     <Flex
@@ -26,10 +27,12 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
       alignItems="center"
       justifyContent="space-between"
       gap={2}
-      p={1}
+      py={1}
+      pl={{ base: 0, md: 1 }}
       borderRadius={10}
       position="relative"
       pr={8}
+      {...props}
     >
       <>
         <Flex

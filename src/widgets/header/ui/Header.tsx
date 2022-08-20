@@ -11,17 +11,20 @@ import {
   Container,
   Flex,
   FormLabel,
+  Hide,
   Menu,
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
 import { useStore } from "effector-react";
 import Link from "next/link";
-import React from "react";
+import React, { ReactNode } from "react";
 
-interface HeaderProps {}
+interface HeaderProps {
+  mobileMenu: ReactNode;
+}
 
-export const Header: React.FC<HeaderProps> = ({}) => {
+export const Header: React.FC<HeaderProps> = ({ mobileMenu }) => {
   const isAuthenticated = useStore(viewerModel.$isAuthenticated);
 
   return (
@@ -48,11 +51,16 @@ export const Header: React.FC<HeaderProps> = ({}) => {
                 </>
               )}
             />
-            <Menu closeOnSelect={false}>
+            <Menu placement="bottom-end" closeOnSelect={false}>
               {({ isOpen }) => (
                 <>
                   <MenuButton isActive={isOpen} />
-                  <MenuList>
+                  <MenuList
+                    minWidth={{ base: "calc(100vw - 30px)", md: "200px" }}
+                    maxWidth={{ base: "calc(100vw - 30px)", md: "none" }}
+                    maxHeight={{ base: "calc(100vh - 100px)", md: "none" }}
+                    overflowY={{ base: "auto", md: "initial" }}
+                  >
                     {isAuthenticated && <SettingsItem />}
                     <MenuItem display="flex" alignItems="center" gap={2}>
                       <MoonIcon />
@@ -67,6 +75,7 @@ export const Header: React.FC<HeaderProps> = ({}) => {
                       </FormLabel>
                       <ThemeToggler />
                     </MenuItem>
+                    <Hide above="md">{mobileMenu}</Hide>
                   </MenuList>
                 </>
               )}

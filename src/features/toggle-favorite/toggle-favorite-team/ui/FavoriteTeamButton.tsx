@@ -1,7 +1,7 @@
 import { viewerModel } from "@/entities/viewer";
 import { BasicTeam } from "@/shared/api";
 import { StarIcon } from "@chakra-ui/icons";
-import { Button } from "@chakra-ui/react";
+import { Button, ButtonProps } from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
 import { toggleFavoriteTeamModel } from "..";
 
@@ -9,12 +9,14 @@ interface FavoriteTeamButtonProps<T extends BasicTeam> {
   data: T;
   size: "small" | "normal";
   isAbsolute?: boolean;
+  buttonProps?: ButtonProps;
 }
 
 export function FavoriteTeamButton<T extends BasicTeam>({
   data,
   size = "normal",
   isAbsolute = false,
+  buttonProps,
 }: FavoriteTeamButtonProps<T>) {
   const buttonClicked = useEvent(toggleFavoriteTeamModel.buttonClicked);
   const favoriteTeams = useStore(viewerModel.$viewerFavoriteTeams);
@@ -36,6 +38,7 @@ export function FavoriteTeamButton<T extends BasicTeam>({
       onClick={() => buttonClicked({ logo, id, name })}
       variant="outline"
       isLoading={isLoading}
+      {...buttonProps}
     >
       <StarIcon
         h={size === "normal" ? 5 : 3}

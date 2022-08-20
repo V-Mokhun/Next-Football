@@ -4,6 +4,7 @@ import {
   Container,
   ContainerProps,
   Flex,
+  Hide,
   useColorMode,
 } from "@chakra-ui/react";
 import Head from "next/head";
@@ -42,7 +43,7 @@ export const Layout: React.FC<LayoutProps> = ({
             content="width=device-width, initial-scale=1.0"
           />
         </Head>
-        <Header />
+        <Header mobileMenu={<Sidebar isMobile={true} />} />
         <main className="main">
           <Container
             pt={4}
@@ -53,9 +54,11 @@ export const Layout: React.FC<LayoutProps> = ({
             {...containerProps}
           >
             {showSidebar && (
-              <Flex flexDir="column" flex="0 0 230px" maxW={230}>
-                <Sidebar />
-              </Flex>
+              <Hide below="md">
+                <Flex flexDir="column" flex="0 0 230px" maxW={230}>
+                  <Sidebar />
+                </Flex>
+              </Hide>
             )}
             <Flex flexDir="column" flex="1 1 auto">
               {children}

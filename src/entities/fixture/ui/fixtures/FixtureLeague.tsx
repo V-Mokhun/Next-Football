@@ -8,6 +8,7 @@ import {
   AccordionPanel,
   Box,
   Flex,
+  Hide,
   Link,
   Text,
 } from "@chakra-ui/react";
@@ -41,7 +42,7 @@ export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
       <AccordionItem>
         {({ isExpanded }) => (
           <>
-            <Flex alignItems="center" gap={2}>
+            <Flex alignItems="center" gap={2} py={{ base: 1, md: 0 }}>
               {FavoriteComponent && (
                 <FavoriteComponent size="small" data={league} />
               )}
@@ -60,18 +61,22 @@ export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
                     height={12}
                   />
                 </Flex>
-                <Text
-                  color={isFavorite ? "yellow.400" : "initial"}
-                  mr={1}
-                  textTransform="uppercase"
-                >
-                  {league.country}:
-                </Text>
-                <NextLink href={`${LEAGUE_ROUTE}/${league.id}`} passHref>
-                  <Link color={isFavorite ? "yellow.400" : "initial"}>
-                    {league.name}
-                  </Link>
-                </NextLink>
+                <Flex flexDir={{ base: "column-reverse", md: "row" }}>
+                  <Text
+                    color={isFavorite ? "yellow.400" : "initial"}
+                    mr={1}
+                    textTransform="uppercase"
+                    fontWeight={{ base: 400, md: 700 }}
+                    fontSize={{ base: "xs", md: "sm" }}
+                  >
+                    {league.country}
+                  </Text>
+                  <NextLink href={`${LEAGUE_ROUTE}/${league.id}`} passHref>
+                    <Link color={isFavorite ? "yellow.400" : "initial"}>
+                      {league.name}
+                    </Link>
+                  </NextLink>
+                </Flex>
               </Flex>
               <AccordionButton
                 justifyContent="flex-end"
@@ -79,9 +84,11 @@ export const FixtureLeague: React.FC<FixtureLeagueProps> = ({
                 flex="0 1 auto"
               >
                 {!isExpanded && (
-                  <Text whiteSpace="nowrap" fontSize="xs">
-                    Show matches ({matchesQuantity})
-                  </Text>
+                  <Hide below="md">
+                    <Text whiteSpace="nowrap" fontSize="xs">
+                      Show matches ({matchesQuantity})
+                    </Text>
+                  </Hide>
                 )}
                 <AccordionIcon />
               </AccordionButton>

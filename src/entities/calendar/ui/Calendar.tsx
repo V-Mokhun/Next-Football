@@ -33,7 +33,7 @@ export const Calendar: React.FC<CalendarProps> = ({
 
   return (
     <Popover isOpen={isOpen} onClose={onClose}>
-      <Flex alignItems="center">
+      <Flex flex={{ base: "1 1 auto", md: "0 1 auto" }} alignItems="center">
         {PrevButton}
         <PopoverTrigger>
           <Button
@@ -43,13 +43,18 @@ export const Calendar: React.FC<CalendarProps> = ({
             py={0}
             borderRadius={0}
             variant="solid"
+            width={{ base: "100%", md: "initial" }}
           >
             <CalendarIcon /> <Text ml={2}>{selectedDate.slice(5)}</Text>
           </Button>
         </PopoverTrigger>
         {NextButton}
       </Flex>
-      <PopoverContent maxW={160}>
+      <PopoverContent
+        maxHeight={{ base: "450px", md: "none" }}
+        overflowY={{ base: "auto", md: "initial" }}
+        maxWidth={{ base: "none", md: 160 }}
+      >
         <PopoverBody padding={2}>
           <VStack spacing={2}>
             {allDates.map((date) => (

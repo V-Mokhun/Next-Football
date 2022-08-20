@@ -34,7 +34,7 @@ export const Modal: React.FC<ModalProps> = ({
         </ModalHeader>
         <ModalCloseButton />
         <Divider />
-        <ModalBody py={4}>{children}</ModalBody>
+        <ModalBody p={{ base: 2, md: 4 }}>{children}</ModalBody>
       </ModalContent>
     </UiModal>
   );

@@ -50,6 +50,7 @@ export const SidebarLeagues: React.FC<SidebarLeaguesProps> = ({}) => {
           />
         ))}
         <Button
+          size={{ base: "sm", md: "md" }}
           onClick={() => {
             onAddLeagues();
             changeSearchMode("leagues");

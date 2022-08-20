@@ -49,12 +49,19 @@ export const SearchForm: React.FC<SearchFormProps> = ({
 
   return (
     <>
-      <Flex mb={3} justifyContent="space-between" alignItems="center" gap={3}>
+      <Flex
+        mb={3}
+        justifyContent="space-between"
+        alignItems="center"
+        flexDir={{ base: "column", md: "row" }}
+        gap={3}
+      >
         <Heading as="h3" size="md">
           Search leagues or teams
         </Heading>
-        <Flex alignItems="center" gap={2}>
+        <Flex alignItems="center" width={{ base: "100%", md: "auto" }} gap={2}>
           <Button
+            flex={{ base: "1 1 auto", md: "0 1 auto" }}
             isDisabled={loading}
             onClick={() => leaguesButtonClicked()}
             variant={searchMode === "leagues" ? "solid" : "outline"}
@@ -62,6 +69,7 @@ export const SearchForm: React.FC<SearchFormProps> = ({
             Leagues
           </Button>
           <Button
+            flex={{ base: "1 1 auto", md: "0 1 auto" }}
             isDisabled={loading}
             onClick={() => teamsButtonClicked()}
             variant={searchMode === "teams" ? "solid" : "outline"}

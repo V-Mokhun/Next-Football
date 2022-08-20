@@ -82,6 +82,8 @@ export const CountryDropdownItem: React.FC<CountryDropdownItemProps> = ({
                   />
                 ) : null
               }
+              mb={{ base: 1, md: 0 }}
+              pl={2}
             />
           ))
         )}

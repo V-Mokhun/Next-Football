@@ -1,4 +1,10 @@
-import { Avatar, Button, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Avatar,
+  Button,
+  Hide,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { useEvent, useStore } from "effector-react";
 import React, { Ref } from "react";
 import { viewerModel } from "..";
@@ -33,7 +39,9 @@ export const ViewerButton: React.FC<ViewerButtonProps> = React.forwardRef(
         }}
       >
         <Avatar size="xs" name={viewer?.email} />
-        <Text>{isAuthenticated ? viewer?.email : "Log in"}</Text>
+        <Hide below="md">
+          <Text>{isAuthenticated ? viewer?.email : "Log in"}</Text>
+        </Hide>
       </Button>
     );
   }

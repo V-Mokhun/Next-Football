@@ -73,7 +73,7 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({
             backgroundColor: colorMode === "dark" ? "#283941" : "#f4f5f5",
           }}
         >
-          <Box flex="0 1 75px" textAlign="center">
+          <Box flex={{ base: "0 1 60px", md: "0 1 75px" }} textAlign="center">
             <Text
               color={
                 (fixture.status.short !== FixtureStatus.FT &&

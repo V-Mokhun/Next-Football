@@ -1,4 +1,5 @@
 import { loadViewerModel } from "@/features/auth/load";
+import { countriesModel } from "@/features/countries";
 import { COOKIE_NAME } from "@/shared/config";
 import { createEvent, Event, sample } from "effector";
 import { PreviewData } from "next";

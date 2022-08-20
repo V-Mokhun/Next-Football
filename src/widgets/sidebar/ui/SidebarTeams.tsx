@@ -46,6 +46,7 @@ export const SidebarTeams: React.FC<SidebarTeamsProps> = ({}) => {
           />
         ))}
         <Button
+          size={{ base: "sm", md: "md" }}
           onClick={() => {
             onAddTeams();
             changeSearchMode("teams");

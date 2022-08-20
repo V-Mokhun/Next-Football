@@ -20,7 +20,7 @@ export const FixtureButtons: React.FC<FixtureButtonsProps> = ({}) => {
   );
 
   return (
-    <ButtonGroup isDisabled={isButtonsDisabled} gap={2}>
+    <ButtonGroup isDisabled={isButtonsDisabled} spacing={{ base: 2, md: 4 }}>
       <Button
         size="sm"
         onClick={() => allFixturesSelected()}
