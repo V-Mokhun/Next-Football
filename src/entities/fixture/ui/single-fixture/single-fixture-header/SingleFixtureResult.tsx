@@ -25,11 +25,13 @@ export const SingleFixtureResult: React.FC<SingleFixtureResultProps> = ({
   }
   return (
     <Box textAlign="center">
-      <Box mb={2}>
-        <Text>{convertToReadableDate(date, false, true)}</Text>
+      <Box mb={{ base: 0, md: 2 }}>
+        <Text fontSize={{ base: "xs", sm: "sm", md: "md" }}>
+          {convertToReadableDate(date, false, true)}
+        </Text>
       </Box>
-      <Box mb={2}>
-        <Text fontSize="5xl" fontWeight="700">
+      <Box mb={{ base: 0, md: 2 }}>
+        <Text fontSize={{ base: "2xl", sm: "4xl", md: "5xl" }} fontWeight="700">
           {goals.home} - {goals.away}
         </Text>
       </Box>
@@ -37,7 +39,7 @@ export const SingleFixtureResult: React.FC<SingleFixtureResultProps> = ({
         <Text
           textTransform="uppercase"
           fontWeight="700"
-          fontSize="lg"
+          fontSize={{ base: "sm", sm: "md", md: "lg" }}
           color={
             (status.short !== FixtureStatus.FT && status.elapsed != null) ||
             status.short === FixtureStatus.HT

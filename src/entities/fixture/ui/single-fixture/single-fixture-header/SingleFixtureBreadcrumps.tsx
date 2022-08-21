@@ -20,8 +20,11 @@ export const SingleFixtureBreadcrumps: React.FC<
       alignItems="center"
       gap={1}
       p={2}
+      whiteSpace="nowrap"
+      overflowX="auto"
+      maxWidth="calc(100vw - 30px)"
     >
-      <Flex justifyContent="center" alignItems="center">
+      <Flex flex="0 0 18px" justifyContent="center" alignItems="center">
         <ChakraImage
           width={18}
           height={12}

@@ -48,13 +48,14 @@ export const SingleFixtureStatisticsItem: React.FC<
   }
 
   return (
-    <Box px={3} mb={3}>
+    <Box px={{ base: 0, md: 3 }} mb={3}>
       <Flex
         alignItems="center"
         justifyContent="space-between"
         gap={2}
         fontWeight={700}
         mb={1}
+        fontSize={{ base: "sm", md: "md" }}
       >
         <Text>{homeStatistic.value ?? 0}</Text>
         <Text>{homeStatistic.type}</Text>

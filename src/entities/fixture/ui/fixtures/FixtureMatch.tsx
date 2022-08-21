@@ -73,41 +73,48 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({
             backgroundColor: colorMode === "dark" ? "#283941" : "#f4f5f5",
           }}
         >
-          <Box flex={{ base: "0 1 60px", md: "0 1 75px" }} textAlign="center">
-            <Text
-              color={
-                (fixture.status.short !== FixtureStatus.FT &&
-                  fixture.status.elapsed != null) ||
-                fixture.status.short === FixtureStatus.HT
-                  ? "primary.500"
-                  : "initial"
-              }
-              fontSize="xs"
-            >
-              {matchDateText}
-            </Text>
-          </Box>
-          {showLeague && (
-            <Flex
-              alignItems="center"
-              justifyContent="center"
-              flex="0 1 75px"
-              textAlign="center"
-              gap={2}
-            >
-              {(league.flag || league.logo) && (
-                <Box>
-                  <ChakraImage
-                    src={league.flag || league.logo}
-                    alt={league.name}
-                    width={18}
-                    height={12}
-                  />
-                </Box>
-              )}
-              <Text>{leagueName}</Text>
-            </Flex>
-          )}
+          <Flex
+            flex={{ base: "0 1 60px", sm: "0 1 auto" }}
+            flexDir={{ base: "column", sm: "row" }}
+            alignItems="center"
+            gap={2}
+          >
+            <Box flex={{ base: "0 1 auto", sm: "0 1 75px" }} textAlign="center">
+              <Text
+                color={
+                  (fixture.status.short !== FixtureStatus.FT &&
+                    fixture.status.elapsed != null) ||
+                  fixture.status.short === FixtureStatus.HT
+                    ? "primary.500"
+                    : "initial"
+                }
+                fontSize="xs"
+              >
+                {matchDateText}
+              </Text>
+            </Box>
+            {showLeague && (
+              <Flex
+                alignItems="center"
+                justifyContent="center"
+                flex={{ base: "0 1 auto", sm: "0 1 75px" }}
+                textAlign="center"
+                gap={2}
+              >
+                {(league.flag || league.logo) && (
+                  <Box flex="0 0 18px">
+                    <ChakraImage
+                      src={league.flag || league.logo}
+                      alt={league.name}
+                      width={18}
+                      height={12}
+                    />
+                  </Box>
+                )}
+                <Text>{leagueName}</Text>
+              </Flex>
+            )}
+          </Flex>
 
           <Flex flex={"0 1 70%"} flexDir="column" gap={2}>
             <FixtureMatchTeam team={teams.home} goals={goals.home} />

@@ -30,15 +30,16 @@ export function SingleFixtureHeader({
         </title>
       </Head>
       <SingleFixtureBreadcrumps league={singleFixture.league} />
+
       <Flex
         borderBottomColor="main.400"
         borderBottomWidth={1}
         borderBottomStyle="solid"
         alignItems="center"
         justifyContent="space-between"
-        gap={8}
+        gap={{ base: 1, sm: 4, md: 8 }}
         py={3}
-        px={2}
+        px={{ base: 0, md: 2 }}
       >
         <SingleFixtureTeam
           FavoriteComponent={FavoriteComponent}

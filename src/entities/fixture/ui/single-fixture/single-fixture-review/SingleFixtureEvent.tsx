@@ -70,7 +70,7 @@ export const SingleFixtureEvent: React.FC<SingleFixtureEventProps> = ({
       alignItems="center"
       gap={2}
       py={2}
-      px={4}
+      px={{ base: 2, md: 4 }}
     >
       <Text fontSize="sm" fontWeight={700} color="gray.400">
         {time}
@@ -83,6 +83,7 @@ export const SingleFixtureEvent: React.FC<SingleFixtureEventProps> = ({
         borderWidth={1}
         borderStyle="solid"
         borderColor="main.400"
+        fontSize={{ base: "sm", md: "md" }}
       >
         {eventType}
       </Flex>
@@ -90,6 +91,7 @@ export const SingleFixtureEvent: React.FC<SingleFixtureEventProps> = ({
         flexDir={isAwayTeam ? "row-reverse" : "row"}
         alignItems="center"
         gap={1}
+        fontSize={{ base: "sm", md: "md" }}
       >
         {eventDescription}
       </Flex>

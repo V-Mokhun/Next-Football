@@ -32,7 +32,7 @@ export const SingleFixturePlayer: React.FC<SingleFixturePlayerProps> = ({
       borderBottomRightRadius={isAway ? "8px" : 0}
       borderTopLeftRadius={!isAway ? "8px" : 0}
       borderBottomLeftRadius={!isAway ? "8px" : 0}
-      height={"40px"}
+      height={{ base: "60px", md: "40px" }}
     >
       <Text flex="0 0 20px">{player.number ?? 0}</Text>
       <Text flex="1 1 auto">{player.name}</Text>

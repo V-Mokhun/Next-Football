@@ -15,7 +15,7 @@ export const FixtureMatchTeam: React.FC<FixtureMatchTeamProps> = ({
   return (
     <Flex alignItems="center" gap={2}>
       <Flex alignItems="center" gap={1} flex="1 1 auto">
-        <Flex justifyContent="center" alignItems="center">
+        <Flex flex="0 0 15px" justifyContent="center" alignItems="center">
           <ChakraImage width={15} height={15} alt={team.name} src={team.logo} />
         </Flex>
         <Text fontSize="sm" fontWeight={team.winner ? "700" : "400"}>

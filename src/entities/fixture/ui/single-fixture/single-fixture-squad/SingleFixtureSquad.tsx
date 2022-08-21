@@ -1,6 +1,6 @@
 import { fixtureModel } from "@/entities/fixture";
 import { ChakraImage } from "@/shared/ui";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Hide, Text } from "@chakra-ui/react";
 import { useStoreMap } from "effector-react";
 import { SingleFixtureTitle } from "../SingleFixtureTitle";
 import { SingleFixtureField } from "./SingleFixtureField";
@@ -20,14 +20,16 @@ export const SingleFixtureSquad = ({}) => {
   return (
     <>
       {homeTeam.formation && (
-        <SingleFixtureField
-          awayTeamFormation={awayTeam.formation}
-          homeTeamFormation={homeTeam.formation}
-          awayTeamSquad={awayTeam.startXI}
-          homeTeamSquad={homeTeam.startXI}
-          homeTeamColors={homeTeam.team.colors}
-          awayTeamColors={awayTeam.team.colors}
-        />
+        <Hide below="md">
+          <SingleFixtureField
+            awayTeamFormation={awayTeam.formation}
+            homeTeamFormation={homeTeam.formation}
+            awayTeamSquad={awayTeam.startXI}
+            homeTeamSquad={homeTeam.startXI}
+            homeTeamColors={homeTeam.team.colors}
+            awayTeamColors={awayTeam.team.colors}
+          />
+        </Hide>
       )}
       <SingleFixtureSquadItem
         homeSquad={homeTeam.startXI}

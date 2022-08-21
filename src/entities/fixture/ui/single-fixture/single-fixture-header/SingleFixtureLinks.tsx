@@ -53,6 +53,10 @@ export const SingleFixtureLinks: React.FC<SingleFixtureLinksProps> = ({
       borderBottomColor="main.400"
       borderBottomWidth={1}
       borderBottomStyle="solid"
+      whiteSpace="nowrap"
+      overflowX="auto"
+      display={{ base: "block", md: "flex" }}
+      maxWidth="calc(100vw - 30px)"
     >
       {LINKS(id).map(({ isActivePath, onClickPath, text }) => {
         if (isSquadEmpty && isActivePath === SQUAD_ROUTE) return null;
@@ -67,6 +71,7 @@ export const SingleFixtureLinks: React.FC<SingleFixtureLinksProps> = ({
             _active={{
               color: "primary.400",
             }}
+            mr={{ base: 2, md: 0 }}
           >
             {text}
           </Button>

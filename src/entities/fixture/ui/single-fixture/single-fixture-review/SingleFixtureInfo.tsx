@@ -29,13 +29,14 @@ export const SingleFixtureInfo: React.FC<SingleFixtureInfoProps> = ({}) => {
             alignItems="center"
             justifyContent="space-between"
             gap={2}
-            px={4}
+            px={{ base: 2, md: 4 }}
             mb={2}
           >
             <Text>Referee:</Text>
             <Text
               fontWeight={700}
               color={colorMode === "dark" ? "white" : "initial"}
+              fontSize={{ base: "sm", md: "md" }}
             >
               {referee}
             </Text>
@@ -46,12 +47,13 @@ export const SingleFixtureInfo: React.FC<SingleFixtureInfoProps> = ({}) => {
             alignItems="center"
             justifyContent="space-between"
             gap={2}
-            px={4}
+            px={{ base: 2, md: 4 }}
           >
             <Text>Venue:</Text>
             <Text
               fontWeight={700}
               color={colorMode === "dark" ? "white" : "initial"}
+              fontSize={{ base: "sm", md: "md" }}
             >
               {venue.name} ({venue.city})
             </Text>
