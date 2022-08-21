@@ -72,7 +72,8 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
         alignItems="center"
         pb={4}
         mb={4}
-        gap={4}
+        gap={{ base: 2, md: 4 }}
+        flexDir={{ base: "column", md: "row" }}
       >
         {(league.logo || country.flag) && (
           <Flex justifyContent="center" alignItems="center">
@@ -85,8 +86,12 @@ export const LeagueHeader: React.FC<LeagueHeaderProps> = ({
           </Flex>
         )}
         <Box>
-          <Flex alignItems="center" gap={4} mb={3}>
-            <Heading as="h1" fontSize="2xl">
+          <Flex
+            alignItems="center"
+            gap={{ base: 2, md: 4 }}
+            mb={{ base: 1, md: 3 }}
+          >
+            <Heading as="h1" fontSize={{ base: "xl", md: "2xl" }}>
               {league.name}
             </Heading>
             {<FavoriteComponent size="normal" data={league} />}

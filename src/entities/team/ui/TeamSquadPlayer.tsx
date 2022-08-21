@@ -26,8 +26,8 @@ export const TeamSquadPlayer: React.FC<TeamSquadPlayerProps> = ({
         borderRadius="4px 0 0 4px"
         backgroundColor={bgColor}
         textAlign="center"
-        px={2}
-        py={3}
+        px={{ base: 1, md: 2 }}
+        py={{ base: 2, md: 3 }}
       >
         <Flex textAlign="center" justifyContent="center" alignItems="center">
           <ChakraImage
@@ -40,18 +40,27 @@ export const TeamSquadPlayer: React.FC<TeamSquadPlayerProps> = ({
           />
         </Flex>
       </Td>
-      <Td backgroundColor={bgColor} textAlign="center" px={2} py={3}>
+      <Td
+        backgroundColor={bgColor}
+        textAlign="center"
+        px={{ base: 1, md: 2 }}
+        py={{ base: 2, md: 3 }}
+      >
         {player.number ?? 0}
       </Td>
-      <Td backgroundColor={bgColor} px={2} py={3}>
+      <Td
+        backgroundColor={bgColor}
+        px={{ base: 1, md: 2 }}
+        py={{ base: 2, md: 3 }}
+      >
         {player.name}
       </Td>
       <Td
         borderRadius="0 4px 4px 0"
         backgroundColor={bgColor}
         textAlign="center"
-        px={2}
-        py={3}
+        px={{ base: 1, md: 2 }}
+        py={{ base: 2, md: 3 }}
       >
         {player.age}
       </Td>

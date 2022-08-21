@@ -47,8 +47,6 @@ export const $countries = createStore<{ country: Country; loaded: boolean }[]>(
   return countries.map((country) => ({ country, loaded: false }));
 });
 
-$countries.watch((s) => console.log(s));
-
 sample({
   clock: fetchCountries,
   source: $countries,

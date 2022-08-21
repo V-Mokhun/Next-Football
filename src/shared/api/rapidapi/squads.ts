@@ -11,6 +11,7 @@ class SquadsApi extends BaseApi {
       const url = this.makeUrl(SQUADS_URL, params);
 
       const { data } = await apiInstance.get<GetSquadsResponse>(url);
+      console.log(data);
 
       return data;
     } catch (error) {

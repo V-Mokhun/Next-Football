@@ -118,6 +118,7 @@ export const fetchTeamStandingsFx = createEffect<
 
 export const fetchTeamSquadFx = createEffect<number, SquadResponse, Error>(
   async (teamId) => {
+    console.log(teamId);
     const { response } = await rapidApi.squadsApi.getSquads({ team: teamId });
 
     return response[0];
@@ -158,7 +159,6 @@ export const $nextMatches = createStore<
 >([]).reset(fetchNextMatchesFx.failData);
 export const $nextMatchesLoading = fetchNextMatchesFx.pending;
 export const $nextMatchesError = createStore("").reset(fetchNextMatchesFx);
-$nextMatches.watch((s) => console.log(s));
 
 export const $teamStandings = createStore<Standing[]>([]);
 export const $teamStandingsLoading = fetchTeamStandingsFx.pending;

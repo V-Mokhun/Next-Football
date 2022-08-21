@@ -32,14 +32,22 @@ export const StandingRow: React.FC<StandingRowProps> = ({
           <Link>
             <Flex alignItems="center" gap={2}>
               {standing.team.logo && (
-                <ChakraImage
-                  alt={standing.team.name}
-                  src={standing.team.logo}
-                  width={20}
-                  height={20}
-                />
+                <Box flex="0 0 20px">
+                  <ChakraImage
+                    alt={standing.team.name}
+                    src={standing.team.logo}
+                    width={20}
+                    height={20}
+                  />
+                </Box>
               )}
-              <Text>{standing.team.name}</Text>
+              <Text
+                maxWidth={{ base: "100px", sm: "150px", md: "none" }}
+                overflow={{ base: "hidden", md: "initial" }}
+                textOverflow={{ base: "ellipsis", md: "initial" }}
+              >
+                {standing.team.name}
+              </Text>
             </Flex>
           </Link>
         </NextLink>

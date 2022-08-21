@@ -68,27 +68,37 @@ export const TeamHeader: React.FC<TeamHeaderProps> = ({
         alignItems="center"
         pb={4}
         mb={4}
-        gap={4}
+        gap={{ base: 2, md: 4 }}
+        flexDir={{ base: "column", md: "row" }}
       >
         <Flex justifyContent="center" alignItems="center">
           <ChakraImage alt={team.name} src={team.logo} width={84} height={84} />
         </Flex>
         <Box>
-          <Flex alignItems="center" gap={4}>
-            <Heading as="h1" fontSize="2xl">
+          <Flex alignItems="center" gap={{ base: 2, md: 4 }}>
+            <Heading as="h1" fontSize={{ base: "xl", md: "2xl" }}>
               {team.name}
             </Heading>
             {<FavoriteComponent size="normal" data={team} />}
           </Flex>
         </Box>
       </Flex>
-      <Flex alignItems="center" mb={2} gap={4}>
+      <Flex
+        overflowX="auto"
+        whiteSpace="nowrap"
+        alignItems="center"
+        mb={2}
+        gap={4}
+        maxWidth="calc(100vw - 30px)"
+        display={{ base: "block", md: "flex" }}
+      >
         {LINKS(team.id).map(({ isActivePath, onClickPath, text }) => (
           <Button
             key={text}
             isActive={router.asPath.endsWith(isActivePath)}
             onClick={() => router.push(onClickPath)}
             variant="link"
+            mr={{ base: 2, md: 0 }}
             _active={{
               color: "primary.400",
             }}

@@ -49,7 +49,7 @@ export const Standings: React.FC<StandingsProps> = ({
   } else {
     body = (
       <>
-        <TableContainer>
+        <TableContainer maxWidth="calc(100vw - 30px)">
           <Table variant="simple">
             <StandingHeader />
             <Tbody>{standings}</Tbody>
