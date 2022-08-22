@@ -11,5 +11,6 @@
     "prettier/prettier": "error",
     "react/display-name": "off",
     "effector/prefer-useUnit": "off"
-  }
+    },
+   "ignorePatterns": ["library/**/*.ts"] 
 }

@@ -40,7 +40,7 @@ sample({
   target: loadViewerModel.loadViewer,
 });
 
-// sample({
-//   source: appStarted,
-//   target: countriesModel.fetchCountries,
-// });
+sample({
+  source: appStarted,
+  target: countriesModel.fetchCountries,
+});

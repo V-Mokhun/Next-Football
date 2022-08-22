@@ -2,7 +2,7 @@ import { Flex, FlexProps, Heading } from "@chakra-ui/react";
 import React from "react";
 import { ChakraImage } from "../chakra-image";
 
-interface SidebarItemProps extends FlexProps {
+interface SidebarItemProps extends Omit<FlexProps, "id"> {
   onClick: () => void;
   id: number;
   logo: string;

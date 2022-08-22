@@ -74,7 +74,7 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({
           }}
         >
           <Flex
-            flex={{ base: "0 1 60px", sm: "0 1 auto" }}
+            flex={{ base: "0 1 60px", sm: "0 0 75px" }}
             flexDir={{ base: "column", sm: "row" }}
             alignItems="center"
             gap={2}
