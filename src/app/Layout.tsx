@@ -37,6 +37,7 @@ export const Layout: React.FC<LayoutProps> = ({
       <div className="wrapper">
         <Head>
           <title>Next Football</title>
+          <link rel="icon" type="image/x-icon" href="/icons/favicon.ico" />
           <meta charSet="UTF-8" />
           <meta
             name="viewport"
