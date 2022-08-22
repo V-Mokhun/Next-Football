@@ -74,12 +74,15 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({
           }}
         >
           <Flex
-            flex={{ base: "0 1 60px", sm: "0 0 75px" }}
+            flex={{
+              base: "0 1 60px",
+              sm: showLeague ? "0 1 auto" : "0 0 75px",
+            }}
             flexDir={{ base: "column", sm: "row" }}
             alignItems="center"
             gap={2}
           >
-            <Box flex={{ base: "0 1 auto", sm: "0 1 75px" }} textAlign="center">
+            <Box flex="0 1 auto" textAlign="center">
               <Text
                 color={
                   (fixture.status.short !== FixtureStatus.FT &&
@@ -97,7 +100,7 @@ export const FixtureMatch: React.FC<FixtureMatchProps> = ({
               <Flex
                 alignItems="center"
                 justifyContent="center"
-                flex={{ base: "0 1 auto", sm: "0 1 75px" }}
+                flex="0 1 auto"
                 textAlign="center"
                 gap={2}
               >
