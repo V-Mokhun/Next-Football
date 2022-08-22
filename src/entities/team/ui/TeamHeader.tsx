@@ -15,7 +15,7 @@ import React from "react";
 import { teamModel } from "..";
 
 interface TeamHeaderProps {
-  FavoriteComponent: React.FC<{ data: Team; size: "normal" | "small" }>;
+  FavoriteComponent: React.FC<{ data: Team; size: "normal" | "small" }> | null;
 }
 
 const LINKS = (id: number) => [
@@ -79,7 +79,9 @@ export const TeamHeader: React.FC<TeamHeaderProps> = ({
             <Heading as="h1" fontSize={{ base: "xl", md: "2xl" }}>
               {team.name}
             </Heading>
-            {<FavoriteComponent size="normal" data={team} />}
+            {FavoriteComponent && (
+              <FavoriteComponent size="normal" data={team} />
+            )}
           </Flex>
         </Box>
       </Flex>

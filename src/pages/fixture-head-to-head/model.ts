@@ -15,7 +15,8 @@ sample({
   clock: [viewerModel.$viewerTimezone, paramsIdReceived],
   source: { timezone: viewerModel.$viewerTimezone, id: $fixtureId },
   filter: ({ id }) => id != null,
-  fn: ({ timezone, id }) => ({ timezone, id: id! }),
+  fn: ({ timezone, id }) =>
+    timezone?.length > 0 ? { timezone, id: id! } : { id: id! },
   target: fixtureModel.singleFixtureSubmodel.singleFixtureSet,
 });
 
@@ -32,10 +33,20 @@ sample({
   },
   filter: ({ id: fixtureId, singleFixture }) =>
     fixtureId != null && singleFixture != null,
-  fn: ({ timezone, singleFixture }): HeadToHeadQueryParams => ({
-    timezone,
-    last: 5,
-    h2h: `${singleFixture!.teams.home.id}-${singleFixture!.teams.away.id}`,
-  }),
+  fn: ({ timezone, singleFixture }): HeadToHeadQueryParams =>
+    timezone?.length > 0
+      ? {
+          timezone,
+          last: 5,
+          h2h: `${singleFixture!.teams.home.id}-${
+            singleFixture!.teams.away.id
+          }`,
+        }
+      : {
+          last: 5,
+          h2h: `${singleFixture!.teams.home.id}-${
+            singleFixture!.teams.away.id
+          }`,
+        },
   target: fixtureModel.singleFixtureSubmodel.headToHeadSet,
 });
