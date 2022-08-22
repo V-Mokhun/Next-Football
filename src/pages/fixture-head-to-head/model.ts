@@ -12,7 +12,7 @@ const $fixtureId = restore(paramsIdReceived, null);
 setEntityByParamsId(pageStarted, [paramsIdReceived]);
 
 sample({
-  clock: [viewerModel.$viewerTimezone, paramsIdReceived],
+  clock: [viewerModel.$viewerTimezone, $fixtureId],
   source: { timezone: viewerModel.$viewerTimezone, id: $fixtureId },
   filter: ({ id }) => id != null,
   fn: ({ timezone, id }) =>
