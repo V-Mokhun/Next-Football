@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch"
+    "test": "jest --watchAll"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.2",
