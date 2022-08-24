@@ -1,4 +1,3 @@
-export * from "./check-league-exists";
 export * from "./connect-db";
 export * from "./convert-to-readable-date";
 export * from "./create-dates";

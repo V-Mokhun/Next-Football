@@ -1,5 +1,5 @@
 export const convertToReadableDate = (
-  date: string,
+  date: string | number,
   onlyHours = false,
   showYear = false,
   showHours = true
@@ -18,8 +18,8 @@ export const convertToReadableDate = (
     const year = String(givenDate.getFullYear());
     const month = String(givenDate.getMonth() + 1).padStart(2, "0");
     const day = String(givenDate.getDate()).padStart(2, "0");
-    readableDate = `${day}.${month}.${showYear ? year : ""} ${
-      showHours ? hoursAndMinutes : ""
+    readableDate = `${day}.${month}.${showYear ? year : ""}${
+      showHours ? " " + hoursAndMinutes : ""
     }`;
   }
 

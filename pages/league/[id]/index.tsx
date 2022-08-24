@@ -28,13 +28,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps = createGSP({
   pageEvent: leaguePageModel.pageStarted,
   async customize({ context }) {
-    const params = context.params;
-
     return {
       props: {},
       revalidate: 600,
     };
-    // return await checkLeagueExists(params);
   },
 });
 
