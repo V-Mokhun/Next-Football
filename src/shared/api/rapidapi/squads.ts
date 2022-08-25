@@ -1,5 +1,4 @@
 import { BaseApi } from "../base";
-import { catchError } from "../lib";
 import { apiInstance } from "./config";
 import { GetSquadsResponse, SquadsQueryParams } from "./models";
 
@@ -7,15 +6,10 @@ const SQUADS_URL = "players/squads";
 
 class SquadsApi extends BaseApi {
   async getSquads(params: SquadsQueryParams) {
-    try {
-      const url = this.makeUrl(SQUADS_URL, params);
+    const url = this.makeUrl(SQUADS_URL, params);
+    const data = await this.getRequest<GetSquadsResponse>(url);
 
-      const { data } = await apiInstance.get<GetSquadsResponse>(url);
-
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
+    return data;
   }
 }
 

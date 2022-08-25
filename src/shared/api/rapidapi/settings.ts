@@ -1,23 +1,18 @@
-import { catchApiError, catchError } from "../lib";
+import { BaseApi } from "../base";
+import { catchApiError } from "../lib";
 import { apiInstance } from "./config";
 import { GetTimezonesResponse } from "./models";
 
 const TIMEZONES_URL = "timezone";
 
-class SettingsApi {
+class SettingsApi extends BaseApi {
   async getTimezones() {
-    try {
-      const { data } = await apiInstance.get<GetTimezonesResponse>(
-        TIMEZONES_URL
-      );
+    const data = await this.getRequest<GetTimezonesResponse>(TIMEZONES_URL);
 
-      catchApiError(data.errors, "No timezones found");
+    catchApiError(data.errors, "No timezones found");
 
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
+    return data;
   }
 }
 
-export const settingsApi = new SettingsApi();
+export const settingsApi = new SettingsApi(apiInstance);

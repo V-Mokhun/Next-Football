@@ -1,5 +1,4 @@
 import { BaseApi } from "../base";
-import { catchError } from "../lib";
 import { apiInstance } from "./config";
 import { GetLeaguesResponse, LeaguesQueryParams } from "./models";
 
@@ -7,15 +6,10 @@ const LEAGUES_URL = "leagues";
 
 class LeaguesApi extends BaseApi {
   async getLeagues(params: LeaguesQueryParams) {
-    try {
-      const url = this.makeUrl(LEAGUES_URL, params);
+    const url = this.makeUrl(LEAGUES_URL, params);
+    const data = await this.getRequest<GetLeaguesResponse>(url);
 
-      const { data } = await apiInstance.get<GetLeaguesResponse>(url);
-
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
+    return data;
   }
 }
 

@@ -1,5 +1,4 @@
 import { BaseApi } from "../base";
-import { catchError } from "../lib";
 import { apiInstance } from "./config";
 import { GetStandingsResponse, StandingsQueryParams } from "./models";
 
@@ -7,15 +6,10 @@ const STANDINGS_URL = "standings";
 
 class StandingsApi extends BaseApi {
   async getStandings(params: StandingsQueryParams) {
-    try {
-      const url = this.makeUrl(STANDINGS_URL, params);
+    const url = this.makeUrl(STANDINGS_URL, params);
+    const data = await this.getRequest<GetStandingsResponse>(url);
 
-      const { data } = await apiInstance.get<GetStandingsResponse>(url);
-
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
+    return data;
   }
 }
 

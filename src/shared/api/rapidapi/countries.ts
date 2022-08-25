@@ -1,21 +1,15 @@
-import { catchError } from "../lib";
+import { BaseApi } from "../base";
 import { apiInstance } from "./config";
 import { GetCountriesResponse } from "./models";
 
 const COUNTRIES_URL = "countries";
 
-class CountriesApi {
+class CountriesApi extends BaseApi {
   async getCountries() {
-    try {
-      const { data } = await apiInstance.get<GetCountriesResponse>(
-        COUNTRIES_URL
-      );
+    const data = await this.getRequest<GetCountriesResponse>(COUNTRIES_URL);
 
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
+    return data;
   }
 }
 
-export const countriesApi = new CountriesApi();
+export const countriesApi = new CountriesApi(apiInstance);

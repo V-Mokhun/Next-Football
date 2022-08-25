@@ -1,5 +1,4 @@
 import { BaseApi } from "../base";
-import { catchError } from "../lib";
 import { apiInstance } from "./config";
 import { FixturesQueryParams, GetRoundsResponse } from "./models";
 
@@ -7,15 +6,10 @@ const ROUNDS_URL = "fixtures/rounds";
 
 class RoundsApi extends BaseApi {
   async getRounds(params: FixturesQueryParams) {
-    try {
-      const url = this.makeUrl(ROUNDS_URL, params);
+    const url = this.makeUrl(ROUNDS_URL, params);
+    const data = await this.getRequest<GetRoundsResponse>(url);
 
-      const { data } = await apiInstance.get<GetRoundsResponse>(url);
-
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
+    return data;
   }
 }
 

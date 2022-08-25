@@ -1,5 +1,5 @@
 import { BaseApi } from "../base";
-import { catchApiError, catchError } from "../lib";
+import { catchApiError } from "../lib";
 import { apiInstance } from "./config";
 import {
   FixturesQueryParams,
@@ -14,45 +14,30 @@ const HEAD_TO_HEAD_URL = `${FIXTURES_URL}/headtohead`;
 
 class FixturesApi extends BaseApi {
   async getFixtures(params: FixturesQueryParams) {
-    try {
-      const url = this.makeUrl(FIXTURES_URL, params);
+    const url = this.makeUrl(FIXTURES_URL, params);
+    const data = await this.getRequest<GetFixturesResponse>(url);
 
-      const { data } = await apiInstance.get<GetFixturesResponse>(url);
+    catchApiError(data.errors, "No fixtures found..");
 
-      catchApiError(data.errors, "No fixtures found..");
-
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
+    return data;
   }
 
   async getSingleFixture(params: SingleFixtureQueryParams) {
-    try {
-      const url = this.makeUrl(FIXTURES_URL, params);
+    const url = this.makeUrl(FIXTURES_URL, params);
+    const data = await this.getRequest<GetSingleFixtureResponse>(url);
 
-      const { data } = await apiInstance.get<GetSingleFixtureResponse>(url);
+    catchApiError(data.errors, "No fixture found..");
 
-      catchApiError(data.errors, "No fixture found..");
-
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
+    return data;
   }
 
   async getHeadToHead(params: HeadToHeadQueryParams) {
-    try {
-      const url = this.makeUrl(HEAD_TO_HEAD_URL, params);
+    const url = this.makeUrl(HEAD_TO_HEAD_URL, params);
+    const data = await this.getRequest<GetFixturesResponse>(url);
 
-      const { data } = await apiInstance.get<GetFixturesResponse>(url);
+    catchApiError(data.errors, "No head to heads found..");
 
-      catchApiError(data.errors, "No head to heads found..");
-
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
+    return data;
   }
 }
 

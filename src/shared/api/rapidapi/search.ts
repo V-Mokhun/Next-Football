@@ -11,35 +11,27 @@ class SearchApi extends BaseApi {
     if (searchQuery.trim().length < 3)
       throw catchError("Provide valid search query");
 
-    try {
-      const url = this.makeUrl(SEARCH_LEAGUES_API, {
-        search: searchQuery,
-      });
+    const url = this.makeUrl(SEARCH_LEAGUES_API, {
+      search: searchQuery,
+    });
 
-      const { data } = await apiInstance.get<GetLeaguesResponse>(url);
+    const data = await this.getRequest<GetLeaguesResponse>(url);
 
-      catchApiError(data.errors);
+    catchApiError(data.errors);
 
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
+    return data;
   }
   async searchTeams(searchQuery: string) {
     if (searchQuery.trim().length < 3)
       throw catchError("Provide valid search query");
 
-    try {
-      const url = this.makeUrl(SEARCH_TEAMS_API, {
-        search: searchQuery,
-      });
+    const url = this.makeUrl(SEARCH_TEAMS_API, {
+      search: searchQuery,
+    });
 
-      const { data } = await apiInstance.get<GetTeamsResponse>(url);
+    const data = await this.getRequest<GetTeamsResponse>(url);
 
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
+    return data;
   }
 }
 

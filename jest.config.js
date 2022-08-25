@@ -10,6 +10,8 @@ module.exports = {
     "!<rootDir>/.next/**",
     "!<rootDir>/library/**",
     "!<rootDir>/pages/**",
+    "!<rootDir>/src/**/models.ts",
+    "!<rootDir>/src/**/schema.ts",
     "!<rootDir>/*.config.js",
     "!<rootDir>/coverage/**",
   ],

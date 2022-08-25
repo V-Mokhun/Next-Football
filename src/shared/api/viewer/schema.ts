@@ -29,7 +29,6 @@ const ViewerSchema: Schema = new Schema<IViewer>({
       {
         id: {
           type: Number,
-          unique: true,
           required: true,
         },
         logo: {
@@ -49,7 +48,6 @@ const ViewerSchema: Schema = new Schema<IViewer>({
       {
         id: {
           type: Number,
-          unique: true,
           required: true,
         },
         logo: {

@@ -1,5 +1,5 @@
 import { BaseApi } from "../base";
-import { catchApiError, catchError } from "../lib";
+import { catchApiError } from "../lib";
 import { apiInstance } from "./config";
 import {
   GetSeasonsResponse,
@@ -12,31 +12,21 @@ const SEASONS_URL = `${TEAMS_URL}/seasons`;
 
 class TeamsApi extends BaseApi {
   async getTeams(params: TeamsQueryParams) {
-    try {
-      const url = this.makeUrl(TEAMS_URL, params);
+    const url = this.makeUrl(TEAMS_URL, params);
+    const data = await this.getRequest<GetTeamsResponse>(url);
 
-      const { data } = await apiInstance.get<GetTeamsResponse>(url);
-
-      return data;
-    } catch (error) {
-      throw catchError(error);
-    }
+    return data;
   }
 
   async getCurrentSeason(id: number) {
-    try {
-      const url = `${SEASONS_URL}?team=${id}`;
+    const url = `${SEASONS_URL}?team=${id}`;
+    const data = await this.getRequest<GetSeasonsResponse>(url);
 
-      const { data } = await apiInstance.get<GetSeasonsResponse>(url);
-
-      if (data.response.length < 1) {
-        catchApiError(data.errors);
-      }
-
-      return data.response[data.response.length - 1];
-    } catch (error) {
-      throw catchError(error);
+    if (data.response.length < 1) {
+      throw catchApiError(data.errors, "An unexpected error happened..");
     }
+
+    return data.response[data.response.length - 1];
   }
 }
 
