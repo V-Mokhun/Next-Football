@@ -28,7 +28,7 @@ export class BaseApi {
     return url;
   }
 
-  protected async postRequest<T>(body: ViewerRequestBody, url: string) {
+  protected async postRequest<T, F = ViewerRequestBody>(body: F, url: string) {
     try {
       const { data } = await this.apiInstance.post<T>(url, body);
 
@@ -38,7 +38,10 @@ export class BaseApi {
     }
   }
 
-  protected async updateRequest<T, F>(body: F, url: string) {
+  protected async updateRequest<T, F = ViewerRequestBody>(
+    body: F,
+    url: string
+  ) {
     try {
       const { data } = await this.apiInstance.patch<T>(url, body);
 

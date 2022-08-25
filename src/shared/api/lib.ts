@@ -3,7 +3,11 @@ import { ApiResponse } from "./models";
 
 export const catchError = (error: any) => {
   if (axios.isAxiosError(error)) {
-    throw new Error((error.response?.data as any)?.data || error.message);
+    throw new Error(
+      (error.response?.data as any)?.data ||
+        error.message ||
+        "An unexpected error happened.."
+    );
   }
 
   if (typeof error === "string") {
@@ -19,7 +23,7 @@ export const catchError = (error: any) => {
 
 export const catchApiError = (
   errors: ApiResponse["errors"],
-  errorMessage?: string
+  errorMessage = "An unexpected error happened.."
 ) => {
   if (Object.values(errors).length > 0) {
     throw new Error(errorMessage);
