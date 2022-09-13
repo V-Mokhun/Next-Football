@@ -93,7 +93,7 @@ describe("Base Api works", () => {
 });
 
 describe("Catch error works", () => {
-  const errorMessage = "Error!";
+  const errorMessage = "Error!!";
 
   test("Successfully catches error as string", async () => {
     try {

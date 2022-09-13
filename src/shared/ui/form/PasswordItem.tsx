@@ -29,13 +29,14 @@ export const PasswordItem: React.FC<PasswordItemProps> = ({
   setShow,
   id,
   label,
-  errorMessage,
+  errorMessage = "Password is required",
 }) => {
   return (
-    <FormControl isInvalid={isError}>
+    <FormControl data-testid="form-control" isInvalid={isError}>
       <FormLabel htmlFor={id}>{label || "Password"}</FormLabel>
       <InputGroup>
         <Input
+          data-testid="password"
           id={id}
           type={show ? "text" : "password"}
           value={value}
@@ -43,18 +44,21 @@ export const PasswordItem: React.FC<PasswordItemProps> = ({
         />
         <InputRightElement>
           <IconButton
+            data-testid="password-button"
             size="sm"
             onClick={setShow}
             aria-label="Show password"
-            icon={show ? <ViewIcon /> : <ViewOffIcon />}
+            icon={
+              show ? (
+                <ViewIcon data-testid="view-on-icon" />
+              ) : (
+                <ViewOffIcon data-testid="view-off-icon" />
+              )
+            }
           />
         </InputRightElement>
       </InputGroup>
-      {isError && (
-        <FormErrorMessage>
-          {errorMessage || "Password is required"}
-        </FormErrorMessage>
-      )}
+      {isError && <FormErrorMessage>{errorMessage}</FormErrorMessage>}
     </FormControl>
   );
 };

@@ -20,9 +20,15 @@ export const EmailItem: React.FC<EmailItemProps> = ({
   id,
 }) => {
   return (
-    <FormControl isInvalid={isError}>
+    <FormControl data-testid="form-control" isInvalid={isError}>
       <FormLabel htmlFor={id}>Email</FormLabel>
-      <Input id={id} type="email" value={value} onChange={setValue} />
+      <Input
+        data-testid="email"
+        id={id}
+        type="email"
+        value={value}
+        onChange={setValue}
+      />
       {isError && <FormErrorMessage>Email is required</FormErrorMessage>}
     </FormControl>
   );

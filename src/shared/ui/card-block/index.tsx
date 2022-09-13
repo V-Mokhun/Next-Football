@@ -8,6 +8,7 @@ interface CardBlockProps extends BoxProps {
 export const CardBlock: React.FC<CardBlockProps> = ({ children, ...props }) => {
   return (
     <Box
+      data-testid="card-block"
       borderRadius="8px"
       p="12px"
       backgroundColor="main.500"

@@ -16,7 +16,8 @@ export const StandingRow: React.FC<StandingRowProps> = ({
 }) => {
   const { colorMode } = useColorMode();
   const standingForm = standing.form && standing.form.split("");
-  let bgColor = colorMode === "dark" ? "#010a0f" : "fff";
+
+  let bgColor = colorMode === "dark" ? "#010a0f" : "#fff";
 
   if (isTeamSelected) {
     bgColor = "main.400";
@@ -32,7 +33,7 @@ export const StandingRow: React.FC<StandingRowProps> = ({
           <Link>
             <Flex alignItems="center" gap={2}>
               {standing.team.logo && (
-                <Box flex="0 0 20px">
+                <Box data-testid="standing-row-image" flex="0 0 20px">
                   <ChakraImage
                     alt={standing.team.name}
                     src={standing.team.logo}
@@ -80,7 +81,7 @@ export const StandingRow: React.FC<StandingRowProps> = ({
         <Flex alignItems="center" gap={1}>
           {Array.isArray(standingForm) &&
             standingForm.map((form, index) => {
-              if (index > 5) return null;
+              if (index >= 5) return null;
               let bgColor = "#dc0000";
               if (form === "W") {
                 bgColor = "#00a83f";
@@ -90,6 +91,7 @@ export const StandingRow: React.FC<StandingRowProps> = ({
 
               return (
                 <Box
+                  data-testid="standing-row-form"
                   borderRadius="4px"
                   w="20px"
                   h="20px"

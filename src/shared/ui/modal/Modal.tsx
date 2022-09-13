@@ -24,8 +24,8 @@ export const Modal: React.FC<ModalProps> = ({
   title,
 }) => {
   return (
-    <UiModal size="xl" isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
+    <UiModal data-testid="modal" size="xl" isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay data-testid="modal-overlay" />
       <ModalContent>
         <ModalHeader>
           <Heading as="h2" size="lg">

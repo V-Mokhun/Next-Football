@@ -16,11 +16,18 @@ export const MenuButton: React.FC<MenuButtonProps> = ({ isActive }) => {
 
   return (
     <MenuButtonIcon
+      data-testid="menu-button"
       color={color}
       bg={bg}
       isActive={isActive}
       as={IconButton}
-      icon={isActive ? <CloseIcon /> : <HamburgerIcon />}
+      icon={
+        isActive ? (
+          <CloseIcon data-testid="close-icon" />
+        ) : (
+          <HamburgerIcon data-testid="hamburger-icon" />
+        )
+      }
       _hover={{
         backgroundColor: "whiteAlpha.400",
       }}

@@ -46,7 +46,12 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
           }}
         >
           {noImage ? null : (
-            <Flex justifyContent="center" alignItems="center" flex="0 0 18px">
+            <Flex
+              data-testid="sidebar-item-image"
+              justifyContent="center"
+              alignItems="center"
+              flex="0 0 18px"
+            >
               <ChakraImage src={logo} alt={name} width={18} height={18} />
             </Flex>
           )}

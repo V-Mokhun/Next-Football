@@ -12,6 +12,8 @@ module.exports = {
     "!<rootDir>/pages/**",
     "!<rootDir>/src/**/models.ts",
     "!<rootDir>/src/**/schema.ts",
+    "!<rootDir>/src/shared/ui/index.ts",
+    "!<rootDir>/src/shared/lib/index.ts",
     "!<rootDir>/*.config.js",
     "!<rootDir>/coverage/**",
   ],

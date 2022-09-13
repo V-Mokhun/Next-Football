@@ -186,7 +186,7 @@ export interface StandingTeamStatistics {
 export interface Standing {
   rank: number;
   team: Pick<Team, "id" | "name" | "logo">;
-  points: number;
+  points: number | null;
   goalsDiff: number;
   group: string;
   form: null | string;

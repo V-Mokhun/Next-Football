@@ -16,10 +16,12 @@ export const AlertMessage: React.FC<AlertMessageProps> = ({
   ...props
 }) => {
   return (
-    <Alert mt={2} status="error" {...props}>
+    <Alert data-testid="alert" mt={2} status="error" {...props}>
       <AlertIcon />
-      <AlertTitle>Error!</AlertTitle>
-      <AlertDescription>{error}</AlertDescription>
+      <AlertTitle data-testid="alert-title">Error!</AlertTitle>
+      <AlertDescription data-testid="alert-description">
+        {error}
+      </AlertDescription>
     </Alert>
   );
 };
